@@ -20,7 +20,14 @@ redistribution (noted below).
 
 | Source / Work | Creator(s) | Link |
 |---|---|---|
-| *(none yet — no research topics have been added)* | | |
+| Steam Community guide: free-camera & screenshots | Steam guide author | https://steamcommunity.com/sharedfiles/filedetails/?id=1135506903 |
+| Steam Community guide: Developer Menu | Steam guide authors | https://steamcommunity.com/sharedfiles/filedetails/?id=231208707 |
+| Alan Wake Wiki: Console commands | Fandom community | https://alanwake.fandom.com/wiki/Console_commands |
+| The Sudden Stop: Alan Wake PC Commands | alanwake.info | https://www.alanwake.info/2011/10/alan-wake-pc-commands.html |
+| NVIDIA GeForce forums: Alan Wake 3D Vision settings | NVIDIA forum community | https://www.nvidia.com/en-us/geforce/forums/discover/136359/alan-wake-what-are-the-3d-recommended-settings-/ |
+| Helix Mod: Alan Wake | Helix Mod community | https://helixmod.blogspot.com/2017/05/alan-wake.html |
+| vorpX Alan Wake compatibility reports | vorpX forum community | https://www.vorpx.com/forums/search/Alan%20Wake/ |
+| KitGuru (Space Oddity removal reporting) | KitGuru | https://www.kitguru.net/tech-news/mustafa-mahmoud/alan-wake-is-getting-an-update-to-remove-licensed-song/ |
 
 Development on this project is AI-assisted: much of the research, code, and
 documentation was produced with **Claude (Anthropic)** (https://claude.com)
