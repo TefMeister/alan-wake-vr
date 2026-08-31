@@ -1,27 +1,27 @@
-# alan-wake-vr-dev-archive
+# alan-wake-vr — `dev-archive/`
 
 Full development archive for the Alan Wake (2010) VR mod — snapshots, probes,
 raw recon data, and the messy in-progress history behind the mod. Only files
 created during development; no game files.
 
 The readable version of this history lives in
-[alan-wake-vr-modding-notes](https://github.com/TefMeister/alan-wake-vr-modding-notes);
+[`modding-notes/`](../modding-notes/);
 the distilled engine knowledge lives in
-[alan-wake-vr-engine-research](https://github.com/TefMeister/alan-wake-vr-engine-research).
+[`engine-research/`](../engine-research/).
 
-## The six repositories for Alan Wake VR
+## The folders for Alan Wake VR
 
-Everything for this game lives in six repositories, each with one job — so you
-always know where to look. You are in **alan-wake-vr-dev-archive**.
+Everything for this game lives in one repository, one folder per job — so you
+always know where to look. You are in **`dev-archive/`**.
 
-| Repository | What lives here |
+| Folder | What lives here |
 | --- | --- |
-| [alan-wake-vr-mod](https://github.com/TefMeister/alan-wake-vr-mod) | The mod itself — releases only, once there is something to release. |
-| **alan-wake-vr-dev-archive** ← you are here | Full development history — snapshots, probes, dead ends, raw recon. |
-| [alan-wake-vr-modding-notes](https://github.com/TefMeister/alan-wake-vr-modding-notes) | Readable field notes / progress ledger. |
-| [alan-wake-vr-staging](https://github.com/TefMeister/alan-wake-vr-staging) 🔒 | **Private** — unverified WIP builds, cross-machine handoff. |
-| [alan-wake-vr-engine-research](https://github.com/TefMeister/alan-wake-vr-engine-research) | Distilled engine reference (dossier) + reusable VR RE playbook. |
-| [alan-wake-vr-external-research](https://github.com/TefMeister/alan-wake-vr-external-research) | Ongoing public-research leads, gathered separately from hands-on modding work. |
+| [`mod/`](../mod/) | The mod itself — releases only, once there is something to release. |
+| **`dev-archive/`** ← you are here | Full development history — snapshots, probes, dead ends, raw recon. |
+| [`modding-notes/`](../modding-notes/) | Readable field notes / progress ledger. |
+| [staging/alan-wake-vr](https://github.com/TefMeister/staging/tree/main/alan-wake-vr) 🔒 | **Private** — unverified WIP builds, cross-machine handoff. |
+| [`engine-research/`](../engine-research/) | Distilled engine reference (dossier) + reusable VR RE playbook. |
+| [`external-research/`](../external-research/) | Ongoing public-research leads, gathered separately from hands-on modding work. |
 
 ## Contributing & policy
 

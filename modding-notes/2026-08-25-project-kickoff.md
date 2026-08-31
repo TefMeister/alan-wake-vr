@@ -17,6 +17,6 @@ This is the **first look** phase: the six-repo standard has just been
 scaffolded per [CONVENTIONS.md](https://github.com/TefMeister/claude-memory/blob/main/CONVENTIONS.md)
 in the cross-machine brain repo. No reverse-engineering has started yet —
 that begins in a future session, following the
-[PLAYBOOK.md](https://github.com/TefMeister/alan-wake-vr-engine-research/blob/main/PLAYBOOK.md)
+[PLAYBOOK.md](https://github.com/TefMeister/alan-wake-vr/blob/main/engine-research/PLAYBOOK.md)
 Phase 0 groundwork (confirm legitimacy, toolchain, first binary read, engine
 lineage, DRM/anti-debug recon).
