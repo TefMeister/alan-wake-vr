@@ -34,6 +34,8 @@ redistribution (noted below).
 | GOG community command-line reference for Alan Wake (the `-forcestereo` = 2-channel speaker-mode correction) | GOG.com forum contributors | https://www.gog.com/forum/alan_wake/info_command_line_options_for_alan_wake_1 |
 | *The Sudden Stop* Alan Wake PC commands reference (`-directaiming` 1:1 mouse control; sound-category placement of `-forcestereo`) | The Sudden Stop (alanwake.info) | https://www.alanwake.info/2011/10/alan-wake-pc-commands.html |
 | Steam community discussion documenting `-rigidcamera` removing camera smoothing | Steam Community contributors | https://steamcommunity.com/app/108710/discussions/0/828939978253890023/ |
+| NVAPI published function-ID dispatch table `nvapi_interface.h` (the id→name mapping that `nvapi_QueryInterface` is driven by; used to confirm `NvAPI_Stereo_SetDriverMode` = `0x5E8F0BEC`) | NVIDIA Corporation | https://github.com/NVIDIA/nvapi/blob/main/nvapi_interface.h |
+| `NVIDIA_NvAPI` — `info/NvAPI_IDs.txt`, an independently compiled NVAPI function-ID list used as a second source | jNizM | https://github.com/jNizM/NVIDIA_NvAPI/blob/master/info/NvAPI_IDs.txt |
 
 Development on this project is AI-assisted: much of the research, code, and
 documentation was produced with **Claude (Anthropic)** (https://claude.com)
