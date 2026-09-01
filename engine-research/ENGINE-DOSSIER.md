@@ -83,6 +83,29 @@ through a runtime-computed pointer would be missed. That is unlikely here — th
 are all called directly, so a direct-call convention is established — but it is the one way this
 conclusion could be wrong, and it would be settled by a breakpoint on `0x100D8B50` in a live run.
 
+**⚠️ Separate the load-bearing claim from the weaker one it rests on.**
+
+- **Verified on this machine** `[inferred-static 2026-09-01]`: the game references **seven genuine
+  NVAPI dispatch IDs** (all seven occur in both `C:\Windows\SysWOW64
+vapi.dll` and
+  `nvapi64.dll`, so they are real function IDs, not arbitrary constants), and **one of them —
+  `0x5E8F0BEC` — has zero callers while four others have callers.** That structural result is solid.
+- **NOT verified here** `[reported]`: that `0x5E8F0BEC` is specifically
+  `NvAPI_Stereo_SetDriverMode`. The ID→name mapping comes from the published NVAPI ID list. **The
+  shipped driver has its id→name table stripped** — the function-name strings are absent from both
+  `nvapi.dll` and `nvapi64.dll` — so the mapping could not be confirmed on this machine.
+  **If that mapping is wrong, the conclusion above inverts.**
+
+**What supports the mapping short of proof:** the four IDs that *are* called form a coherent NVAPI
+stereo initialisation sequence under this mapping — `Initialize` → `CreateHandleFromIUnknown` →
+`Activate` → `SetSeparation` — while the two that are *not* called (`SetDriverMode`, `Enable`) are
+exactly the two a game using Automatic mode would have no reason to call. A scrambled mapping would
+be unlikely to produce a set that coherent. That is consistency, not confirmation.
+
+**Cheapest way to close it:** check the IDs against NVIDIA's published `nvapi.h` / NVAPI SDK
+(`NvAPI_Stereo_SetDriverMode`'s ID is a documented constant). That is a research task, not a modding
+one — worth a `/gr` drop rather than a launch.
+
 ### Corrections that came with it (from the same `/gr` drop)
 
 - **`-forcestereo` is an AUDIO switch** — *"forces stereo 2 channel speaker mode"*, sitting beside
