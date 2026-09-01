@@ -28,6 +28,12 @@ redistribution (noted below).
 | Helix Mod: Alan Wake | Helix Mod community | https://helixmod.blogspot.com/2017/05/alan-wake.html |
 | vorpX Alan Wake compatibility reports | vorpX forum community | https://www.vorpx.com/forums/search/Alan%20Wake/ |
 | KitGuru (Space Oddity removal reporting) | KitGuru | https://www.kitguru.net/tech-news/mustafa-mahmoud/alan-wake-is-getting-an-update-to-remove-licensed-song/ |
+| NVIDIA 3D Vision Automatic developer documentation (the clip-space footer, draw-call duplication, and the `StereoParmsTexture` / `nvstereo.h` correction pattern) | NVIDIA Corporation | https://archive.docs.nvidia.com/gameworks/content/technologies/desktop/nv3dva_background.htm · https://archive.docs.nvidia.com/gameworks/content/technologies/desktop/nv3dva_stereoscopic_issues.htm |
+| NVAPI public headers and reference documentation (`NvAPI_Stereo_SetDriverMode`, Direct vs Automatic driver modes) | NVIDIA Corporation | https://github.com/NVIDIA/nvapi/blob/main/nvapi_lite_stereo.h · https://docs.nvidia.com/nvapi/nvapi__lite__stereo_8h.html |
+| Scaleform / Autodesk documentation on 3D Vision automatic vs API-driven modes and the Ctrl+F3/F4 hotkeys | Autodesk (Scaleform documentation) | https://help.autodesk.com/cloudhelp/ENU/Scaleform-Help/scaleform_help/3di/stereoscopic/nvidia.html |
+| GOG community command-line reference for Alan Wake (the `-forcestereo` = 2-channel speaker-mode correction) | GOG.com forum contributors | https://www.gog.com/forum/alan_wake/info_command_line_options_for_alan_wake_1 |
+| *The Sudden Stop* Alan Wake PC commands reference (`-directaiming` 1:1 mouse control; sound-category placement of `-forcestereo`) | The Sudden Stop (alanwake.info) | https://www.alanwake.info/2011/10/alan-wake-pc-commands.html |
+| Steam community discussion documenting `-rigidcamera` removing camera smoothing | Steam Community contributors | https://steamcommunity.com/app/108710/discussions/0/828939978253890023/ |
 
 Development on this project is AI-assisted: much of the research, code, and
 documentation was produced with **Claude (Anthropic)** (https://claude.com)
