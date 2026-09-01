@@ -63,6 +63,26 @@ The queued xref on that symbol is retired — it maps where an eye offset *would
 **§6 must now be answered the ordinary way:** find where the view-projection reaches the GPU and
 override it. This project has no shortcut, and it is better to know that now than after building on it.
 
+## ⚠️ The weak link, stated plainly
+
+The structural result is solid and was verified here: seven **genuine** NVAPI dispatch IDs are
+referenced by the game (all seven occur in both shipped drivers, `nvapi.dll` and `nvapi64.dll`, so
+they are real function IDs), and one of them has zero callers while four have callers.
+
+**What I could not verify on this machine is that `0x5E8F0BEC` is `NvAPI_Stereo_SetDriverMode`.**
+That mapping comes from the published NVAPI ID list. I tried to confirm it against the shipped
+driver and **the id→name table is stripped** — none of the function-name strings occur in either
+`nvapi.dll` or `nvapi64.dll`. **If the mapping is wrong, this whole conclusion inverts**, so it is
+recorded as `[reported]` rather than folded into the `[inferred-static]` result.
+
+Supporting it short of proof: under this mapping the four *called* IDs form a coherent stereo
+initialisation sequence (`Initialize` → `CreateHandleFromIUnknown` → `Activate` → `SetSeparation`),
+and the two *uncalled* ones are exactly the pair a game in Automatic mode would not need. A scrambled
+mapping would be unlikely to look that tidy. That is consistency, not confirmation.
+
+**To close it:** check the IDs against NVIDIA's published `nvapi.h`. That is web research, so it
+belongs in a `/gr` drop, not here.
+
 ## What is NOT established
 
 The scan finds `E8` rel32 calls and absolute immediates. **A call through a runtime-computed pointer
