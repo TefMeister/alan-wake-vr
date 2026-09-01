@@ -33,6 +33,71 @@
 - One-frame walkthrough (record → replay → present):
 
 ## 6. Camera & projection delivery (the crucial section)
+
+### ⛔️ SETTLED 2026-09-01 — the game never takes the eyes off the driver. The native-stereo shortcut is DEAD.
+
+**The game was not launched.** `/gr` filed the exact static check that would decide this
+(`inbox/2026-09-01-gr-forcestereo-is-audio-and-the-driver-owns-the-eyes.md`): *does
+`renderer_sf_Win32.dll`'s stereo path call `NvAPI_Stereo_SetDriverMode`, and with which constant?*
+Its own decision rule was: **DIRECT ⇒ a real self-driven two-eye path exists and the shortcut
+survives; AUTOMATIC or absent ⇒ the subsystem is a correction layer over a driver that no longer
+ships.**
+
+**Answer: absent.** NVAPI resolves entry points by published function ID through
+`nvapi_QueryInterface`, so each wrapper is findable as a `push imm32` of its ID. All seven stereo IDs
+are present in `renderer_sf_Win32.dll` — but counting **direct callers** of each wrapper separates
+what the game *links* from what it *uses*:
+
+| NVAPI wrapper | ID | direct callers |
+|---|---|---|
+| `NvAPI_Initialize` | `0x0150E828` | 4 |
+| `NvAPI_Stereo_CreateHandleFromIUnknown` | `0xAC7E37F4` | 2 |
+| `NvAPI_Stereo_Activate` | `0xF6A1AD68` | 1 |
+| `NvAPI_Stereo_SetSeparation` | `0x5C069FA3` | 1 |
+| **`NvAPI_Stereo_SetDriverMode`** | `0x5E8F0BEC` | **0** |
+| `NvAPI_Stereo_Enable` | `0x239C4545` | 0 |
+
+`[inferred-static 2026-09-01]` The wrapper at `0x100D8B50` has **no direct call and no absolute
+reference anywhere in the module**, and no wrapper is exported (1,231 exports checked), so no other
+module reaches it either.
+
+**Why the zero is meaningful and not just a linker artifact:** unused NVAPI dispatch stubs do get
+linked in, so "0 callers" alone would prove nothing. It is the **contrast** that carries the result —
+four of the six wrappers *are* called, so unused stubs are plainly distinguishable from used ones in
+this binary.
+
+**What it means.** `SetDriverMode` must be called before device creation to hand per-eye rendering to
+the application. It is never called, so the driver mode is never switched to DIRECT: Alan Wake used
+3D Vision **Automatic**, where the **driver** duplicated the draw calls and appended the clip-space
+offset. The game's role was the consumer one — create a stereo handle, activate, set separation. So
+`g_vStereo_Separation_Convergence` is a **consumer of driver-published values, not the producer of an
+eye offset.** Driving it would change how the game corrects its post-processing and **would move no
+camera.**
+
+**⇒ §6 must be answered from scratch**, the ordinary way (find where the view-projection reaches the
+GPU and override it). The queued `g_vStereo_Separation_Convergence` xref is **retired** — it maps
+where an eye offset *would* go, not a lever.
+
+**What this does NOT establish:** the scan finds `E8` rel32 calls and absolute immediates. A call made
+through a runtime-computed pointer would be missed. That is unlikely here — the other four wrappers
+are all called directly, so a direct-call convention is established — but it is the one way this
+conclusion could be wrong, and it would be settled by a breakpoint on `0x100D8B50` in a live run.
+
+### Corrections that came with it (from the same `/gr` drop)
+
+- **`-forcestereo` is an AUDIO switch** — *"forces stereo 2 channel speaker mode"*, sitting beside
+  `-forcesurround` in the public lists and in the binary's own option table.
+  `[reported 2026-09-01, n=2 independent sources]` **There is no launch switch that enables stereo
+  rendering** — consistent with the finding above.
+- **`-rigidcamera`** (Remedy patch-added) **removes camera smoothing** and centres the camera behind
+  Alan. `[reported]` Camera smoothing is the comfort hazard a VR conversion usually has to find and
+  defeat in the binary; here it has an official off-switch. Add to the standard launch line beside
+  `-freecamera -developermenu`, and use it as a **diagnostic** — residual lag with it set means the
+  smoothing is somewhere else.
+- **`-directaiming`** — 1:1 mouse control, removes mouse acceleration. `[reported]`
+- **`-nativekeys`** preserves keyboard layout on exit (worth setting for unattended runs).
+  `-shaders` has no public documentation and is left honestly unknown.
+
 - How the world transform reaches the GPU (shared VP buffer / per-draw MVP /
   other), with **shader-reflection / disassembly evidence**: (D3D9 note: shader constant registers, not D3D11-style cbuffers — same caveat as the other D3D9 titles in this portfolio.)
 - Exact constant-buffer slot, parameter name(s), byte offset(s), layout,
