@@ -80,3 +80,13 @@ Several games in this portfolio are from exactly that era. Filed to the cross-en
   https://github.com/NVIDIA/nvapi/blob/main/nvapi_lite_stereo.h
 - jNizM, `NVIDIA_NvAPI` — `info/NvAPI_IDs.txt`, an independently compiled ID list —
   https://github.com/jNizM/NVIDIA_NvAPI/blob/master/info/NvAPI_IDs.txt
+
+## Independently re-read by `/sr`, 2026-09-02 — the mapping now has two readers of the same header
+
+The cross-project sweep re-read NVIDIA's `nvapi_interface.h` on its own and reports **all six IDs match**
+(`0x5E8F0BEC` = `NvAPI_Stereo_SetDriverMode` included). Same primary source, a second independent read:
+`[verified-static 2026-09-02, n=2 reads]`. The method half — counting direct callers to separate what a
+binary *links* from what it *uses*, and not letting a verified structural result lend its confidence to
+an unverified name lookup — is now generalised in the cross-engine library at
+`flat-to-vr-cross-engine-research/docs/techniques/README.md` (section "Counting callers separates what a
+binary links from what it uses"), credited to this project.
