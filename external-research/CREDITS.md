@@ -36,6 +36,9 @@ redistribution (noted below).
 | Steam community discussion documenting `-rigidcamera` removing camera smoothing | Steam Community contributors | https://steamcommunity.com/app/108710/discussions/0/828939978253890023/ |
 | NVAPI published function-ID dispatch table `nvapi_interface.h` (the id→name mapping that `nvapi_QueryInterface` is driven by; used to confirm `NvAPI_Stereo_SetDriverMode` = `0x5E8F0BEC`) | NVIDIA Corporation | https://github.com/NVIDIA/nvapi/blob/main/nvapi_interface.h |
 | `NVIDIA_NvAPI` — `info/NvAPI_IDs.txt`, an independently compiled NVAPI function-ID list used as a second source | jNizM | https://github.com/jNizM/NVIDIA_NvAPI/blob/master/info/NvAPI_IDs.txt |
+| Alan Wake Cheat Engine table (time-scale + FOV, the FOV read site) | Jim2point0, hosted by the FRAMED screenshot community | https://framedsc.com/CheatTables/AlanWake.CT |
+| Alan Wake game guide (free camera, downgrade depot, table) | FRAMED screenshot community | https://framedsc.com/GameGuides/Alan_Wake.htm |
+| Alan Wake 3D Vision fix (Helix Mod; FOV-dependent shadows, shader `2B37CDBA`) | Neovad, via the Helix Mod blog | https://helixmod.blogspot.com/2014/08/alan-wake.html |
 
 Development on this project is AI-assisted: much of the research, code, and
 documentation was produced with **Claude (Anthropic)** (https://claude.com)
