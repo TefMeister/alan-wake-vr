@@ -39,6 +39,10 @@ redistribution (noted below).
 | Alan Wake Cheat Engine table (time-scale + FOV, the FOV read site) | Jim2point0, hosted by the FRAMED screenshot community | https://framedsc.com/CheatTables/AlanWake.CT |
 | Alan Wake game guide (free camera, downgrade depot, table) | FRAMED screenshot community | https://framedsc.com/GameGuides/Alan_Wake.htm |
 | Alan Wake 3D Vision fix (Helix Mod; FOV-dependent shadows, shader `2B37CDBA`) | Neovad, via the Helix Mod blog | https://helixmod.blogspot.com/2014/08/alan-wake.html |
+| OpenAWE — open-source reimplementation of the Alan Wake / Northlight engine (GPL-3.0; studied for engine concepts and data formats, nothing copied) | the OpenAWE Project contributors | https://github.com/OpenAWE-Project/OpenAWE |
+| AWTools — `unrmdp` / `unbin` readers for Alan Wake's archive formats | Nostritius | https://github.com/Nostritius/AWTools |
+| neat — Northlight archive unpacker | TomEvin | https://github.com/TomEvin/neat |
+| The "could not process hlsl shader" launch-failure thread (evidence of runtime shader compilation) | Steam Community discussion participants | https://steamcommunity.com/app/108710/discussions/0/864977025688898181/ |
 
 Development on this project is AI-assisted: much of the research, code, and
 documentation was produced with **Claude (Anthropic)** (https://claude.com)
