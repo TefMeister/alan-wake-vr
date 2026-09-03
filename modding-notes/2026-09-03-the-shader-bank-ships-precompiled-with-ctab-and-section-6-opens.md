@@ -188,6 +188,52 @@ once with the proxy in place.
   the unexplained 2026-08-25 vtable-hook failure blocks. That failure has moved from a footnote to
   the critical path.
 
+## Built the same session: `ctab.c`, the per-shader register map — validated, not just compiled
+
+The finding above has an immediate consequence that can be built with nothing running, so it was:
+`staging/alan-wake-vr/proxy-d3d9/src/ctab.{h,c}` parses the constant table out of a shader token
+stream and keeps a pointer-keyed registry, so the eye offset can resolve `g_mViewToClip` /
+`g_mLocalToView` **per shader** instead of assuming `c0`.
+
+**How it was validated matters more than that it compiles.** A parser tested against a fixture
+written by its own author only proves the author was self-consistent. Instead the harness runs it
+over **all 62 shipped containers** and compares its aggregates against
+`flat-to-vr-RE-toolkit/tools/d3d9-ctab.py` — a different implementation, in a different language,
+which finds tables a **different way**: the Python scans for the `CTAB` fourcc anywhere in the file,
+the C walks the token stream from each version token exactly as the proxy will at runtime. Two
+methods that could disagree, agreeing on **all 9,971 shaders and every bucket**, first run.
+`[verified-numerically 2026-09-03, n=9971]`
+
+That also upgrades the skinning claim itself: `skinned AND g_mViewToClip NOT at c192` is **0** and
+`GPU_skinning_matrices anywhere but c0` is **0**, now confirmed by two independent readers rather
+than one script.
+
+The harness additionally exercises the registry against the failure it is most likely to have —
+3,000 deliberately 16-byte-spaced pointer-like keys (so the low bits collide), insert, look up,
+remove one in three, re-check survivors, which is precisely where naive removal under linear
+probing silently breaks later lookups — and feeds the parser hostile input: NULL, junk, a truncated
+stream, a comment token claiming a `0x7FFF`-dword payload, and a CTAB header claiming 65,535
+constants. None crash, none report success. That matters because `CreateVertexShader` passes **no
+length**, so the walk is driven by the tokens themselves and must refuse to run off the end.
+
+Clean under `-Wall -Wextra -Wpedantic -Wshadow -Wconversion` for both the host and
+`i686-w64-mingw32`. `[compile-verified 2026-09-03]`
+
+### Deliberately NOT wired into `proxy.c` — and that is a decision, not an omission
+
+`proxy.c` and the deployed `d3d9.dll` are **untouched**, for two reasons that both point the same
+way:
+
+1. Using the map needs `CreateVertexShader` + `SetVertexShaderConstantF` interception, i.e. exactly
+   the device-level hooking that the unexplained 2026-08-25 vtable-hook failure blocks. Stacking an
+   unknown on an unknown would make the eventual failure unattributable.
+2. **Changing the deployed binary now would destroy the starred `[FLAT]` test** queued above — "does
+   the game still start with the deployed `d3d9.dll`". That test is only meaningful against the
+   *same* binary the log lines came from.
+
+So this is the half of the work that is provably correct without answering either question, and it
+stays correct whichever way both go.
+
 ## Method note worth reusing
 
 The `/gr` drop that prompted this concluded the opposite of what the disk shows — reasonably, from

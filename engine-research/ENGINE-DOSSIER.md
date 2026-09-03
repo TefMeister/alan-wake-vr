@@ -225,6 +225,16 @@ one — worth a `/gr` drop rather than a launch.
 - **The chosen override patch point:** `IDirect3DDevice9::SetVertexShaderConstantF`, with the
   target register resolved **per shader** from the CTAB parsed at `CreateVertexShader` (§6 — the
   register is not fixed; `c0` vs `c192` depends on the skinning palette).
+- **✅ The register map is BUILT and validated (2026-09-03, `/pd`, no launch):**
+  `staging/alan-wake-vr/proxy-d3d9/src/ctab.{h,c}` — a dependency-free CTAB parser plus a
+  pointer-keyed registry. Validated by running it over all 62 shipped containers and comparing
+  against `d3d9-ctab.py`, an independent implementation in another language that locates tables a
+  **different way** (fourcc scan vs. token walk): **all 9,971 shaders agree on every bucket**.
+  `[verified-numerically 2026-09-03, n=9971]` `[compile-verified 2026-09-03]` for host and
+  `i686-w64-mingw32` under `-Wall -Wextra -Wpedantic -Wshadow -Wconversion`. Registry and
+  hostile-input tests included — the parser must be bounds-safe because `CreateVertexShader` passes
+  no length. **It is deliberately not wired into `proxy.c`** (see `README-ctab.md`): that needs the
+  device hook, and altering the deployed binary would invalidate the queued one-launch test in §4.
 - ⚠️ **This requires device-level interception, which is the project's live blocker** — the
   2026-08-25 `CreateDevice` vtable-hook failure (§4, §11) is now on the critical path rather than
   being a footnote, because every route to per-eye rendering goes through it.
