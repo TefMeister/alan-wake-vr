@@ -82,3 +82,27 @@ pass (HTTP 429) and was not read.
 - https://framedsc.com/GameGuides/Alan_Wake.htm — FRAMED game guide (free camera, table, downgrade depot)
 - https://framedsc.com/CheatTables/AlanWake.CT — Jim2point0's table, read online as XML
 - https://helixmod.blogspot.com/2014/08/alan-wake.html — Neovad's Helix Mod fix and its comment thread
+
+## ✅ Verdict 2026-09-03 — both addresses verified statically in our build; byte patterns ported exactly (folded from `inbox/`)
+
+- **FOV read at `[camera+0x214]`** — the pattern `D9 80 14 02 00 00 D9 5C 24 10 E8` matched **exactly
+  once**; our build has it at **`0x0043F533`** (`AlanWake.exe+0x3F533`), `0x90` from the table's
+  `+0x3F5C3` — the "offsets are for the older build, patterns are portable" caveat did its job.
+  The accessor before it is `0x005B5800`: `mov eax, [0x0076C5D8]` / `ret`. **So the camera object
+  sits behind ONE static global, `[0x0076C5D8]`**, corroborated by 151 direct callers of that getter
+  and by the global's own writer cluster and teardown `[inferred-static 2026-09-03]`. The modding
+  side calls this the single most useful structural fact recorded for this game so far.
+- **`AlanWake.exe` has no ASLR** — `DllCharacteristics = 0x8000`, `DYNAMIC_BASE` unset, no `.reloc`.
+  Fixed at `0x400000`; every static address in this project is permanent.
+- **Global time-scale** — `D9 05 ?? ?? ?? ?? DE CB D9 C9` returns two sites; the live one reads
+  `[0x0069C628]` (`+0x29C628`, exactly one page from the table's `+0x29D628`), and its initial `.data`
+  value is exactly `1.0`, the independent check that makes it a confirmation
+  `[inferred-static 2026-09-03]`. Not yet written to.
+- ⚠️ **The consumer after the FOV read is still only a candidate for the projection build.** The code
+  does `fmul [0.4]` then `fadd [0.8]` — a linear remap, not degrees-to-radians (`0.0174533`). Recorded
+  as unestablished.
+- **FOV-dependent shadows** folded into dossier §8 as `[reported 2026-09-02]`; the shader-bank read
+  is consistent with it mattering (`g_mSunLightProjectionMatrix` in 1,520 pixel shaders). Untested.
+
+Request from the modding side, adopted as this lane's practice for this game: **send byte patterns,
+not addresses.** Both ported and both were checkable in minutes.
