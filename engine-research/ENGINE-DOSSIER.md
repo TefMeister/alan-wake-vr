@@ -253,11 +253,16 @@ conclusion could be wrong, and it would be settled by a breakpoint on `0x100D8B5
 vapi.dll` and
   `nvapi64.dll`, so they are real function IDs, not arbitrary constants), and **one of them —
   `0x5E8F0BEC` — has zero callers while four others have callers.** That structural result is solid.
-- **NOT verified here** `[reported]`: that `0x5E8F0BEC` is specifically
-  `NvAPI_Stereo_SetDriverMode`. The ID→name mapping comes from the published NVAPI ID list. **The
-  shipped driver has its id→name table stripped** — the function-name strings are absent from both
-  `nvapi.dll` and `nvapi64.dll` — so the mapping could not be confirmed on this machine.
-  **If that mapping is wrong, the conclusion above inverts.**
+- **✅ The ID→name mapping is CONFIRMED — read the closure box below before reading the rest of this
+  bullet.** `[reported 2026-09-03, n=3 independent reads]` It was checked against NVIDIA's own
+  published `nvapi_interface.h` by `/gr` on 2026-09-01, independently by `/sr` on 2026-09-02, and
+  independently again by `/gr` on 2026-09-03 — that third read carried **two positive controls in
+  the same query** and reached the file's closing `#endif`, so it was not a truncated head.
+  **The inversion risk is retired. `0x5E8F0BEC` is `NvAPI_Stereo_SetDriverMode`.**
+  - *What remains true and is worth keeping:* the mapping could not be confirmed **on this machine**,
+    because the shipped driver has its id→name table stripped — the function-name strings are absent
+    from both `nvapi.dll` and `nvapi64.dll`. That is why it took a first-party header rather than a
+    local lookup. It is not an open question.
 
 **What supports the mapping short of proof:** the four IDs that *are* called form a coherent NVAPI
 stereo initialisation sequence under this mapping — `Initialize` → `CreateHandleFromIUnknown` →
@@ -265,11 +270,15 @@ stereo initialisation sequence under this mapping — `Initialize` → `CreateHa
 exactly the two a game using Automatic mode would have no reason to call. A scrambled mapping would
 be unlikely to produce a set that coherent. That is consistency, not confirmation.
 
-**Cheapest way to close it:** check the IDs against NVIDIA's published `nvapi.h` / NVAPI SDK
-(`NvAPI_Stereo_SetDriverMode`'s ID is a documented constant). That is a research task, not a modding
-one — worth a `/gr` drop rather than a launch.
+**✅ That was the cheapest way to close it, and it is done** — three times, by two lanes. The
+paragraph above is kept for the reasoning, not as an open action.
 
-> #### ✅ CLOSED 2026-09-01 by `/gr` — the mapping is confirmed, so the verdict above stands.
+**⚠️ The verdict CAN still be wrong, but not for this reason.** The one genuinely open hole is a call
+reaching NVAPI through a **runtime-computed pointer**, which a static caller count cannot see. That
+is the `[FLAT]` breakpoint on `0x100D8B50`, and it is the only thing left that could invert the
+conclusion. Do not re-open the name lookup.
+
+> #### ✅ CLOSED 2026-09-01 by `/gr`, re-confirmed 2026-09-02 (`/sr`) and 2026-09-03 (`/gr`) — n=3, two lanes
 >
 > All six IDs were checked against **NVIDIA's own published `nvapi_interface.h`** (the very table
 > `nvapi_QueryInterface` dispatches through) and corroborated by an independent third-party ID
