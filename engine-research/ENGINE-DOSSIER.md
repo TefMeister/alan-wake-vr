@@ -122,14 +122,54 @@ suite discriminates (all caught; control passes) — including `row0.z = (l+r)/(
 correct for a *symmetric* frustum and would therefore have passed every mono check while breaking
 only stereo. Code and full account: `staging/alan-wake-vr/proxy-d3d9/README-stereo.md`.
 
+#### The paths that bypass the split, and the ones that run backwards — also covered (2026-09-03)
+
+**515 vertex shaders never receive `g_mViewToClip`.** Confirmed by disassembly, not assumed —
+`Particle.obj` emits position with `dp4 o0.x, c103, r1` straight from `g_mWorldToClip`, using
+`g_mWorldToView` only for a fog distance and `g_mViewToWorld` as a `dp3` billboard-facing rotation.
+Split: **478** fused-plus-a-view-matrix (Particle 256, FoliagePRT 152, Terrain 33, FoliageBillboard
+18, Grass 18, ShadowBlob 1) and **37** fused-only minimal depth shaders (23 with a single
+constant; some carry `g_fZClampValue`).
+
+| path | shaders | edit |
+| --- | --- | --- |
+| `g_mWorldToClip` / `g_mLocalToClip` (fused) | 515 | `row0 += S·row3` then `row0.w -= S·C`, `S = p00·eye_dx/C` |
+| `g_mClipToView` (deferred reconstruction) | 90 | `m[i][3] -= s·m[i][0]` — the matching inverse |
+| `g_mViewToWorld` (pixel stage) | 1,367 | `m[i][3] += eye_dx·m[i][0]` |
+
+`p00` is **supplied from the cached camera projection, not recovered from the fused matrix** —
+object scale baked into a `g_mLocalToClip` corrupts recovery, and the test suite asserts both that
+recovery is exact on a rigid `P·V` and that it is demonstrably wrong under scale.
+
+The `g_mViewToWorld` edit is **safe to apply blanket**: disassembly shows uses split between `dp3`
+(direction — reflections and normals in `Chrome`, `Taken`) and `dp4` (position, `Water`), and `dp3`
+never reads `.w`, so the edit is invisible to those and correct for the others.
+
+`[verified-numerically 2026-09-03, n=48 fused + 24 inverse configurations]` — the fused result is
+compared against `P_eye·V_eye·W` including object scale, and `g_mClipToView` against
+`inverse(P_eye)` from an independent Gauss-Jordan inverse. **Twelve mutants across both rounds, all
+caught, control passes.**
+
+⚠️ **KNOWN GAP — fused-draw attribution is a RUNTIME question.** Whether a fused draw belongs to the
+camera or to a shadow/light view depends on which pass is active, and **the same shader serves
+both**. Applying a camera shear to a shadow pass corrupts the shadow map. The code refuses
+orthographic matrices (`row3 ≈ [0,0,0,1]`) as a fail-safe against directional-light shadows, but a
+**perspective spot-light shadow would pass that guard**. The reliable discriminator is the active
+render target. Recorded, not solved. `[hypothesis 2026-09-03]` that the 37 fused-only shaders are
+the shadow-map path — the `g_fZClampValue` constant is suggestive, not proof.
+
 ⚠️ **Not established until something runs:** that `g_mViewToClip` is left-handed with
 `clip.w = view.z` and `row3 = [0,0,1,0]` (assumed from the `dp4 r0.w, c3, r1` pattern plus D3D
 convention, not measured); which engine unit the IPD should be expressed in; and that no second
-path rewrites these registers after we do. **Diagnostics:** vertical separation instead of
-horizontal ⇒ the matrix is transposed from this derivation; identical eyes at any IPD ⇒ the write
-is not reaching the shader (registry miss, or one of the 515 fused `g_mWorldToClip` /
-`g_mLocalToClip` shaders that bypass view space); separation correct but depth inverted ⇒ only the
-`eye_dx` sign, a one-line fix and **not** evidence against the derivation.
+path rewrites these registers after we do. **Diagnostics — each path fails distinctively, so the symptom names the cause:**
+vertical separation instead of horizontal ⇒ the matrix is transposed from this derivation;
+identical eyes at any IPD ⇒ the write is not reaching the shader (registry miss); separation
+correct but depth inverted ⇒ only the `eye_dx` sign, a one-line fix and **not** evidence against
+the derivation; **particles and foliage at the wrong depth while the world is right** ⇒ the fused
+path is not applied or `p00` is stale; **shadows doubled, smeared or detached** ⇒ the fused shear
+is hitting a shadow pass (the attribution gap above); **deferred lighting and SSAO right in one eye
+and offset in the other** ⇒ `g_mClipToView` is not getting the matching inverse; **reflections and
+specular swimming** ⇒ pixel-stage `g_mViewToWorld`.
 
 ### ✅ The game-side camera is ONE static global, and this exe has no ASLR (2026-09-03, `/pd`)
 
