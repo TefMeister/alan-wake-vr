@@ -84,3 +84,35 @@ It is GPL-3.0 — study only, nothing copied.
 - https://github.com/OpenAWE-Project/OpenAWE — open-source reimplementation of this engine (GPL-3.0); `techniques/*.json` permutation model
 - https://github.com/Nostritius/AWTools — `unrmdp` / `unbin` for Alan Wake's archives
 - https://github.com/TomEvin/neat — archive unpacker for the same engine family
+
+## ❌ Withdrawn 2026-09-03 — the central recommendation is `[disproved 2026-09-03]` (folded from `inbox/`, `Supersedes:` drop by `/pd`)
+
+The "check the archives first" step above is what prompted the check that overturned this topic, so
+the research did its job — but the operational conclusion was wrong on the installed Steam build:
+
+- **The shader bank ships pre-compiled, with `CTAB` intact.** The install's `shaders/build/pc/`
+  folder holds 62 `RFX ` containers (~16 MB) of D3D9 bytecode — **9,971 constant tables in 691
+  distinct layouts**, every constant named with its register
+  `[inferred-static 2026-09-03, n=9971 tables]`. The CTAB method *does* transfer, and it answered §6
+  the same afternoon: `g_mViewToClip` (`vs_3_0`, 4×4) is a standalone projection matrix,
+  `g_mLocalToView` (4×3) is object-to-view, and the projection register moves between `c0` and
+  `c192` depending on whether the 192-register skinning palette is present. The bank sits in a plain
+  folder outside the archives, so no unpacking was needed for §6.
+- **The cabs are not evidence about this game.** The `thirdparty/DirectX/` folder is the complete
+  stock June-2010 DirectX redistributable — 154 cabs spanning XACT, XInput, `d3dx9_24` to `_43`,
+  `D3DCompiler_42`/`43`. Practically every DX9-era game ships it verbatim.
+- **The call site is D3DX9, not D3DCompiler.** `renderer_sf_Win32.dll`, `d3d_sf_Win32.dll` and
+  `AlanWake.exe` import `D3DXCompileShader` / `D3DXCompileShaderFromFileA` from **`d3dx9_43.dll`**,
+  not `D3DCompile` from `d3dcompiler_43.dll`. (`d3dx9_43` delegates to `D3DCompiler_43` internally,
+  which is why the redist installs both.)
+- **There is nothing to compile.** No `.rfx`, `.hlsl`, `.fx` or `.h` shader source ships anywhere in
+  the install, and the entry point used is the file-based `FromFileA` variant. The
+  `Could not compile HLSL shader` strings are real, but they belong to a **developer/fallback path
+  with no inputs in a retail install**.
+
+**What survives:** the OpenAWE and `AWTools`/`neat` pointers (still good for formats and concepts),
+and the archive-unpacking suggestion for *other* data. **What does not:** the `d3dcompiler_43.dll`
+proxy as the seam for §6 — a shipped shader *compiler* did not imply shipped shader *compilation*.
+The generalisable lesson (look for shipped shader **sources**; no sources, or a file-based compile
+entry point with nothing to point at, means the compile path is a dev affordance) was filed to the
+cross-engine library's inbox by the modding side itself.

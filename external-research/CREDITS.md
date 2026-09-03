@@ -26,6 +26,9 @@ redistribution (noted below).
 | The Sudden Stop: Alan Wake PC Commands | alanwake.info | https://www.alanwake.info/2011/10/alan-wake-pc-commands.html |
 | NVIDIA GeForce forums: Alan Wake 3D Vision settings | NVIDIA forum community | https://www.nvidia.com/en-us/geforce/forums/discover/136359/alan-wake-what-are-the-3d-recommended-settings-/ |
 | Helix Mod: Alan Wake | Helix Mod community | https://helixmod.blogspot.com/2017/05/alan-wake.html |
+| Nvidia 3D Vision article (discontinuation facts) | Wikipedia contributors | https://en.wikipedia.org/wiki/Nvidia_3D_Vision |
+| 3D Fix Manager (driver-support history, DX9 vs DX11, Discover mode) | Pauldusler | https://helixmod.blogspot.com/2017/05/3d-fix-manager.html |
+| HelixVision driver-compatibility notes | Bo3b | https://steamcommunity.com/app/1127310/discussions/0/1635291505036080879/ |
 | vorpX Alan Wake compatibility reports | vorpX forum community | https://www.vorpx.com/forums/search/Alan%20Wake/ |
 | KitGuru (Space Oddity removal reporting) | KitGuru | https://www.kitguru.net/tech-news/mustafa-mahmoud/alan-wake-is-getting-an-update-to-remove-licensed-song/ |
 | NVIDIA 3D Vision Automatic developer documentation (the clip-space footer, draw-call duplication, and the `StereoParmsTexture` / `nvstereo.h` correction pattern) | NVIDIA Corporation | https://archive.docs.nvidia.com/gameworks/content/technologies/desktop/nv3dva_background.htm · https://archive.docs.nvidia.com/gameworks/content/technologies/desktop/nv3dva_stereoscopic_issues.htm |
