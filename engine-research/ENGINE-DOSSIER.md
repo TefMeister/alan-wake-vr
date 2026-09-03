@@ -75,6 +75,62 @@ hit on 2026-09-02** — so use `-noblur` when judging a stereo run.
 Full inventory and reproduction scripts: `dev-archive/recon/2026-09-03-shader-ctab-inventory/`.
 Write-up: `modding-notes/2026-09-03-the-shader-bank-ships-precompiled-with-ctab-and-section-6-opens.md`.
 
+### ✅ MATRIX CONVENTION SETTLED, and the per-eye maths is two single-float edits (2026-09-03, `/pd`, no launch)
+
+Established **two independent ways**, because a transpose error here compiles fine and is visible
+only in a headset:
+
+1. **CTAB type metadata:** every camera matrix is `D3DXPC_MATRIX_ROWS` — register *i* holds **row**
+   *i*. `g_mLocalToView` declares a `4x4` type but occupies **3 registers**, which is only
+   consistent with the 4th row being `[0,0,0,1]` and elided.
+2. **The shipped bytecode agrees** (`TerrainMesh.obj`, disassembled):
+   ```
+   dp4 r1.x, c4, r0     ; view.x = dot(row0 of g_mLocalToView, local)
+   dp4 r1.y, c5, r0
+   dp4 r1.z, c6, r0
+   mov r1.w, v0.w       ; 4th row elided, w carried through
+   dp4 r0.x, c0, r1     ; clip.x = dot(row0 of g_mViewToClip, view)
+   dp4 r0.w, c3, r1
+   ```
+   **`dp4`** — the full 4-component dot — is decisive: each row's `.w` participates, so **the
+   translation lives in the `.w` of each row.** (`Sky.obj` shows the `x4` variant where the 4th
+   register is present and supplies `w`; both layouts occur, and `ctab.c` reports which.)
+
+**Verdict:** column-vector (`view = M·local`, `clip = P·view`), registers are rows, translation in
+`.w`. `[inferred-static 2026-09-03, two independent reads]`
+
+**Consequence — a physically correct off-axis pair, in two single-float edits:**
+
+```
+separation   g_mLocalToView.row0.w -= eye_dx          (eye_dx = ±ipd/2 along view +X)
+convergence  g_mViewToClip.row0.z  += g_mViewToClip.row0.x * eye_dx / C
+```
+
+The convergence shear is expressed via the projection's **own `row0.x`**, so the game's FOV, near
+and far never have to be recovered — and it stays correct when the game changes FOV at runtime
+(cutscenes, aiming, and the FOV-dependent shadow behaviour in §8). Because the engine hands over a
+real view matrix, this is a **true eye translation plus frustum shear**, not the clip-space
+approximation alice-madness-returns-vr is forced into — so per-eye depth and view-dependent shading
+are correct rather than approximately right. The two are the same family algebraically (with
+`w = z`, NVIDIA's `x' = x + S(w−C)` is a shear plus a constant).
+
+**Verified numerically** against ground truth built a *different* way (explicit off-axis frustum +
+physically translated eye) over **1,080 configurations × 8 points**, plus the convergence property,
+parallax sign and falloff, an `eye_dx = 0` bit-identical no-op, and fail-closed degenerate input.
+`[verified-numerically 2026-09-03, n=1080 configurations]` A five-mutant mutation test confirms the
+suite discriminates (all caught; control passes) — including `row0.z = (l+r)/(r-l)`, which is
+correct for a *symmetric* frustum and would therefore have passed every mono check while breaking
+only stereo. Code and full account: `staging/alan-wake-vr/proxy-d3d9/README-stereo.md`.
+
+⚠️ **Not established until something runs:** that `g_mViewToClip` is left-handed with
+`clip.w = view.z` and `row3 = [0,0,1,0]` (assumed from the `dp4 r0.w, c3, r1` pattern plus D3D
+convention, not measured); which engine unit the IPD should be expressed in; and that no second
+path rewrites these registers after we do. **Diagnostics:** vertical separation instead of
+horizontal ⇒ the matrix is transposed from this derivation; identical eyes at any IPD ⇒ the write
+is not reaching the shader (registry miss, or one of the 515 fused `g_mWorldToClip` /
+`g_mLocalToClip` shaders that bypass view space); separation correct but depth inverted ⇒ only the
+`eye_dx` sign, a one-line fix and **not** evidence against the derivation.
+
 ### ✅ The game-side camera is ONE static global, and this exe has no ASLR (2026-09-03, `/pd`)
 
 `/gr`'s FOV byte pattern (`D9 80 14 02 00 00 D9 5C 24 10 E8`, from an older build) **ports to our

@@ -15,7 +15,10 @@ itself stays in the install folder.
 | `transform-constants.txt` | every constant whose name mentions clip/view/proj/camera/eye/world/near/far/fov — 33 names, with the register each lands on per stage |
 | `register-map-and-skinning-correlation.txt` | the camera/projection register map, plus the per-shader test of "skinning palette pushes the camera block to c192" |
 | `clip-matrix-coverage.txt` | how many vertex shaders carry a `*ToClip` matrix, and what the ones that do not are |
-| `aw_names.py`, `aw_agg.py`, `aw_cov.py` | the three scripts that produced the above, so the numbers can be reproduced or re-run against a patched build |
+| `no-clip-vertex-shaders-complete-list.txt` | the complete 22-file breakdown of the 121 vertex shaders carrying no `*ToClip` matrix |
+| `matrix-type-info.txt` | every camera matrix's CTAB type info — class (all `MATRIX_ROWS`), rows, columns |
+| `disasm-terrainmesh-vs.txt` | two disassembled vertex shaders showing how the matrix registers are actually consumed (`dp4` against consecutive registers) |
+| `aw_names.py`, `aw_agg.py`, `aw_cov.py`, `full_noclip.py`, `aw_typeinfo.py`, `aw_disasm.py` | the scripts that produced the above, so the numbers can be reproduced or re-run against a patched build. `aw_disasm.py` is a minimal D3D9 SM3 disassembler — enough to read matrix usage, not a general tool |
 
 ## Reproducing
 
@@ -36,6 +39,16 @@ python aw_cov.py
 - `g_mLocalToView` (`vs_3_0`, 4x3) = object-to-view, in 4,553 shaders.
 - The projection register is **not fixed**: `c0` (2,238), `c192` (2,084), `c4` (128), `c7` (17).
 - 97.6% of vertex shaders carry some `*ToClip` matrix; the 121 that do not are post-process.
+
+## Why the disassembly is here
+
+The matrix convention (column-vector, registers as rows, translation in each row's `.w`) is what
+the whole per-eye derivation rests on, and a transpose error there compiles fine and shows up only
+in a headset. It was therefore established twice — once from the CTAB type metadata
+(`matrix-type-info.txt`: everything is `D3DXPC_MATRIX_ROWS`, and `g_mLocalToView` declares 4x4
+while occupying 3 registers) and once from the shipped bytecode itself
+(`disasm-terrainmesh-vs.txt`: `dp4` against consecutive registers, with `mov r1.w, v0.w` carrying
+the elided fourth row). Both agree.
 
 Interpretation, caveats and the consequences for proxy design are in
 `modding-notes/2026-09-03-the-shader-bank-ships-precompiled-with-ctab-and-section-6-opens.md`.
