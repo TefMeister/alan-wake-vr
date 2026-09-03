@@ -1,0 +1,39 @@
+vertex shaders: 5103 (94 layouts) ; pixel shaders: 4868 (597 layouts)
+
+VS carrying g_mViewToClip : 4467 / 5103  (87.5%)
+VS carrying ANY *ToClip    : 4982 / 5103  (97.6%)
+
+g_mViewToClip register distribution (vs_3_0):
+   c0    x4   :  2238 shaders
+   c192  x4   :  2084 shaders
+   c4    x4   :   128 shaders
+   c7    x4   :    17 shaders
+
+=== VS with NO *ToClip matrix: what are they? ===
+total 121 shaders in 18 layouts
+   g_mClipToView                      73
+   g_vOutputRes                       72
+   g_fInvNear                         16
+   g_vScreenRes                       12
+   g_fFrontClipPlaneZ                 8
+   g_vBlurSourceRes                   8
+   g_fVelocityDepthBias               8
+   g_mCurrentLocalToClip              8
+   g_mPreviousLocalToClip             8
+   g_fBorder                          4
+   g_vShrinkSourceRes                 4
+   GPU_skinning_matrices              4
+
+  which files:
+   Godray.obj                   17
+   SSAO.obj                     16
+   BloomX86.obj                 12
+   DeferredLight.obj            11
+   VolumetricLight.obj          11
+   ShadowBuffer.obj             10
+   Velocity.obj                 8
+   Blur.obj                     6
+   BilateralFilter.obj          5
+   ConvertToLinearDepth.obj     4
+   VectorBlur.obj               4
+   ShadeEffect.obj              3
