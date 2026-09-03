@@ -85,8 +85,61 @@ Several games in this portfolio are from exactly that era. Filed to the cross-en
 
 The cross-project sweep re-read NVIDIA's `nvapi_interface.h` on its own and reports **all six IDs match**
 (`0x5E8F0BEC` = `NvAPI_Stereo_SetDriverMode` included). Same primary source, a second independent read:
-`[verified-static 2026-09-02, n=2 reads]`. The method half — counting direct callers to separate what a
+`[reported 2026-09-02, n=2 reads]` — first-party, from NVIDIA's own header, but a document read
+rather than a measurement. (Tag corrected 2026-09-03: `verified-static` is not one of the eight
+vocabulary names, and an invented tag counts as untagged to every tool. The replacement follows
+`/gs`'s own 2026-09-02 precedent for claims read out of a vendor's published documentation, which
+deliberately did **not** use `inferred-static` because that would understate a first-party read.) The method half — counting direct callers to separate what a
 binary *links* from what it *uses*, and not letting a verified structural result lend its confidence to
 an unverified name lookup — is now generalised in the cross-engine library at
 `flat-to-vr-cross-engine-research/docs/techniques/README.md` (section "Counting callers separates what a
 binary links from what it uses"), credited to this project.
+
+
+## Read a third time by `/gr`, 2026-09-03 — n=3, and this time with two controls
+
+The estate sweep re-read NVIDIA's published `nvapi_interface.h` independently, without consulting the
+table above first, and asked it for four ids at once — the two that matter plus two positive
+controls:
+
+| ID | Name returned |
+|---|---|
+| **`0x5E8F0BEC`** | **`NvAPI_Stereo_SetDriverMode`** |
+| **`0x96EEA9F8`** | **`NvAPI_Stereo_SetActiveEye`** |
+| `0x0150E828` (control) | `NvAPI_Initialize` |
+| `0x239C4545` (control) | `NvAPI_Stereo_Enable` |
+
+All four match. The reader also reported reaching the file's closing `#endif // _NVAPI_INTERFACE_H`,
+so this was a complete read and not a truncated head — the check the negative-evidence rule asks for,
+and the one that would have caught a partial fetch answering from the first few hundred entries.
+`[reported 2026-09-03, n=3 independent reads]`
+
+**So the mapping is settled.** Three readers, two of them (`/sr`, `/gr`) with no sight of the
+others' work at the time, one primary source, and now two controls inside the same query.
+
+### ⚠️ The board is asking for something already delivered
+
+`status/alan-wake-vr.md`'s `OPEN (2026-09-02)` block still carries, on its first `[PD]` row:
+
+> ⚠️ That verdict rests on `0x5E8F0BEC` being `SetDriverMode`, which is `[reported]`, not verified —
+> if the mapping is wrong the conclusion inverts, and `/gr` has been asked to check it against
+> NVIDIA's `nvapi.h`
+
+That request was answered on **2026-09-01**, before the row was written, and again on 2026-09-02 by
+`/sr`. The caveat is stale, and while it stands it makes the whole `[PD]` main line read as resting
+on an open question when it does not. A pointer has been filed to `engine-research/inbox/` asking the
+modding side to retire the caveat and close the row's warning.
+
+The substantive point is unchanged and worth restating plainly: **`SetDriverMode` is confirmed
+absent from the caller count, so the native-stereo shortcut stays retired and the eyes are ours to
+build.** Nothing about the route changes; what changes is that the route no longer carries a
+disclaimer it does not need.
+
+### One more thing this pass noticed, and it is not this project's fault
+
+`0x96EEA9F8` = `NvAPI_Stereo_SetActiveEye` is also the **Direct-only discriminator that
+`alice-madness-returns-vr` uses** for the same Direct-vs-Automatic question. That project's scan was
+blocked on 2026-09-02 by an encrypted `.text` (its wrapper is now identified — see that project's
+2026-09-03 topic), so it has not yet been able to spend the id. Confirming it here means that when
+Alice's scan does run, its discriminator is already on a three-read footing and does not need
+checking again.
