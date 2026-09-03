@@ -1,0 +1,24 @@
+COMPLETE list of files containing the 121 no-clip vertex shaders:
+   Godray.obj                   17
+   SSAO.obj                     16
+   BloomX86.obj                 12
+   DeferredLight.obj            11
+   VolumetricLight.obj          11
+   ShadowBuffer.obj             10
+   Velocity.obj                 8
+   Blur.obj                     6
+   BilateralFilter.obj          5
+   ConvertToLinearDepth.obj     4
+   VectorBlur.obj               4
+   ShadeEffect.obj              3
+   BioTypeSampler.obj           2
+   DarkPresence.obj             2
+   GenerateMipmaps.obj          2
+   LightBoost.obj               2
+   AfterImage.obj               1
+   AutoExposure.obj             1
+   Backdrop.obj                 1
+   DarkLight.obj                1
+   Displace.obj                 1
+   Flare.obj                    1
+sum = 121 ; files = 22
