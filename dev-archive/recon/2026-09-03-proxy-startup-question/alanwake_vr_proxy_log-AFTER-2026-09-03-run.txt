@@ -1,0 +1,15 @@
+[16:16:15.645] === alan-wake-vr proxy d3d9.dll loaded, PID=10660 ===
+[16:16:15.648] real d3d9.dll loaded from C:\Windows\system32\d3d9.dll; Direct3DCreate9=72304B20
+[16:16:15.649] Direct3DCreate9 called: SDKVersion=0x20
+[16:16:15.770]   -> returned 03807940
+[16:16:15.776] === alan-wake-vr proxy d3d9.dll unloading ===
+[16:20:25.685] === alan-wake-vr proxy d3d9.dll loaded, PID=28072 ===
+[16:20:25.688] real d3d9.dll loaded from C:\Windows\system32\d3d9.dll; Direct3DCreate9=72304B20
+[16:20:25.689] Direct3DCreate9 called: SDKVersion=0x20
+[16:20:25.810]   -> returned 03842BB8
+[16:20:25.816] === alan-wake-vr proxy d3d9.dll unloading ===
+[19:03:04.262] === alan-wake-vr proxy d3d9.dll loaded, PID=25000 ===
+[19:03:04.280] real d3d9.dll loaded from C:\Windows\system32\d3d9.dll; Direct3DCreate9=6BA64B20
+[19:03:04.281] Direct3DCreate9 called: SDKVersion=0x20
+[19:03:04.400]   -> returned 03736F58
+[19:03:04.406] === alan-wake-vr proxy d3d9.dll unloading ===
