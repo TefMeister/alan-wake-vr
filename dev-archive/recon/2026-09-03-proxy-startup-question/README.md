@@ -39,3 +39,22 @@ Steam, and this title checks for its launcher.
 The proxy is the **plain forwarding build**: exports are exactly `Direct3DCreate9`, one symbol, no
 hook code `[inferred-static 2026-09-03]`. Revert is a one-step **delete** — the game ships no
 `d3d9.dll` of its own and uses the system copy.
+
+---
+
+## ✅ RESOLVED 2026-09-03 — the build DOES reach gameplay; `alanwake_vr_proxy_log-AFTER-2026-09-03-run.txt`
+
+The first `/lm` session on this game launched with this exact proxy still deployed. The log gained
+one more identical fast load/unload cycle (`AFTER` file, last 5 lines) — but a screenshot taken
+seconds later showed the game in live, moving gameplay with a working HUD. `[verified-live
+2026-09-03]`
+
+**So the line above — "there is no evidence on disk that this build ever reached gameplay" — is
+superseded, not by new reasoning but by an actual launch.** The fast cycle was never the failure
+mode it looked like; it's something else entirely (see the write-up in `modding-notes/` for the
+current best guess: a throwaway capability-probe device, separate from the real one). Full
+analysis: [`modding-notes/2026-09-03d-windowed-mode-staged-and-the-proxy-is-confirmed-live.md`](../../../modding-notes/2026-09-03d-windowed-mode-staged-and-the-proxy-is-confirmed-live.md).
+
+**Not investigated further:** where the real device's `IDirect3D9` actually comes from, since our
+hook only ever sees the one short-lived call. That's the new open question, not "does the proxy
+work" — it demonstrably does.
