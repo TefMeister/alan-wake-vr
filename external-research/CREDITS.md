@@ -46,6 +46,9 @@ redistribution (noted below).
 | AWTools — `unrmdp` / `unbin` readers for Alan Wake's archive formats | Nostritius | https://github.com/Nostritius/AWTools |
 | neat — Northlight archive unpacker | TomEvin | https://github.com/TomEvin/neat |
 | The "could not process hlsl shader" launch-failure thread (evidence of runtime shader compilation) | Steam Community discussion participants | https://steamcommunity.com/app/108710/discussions/0/864977025688898181/ |
+| ReShade commit `74347b91d` "Fix hooking in Alan Wake" — freeing the system-DLL reference on unload, the primary source for the probe-then-reload bypass (read online, nothing copied) | crosire | https://github.com/crosire/reshade/commit/74347b91d |
+| `LoadLibraryA` reference — the already-loaded-module base-name rule and the per-process reference count | Microsoft | https://learn.microsoft.com/en-us/windows/win32/api/libloaderapi/nf-libloaderapi-loadlibrarya |
+| Alan Wake care package (Helix `d3d9.dll` + ReShade via ASI loader — practical proof a game-folder `d3d9.dll` hosts the real device) | the package author, via Nexus Mods | https://www.nexusmods.com/alanwake/mods/9 |
 
 Development on this project is AI-assisted: much of the research, code, and
 documentation was produced with **Claude (Anthropic)** (https://claude.com)
