@@ -73,6 +73,39 @@ contains none of it and does not need to**; it was proved to compile in by build
 with the hook enabled and confirming its log strings, then discarding that build.
 Write-up: `modding-notes/2026-09-04-the-proxy-was-bypassed-on-reload-and-the-vtable-hook-was-a-lifetime-bug.md`.
 
+### ⭐ 4b. The device is ours, and the instrument to read `g_mViewToClip` is built (2026-09-04c, `/pd`, no launch)
+
+**Both halves needed the same thing.** `install_createdevice_hook()` is the only place the game's
+real `IDirect3DDevice9` is handed to us, and the device vtable carries `SetVertexShaderConstantF` —
+so no device meant no constant reads, and the hook was disabled from 2026-08-25 under a verdict that
+turned out to be a lifetime bug. With that fixed and the FreeLibrary bypass closed
+`[verified-live 2026-09-04, n=1]`, both rows became one build.
+
+- **The CreateDevice hook is re-enabled**, with its unhook path (built the same day) intact — that
+  is what makes it safe, since the crash it caused was a pointer into our DLL left in a shared
+  vtable across an unload.
+- **A `g_mViewToClip` dump is built** on device vtable **slot 94** (`SetVertexShaderConstantF`, read
+  from the SDK header's own `IDirect3DDevice9Vtbl`, not assumed). It is **read-only** and exists to
+  settle §6's standing assumption that the projection is left-handed with `clip.w = view.z`.
+- **It watches four registers, not one.** The 2026-09-03 census found `g_mViewToClip` is standalone
+  in 4,467 vertex shaders with **no fixed register**: `c0` (2,238), `c192` (2,084), `c4` (128), `c7`
+  (17), the split being the `c0..c191` skinning palette pushing the camera block to `c192`.
+- ⚠️ **The capture is SPANNING, not equality** — an upload may start below a candidate and contain
+  it, and `c192` sits immediately past the palette, so testing `start == reg` would report "never
+  seen" for a register written every frame. That is the most misleading possible negative and the
+  code says so where it is done.
+- **The log states the verdict, not just the numbers:** `m[11]=+1, m[15]=0` ⇒ left-handed and the
+  derivation stands; `m[11]=-1` ⇒ right-handed and **every sign in `stereo.c` needs re-deriving**;
+  anything else ⇒ that register is not the projection in the shaders that ran.
+- **The lifetime rule now covers three things, unhooked in order at detach:** the device vtable, the
+  `IDirect3D9` vtable, then the module reference. Each holds a pointer into this DLL and the
+  2026-08-25 crash was exactly one of them left behind.
+
+`[compile-verified 2026-09-04]`, deployed (`d3d9.dll` 62,464 B; previous kept as
+`d3d9.dll.bak-2026-09-04c-pre-vsdump`). **NOT established:** that either hook survives a real frame —
+the device hook has only ever run against the throwaway probe, and the constant hook has never run.
+Write-up and the log-reading table: `modding-notes/2026-09-04c-the-createdevice-hook-is-back-on-and-the-viewtoclip-dump-is-built.md`.
+
 ## 5. Threading & frame structure
 - Immediate context only, or deferred contexts + command lists?:
 - Which thread(s) do what; render-thread name(s):
