@@ -30,6 +30,50 @@
 - **⚠️ 2026-09-03 (`/pd`): the "live-verified working" status above is NOT supported by the evidence currently on disk.** The deployed `d3d9.dll` (56.5 KB, 2026-08-25) contains **no** hook code — it is the plain forwarding build `[inferred-static 2026-09-03]`. But `alanwake_vr_proxy_log.txt`, the only run evidence on this disk, records **two launches that both ended ~131 ms after `Direct3DCreate9` returned** (PIDs 10660 and 28072, one load/unload cycle each, nothing after) `[measured 2026-09-03, from the log file]`. That is not a game that reached gameplay, and the log appends across runs, so a later successful run would still be present. **This does not prove the proxy is broken** — it means the recorded status and the surviving evidence disagree, and static data cannot reconcile them. `[hypothesis 2026-09-03]` **Settle it with the first launch of any flat session on this game, before testing anything else:** game reaches the menu ⇒ the recorded status is right; game exits immediately ⇒ rename `d3d9.dll` aside, relaunch, and note that this also re-opens the 2026-08-25 "the vtable hook was the problem" conclusion, which was drawn while the plain proxy was believed to work.
 - **A second dynamic-load seam exists beside NVAPI, but it is NOT `d3dcompiler`.** All three modules that mention shader compilation reference **`d3dx9_43.dll`** and call **`D3DXCompileShader` / `D3DXCompileShaderFromFileA`** — the D3DX9 entry points, not `d3dcompiler_43.dll`'s `D3DCompile`. `[inferred-static 2026-09-03]` See §11 for why a `d3dcompiler_43.dll` proxy is the wrong seam here.
 
+### ⭐ ANSWERED 2026-09-04 (`/pd`, no launch) — the proxy was being BYPASSED on the game's second load, and the vtable hook's "confirmed broken" was a lifetime bug
+
+**Where the real device's `IDirect3D9` came from: the system runtime, with us out of the chain.**
+`[inferred-static 2026-09-04]` The game loads `d3d9.dll`, calls `Direct3DCreate9` once, and unloads
+it again ~6 ms later `[measured, n=3 launches]`, then loads `"d3d9.dll"` a **second** time for the
+device it renders with. Our `load_real_dll()` took a reference on
+`C:\Windows\system32\d3d9.dll` by full path and **never released it**, so the system module stayed
+resident after we were gone — and `LoadLibrary` matches an unqualified name against the **base names
+of already-loaded modules** before searching any directory (Microsoft's `LoadLibrary` remarks). The
+game's second load therefore got the resident system copy; the game folder was never searched again.
+That is the whole answer to "our hook only ever sees one short-lived call".
+
+- **ReShade needed the identical fix for this identical game**: commit `74347b91d`, 4.5.2,
+  *"Fixed hooking in Alan Wake"* — free the reference to the module loaded for export hooks.
+  `[reported, primary source]` (Via `/gr`, 2026-09-04.)
+- **Fixed and deployed**: `FreeLibrary(real_d3d9)` at `DLL_PROCESS_DETACH`, **only when
+  `lpReserved == NULL`** (a non-NULL value means process teardown, where a DLL must not free
+  libraries). `d3d9.dll` 58,368 B; previous kept as `d3d9.dll.bak-2026-09-04-pre-freelibrary`.
+  `[compile-verified 2026-09-04]`, **not run**.
+- ⚠️ `FreeLibrary` inside `DllMain` is against the general loader-lock guidance. It is done here
+  because the unload is the only moment the reference can be released and because ReShade ships the
+  same call for the same reason — **but if a future launch hangs at exit or on the second load, this
+  is the suspect**, and the backup merely restores the old bypass.
+- **NOT established:** that the second load now finds us. The next launch shows a **second "proxy
+  loaded" block in the same PID** if it does.
+
+**And the `install_createdevice_hook` verdict is `[disproved 2026-09-04]` as written.** The source
+carried "CONFIRMED BROKEN, 2026-08-25 … the real cause is something about how this specific patch is
+applied to this specific game's vtable; not yet understood". The cause is mechanical and needs no
+mystery: the hook wrote an address **inside our DLL** into slot 16 of the `IDirect3D9` vtable and
+**nothing ever put the original back**; the game then unloads our DLL ~6 ms later. A D3D9 vtable is
+shared per interface class, so the patch outlives the object — the next
+`IDirect3D9::CreateDevice` call jumps into unmapped memory, which is precisely the reported access
+violation, every time. `remove_createdevice_hook()` now restores the runtime's own pointer, and
+`DllMain` calls it **before** the `FreeLibrary` above (the vtable lives in the system module's own
+data and must not be written after that module is released). It refuses to touch slot 16 if some
+later hook owns it.
+⚠️ **Still disabled deliberately** — the explanation is static and untested, and the last time the
+hook was on the game did not start. Re-enable it in a launch of its own with nothing else changed.
+⚠️ With the hook disabled the optimiser strips the unhook as dead code, so the **deployed binary
+contains none of it and does not need to**; it was proved to compile in by building a scratch copy
+with the hook enabled and confirming its log strings, then discarding that build.
+Write-up: `modding-notes/2026-09-04-the-proxy-was-bypassed-on-reload-and-the-vtable-hook-was-a-lifetime-bug.md`.
+
 ## 5. Threading & frame structure
 - Immediate context only, or deferred contexts + command lists?:
 - Which thread(s) do what; render-thread name(s):
