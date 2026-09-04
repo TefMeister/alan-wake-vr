@@ -1,8 +1,14 @@
 # The game compiles its shaders at runtime — so `d3dcompiler_43.dll` is a proxy seam that hands us the constant map with names
 
-**Status:** 🆕 new · **Priority:** ⭐ high — it attacks the board's main line (*"answer §6 the ordinary
-way — locate the camera and projection delivery"*) with a route that needs no launch to design and no
-disassembly to read, and it explains why the sibling projects' off-disk trick does not apply here.
+**Status:** ❌ dead end · **Priority:** — · **⚠️ WITHDRAWN 2026-09-03 — read the last section first.**
+The central recommendation below (build a `d3dcompiler_43.dll` proxy) is `[disproved 2026-09-03]`:
+the shipped build hands the API pre-compiled bytecode, so that seam sees nothing. **Everything from
+here to the "❌ Withdrawn 2026-09-03" section at the end of this file is the original 2026-09-02
+argument, kept for the record.**
+
+_Original status line, 2026-09-02:_ 🆕 new · ⭐ high — it attacks the board's main line (*"answer §6 the
+ordinary way — locate the camera and projection delivery"*) with a route that needs no launch to design
+and no disassembly to read, and it explains why the sibling projects' off-disk trick does not apply here.
 
 ## The evidence
 
