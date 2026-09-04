@@ -53,8 +53,7 @@ That is the whole answer to "our hook only ever sees one short-lived call".
   because the unload is the only moment the reference can be released and because ReShade ships the
   same call for the same reason — **but if a future launch hangs at exit or on the second load, this
   is the suspect**, and the backup merely restores the old bypass.
-- **NOT established:** that the second load now finds us. The next launch shows a **second "proxy
-  loaded" block in the same PID** if it does.
+- **✅ CONFIRMED LIVE 2026-09-04b (`/lm`): the second load now finds us — the bypass is FIXED and the proxy is in the REAL device chain.** `[verified-live 2026-09-04, n=1 launch]` The log shows, in one PID: probe load → `Direct3DCreate9` → unload logged as `(reserved=00000000, explicit FreeLibrary)` with `releasing the system d3d9.dll reference so the game's next LoadLibraryA searches the game folder and finds us again` → **a SECOND `proxy d3d9.dll loaded, PID=<same>` block** → `Direct3DCreate9 -> returned`, and it **never unloads again** — the title and the main menu both render through it (deltas > 0 throughout). This is the project's central unblock: for weeks the proxy saw only the throwaway probe device; it now owns the device the game actually renders with, so device-level interception (CreateDevice hook, constant/matrix dumps — M1/M2) is finally reachable. Write-up: `modding-notes/2026-09-04b-freelibrary-fix-confirmed-proxy-now-owns-the-real-device.md`; evidence `dev-archive/recon/2026-09-04-freelibrary-fix-proxy-now-in-real-device-chain/`. No exit hang or second-load hang observed (the loader-lock caveat above did not bite this launch).
 
 **And the `install_createdevice_hook` verdict is `[disproved 2026-09-04]` as written.** The source
 carried "CONFIRMED BROKEN, 2026-08-25 … the real cause is something about how this specific patch is
