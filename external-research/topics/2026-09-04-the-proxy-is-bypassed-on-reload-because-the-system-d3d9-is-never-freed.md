@@ -79,3 +79,28 @@ Every proxy in the estate that loads its real DLL by system path and skips `Free
 `burnout-paradise-vr` by a grep of `staging/`, `[inferred-static 2026-09-04]`) carries the same
 latent bypass. It only bites where the game probes-and-reloads, which so far is Alan Wake alone —
 but it costs one line to close everywhere. Filed to `flat-to-vr-cross-engine-research/inbox/`.
+
+
+---
+
+## ✅ Outcome — built, run, and CONFIRMED the same day (2026-09-04b)
+
+**This topic's central claim is now `[verified-live 2026-09-04, n=1 launch]`.** `/pd` built the fix
+the day this was filed — `FreeLibrary(real_d3d9)` at `DLL_PROCESS_DETACH` when `lpReserved == NULL`
+— and an `/lm` session ran it. The log shows the whole mechanism in one PID: the proxy loads, takes
+its reference on the system `d3d9.dll`, is unloaded explicitly, releases that reference with a stated
+reason, and **the game's second `LoadLibraryA("d3d9.dll")` then finds the proxy instead of the system
+copy**.
+
+So the diagnosis in this topic was right on both halves: the second load really was the one that
+mattered, and it really was resolving to the system copy by base name because our own reference kept
+it resident. The proxy now sits in the chain of the device Alan Wake actually renders with, which is
+what M1 and M2 both needed.
+
+Modding write-up:
+`modding-notes/2026-09-04b-freelibrary-fix-confirmed-proxy-now-owns-the-real-device.md`; evidence in
+`dev-archive/recon/2026-09-04-freelibrary-fix-proxy-now-in-real-device-chain/`.
+
+*(Recorded here by `/gr` from the modding lane's own notes rather than from a verdict drop — the
+pointer this topic sent to `engine-research/inbox/` was drained, and the confirmation came back
+through the notes. Worth knowing for the next reader: an empty inbox does not mean nothing happened.)*
