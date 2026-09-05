@@ -49,6 +49,7 @@ redistribution (noted below).
 | ReShade commit `74347b91d` "Fix hooking in Alan Wake" — freeing the system-DLL reference on unload, the primary source for the probe-then-reload bypass (read online, nothing copied) | crosire | https://github.com/crosire/reshade/commit/74347b91d |
 | `LoadLibraryA` reference — the already-loaded-module base-name rule and the per-process reference count | Microsoft | https://learn.microsoft.com/en-us/windows/win32/api/libloaderapi/nf-libloaderapi-loadlibrarya |
 | Alan Wake care package (Helix `d3d9.dll` + ReShade via ASI loader — practical proof a game-folder `d3d9.dll` hosts the real device) | the package author, via Nexus Mods | https://www.nexusmods.com/alanwake/mods/9 |
+| Community reports that the newer Steam in-game overlay's hooking code conflicts with `d3d9`/`dxgi`/`ddraw`/`opengl32` proxy DLLs, with `CreateDevice` in its init path — corroborates the 2026-09-05 layered-hook-race diagnosis | Steam Community posters (Big Picture and Steam Client Beta group discussions) | https://steamcommunity.com/groups/SteamClientBeta/discussions/0/666826703621942440/ |
 
 Development on this project is AI-assisted: much of the research, code, and
 documentation was produced with **Claude (Anthropic)** (https://claude.com)
