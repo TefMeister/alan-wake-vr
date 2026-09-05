@@ -73,7 +73,50 @@ contains none of it and does not need to**; it was proved to compile in by build
 with the hook enabled and confirming its log strings, then discarding that build.
 Write-up: `modding-notes/2026-09-04-the-proxy-was-bypassed-on-reload-and-the-vtable-hook-was-a-lifetime-bug.md`.
 
-### ⭐ 4b. The device is ours, and the instrument to read `g_mViewToClip` is built (2026-09-04c, `/pd`, no launch)
+### ⭐⭐ 4c. ANSWERED LIVE 2026-09-05 (`/lm`, home PC, four launches) — `g_mViewToClip` is LEFT-handed, `clip.w = +view.z`; both hooks survive real frames; the 4b instrument was blind and is replaced
+
+**The verdict** `[verified-live 2026-09-05, n=1 launch, 10 five-second windows per register, in-engine intro]`:
+three true projections were uploaded, every one with the w-from-z entry **+1** — at **storage index
+14** (register 3, component z), which is §6's settled convention (registers are the ROWS of a
+column-vector `P`; the depth offset `−zn·zf/(zf−zn)` sits at index 11). `stereo.c` stands as written.
+
+| register | xs | ys | ys/xs | near … far | what |
+| --- | --- | --- | --- | --- | --- |
+| **c192** | 1.2088 | 2.1490 | **1.778 = 16:9** | 0.2 … 1000 | **main camera**, skinned shaders (the census's c192) |
+| c7 | 1.2088 | 2.1490 | 1.778 | 1068 … 10000 | same lens, far depth slice (distant scenery / sky) |
+| c0 | 1.0 | 1.0 | 1.0 | 0.05 … 2 | square 90° shadow or cubemap-face projection |
+
+Horizontal FOV 79.2°, vertical 50.0°. The c0 *camera* projection of the non-skinned shaders was not
+seen only because the scan rate-limits per register and the shadow pass is uploaded first each frame
+`[hypothesis]`; c192 makes the same statement for the same lens.
+
+**How this engine uploads constants** `[verified-live 2026-09-05]`: **whole 128-register blocks**,
+`c0+128` and `c128+128`, ~6,000 of each per second in a 3D scene, plus `c0+4` / `c0+5` for the
+video quad and UI. Any edit must locate the matrix *inside* a block by offset; `start == reg` never
+fires, and a candidate loop that stops at the first spanned register only ever sees c0.
+
+**Why 4b's dump could not see it (two defects, both in `[disproved 2026-09-05]` territory):** it
+`break`-ed on the first spanned candidate, so every full block was counted against c0 and its head
+printed (a flat 2D matrix at ~500,000 uploads/s in launch 2); and its reading tested `m[11] = ±1`,
+the row-vector D3D convention that §6 had already ruled out on 2026-09-03 — in the dossier's own
+convention the ±1 is at index 14, so it would have printed "neither convention" forever. The
+replacement (`staging/alan-wake-vr/proxy-d3d9/src/proxy.c`, `28a45fe`): a per-5-s histogram of every
+`(start, count)` upload range, and a scan of every 4-register window against both signatures,
+logging first sightings per register. Deployed on the home PC (66,048 B; the 4b build kept as
+`d3d9.dll.bak-2026-09-05-pre-agnostic-dump`).
+
+**Both hooks survive real frames** — CreateDevice at slot 16 (one call, `hr=0`), the constant hook at
+slot 94 through the intro, both unhooked in order at a clean menu quit, three launches running.
+**But launch 1 crashed at 7 s on a layered-hook race** `[verified-live, n=1 crash, n=3 clean]`: at
+the first unload slot 16 held a foreign pointer (`747C0710` — the Steam overlay is the likely owner),
+the unhook correctly stood down, and the second load installed on top of *that* pointer as "real";
+the two chained and `CreateDevice` recursed 1,669 times in one millisecond. The first block lived
+700 ms that launch and 16 ms on the clean ones, so it is timing. Fix queued: never chain into a
+foreign slot-16 pointer. Notes:
+`modding-notes/2026-09-05-handedness-answered-left-handed-and-the-dump-was-blind.md`; logs
+`dev-archive/recon/2026-09-05-handedness-home-pc/`.
+
+### ⭐ 4b. The device is ours, and the instrument to read `g_mViewToClip` is built (2026-09-04c, `/pd`, no launch) — *superseded by 4c: the instrument was blind, see above*
 
 **Both halves needed the same thing.** `install_createdevice_hook()` is the only place the game's
 real `IDirect3DDevice9` is handed to us, and the device vtable carries `SetVertexShaderConstantF` —
@@ -234,9 +277,9 @@ orthographic matrices (`row3 ≈ [0,0,0,1]`) as a fail-safe against directional-
 render target. Recorded, not solved. `[hypothesis 2026-09-03]` that the 37 fused-only shaders are
 the shadow-map path — the `g_fZClampValue` constant is suggestive, not proof.
 
-⚠️ **Not established until something runs:** that `g_mViewToClip` is left-handed with
-`clip.w = view.z` and `row3 = [0,0,1,0]` (assumed from the `dp4 r0.w, c3, r1` pattern plus D3D
-convention, not measured); which engine unit the IPD should be expressed in; and that no second
+✅ **ESTABLISHED LIVE 2026-09-05 (§4c):** `g_mViewToClip` IS left-handed with `clip.w = +view.z` and
+`row3 = [0,0,1,0]` — measured at c192 / c7 / c0 in the in-engine intro, `[verified-live 2026-09-05,
+n=1 launch]`. ⚠️ **Still not established until something runs:** which engine unit the IPD should be expressed in; and that no second
 path rewrites these registers after we do. **Diagnostics — each path fails distinctively, so the symptom names the cause:**
 vertical separation instead of horizontal ⇒ the matrix is transposed from this derivation;
 identical eyes at any IPD ⇒ the write is not reaching the shader (registry miss); separation
