@@ -439,6 +439,97 @@ conclusion. Do not re-open the name lookup.
   2. **`-developermenu`** (launch option) — adds a "Developer Menu" to the main menu. Confirmed scope so far: episode/difficulty selection and max ammo/consumables — **not confirmed to include camera/rendering tools**, don't assume further reach without checking live.
   3. **Real, shipped NVIDIA 3D Vision support** — per an NVIDIA forum discussion (version 1.06.18.1326), later game versions are reported "almost 3D Vision ready out of the box" (no HelixMod needed), with **live in-game separation adjustment via `Ctrl+F3`/`Ctrl+F4`** (reported working value: 12 "bars," ~20%) and FOV set via Options/Controls. An older HelixMod fix exists for earlier builds specifically to fix light-clipping. **A working, in-game-adjustable stereo separation control implies the per-eye offset mechanism is already live and reachable, not buried behind anything exotic** — same pattern as Alice: Madness Returns' native stereo find. **Concrete next step: check the installed version against 1.06.18.1326 and try `Ctrl+F3`/`Ctrl+F4` live early** — a fast, zero-risk way to confirm native stereo support before independent shader-reflection work. Not yet confirmed on the actually-installed build.
 
+
+## 6b. The stereo edit is WIRED IN (2026-09-07, `/pd`, no launch) — and both hook races are closed
+
+*The game was not launched; nothing here has been run. Folds both `engine-research/inbox/` files.*
+
+`stereo.c` has been numerically verified since 2026-09-03 and was connected to nothing. It is now
+called from the live `SetVertexShaderConstantF` path, and the two crash/blindness defects that
+stood in front of it are fixed.
+
+### ⭐ The instrument was keyed by REGISTER, which hid the thing it was built to find
+
+`g_persp[register]`: the first perspective-shaped matrix seen at a register set `seen`, and every
+later one at that register was rate-limited behind the same entry. **A shadow pass uploading a
+projection at c0 therefore masked the camera projection at c0 for the rest of the run** — and c0 is
+exactly where the non-skinned camera projection lives.
+
+Now keyed by **(xs, ys)** = `m[0][0]`, `m[1][1]`. Those are the right key three ways over: they
+differ between a shadow frustum and the camera, they are **unchanged by transpose** so the key does
+not depend on settling the storage layout, and they are what the shear scales from — so the
+signature the log prints is literally the one to paste into the ini. Every distinct projection now
+announces itself once, in full, with the list of registers it has been seen at.
+
+### The shear itself: `aw_stereo_apply_block()` `[verified-numerically 2026-09-07]`
+
+The match/copy/edit is a pure function in `stereo.c`, so **the code that runs in the game is the code
+the host self-test exercises** — not a transcription of it. Three properties matter and all three are
+tested:
+
+1. **Found by OFFSET INSIDE the block, never by `start == reg`.** The engine flushes whole
+   128-register blocks (`c0+128`, `c128+128`) per draw, so `start` is the block base and a
+   `start == reg` test fires on nothing.
+2. **The engine's buffer is never written.** The pointer handed to the hook may be the live constant
+   store; the edit lands in a copy, and the original is forwarded untouched when nothing matched.
+3. **A zero signature is refused.** Most of a 128-register flush is zero padding, so a zero key
+   would shear dozens of windows.
+
+Tests added to `stereo_test.c` (9 groups): offset 53 of a 128-register block is found and reported;
+source unmodified; no collateral edits outside the matched window; the edited window equals
+`aw_stereo_apply_fused_clip` exactly; no-match leaves `dst` alone; zero signature, `C<=0`, short
+block and NULL all refused; two windows in one block both edited; `eye_dx = 0` is bit-identical.
+**The suite was mutation-checked** — injecting "edit window 0 instead of the matched offset" made it
+fail, so a pass is evidence rather than a test that cannot fire.
+
+⚠️ **IT SHIPS SWITCHED OFF, and that is not caution for its own sake.** Attribution is a *runtime*
+question: the same shader serves the camera and a shadow view, and nothing static separates them.
+The operator reads a signature off the instrument and names it in `d3d9_proxy.ini`. **NOT
+ESTABLISHED: that any particular signature is the camera.** If the shear lands on the wrong
+projection the tell is a corrupted shadow map — shadows swimming or detaching — **not** a
+wrong-looking camera.
+
+### ⭐ The layered-hook race that killed launch 1 `[compile-verified 2026-09-07]`
+
+Launch 1 on 2026-09-05 recursed `CreateDevice` **1,669 times in one millisecond** and died. The
+cause is a layered hook: something else — the Steam overlay is the likeliest — had already replaced
+the slot, so the pointer cached as "the real one" was itself another hook that chains onward.
+Chaining is harmless once, and stops being harmless the moment that hook re-enters.
+
+The **unload** path already refused to restore a slot that was not ours. The **install** path checked
+nothing, and that is the half that crashed. Both installs (`IDirect3D9` slot 16 and
+`IDirect3DDevice9` slot 94) now verify that the pointer they are about to cache lives inside the real
+`d3d9.dll`, via `GetModuleHandleExA(FROM_ADDRESS)`, and **stand down and log the owning module**
+otherwise. A pointer with no owning module is also refused — an unbacked address is a trampoline,
+which is precisely the case to avoid.
+
+⚠️ Launches 2–4 were clean **only because the first block happened to live 16 ms instead of 700** —
+they were timed lucky, not protected. Standing down costs the mod for that run; chaining costs the
+process.
+
+### Build and deployment state
+
+`build.sh` now links `stereo.c`. **Deployed on the DEV PC: `d3d9.dll` 73,216 B, hash-verified against
+the build**, previous kept as `d3d9.dll.bak-2026-09-07-pre-stereo`. ⚠️ **The dev PC was still running
+the 2026-09-04c build (62,464 B)** — the 2026-09-05 instrument only ever reached the home PC, so the
+dev PC skipped a generation. **The home PC still needs a rebuild** to get any of this.
+`d3d9_proxy.ini.template` ships beside the source with the reading order written out.
+
+Strict build (`-Wall -Wextra -Wpedantic -Wshadow -Wconversion`) is clean for all of this session's
+code; the 3 remaining warnings are pre-existing `missing-field-initializer` notices on the `g_vs`
+candidate array and were not introduced here.
+
+### `[reported]` — the x64dbg bridge failure has a different cause than recorded
+
+Folded from `/gr`. The old note blamed "stale helper processes / an estate-wide bridge issue". The
+helpers are **not** stale — five were running on 2026-09-07 and every one had a live `claude` parent,
+holding no TCP endpoints `[measured 2026-09-07]`. The real configuration facts:
+**`X64DBG_PATH` points at `x96dbg.exe`, which is the launcher/selector, not a debugger**, and the
+bridge `Popen`s that path then waits for a session that therefore never registers
+`[inferred-static 2026-09-07]`. There are also **two installs**, and the `AppData\Local\x64dbg` one
+has an **empty `x32\plugins`** — fatal for a 32-bit target like this game. First thing to try: point
+`X64DBG_PATH` at the WinGet install's `x32\x32dbg.exe`, or pass `x64dbg_path` per call. **Untested.**
+
 ## 7. Constant-buffer fill mechanism
 - **D3D9 float constant registers — there are no constant buffers.** `vs_3_0`/`ps_3_0` throughout,
   so the mechanism is `SetVertexShaderConstantF` / `SetPixelShaderConstantF` against the register
