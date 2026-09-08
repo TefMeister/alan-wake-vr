@@ -667,6 +667,84 @@ Two builds of identical source differed by 2 bytes (PE `TimeDateStamp`), so "reb
 hash" silently could not work here. `-Wl,--no-insert-timestamp` → 0 differing bytes. ⚠️ **Fourth
 project in one day**, across two toolchains — four for four. See `CONVENTIONS.md`.
 
+## ✅ 6e. THE WRAPPER IS VERIFIED LIVE, THE CAMERA IS IDENTIFIED, AND THE SHEAR LANDS ON NOTHING THE SCREEN USES (2026-09-08c, `/lm`, four launches)
+
+Notes: `modding-notes/2026-09-08c-the-wrapper-works-the-camera-is-identified-and-the-edit-lands-on-nothing-the-screen-uses.md`.
+Evidence: `dev-archive/recon/2026-09-08c-the-wrapper-works-and-the-camera-is-identified/`.
+
+### §6d is confirmed live, and the device slot was never contested
+
+`[verified-live 2026-09-08, n=4 launches]` — `returning OUR IDirect3D9 … wrapping the real …`,
+then `IDirect3D9::CreateDevice (through OUR wrapper)`, then
+`SetVertexShaderConstantF hook installed at device vtable slot 94`. **No `REFUSING to hook
+IDirect3DDevice9`** on any launch, so the open question in §6d — whether the device slot would need
+the same wrapper treatment — is answered **no**. §6c's slot-16 contest is now moot rather than solved.
+
+### ⭐⭐ The camera projection, measured live
+
+**`xs = 0.915689, ys = 1.627892`, at BOTH `c0` and `c192`** `[measured 2026-09-08, n=2 launches]`.
+
+**The identifying property is `ys/xs = 1.7778`, exactly the 16:9 display aspect.** Every other
+perspective-shaped signature in the same frame is square (`1.0/1.0`; `2.414214/2.414214`, a 90°
+cube or shadow face) or non-physical (`19.77/-3.00` at c81, `19.92/2.65` at c87). Lens:
+`hfov 95.0°`, `vfov 63.1°`. Seeing it at c0 **and** c192 in one frame confirms the 2026-09-05
+census inference that the skinning palette displaces it to c192 in skinned shaders.
+
+### ⚠️ The one-shot signature table saturates, and said nothing about it
+
+The distinct-signature table logs each signature once. The load-in FOV settle walks monotonically
+through ~16 distinct signatures (`xs` 1.035317 → 0.926827, **still converging**), fills all 24 slots,
+and everything after is dropped — **including the settled gameplay FOV**. `g_sig_dropped` counted
+those drops and was **never printed**, so a saturated table was indistinguishable from a quiet one.
+Measured after the fix: `24/24 slots used, 2 977 773 dropped` `[measured 2026-09-08]`.
+
+**Why it mattered:** the table's last logged value (`0.926827`) is **0.011** from the truth
+(`0.915689`), and `aw_sig_same()`'s tolerance is `1e-4·(|a|+1) ≈ 0.0002` — **55× tighter**. An ini
+configured from the old log would have matched nothing, silently, and the row would have read as
+"the shear does not work".
+
+**Now fixed:** the periodic 5 s line prints the *last* signature seen at each register that period
+with its `ys/xs`, plus table occupancy, drop count, and the stereo apply counters.
+
+### ⭐⭐ 1.66 M edits applied, zero pixels moved
+
+`stereo: 1661102 edit(s) applied in total, 0 upload(s) refused as oversize` (~236 k per 5 s;
+`ST_COPY_REGS` is 256 and the gameplay flushes are 128, so nothing is refused). The match fires
+constantly and the edited copy is what is forwarded.
+
+**The rendered frame is unchanged** `[verified-numerically 2026-09-08, n=2 launches]`. Same save
+point, stereo OFF vs ON, horizontal cross-correlation per depth band: far **+0 px** (corr 0.91),
+near **+0 px** (corr 0.91), mid −72 px at the lowest corr of the three (0.75 — fog/lighting drift
+between runs, not geometry; a real global shift moves all three together). Predicted effect was a
+constant NDC offset `s = p00·EyeDx/Convergence = 0.3663` = **351 px**. Absent.
+
+**Two live candidates, deliberately not collapsed** `[hypothesis]`:
+1. the engine **re-uploads** the camera constants after our edit, by a path that is not
+   `SetVertexShaderConstantF`;
+2. these constants **are not what produces the on-screen transform** — same shape as `mad-max-vr`
+   §7's "large `edited` count, nothing moves ⇒ the transform is in NEITHER buffer".
+
+They are separated by a **read-back immediately after the draw**: `SURVIVED` ⇒ (2), `OVERWRITTEN` ⇒ (1).
+
+⚠️ **NOT established that the shear is mathematically wrong.** It never got the chance to be wrong
+on screen; `stereo.c` is still numerically self-tested and live-untested.
+
+### ⚠️ INPUT: a bare keypress does not reach this game. A mouse click must precede every key.
+
+Measured on the **main menu** — a stable state that does not auto-advance, so results are
+attributable `[verified-live 2026-09-08, n=2 each]`. VK alone: no. Scancode alone: no. Cursor moved
+inside the window without clicking, then VK: no. **Click then VK: YES.** VK again without a new
+click: no. The rule is **click, key, click, key** — one click does not enable input persistently.
+Holds in gameplay too (2.5 s of `W` with no click matched the no-input control at 2.87 vs 2.92; a
+click then 3 s of `W` walked Alan visibly). Tool: `dev-archive/tools/awkeys.py`.
+
+**Why the click is needed is NOT established** — plausibly each shell command steals foreground and
+the game never gets a proper activation back. Recorded as a rule, not a cause.
+
+⚠️ **The title screen is useless as an input testbed**: it **auto-advances into an attract reel with
+no input at all** (60 s of no input, no title). An early reading of "VK works, scancodes do not" came
+from exactly that confound and is withdrawn.
+
 ## 7. Constant-buffer fill mechanism
 - **D3D9 float constant registers — there are no constant buffers.** `vs_3_0`/`ps_3_0` throughout,
   so the mechanism is `SetVertexShaderConstantF` / `SetPixelShaderConstantF` against the register
@@ -722,7 +800,22 @@ project in one day**, across two toolchains — four for four. See `CONVENTIONS.
 | `Ctrl+F3` / `Ctrl+F4` | live in-game stereo separation adjustment (reported working value: 12 "bars," ~20%) | external-research, NVIDIA forum — untested on this installed build, see §6 |
 
 ## 10. Autonomous harness recipe (this game)
-- Launch to a known scene (commands used): candidate — `-developermenu` for episode select, plus the general `-w`/`-h`/`-window`/`-novsync` flags for a controlled test environment (see §9).
+- **✅ SOLVED 2026-09-08c — THE INPUT RULE: a mouse click must precede EVERY key.** Bare `SendInput`
+  does not reach this game, VK or scancode, foreground verified. `click, key, click, key` — one click
+  does not enable input persistently. Driver: **`dev-archive/tools/awkeys.py`**; screen capture and
+  window state: `dev-archive/tools/awdrive.py` (both resolve their paths per machine).
+  Full evidence table in §6e. ⚠️ The click lands at 15 % window height on purpose — the menu list is
+  in the lower third and a click there SELECTS an item (`Quit`, `Restart Checkpoint`).
+- **✅ Menu → gameplay, proven autonomously (`n=3`):** click+`space` ×6 → main menu (`Continue Game`
+  highlighted) → `enter` → slot list → `enter` → ~40 s load → gameplay. **Self-close, proven `n=4`,
+  graceful, never `taskkill`:** `esc` → `down`×5 → verify `Quit To Menu` → `enter` → `enter` → ~12 s
+  → `down`×5 → verify `Quit` → `enter` → `enter`. **Verify the highlight by screenshot before every
+  Enter** — never blind-count past a destructive item.
+- ⚠️ **The title screen auto-advances into an attract reel with no input**, so it cannot be used to
+  test whether input works. The main menu is stable; test there.
+- Frame capture: `BitBlt` from the screen DC via the toolkit harness (`awdrive.py shot`). Works in
+  gameplay and menus at 1920×1080 windowed (`resolution.xml` `fullscreen=0`).
+- Launch to a known scene (commands used): candidate (commands used): candidate — `-developermenu` for episode select, plus the general `-w`/`-h`/`-window`/`-novsync` flags for a controlled test environment (see §9).
 - In-process input / camera drive method that worked: candidate — `-freecamera` (see §6) is a real, official free-camera tool; worth using for black-box observation before any hooking work, though it's controller-driven with no confirmed keyboard/mouse equivalent.
 - Frame-capture method; where images land: not yet investigated.
 - **⏱️ A global time-scale float, located in OUR build (2026-09-03, `/pd`): `0x0069C628`
