@@ -92,3 +92,55 @@ built on the assumption it was the only one.
 - https://alanwake.fandom.com/wiki/Console_commands
 - https://alanwake.fandom.com/wiki/Changelogs
 - https://steamcommunity.com/app/108710/discussions/0/828939978253890023/
+
+
+---
+
+## Addendum 2026-09-08 — patch versions pinned, and a sibling project just hit the trap this prevents
+
+Added by `/gr` (estate sweep). **Nothing above changes.** This records three things that were not
+known when the section was written, after the modding lane's 2026-09-08 binary read asked for
+research on `rigidcamera` — research this topic had already done, which is itself worth noting
+(see the end).
+
+### Which patch added which
+
+| flag | added in | source wording |
+| --- | --- | --- |
+| `-rigidcamera` | **v1.02** | added *"for those who are sensitive to the default mouse/camera controls"* |
+| `-directaiming` | **v1.03** | *removes all mouse acceleration*, and *enables `-rigidcamera` automatically* |
+
+`[reported 2026-09-08]`. This pins the "added by Remedy in a patch" above to specific releases, and
+independently confirms the **implication** relationship from a second source.
+
+### ⭐ v1.03 also reworked the mouse reading itself
+
+Two further notes ship with v1.03 and matter for anything injecting input under a VR frame budget:
+
+- the **low-level mouse reading routines were reworked to cope better with low and variable frame
+  rates** `[reported 2026-09-08]`;
+- the **jerkiness reported when `-rigidcamera` was enabled in v1.02 was removed**.
+
+The second is worth carrying: a community report of `-rigidcamera` being jerky is describing
+**v1.02 behaviour**, and should not be read as a reason to avoid the flag on a current build.
+
+### The trap this flag prevents is live on this estate, today
+
+`alice-madness-returns-vr` hit the other half of this on **2026-09-08** and had to measure the dev
+PC's pointer ballistics — thresholds **(6, 10)**, acceleration **ON**, speed 6/20
+`[measured 2026-09-08]` — because an injected mouse delta may be scaled, and any step size
+calibrated on that machine would not port to another.
+
+That makes the recommendation above sharper than "comfort": **if mouse injection is ever the route
+on Alan Wake, `-directaiming` must be set before any step size is calibrated**, or the calibration
+measures the acceleration curve rather than the game. The general form of that lesson has been
+filed to `flat-to-vr-cross-engine-research/inbox/` for `/sr`.
+
+### ⚠️ Process note — this was asked for as if unknown
+
+The 2026-09-08 drop asked, reasonably, whether *"any public source describes what `rigidcamera`
+actually does"*. It did, and this file had said so since **2026-09-01** — seven days, in the
+same repo, one folder across. Nothing was lost (the answers agree), but a `/gr` pass that had
+simply pointed at this file would have cost minutes rather than a fresh search. Recorded as a
+prompt to check `external-research/topics/` before filing a research ask, not as a criticism of the
+drop, which was right about everything it measured.
