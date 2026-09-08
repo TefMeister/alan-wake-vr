@@ -1,0 +1,26 @@
+; Written 2026-09-08 by the /lm session, from the LIVE signature the patched
+; instrument printed while standing still in gameplay (Ep.1, "Get to the
+; lighthouse"):
+;
+;   LIVE perspective signatures: [c0 0.915689 1.627892 ys/xs=1.7778 n=163051]
+;                                [c192 0.915689 1.627892 ys/xs=1.7778 n=64149]
+;
+; ys/xs = 1.7778 is exactly 16:9, the display aspect, which is what identifies
+; this signature as the CAMERA rather than a shadow or cube projection (those
+; came out square: 1.0000 and 2.414214/2.414214). It appears at BOTH c0 and
+; c192 - the skinning palette pushes it to c192 in skinned shaders, which is the
+; 2026-09-05 census finding, now seen live in one frame.
+;
+; EyeDx/Convergence are DELIBERATELY EXAGGERATED for this first read: the
+; question is "does the edit land and does the world move", not "is this a
+; comfortable IPD". Shear s = p00 * EyeDx / Convergence = 0.9157 * 2 / 5 = 0.366.
+[stereo]
+; ProbeScaleXS (2026-09-08e): scale p[0] instead of shearing. p[0] is the
+; value we MATCH on, so its location is not in doubt; 0.5 halves the
+; horizontal FOV, which cannot be missed. Set to 0 to go back to the shear.
+ProbeScaleXS=0.5
+Enabled=1
+EyeDx=2.0
+Convergence=5.0
+MatchXS=0.915689
+MatchYS=1.627892
