@@ -913,6 +913,45 @@ discontinued. So `g_vStereo_Separation_Convergence` is a **correction constant f
 stereo image**, not a two-eye renderer we can drive. Finding the strings is confirmation of a
 retired route, not a new one.
 
+### ✅ RUN 2026-09-08f: the menu exists, and it is a CHEAT MENU
+
+`AlanWake.exe -developermenu -rigidcamera -noblur` started clean (no `Unknown command line option`).
+**`[Developer Menu]` appears in the main menu between `Extras` and `Quit`**
+`[verified-live 2026-09-08, n=1 launch]`. Entire contents:
+
+| entry | state |
+| --- | --- |
+| `Get Lots of Guns` | greyed at the main menu (in-game only) |
+| `Get Flashlight and Batteries` | greyed at the main menu (in-game only) |
+| `Unlock all Episodes (Easy and Normal)` | selectable |
+| `Unlock Nightmare difficulty` | selectable |
+
+**No stereo entries, no camera / FOV / freeze-render / debug-draw toggles, no cvar console.** It is
+a QA unlock menu and there is nothing in it for this project. Nothing was selected — all four alter
+save/profile state and the save is the test fixture.
+
+⚠️ **THE FLAG SHIFTS EVERY MENU INDEX BY ONE**, in the main menu *and* the pause menu:
+
+| route | no flag | with `-developermenu` |
+| --- | --- | --- |
+| main menu → `Quit` | Down ×5 | **Down ×6** |
+| pause menu → `Quit To Menu` | Down ×5 | **Down ×6** |
+
+A session blind-counting the recorded ×5 lands on `[Developer Menu]`. Harmless here; the same
+off-by-one on a differently-ordered menu is how a save gets overwritten.
+
+### `rigidcamera`: the treatment half of an A/B, with no control yet
+
+14 frames captured while holding `W` with `-rigidcamera` armed. Per-frame **vertical** camera shift
+(cross-correlation on the far field): **all zero, mean |dy| = 0.00 px** across 13 pairs. Two guards
+so the null means something: consecutive frames differed by 1.97–4.47 mean luma (the game was
+rendering and walking, not frozen), and the estimator recovered injected ±1/±3/±8 px offsets
+exactly (it is not blind).
+
+⚠️ **NOT established that `-rigidcamera` did anything** — this camera may have no bob to begin with.
+**The control is one launch with NO flags at the same save point, captured the same way.**
+`-noblur` was armed in the same run and not tested, for the same reason.
+
 **Consequence for the board:** the `-developermenu` row's stated payoff — *"they exist and respond
 ⇒ the game ships its own stereo path and this project changes shape entirely"* — **is wrong as
 written and is corrected here.** The menu is still worth opening once, but for what else it exposes
