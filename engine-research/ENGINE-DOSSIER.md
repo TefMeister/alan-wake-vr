@@ -684,7 +684,7 @@ the same wrapper treatment — is answered **no**. §6c's slot-16 contest is now
 
 **`xs = 0.915689, ys = 1.627892`, at BOTH `c0` and `c192`** `[measured 2026-09-08, n=2 launches]`.
 
-**The identifying property is `ys/xs = 1.7778`, exactly the 16:9 display aspect.** Every other
+**The identifying property is `ys/xs` = the RENDER aspect ratio** — `1.7778` here because the dev PC is 16:9 and the game ran at 1280×720/1920×1080. ⚠️ **The HOME PC is 21:9**, so the number to look for there is **~2.37**, not 1.7778, unless the game is pinned to a 16:9 WINDOWED resolution — which is the cheap way to keep every aspect-keyed number portable (`MACHINES.md`). `MatchXS` is unaffected (`xs = 1/tan(hfov/2)`, set by FOV); only `MatchYS` moves: `1.627892` at 16:9 vs `≈ 2.170522` at 2560×1080. Every other
 perspective-shaped signature in the same frame is square (`1.0/1.0`; `2.414214/2.414214`, a 90°
 cube or shadow face) or non-physical (`19.77/-3.00` at c81, `19.92/2.65` at c87). Lens:
 `hfov 95.0°`, `vfov 63.1°`. Seeing it at c0 **and** c192 in one frame confirms the 2026-09-05
@@ -793,6 +793,73 @@ time**, and that is readable without the game running to write.
 **No configuration change is needed for the next launch** — the live ini already carries
 `Enabled=1 / EyeDx=2.0 / Convergence=5.0` and the measured signature, so the read-back arms with the
 shear. Read the `readback:` counts, not the first line.
+
+## ⛔ 6f. THE VERTEX-SHADER CONSTANT PATH IS NOT THE LEVER — PROVEN BY A READ-BACK AND THEN BY AN EDIT TOO BLATANT TO MISS (2026-09-08e, `/lm`, two launches)
+
+Notes: `modding-notes/2026-09-08e-the-readback-settles-the-fork-and-a-blatant-probe-closes-the-third-possibility.md`.
+Evidence: `dev-archive/recon/2026-09-08e-the-readback-answers-the-fork-and-the-blatant-probe-confirms-it/`.
+
+**This closes the line §6b–§6e were built on. Do not resume editing `SetVertexShaderConstantF`
+constants for the camera in this game.**
+
+### The read-back: candidate (1) is disproved outright
+
+```
+readback: 11701 check(s) over 12806104 draw(s) - survived=4992 restored=0 overwritten=6709 unavailable=0
+stereo:   2018199 edit(s) applied, 0 refused as oversize
+```
+
+- **`restored=0`, exactly** `[verified-numerically 2026-09-08, n=1 launch, 11701 checks]` — nothing
+  ever puts the engine's original matrix back, so there is no second upload path and no state-block
+  `Apply` restoring it. Candidate (1) is **dead**.
+- **`survived=4992`** — the device demonstrably held OUR sheared matrix at draw time in those draws.
+- **`overwritten=6709`** — `c0` is a shared register block; the last writer before a given draw is
+  often another pass. About register reuse, not about the engine defending its camera.
+- First sightings: `SURVIVED at c7`, `OVERWRITTEN at c0`.
+- Frame unchanged again: far/mid/near all `+0 px`, **n=3 launches** now.
+
+⚠️ **`PUREDEVICE` did NOT block the read-back.** `CreateDevice` came in with
+`BehaviorFlags=0x54` (`HARDWARE_VERTEXPROCESSING | PUREDEVICE | MULTITHREADED`) and the build warned
+that D3D9 refuses `Get*` on shader constants on a pure device. In practice `unavailable=0` across
+11 701 checks. Do not stand the instrument down on that warning.
+
+⚠️ **The menu summary is not a verdict.** At the main menu it reads `0 check(s) ... NEVER CHECKED`
+and `0 edit(s) ... NEVER MATCHED`, because the camera projection is not uploaded there. Reach
+gameplay before reading anything.
+
+### ⭐ The fork as written was under-specified — and the third possibility is the important one
+
+The reading table said `SURVIVED ⇒ candidate 2, the wrong buffer entirely`. **That does not
+follow.** The read-back proves our *bytes* are present at draw time; it does not prove they were the
+*right bytes to change*. If the shear wrote an element that does not affect the image under this
+matrix's real layout, "survived + nothing moves" is what the **correct** buffer would also look
+like — which would have been a `stereo.c` layout bug and a far better outcome.
+
+### The discriminator, and the answer
+
+There is one element whose location is not in doubt: **`p[0]`, the value the matcher keys on**.
+Scaling it changes horizontal FOV regardless of layout. Built `aw_stereo_probe_block()` +
+`[stereo] ProbeScaleXS` (diagnostic; `0` = off, back to the shear). Deployed `da469d74bc5b`,
+224 256 B, stamped, with `ProbeScaleXS=0.5`; self-tests pass.
+
+**2 298 221 edits applied, and NO geometric change** `[verified-numerically 2026-09-08, n=1 launch]`:
+a horizontal **scale** search over 0.50–2.25 returns **best f = 1.00** (corr 0.855) — a halved
+`p[0]` doubles `tan(hfov/2)` and would be unmissable — and all three depth bands shift `+0 px`.
+
+**⇒ The vertex-shader constants are NOT what produces the on-screen transform.** The element scaled
+is the element matched, so "wrong element" is excluded.
+
+⚠️ **Judged by eye, this frame looks changed — it is not.** Scene lighting and character pose differ
+between runs. That is the SECOND eye-misread in one day on this project (see §6e). The "judge by
+eye" rule applies to *decisive* observations; when the rival hypothesis also predicts a
+different-looking frame, only a number decides.
+
+### What is NOT established
+
+Where the transform actually is. Unexamined: a preshader or in-shader recomputation; constants
+uploaded by a path that is not `SetVertexShaderConstantF`; or the engine's own stereo settings being
+the intended entry point. **`-developermenu` is now the live row** and is the only remaining flat
+row that never depended on this path.
 
 ## 7. Constant-buffer fill mechanism
 - **D3D9 float constant registers — there are no constant buffers.** `vs_3_0`/`ps_3_0` throughout,
