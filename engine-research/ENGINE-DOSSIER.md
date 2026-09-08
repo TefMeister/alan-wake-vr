@@ -948,9 +948,37 @@ so the null means something: consecutive frames differed by 1.97–4.47 mean lum
 rendering and walking, not frozen), and the estimator recovered injected ±1/±3/±8 px offsets
 exactly (it is not blind).
 
-⚠️ **NOT established that `-rigidcamera` did anything** — this camera may have no bob to begin with.
-**The control is one launch with NO flags at the same save point, captured the same way.**
-`-noblur` was armed in the same run and not tested, for the same reason.
+### ✅ A/B COMPLETE (2026-09-08g): `-rigidcamera` changes nothing, because there is no bob to remove
+
+The control ran the next session — no flags, same save point, same walk, same window size, same
+deployed proxy and the same untouched ini — and **both halves were measured by the same file**
+(`dev-archive/tools/awbob.py`), so a difference in the numbers could not have been a difference in
+the arithmetic.
+
+| | treatment (`-rigidcamera`) | control (no flags) |
+| --- | --- | --- |
+| vertical `dy` mean / max | **0.00 / 0 px** | **0.00 / 0 px** |
+| horizontal `dx` mean / max | **0.00 / 0 px** | **0.00 / 0 px** |
+| per-pair correlation | 0.911–0.993 | 0.927–0.993 |
+| frame-to-frame luma delta | 1.97–4.47 | 1.94–4.21 |
+
+`[measured 2026-09-08, n=2 runs, 13 frame pairs each]`
+
+Guards passed in both runs: the frames were changing (so the capture did not outrun the frame rate)
+and the estimator recovered injected ±1/±3/±8 px offsets exactly (so a null is a null). A third
+check came free — the control's main menu had **six** rows and no `[Developer Menu]` where the
+flagged run had seven, confirming the flags really were absent.
+
+⇒ **Alan Wake's third-person camera has no translational bob or sway while walking forward, with or
+without the flag.** `-rigidcamera` has nothing to remove along those axes and is not the comfort win
+its name suggested. The flat comfort angle closes.
+
+⚠️ **NOT established:** anything about camera **rotation** — only translation was measured, so roll
+and rotational smoothing/lag remain untested; anything about running, strafing, stairs, combat or
+scripted sequences — only walking forward on flat road was tested; and **`-noblur`, which was armed
+in the treatment run and never tested at all**, because motion blur shows during fast camera
+rotation and neither run rotated the camera. It stays a cheap question to ride along with any future
+launch.
 
 **Consequence for the board:** the `-developermenu` row's stated payoff — *"they exist and respond
 ⇒ the game ships its own stereo path and this project changes shape entirely"* — **is wrong as
