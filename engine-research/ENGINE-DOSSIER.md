@@ -530,6 +530,59 @@ bridge `Popen`s that path then waits for a session that therefore never register
 has an **empty `x32\plugins`** — fatal for a 32-bit target like this game. First thing to try: point
 `X64DBG_PATH` at the WinGet install's `x32\x32dbg.exe`, or pass `x64dbg_path` per call. **Untested.**
 
+## 6c. ⛔️ SLOT 16 IS ALWAYS ALREADY HOOKED, AND THE GUARD STANDS THE WHOLE MOD DOWN (2026-09-08, `/lm`, two launches)
+
+`[verified-live 2026-09-08, n=2 launches, 4 loads]`
+
+§6b's layered-hook guard was written to stop the 2026-09-05 crash, and **it works** — the game ran
+perfectly, clean main menu, no recursion, clean menu quit both times. But it fires on **every load**,
+and standing down happens **before a device is ever created**, so the constant-upload instrument —
+which lives on the device vtable — never runs.
+
+**Zero perspective signatures were logged.** The 2026-09-07 `(xs, ys)` re-keying is still entirely
+untested live.
+
+### ⭐ Two DIFFERENT foreign owners, changing between loads 350 ms apart
+
+| launch | load | owning module of slot 16 |
+| --- | --- | --- |
+| via Steam | 1, 2 | `Steam\gameoverlayrenderer.dll` |
+| **direct exe** | 1 | `Steam\gameoverlayrenderer.dll` |
+| **direct exe** | 2 | **`C:\Windows\SYSTEM32\apphelp.dll`** |
+
+- **Launching `AlanWake.exe` directly does NOT avoid the Steam overlay** — with Steam running it is
+  injected anyway, so bypassing the Steam launcher changes nothing `[verified-live 2026-09-08, n=1]`.
+- **The owner changed between two loads in the same process**, with different pointer values. A
+  vtable is shared per class, so slot 16 was rewritten in between. **Why is not established** — a
+  late compatibility shim, the overlay re-hooking, or a pointer left dangling by our own unload that
+  now resolves inside another module. Nothing here distinguishes them.
+
+⚠️ **`apphelp.dll` is a Windows compatibility shim, not a third-party hook**, and there is **no
+`AppCompatFlags\Layers` entry for AlanWake** in HKLM or HKCU `[measured 2026-09-08]`, so any shim
+comes from the system database. If apphelp legitimately owns a shimmed `d3d9` entry point then the
+guard's rule — *"the pointer must live inside the real `d3d9.dll`"* — is **false by design** for a
+shimmed d3d9, and refusing it refuses a benign OS mechanism. `[hypothesis]`: consistent with the
+evidence, not demonstrated.
+
+### ⭐⭐ The fix: stop patching the vtable at all
+
+The proxy can only install when it wins the race for slot 16 outright, and on this machine it never
+does. **Return our own COM object from `Direct3DCreate9`** — which the game calls directly, since we
+are the proxy — implementing `IDirect3D9::CreateDevice` ourselves and forwarding every other method
+to the real interface. Then nothing is written into a shared vtable, nobody can be ahead of us, the
+Steam overlay's own hook keeps working on the real object layered below us as it expects, and the
+device we hand back can be wrapped the same way — which is where the constant-upload instrument
+belongs anyway.
+
+⚠️ **The smaller stopgap is worse:** chaining into the foreign pointer plus a re-entrancy guard
+would probably work, but it re-introduces exactly the failure the guard exists to stop, and that
+failure is **timing-dependent** — it appeared once in four launches on 2026-09-05. A fix that is only
+usually safe against a bug that is only sometimes visible is not worth shipping.
+
+⚠️ **Untested and important:** whether disabling the Steam overlay is *sufficient*. It owns load 1
+in every observation, but `apphelp` owned load 2, so removing it may simply expose the next hooker.
+That needs a Steam per-game setting change and a Steam restart.
+
 ## 7. Constant-buffer fill mechanism
 - **D3D9 float constant registers — there are no constant buffers.** `vs_3_0`/`ps_3_0` throughout,
   so the mechanism is `SetVertexShaderConstantF` / `SetPixelShaderConstantF` against the register

@@ -1,0 +1,30 @@
+[13:10:07.749] === alan-wake-vr proxy d3d9.dll loaded, PID=20132 ===
+[13:10:07.752] real d3d9.dll loaded from C:\Windows\system32\d3d9.dll; Direct3DCreate9=73684B20
+[13:10:07.752] stereo: OFF (no D:\Program Files (x86)\Steam\steamapps\common\Alan Wake\.\d3d9_proxy.ini, or [stereo] Enabled=0). The instrument still runs - read a PERSPECTIVE-SHAPED signature out of the log, then set Enabled/EyeDx/Convergence/MatchXS/MatchYS to shear that projection and no other.
+[13:10:07.754] Direct3DCreate9 called: SDKVersion=0x20
+[13:10:07.894]   -> returned 037A2168
+[13:10:07.894] REFUSING to hook IDirect3D9 slot 16: it already holds 73B54DD0, owned by D:\Program Files (x86)\Steam\gameoverlayrenderer.dll, not the real d3d9.dll (73620000). Something hooked this before us; chaining into a foreign hook is what recursed CreateDevice 1669x and killed launch 1 on 2026-09-05. Standing down - the game runs, this mod does not.
+[13:10:07.902] === alan-wake-vr proxy d3d9.dll unloading (reserved=00000000, explicit FreeLibrary) ===
+[13:10:07.902] releasing the system d3d9.dll reference so the game's next LoadLibraryA("d3d9.dll") searches the game folder and finds us again
+[13:10:07.950] === alan-wake-vr proxy d3d9.dll loaded, PID=20132 ===
+[13:10:07.953] real d3d9.dll loaded from C:\Windows\system32\d3d9.dll; Direct3DCreate9=73684B20
+[13:10:07.954] stereo: OFF (no D:\Program Files (x86)\Steam\steamapps\common\Alan Wake\.\d3d9_proxy.ini, or [stereo] Enabled=0). The instrument still runs - read a PERSPECTIVE-SHAPED signature out of the log, then set Enabled/EyeDx/Convergence/MatchXS/MatchYS to shear that projection and no other.
+[13:10:07.955] Direct3DCreate9 called: SDKVersion=0x20
+[13:10:08.076]   -> returned 06DD4930
+[13:10:08.076] REFUSING to hook IDirect3D9 slot 16: it already holds 73B54DD0, owned by D:\Program Files (x86)\Steam\gameoverlayrenderer.dll, not the real d3d9.dll (73620000). Something hooked this before us; chaining into a foreign hook is what recursed CreateDevice 1669x and killed launch 1 on 2026-09-05. Standing down - the game runs, this mod does not.
+[13:14:07.775] === alan-wake-vr proxy d3d9.dll unloading (reserved=00000001, process is terminating) ===
+[13:14:58.389] === alan-wake-vr proxy d3d9.dll loaded, PID=25244 ===
+[13:14:58.395] real d3d9.dll loaded from C:\Windows\system32\d3d9.dll; Direct3DCreate9=73684B20
+[13:14:58.395] stereo: OFF (no D:\Program Files (x86)\Steam\steamapps\common\Alan Wake\d3d9_proxy.ini, or [stereo] Enabled=0). The instrument still runs - read a PERSPECTIVE-SHAPED signature out of the log, then set Enabled/EyeDx/Convergence/MatchXS/MatchYS to shear that projection and no other.
+[13:14:58.397] Direct3DCreate9 called: SDKVersion=0x20
+[13:14:58.525]   -> returned 00B7DBB0
+[13:14:58.525] REFUSING to hook IDirect3D9 slot 16: it already holds 73834DD0, owned by D:\Program Files (x86)\Steam\gameoverlayrenderer.dll, not the real d3d9.dll (73620000). Something hooked this before us; chaining into a foreign hook is what recursed CreateDevice 1669x and killed launch 1 on 2026-09-05. Standing down - the game runs, this mod does not.
+[13:14:58.662] === alan-wake-vr proxy d3d9.dll unloading (reserved=00000000, explicit FreeLibrary) ===
+[13:14:58.662] releasing the system d3d9.dll reference so the game's next LoadLibraryA("d3d9.dll") searches the game folder and finds us again
+[13:14:58.717] === alan-wake-vr proxy d3d9.dll loaded, PID=25244 ===
+[13:14:58.722] real d3d9.dll loaded from C:\Windows\system32\d3d9.dll; Direct3DCreate9=73684B20
+[13:14:58.723] stereo: OFF (no D:\Program Files (x86)\Steam\steamapps\common\Alan Wake\d3d9_proxy.ini, or [stereo] Enabled=0). The instrument still runs - read a PERSPECTIVE-SHAPED signature out of the log, then set Enabled/EyeDx/Convergence/MatchXS/MatchYS to shear that projection and no other.
+[13:14:58.724] Direct3DCreate9 called: SDKVersion=0x20
+[13:14:58.844]   -> returned 0B0F8888
+[13:14:58.844] REFUSING to hook IDirect3D9 slot 16: it already holds 75882830, owned by C:\Windows\SYSTEM32\apphelp.dll, not the real d3d9.dll (73620000). Something hooked this before us; chaining into a foreign hook is what recursed CreateDevice 1669x and killed launch 1 on 2026-09-05. Standing down - the game runs, this mod does not.
+[13:19:32.575] === alan-wake-vr proxy d3d9.dll unloading (reserved=00000001, process is terminating) ===
