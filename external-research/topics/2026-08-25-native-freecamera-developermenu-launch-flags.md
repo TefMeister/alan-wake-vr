@@ -32,6 +32,7 @@ the Alan Wake Fandom wiki's "Console commands" page, and community discussion):
   `-forcesurround`/`-forcestereo` (audio channel forcing) — a solid, citable starting point for
   `ENGINE-DOSSIER.md` §9's cvar/console cheat sheet, and `-window`/`-novsync`/`-showfps` in particular
   are useful for live investigation ergonomics regardless of camera work specifically.
+  - ⚠️ **SUPERSEDED 2026-09-08 — this list is `[reported]` and is now known to be wrong in one place. The parser's own option table has since been read out of the shipped binary; see "The measured flag list" at the end of this file. In particular `-w <n>` / `-h <n>` are NOT real options.**
 
 ## Why this matters
 
@@ -56,3 +57,60 @@ episode-select/ammo.
 - https://steamcommunity.com/sharedfiles/filedetails/?id=231131068
 - https://alanwake.fandom.com/wiki/Console_commands
 - https://www.alanwake.info/2011/10/alan-wake-pc-commands.html
+
+
+---
+
+## The measured flag list (2026-09-08) — supersedes the `[reported]` list above
+
+Folded in by `/gr` from `external-research/inbox/`; read by the modding lane straight out of
+`AlanWake.exe`, from the parser's own option table sitting immediately beside the format string
+`Unknown command line option "%s"` `[measured 2026-09-08]`.
+
+```
+shaders   SENSSCALE=/sensscale=   GPUCOUNT=/gpucount=   freecamera   directaiming
+nativekeys   rigidcamera   showfps   verbose   developermenu   largeshadowmaps
+noblur   forcesurround   forcestereo   cleanaccount   cleancloud   novsync
+nosound   window   LOCALE=/locale=
+```
+
+**This moves the flag set from `[reported]` to `[measured]`** — it is no longer a community
+list, it is the binary's own table — and it adds seven entries nobody had: **`rigidcamera`**,
+**`noblur`**, `directaiming`, `nativekeys`, `largeshadowmaps`, `verbose`, `shaders`, plus
+`gpucount=` and a bare `window`.
+
+### ⚠️ One correction to the reported list
+
+**`-w <n>` and `-h <n>` are not in the table.** Width and height come from `resolution.xml`.
+Anyone repeating "use `-w`/`-h`" — including anyone reading the bullet higher up this page
+— will get `Unknown command line option`. This is exactly the kind of error a community list
+propagates and a binary read settles.
+
+### ⛔️ Do not run these two
+
+`cleanaccount` and `cleancloud` are in the same table. **The names say they wipe local account
+state and Steam Cloud data. Nothing has been run to find out, and nothing should be.** Carry this
+warning wherever the list is published — the list is more useful than it is safe to
+experiment with blind.
+
+### The two comfort flags were already researched — on 2026-09-01
+
+`rigidcamera` and `directaiming` are **not new leads**: this lane wrote them up a week before the
+binary read, in
+[`2026-09-01-the-three-unrecorded-switches-and-a-forcestereo-correction.md`](2026-09-01-the-three-unrecorded-switches-and-a-forcestereo-correction.md),
+which records that `-rigidcamera` removes the camera smoothing and `-directaiming` removes all
+mouse acceleration and implies it — and which already recommends setting both as part of this
+project's standard launch line. That recommendation is still unactioned.
+
+### What did not change: the stereo entries
+
+`Stereo Rendering:Override / Enable / Separation / Convergence / Eye Separation` are **confirmed
+present in our binary** — in `renderer_sf_Win32.dll`, not `AlanWake.exe` — alongside
+`Activate Stereo`, `NvidiaSpecificData` and `g_vStereo_Separation_Convergence`, and that DLL
+imports `nvapi.dll`.
+
+**This corroborates the reported material and does NOT reopen the route.** The 2026-09-01 topic
+already records **zero direct callers** of `NvAPI_Stereo_SetDriverMode`, which makes the stereo
+uniform a *correction* layer applied to a driver-made image rather than a switch we can throw; and
+the 2026-09-03 topic records 3D Vision Automatic as discontinued. Recorded here as
+**"confirmed in-binary, still retired"** so it is not re-chased as an open `[reported]` lead.
