@@ -745,6 +745,49 @@ the game never gets a proper activation back. Recorded as a rule, not a cause.
 no input at all** (60 s of no input, no title). An early reading of "VK works, scancodes do not" came
 from exactly that confound and is withdrawn.
 
+## 6f. THE READ-BACK THAT SEPARATES THE TWO CANDIDATES IS BUILT AND DEPLOYED (2026-09-08d, `/pd`, no launch)
+
+Write-up: `modding-notes/2026-09-08d-the-constant-readback-that-separates-the-two-candidates.md`.
+Deployed `d3d9.dll` md5 `19237c2f...`, 223,232 B, dated backup kept. **Not run.**
+
+§6e left the project at a fork: the shear applies 1,661,102 times and the screen does not move, so
+either **(1)** the engine re-uploads the camera constants by a path that is not
+`SetVertexShaderConstantF`, or **(2)** these constants are not what produces the on-screen
+transform. **Both predict an unchanged screen. They differ only in what the device holds at draw
+time**, and that is readable without the game running to write.
+
+- **The mechanism.** When the shear edits a block, the proxy remembers the absolute register, the
+  sheared 4x4 it wrote, and the engine ORIGINAL 4x4; at the next draw it calls
+  `GetVertexShaderConstantF` on that register and compares. `SURVIVED` (our value) is candidate
+  (2); `RESTORED` (the original, exactly) is candidate (1); `OVERWRITTEN` (a third value) is
+  candidate (1) with a shared register. Keeping the originals is what stops a re-upload and a
+  third-party write from collapsing into one answer. `[compile-verified 2026-09-08]`
+- **⚠️ `D3DCREATE_PUREDEVICE` is the one thing that would make this silently useless** — D3D9 refuses
+  `Get*` on shader constants on a pure device. `BehaviorFlags` is now recorded at `CreateDevice` and
+  the `UNAVAILABLE` verdict names the cause; on a non-pure device the same refusal is flagged as
+  **unexpected and a finding in its own right**. Which case this game is in is **logged, not
+  predicted** `[hypothesis]`.
+- **⭐ Four device vtable slots now carry COMPILE-TIME assertions** against the SDK header
+  (`DrawPrimitive` 81, `DrawIndexedPrimitive` 82, `SetVertexShaderConstantF` 94,
+  `GetVertexShaderConstantF` 95), using the negative-array idiom already used for `IDirect3D9Vtbl`
+  slot 16. **Slot 94 previously had only a comment claiming it was verified.** The assertion was
+  tested by deliberately breaking it: 82 -> 83 fails the build, restoring it builds clean. A check
+  that cannot fail is not a check. `[compile-verified 2026-09-08]`
+- **Cost is bounded and the old numbers stay comparable.** With stereo OFF **nothing is hooked at
+  all**, so the instrument-only hot path is exactly what the 09-08c measurements were taken with.
+  With stereo ON the check runs on the first 8 draws outright, then one draw in 500.
+- **The 09-08c instrument lesson is carried forward:** the first occurrence of **each** verdict is
+  logged and the counts go in the 5 s line, because a mixed result is itself an answer and n=1
+  decides nothing. That is the same defect that made the previous instrument discard ~3M
+  observations including the answer.
+- **The deployed binary was verified before being overwritten**: a fresh build of the pre-session
+  source is md5-identical to what was installed (`0dfdf78b77e9...`), so the stamp was honest and
+  the `--no-insert-timestamp` reproducibility holds `[verified-numerically 2026-09-08]`.
+
+**No configuration change is needed for the next launch** — the live ini already carries
+`Enabled=1 / EyeDx=2.0 / Convergence=5.0` and the measured signature, so the read-back arms with the
+shear. Read the `readback:` counts, not the first line.
+
 ## 7. Constant-buffer fill mechanism
 - **D3D9 float constant registers — there are no constant buffers.** `vs_3_0`/`ps_3_0` throughout,
   so the mechanism is `SetVertexShaderConstantF` / `SetPixelShaderConstantF` against the register
