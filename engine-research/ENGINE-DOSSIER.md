@@ -861,6 +861,63 @@ uploaded by a path that is not `SetVertexShaderConstantF`; or the engine's own s
 the intended entry point. **`-developermenu` is now the live row** and is the only remaining flat
 row that never depended on this path.
 
+## ✅ 6g. THE COMPLETE COMMAND-LINE OPTION TABLE, READ OUT OF THE SHIPPED BINARY (2026-09-08f, `/lm`, static)
+
+`AlanWake.exe` carries its own option table immediately beside the format string
+`Unknown command line option "%s"`, so this is the parser's list, not a wiki's
+`[measured 2026-09-08]`:
+
+```
+shaders   SENSSCALE=/sensscale=   GPUCOUNT=/gpucount=   freecamera   directaiming
+nativekeys   rigidcamera   showfps   verbose   developermenu   largeshadowmaps
+noblur   forcesurround   forcestereo   cleanaccount   cleancloud   novsync
+nosound   window   LOCALE=/locale=
+```
+
+This **supersedes the `[reported]` list** in `external-research` (Fandom + a fan reference), which
+had `-window / -w / -h / -novsync / -showfps / -sensscale / -locale / -forcesurround / -forcestereo
+/ -freecamera / -developermenu`. Note the reported `-w <n>` / `-h <n>` do **not** appear in the
+table; width/height come from `resolution.xml`.
+
+**Seven options nobody had recorded**, and two of them are directly VR-relevant:
+
+| option | why it matters here |
+| --- | --- |
+| **`rigidcamera`** | ⭐ name suggests a camera without bob/sway/lag — the single most common comfort win in a flat→VR port. Untested. |
+| **`noblur`** | ⭐ motion blur off. Also a comfort item, and it removes a full-screen pass that would otherwise have to be defeated. Untested. |
+| `directaiming` | input/aim model change. Untested. |
+| `nativekeys` | keyboard handling change — possibly relevant to the click-before-every-key rule in §10. Untested. |
+| `largeshadowmaps` | quality only. |
+| `verbose` / `shaders` / `gpucount=` | diagnostics. |
+| `window` | forces windowed without editing `resolution.xml`. |
+
+⛔ **NEVER PASS `cleanaccount` OR `cleancloud`.** They sit in the same table and the names say they
+wipe local account state and Steam Cloud data. Nothing has been run to find out what they do, and
+nothing should be — a save wipe is not recoverable and the project's save is the test fixture.
+
+### Where the developer menu's stereo entries actually live — and why they are still not the lever
+
+`Stereo Rendering:Override / Enable / Separation / Convergence / Eye Separation` are **not in
+`AlanWake.exe`** (zero occurrences, ASCII or UTF-16). They are in **`renderer_sf_Win32.dll`**
+(`Stereo Rendering` ×5, `Convergence` ×2, `Eye Separation` ×1) `[measured 2026-09-08]`, in one
+cluster with `Get SLI State`, `Set Stereo Mode`, `Activate Stereo`, `Deactivate Stereo`,
+`g_sStereoBuffer`, `Stereo Texture`, `NvidiaSpecificData` and **`g_vStereo_Separation_Convergence`**.
+That DLL **imports `nvapi.dll`** (and `nvpowerapi.dll`).
+
+⚠️ **This corroborates `/gr`'s `[reported]` menu entries in our own binary — and it does NOT reopen
+the route.** `external-research/topics/2026-09-01-nvapi-function-ids-confirmed-against-nvidias-own-table.md`
+already records that `/pd` found **zero direct callers of `NvAPI_Stereo_SetDriverMode`**, which
+"makes the game's stereo uniform a *correction* layer rather than a self-driven two-eye path", and
+`2026-09-03-3d-vision-on-a-current-driver-is-a-dead-feature...` records that 3D Vision Automatic is
+discontinued. So `g_vStereo_Separation_Convergence` is a **correction constant for a driver-made
+stereo image**, not a two-eye renderer we can drive. Finding the strings is confirmation of a
+retired route, not a new one.
+
+**Consequence for the board:** the `-developermenu` row's stated payoff — *"they exist and respond
+⇒ the game ships its own stereo path and this project changes shape entirely"* — **is wrong as
+written and is corrected here.** The menu is still worth opening once, but for what else it exposes
+(camera/FOV/debug toggles in a 2010 Remedy dev build), not for the stereo rows.
+
 ## 7. Constant-buffer fill mechanism
 - **D3D9 float constant registers — there are no constant buffers.** `vs_3_0`/`ps_3_0` throughout,
   so the mechanism is `SetVertexShaderConstantF` / `SetPixelShaderConstantF` against the register
