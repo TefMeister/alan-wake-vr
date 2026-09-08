@@ -583,6 +583,90 @@ usually safe against a bug that is only sometimes visible is not worth shipping.
 in every observation, but `apphelp` owned load 2, so removing it may simply expose the next hooker.
 That needs a Steam per-game setting change and a Steam restart.
 
+## ✅ 6d. THE ANSWER TO 6c: WE HAND BACK OUR OWN `IDirect3D9` AND STOP RACING (2026-09-08b, `/pd`, no launch)
+
+`[compile-verified 2026-09-08]`, with the vtable layout checked against `d3d9.h` at compile time —
+and that check verified to be capable of failing.
+
+§6c established that slot 16 is **always already taken** and that the guard, though correct, leaves
+the mod inert because standing down happens before a device exists. The conclusion §6c reached —
+that patching is a race we cannot win — is right, and the fix follows from it: **stop racing.**
+
+We own the `Direct3DCreate9` export, so it now returns an object of ours: 17 methods, all
+forwarding, whose vtable lives in our DLL and which nobody else has ever seen.
+
+- nothing is written into a shared vtable, so there is nothing to restore and nothing to race for;
+- nobody can be ahead of us, because the object did not exist before us;
+- **the Steam overlay's hook keeps working, layered below us** — its patch is on the *real* object's
+  vtable, and every forwarder calls straight into it.
+
+### Why this cannot be got wrong quietly
+
+The vtable is typed as `d3d9.h`'s own `IDirect3D9Vtbl`, so the compiler checks all seventeen
+signatures **and their order**. A hand-rolled `void *` array would let one wrong slot compile
+cleanly and corrupt a call at runtime with the wrong arguments — the worst failure available here.
+Two compile-time assertions back it up:
+
+```c
+sizeof(struct IDirect3D9Vtbl)                      == 17 * sizeof(void *)
+offsetof(struct IDirect3D9Vtbl, CreateDevice)      == 16 * sizeof(void *)
+```
+
+Changing the second to `15 *` stops the build with *"declared as an array with a negative size"*
+`[verified-numerically 2026-09-08]`. The check can fail, so its passing is evidence.
+
+### Lifetime — the 2026-08-25 bug in a new shape, and what stops it
+
+Our vtable points into this DLL, so the DLL must not unload while the game holds a wrapper. The
+wrapper takes a reference on our own module while any wrapper is alive and releases it when the last
+one dies.
+
+**The ordering is what makes this safe:** the game releases the throwaway `IDirect3D9` *before* it
+unloads `d3d9.dll` (releasing a COM object after freeing its library is not legal), so our reference
+is gone before the game's `FreeLibrary`. The 2026-09-04 mechanism therefore works unchanged — we
+unload, the system `d3d9.dll` reference is released, and the game's second
+`LoadLibraryA("d3d9.dll")` finds us again `[verified-live 2026-09-04, n=1]`.
+
+⚠️ The one ordering still unsafe is a game that unloads `d3d9.dll` while holding our wrapper. That
+was already fatal and no wrapper design survives it.
+
+A checked interaction: while a wrapper lives, our module reference also prevents
+`DLL_PROCESS_DETACH`, so the existing `FreeLibrary(real_d3d9)` cannot fire while a wrapper still
+points into that module. The two mechanisms reinforce each other.
+
+### The old path was DELETED, not disabled
+
+`install_createdevice_hook` / `remove_createdevice_hook` / `Hooked_CreateDevice` are gone — a
+disabled hook invites re-enabling, and this one cannot be made to work. `slot_is_foreign()` is kept:
+the device-side instrument still patches a vtable.
+
+### ⚠️ The DEVICE is still a vtable patch, deliberately
+
+`IDirect3DDevice9` has **119 methods**, and **there is no evidence its slot is contested** — the
+stand-down happened on `IDirect3D9` slot 16, before a device existed, so the device slot has never
+been reached. `install_vsconst_hook()` carries the same guard, so if it *is* contested the result is
+a clean stand-down of the instrument alone with the game still running. **That** is when the device
+earns the same treatment; building it now would be building against a guess.
+
+### What is NOT established
+
+**That the wrapper works.** Compile-verified only; the game has not been launched. A COM wrapper
+returning the wrong thing from one forwarder would look like a game that starts and then misbehaves
+in one specific way.
+
+### Size, since it looks alarming
+
+73,216 → 216,576 bytes, of which **`.text` grew 610 bytes** `[verified-numerically 2026-09-08]` —
+exactly what seventeen thin forwarders should cost. The rest is DWARF type info for the D3D9 structs
+the signatures reference, the explanatory log strings, and PE padding. `-ldxguid`/`-luuid` add zero
+bytes, measured by linking the old source with and without them.
+
+### Build hygiene
+
+Two builds of identical source differed by 2 bytes (PE `TimeDateStamp`), so "rebuild and compare the
+hash" silently could not work here. `-Wl,--no-insert-timestamp` → 0 differing bytes. ⚠️ **Fourth
+project in one day**, across two toolchains — four for four. See `CONVENTIONS.md`.
+
 ## 7. Constant-buffer fill mechanism
 - **D3D9 float constant registers — there are no constant buffers.** `vs_3_0`/`ps_3_0` throughout,
   so the mechanism is `SetVertexShaderConstantF` / `SetPixelShaderConstantF` against the register
