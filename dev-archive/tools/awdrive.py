@@ -18,8 +18,32 @@ Usage:
 """
 import ctypes, ctypes.wintypes as w, importlib.util, os, sys, time
 
-TOOLKIT = r"C:\Users\TD3KX\github-backups\flat-to-vr-RE-toolkit\tools\game-harness.py"
-GAME = r"D:\SteamLibrary\steamapps\common\Alan Wake"
+# Both of these were hard-coded to the HOME PC (the toolkit under C:\Users\TD3KX and the
+# game under D:\SteamLibrary), so this driver could not run on the dev PC at all -- the
+# same per-machine-path defect build.sh carried until 2026-09-05. Resolve against the
+# candidates each machine actually has; override with AWDRIVE_TOOLKIT / AWDRIVE_GAME.
+def _first_existing(env, candidates, what):
+    override = os.environ.get(env)
+    if override:
+        if os.path.exists(override):
+            return override
+        raise SystemExit("%s=%r does not exist" % (env, override))
+    for c in candidates:
+        if os.path.exists(c):
+            return c
+    raise SystemExit("could not find %s; tried:\n  " % what + "\n  ".join(candidates)
+                     + "\nSet %s to the right path." % env)
+
+TOOLKIT = _first_existing("AWDRIVE_TOOLKIT", [
+    r"D:\claude video game stuff\github-backups\flat-to-vr-RE-toolkit\tools\game-harness.py",
+    r"C:\Users\TD3KX\github-backups\flat-to-vr-RE-toolkit\tools\game-harness.py",
+], "game-harness.py")
+
+GAME = _first_existing("AWDRIVE_GAME", [
+    r"D:\Program Files (x86)\Steam\steamapps\common\Alan Wake",
+    r"D:\SteamLibrary\steamapps\common\Alan Wake",
+], "the Alan Wake install")
+
 LOG = os.path.join(GAME, "alanwake_vr_proxy_log.txt")
 WINDOW = "Alan Wake"
 
