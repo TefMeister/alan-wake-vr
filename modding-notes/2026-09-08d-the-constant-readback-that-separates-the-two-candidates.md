@@ -2,7 +2,7 @@
 
 `/pd`, dev PC, 2026-09-08d. **The game was not launched. Nothing in this note has been run.**
 
-Source: `staging/alan-wake-vr/proxy-d3d9/src/proxy.c`. Deployed `d3d9.dll` md5 `19237c2f…`,
+Source: `staging/alan-wake-vr/proxy-d3d9/src/proxy.c`. Deployed `d3d9.dll` md5 `8ad54c58…`,
 223,232 B, with a dated backup.
 
 ## The question
@@ -109,6 +109,20 @@ the renderer, so:
 Every new hook carries the same foreign-slot guard as the rest of the file, and comes back out of
 the vtable on unload under the same lifetime rule — the one whose absence caused the 2026-08-25
 crash. A layered hook is refused and logged rather than clobbered.
+
+### One defect this session's own self-review caught
+
+The first version nulled `real_DrawPrim` / `real_DrawIndexedPrim` / `real_GetVSConstF` on unload,
+mirroring what `remove_vsconst_hook()` already does for `real_SetVSConstF`. That is wrong here, and
+in a way that only shows up in the case the code around it is explicitly written to survive:
+**restoring the slot makes our hook unreachable through the vtable, so the only way it can still be
+entered is a foreign hook layered on top of it** — precisely the case logged one line earlier — and
+in that case the real pointer is exactly what it needs to forward to. Nulling turned "this unload is
+not safe" into a **null call on the next draw**. The pointers are now deliberately left in place,
+with a comment saying why.
+
+Caught by asking what the new hooks and the existing ones do to each other, which is the only reason
+it was found: nothing about it fails a build or a self-test.
 
 ## Verification
 

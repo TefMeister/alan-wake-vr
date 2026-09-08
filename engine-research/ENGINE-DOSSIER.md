@@ -748,7 +748,7 @@ from exactly that confound and is withdrawn.
 ## 6f. THE READ-BACK THAT SEPARATES THE TWO CANDIDATES IS BUILT AND DEPLOYED (2026-09-08d, `/pd`, no launch)
 
 Write-up: `modding-notes/2026-09-08d-the-constant-readback-that-separates-the-two-candidates.md`.
-Deployed `d3d9.dll` md5 `19237c2f...`, 223,232 B, dated backup kept. **Not run.**
+Deployed `d3d9.dll` md5 `8ad54c58...`, 223,232 B, dated backup kept. **Not run.**
 
 §6e left the project at a fork: the shear applies 1,661,102 times and the screen does not move, so
 either **(1)** the engine re-uploads the camera constants by a path that is not
@@ -780,6 +780,12 @@ time**, and that is readable without the game running to write.
   logged and the counts go in the 5 s line, because a mixed result is itself an answer and n=1
   decides nothing. That is the same defect that made the previous instrument discard ~3M
   observations including the answer.
+- **⚠️ A defect caught in self-review, not by a build:** the first version nulled the new real-function
+  pointers on unload, copying what `remove_vsconst_hook()` does for `real_SetVSConstF`. Restoring a
+  slot makes our hook unreachable *through the vtable*, so the only remaining entry is a foreign
+  layered hook — the case logged one line earlier — and there the real pointer is what it must forward
+  to. Nulling turned "this unload is not safe" into a **null call on the next draw**. The pointers are
+  now left in place deliberately. Nothing about this fails a build or a self-test.
 - **The deployed binary was verified before being overwritten**: a fresh build of the pre-session
   source is md5-identical to what was installed (`0dfdf78b77e9...`), so the stamp was honest and
   the `--no-insert-timestamp` reproducibility holds `[verified-numerically 2026-09-08]`.
