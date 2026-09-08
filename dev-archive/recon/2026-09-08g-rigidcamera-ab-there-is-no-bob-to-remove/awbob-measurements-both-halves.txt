@@ -1,0 +1,43 @@
+=== TREATMENT: launched with -developermenu -rigidcamera -noblur (2026-09-08f) ===
+frames: 14   band: rows 80-360   search: +/-24 px
+
+GUARD 1 - were the frames actually changing?
+  frame-to-frame mean |luma delta|: min 1.97  max 4.47
+  OK - the game was rendering and the character was moving
+
+GUARD 2 - can the estimator see a shift at all?
+    injected -8 px -> recovered +8 px (magnitude OK)
+    injected -3 px -> recovered +3 px (magnitude OK)
+    injected -1 px -> recovered +1 px (magnitude OK)
+    injected +1 px -> recovered -1 px (magnitude OK)
+    injected +3 px -> recovered -3 px (magnitude OK)
+    injected +8 px -> recovered -8 px (magnitude OK)
+  OK - a real shift would have been detected, so a null is a null
+
+RESULT - per-frame vertical camera shift (px): [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  mean |dy| = 0.00 px   max |dy| = 0 px
+
+This is ONE HALF of an A/B. It says nothing about any launch flag until the
+other half - same save point, same command - has been run and compared.
+
+=== CONTROL: launched with NO FLAGS (2026-09-08g) ===
+frames: 14   band: rows 80-360   search: +/-24 px
+
+GUARD 1 - were the frames actually changing?
+  frame-to-frame mean |luma delta|: min 1.94  max 4.21
+  OK - the game was rendering and the character was moving
+
+GUARD 2 - can the estimator see a shift at all?
+    injected -8 px -> recovered +8 px (magnitude OK)
+    injected -3 px -> recovered +3 px (magnitude OK)
+    injected -1 px -> recovered +1 px (magnitude OK)
+    injected +1 px -> recovered -1 px (magnitude OK)
+    injected +3 px -> recovered -3 px (magnitude OK)
+    injected +8 px -> recovered -8 px (magnitude OK)
+  OK - a real shift would have been detected, so a null is a null
+
+RESULT - per-frame vertical camera shift (px): [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  mean |dy| = 0.00 px   max |dy| = 0 px
+
+This is ONE HALF of an A/B. It says nothing about any launch flag until the
+other half - same save point, same command - has been run and compared.
