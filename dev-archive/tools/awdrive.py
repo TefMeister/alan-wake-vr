@@ -19,7 +19,7 @@ Usage:
 import ctypes, ctypes.wintypes as w, importlib.util, os, sys, time
 
 TOOLKIT = r"C:\Users\TD3KX\github-backups\flat-to-vr-RE-toolkit\tools\game-harness.py"
-GAME = r"C:\Steam\steamapps\common\Alan Wake"
+GAME = r"D:\SteamLibrary\steamapps\common\Alan Wake"
 LOG = os.path.join(GAME, "alanwake_vr_proxy_log.txt")
 WINDOW = "Alan Wake"
 
