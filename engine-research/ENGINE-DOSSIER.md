@@ -985,6 +985,26 @@ launch.
 written and is corrected here.** The menu is still worth opening once, but for what else it exposes
 (camera/FOV/debug toggles in a 2010 Remedy dev build), not for the stereo rows.
 
+### Folded from the inbox, 2026-09-29 (three drops)
+
+- **The next way in: the FOV slider** (`/gr` 2026-09-29). The game's own FOV slider (Options → Controls, 20 notches,
+  default 10) is a controlled knob on the projection `[reported]`, and HelixMod's fix already showed the shadow
+  shaders depend on it (§8). Diff every constant path (VS/PS F/I/B, SetTransform, effect setters) and camera-ish memory
+  at slider 10 and 20: whatever scales by tan(fov20/2)/tan(fov10/2) is the real route; if nothing on the wrapped
+  device changes, the scene is not drawn through it. Topic:
+  `external-research/topics/2026-09-29-the-fov-slider-is-a-free-probe-for-where-the-transform-lives.md`.
+- **`-rigidcamera` / `-directaiming` are already documented** (`/gr` 2026-09-08, folded late): `-rigidcamera`
+  (v1.02) removes camera smoothing and centres the camera behind Alan; `-directaiming` (v1.03) gives 1:1 mouse and
+  implies `-rigidcamera` `[reported]`. The topic's standing suggestion, still unactioned: use
+  `-directaiming -rigidcamera` in this project's standard launch line. ⚠️ The Menu-o-matiC route launches through
+  `steam://rungameid/108710`, which passes no flags; adding them means Steam launch options or a `steam://run/108710//...`
+  launch. §6g's A/B already found no bob to remove (2026-09-08g).
+- **The proxy exports only `Direct3DCreate9`: a latent start-up crash** (`/lm dead-space-2-vr` 2026-09-14): a game
+  that calls `D3DPERF_GetStatus`, `D3DPERF_SetOptions` or `DebugSetMute` crashes at start through a NULL pointer
+  when the proxy does not forward all seventeen `d3d9` exports `[verified-live 2026-09-14, n=1, dead-space-2-vr]`.
+  Alan Wake runs today, so it evidently does not call them; the defect is latent. `staging/alan-wake-vr/proxy-d3d9/
+  src/d3d9.def` still lists only `Direct3DCreate9` `[inferred-static 2026-09-29]`. Board row added.
+
 ## 7. Constant-buffer fill mechanism
 - **D3D9 float constant registers — there are no constant buffers.** `vs_3_0`/`ps_3_0` throughout,
   so the mechanism is `SetVertexShaderConstantF` / `SetPixelShaderConstantF` against the register
