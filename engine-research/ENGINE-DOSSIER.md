@@ -1033,6 +1033,15 @@ two pictures be taken a second apart from the same camera. Evidence:
 - So the §6 design (edit `g_mViewToClip` at c0/c192 by signature) reaches the main scene. **Open:** drawing TWO eyes
   per frame (D3D9: re-issue the frame per eye, or alternate frames), the post-effect passes, sensible units for
   `EyeDx`/`Convergence` (the 2/5 values are deliberately exaggerated).
+- **Units are METRES (2026-10-06, static, from the live dump).** The camera projection's depth rows read
+  `A = 1.000200`, `B = -0.200040`, so near = -B/A = **0.2** and far = A*near/(A-1) = **about 1000**
+  `[measured 2026-10-06]`. Only metres make sense for that pair. Cross-check from the shift pictures: with
+  `EyeDx=2`, `Convergence=5` the far-limit shift is S = 0.9157*2/5 = 0.366 NDC = 234 px at 1280 wide; Alan moved
+  about -180 px, giving w = 2.8 (a third-person camera about 2.8 m behind him), and the fence about +150 px,
+  giving w = 15 `[inferred-static 2026-10-06]`. **So `EyeDx` is metres per eye: a real 64 mm IPD is
+  `EyeDx=0.032`.** The installed ini now has `EyeDx=0.032`, `Convergence=3.0` (the 2 m version is kept as
+  `d3d9_proxy.ini.bak-2026-10-06-exaggerated-2m`).
+
 - **Lesson worth keeping:** a measurement across launches of a game whose camera moves is not an A/B. Toggle live.
 
 ## 7. Constant-buffer fill mechanism
