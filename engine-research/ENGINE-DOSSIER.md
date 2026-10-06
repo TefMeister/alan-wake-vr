@@ -1148,6 +1148,17 @@ frustum; rays checked against the true eye-relative direction): **3,172 checks p
 the runtime reprojects for later head movement. Settings: `[vr] HeadTrack=1`, `[vr] Layers=projection`; both off by
 default. Build `95512af70511`, deployed; all self-tests pass `[compile-verified 2026-10-06]`. **Not run.**
 
+**✅ RUN 2026-10-06 (`/lm`, dev PC, OpenXR simulator): HEAD TRACKING WORKS ON ALL THREE AXES.** Settings `[vr]
+OpenXR=1, HeadTrack=1, Layers=projection`, AFR, `EyeDx=0.032`, `-noblur`. Log: `head tracking ON, eye output as
+per-eye projection views`, session running, frames submitted. Each eye now fills its whole view (projection views,
+no floating screen). Simulated head: **yaw 30° right -> the world slides left; pitch 15° up -> the world moves down;
+roll 15° -> the world tilts, HUD stays level**, all in both eyes `[verified-live 2026-10-06, n=1 each]`. One capture
+right after the yaw showed a hard-edged bright lighting patch in one eye that was gone in the next capture
+(probably that eye's image a frame behind mid-turn) `[hypothesis]`. Roll's *direction* and comfort need a real
+headset. Evidence: `dev-archive/recon/2026-10-06-head-tracking-in-the-simulator/`.
+⚠️ `steam://run/108710//-noblur` makes Steam show a launch-options confirmation the first time in a Steam session;
+it waits for a person to press OK `[verified-live 2026-10-06]`.
+
 **Known gaps:** the 515 fused-matrix shaders (`g_mWorldToClip` / `g_mLocalToClip`: particles, foliage, some
 terrain) get neither the eye shift nor the head turn yet (§6 table); screen-space effects stay screen-locked; the game
 camera does not move with head POSITION (rotation only); the HUD turns with the image.
