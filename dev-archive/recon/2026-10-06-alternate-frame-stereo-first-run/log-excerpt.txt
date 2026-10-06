@@ -1,0 +1,5 @@
+[14:46:06.487] afr: ON - Present hooked at slot 17; the eye offset flips sign every frame. If no 'afr: N Present(s)' line follows in gameplay, the game presents through a swap chain instead.
+[14:46:07.355] afr: 1 Present(s) so far; next frame is the RIGHT eye
+[14:46:17.557] afr: 601 Present(s) so far; next frame is the RIGHT eye
+[14:48:15.754] live toggle: the configured edit is now ON (numpad 7)
+[14:49:00.815] live toggle: the configured edit is now OFF (numpad 7)
