@@ -1118,6 +1118,16 @@ as expected; the headset output is the next build.
   from 32-bit XIII through Virtual Desktop's VDXR `[reported]`.
 - **Not done:** head tracking into the game camera (the camera is one static global, §6), per-eye projection layers.
 
+**✅ RUN 2026-10-06 (`/lm`, dev PC, OpenXR simulator 32-bit): HEADSET OUTPUT WORKS END TO END.** A launch with the
+loader's runtime set per game (`[vr] RuntimeJson`, because a direct exe start relaunches through Steam and drops any
+outside environment variable `[verified-live 2026-10-06, n=1]`) gave `session running`, two 1280x720 eye
+swapchains (format 91, `B8G8R8A8_UNORM_SRGB`), frames submitted continuously; the simulator reports the session
+`FOCUSED` at its 90 fps target, and its preview shows the game screen in both eyes `[verified-live 2026-10-06, n=2 launches]`.
+First placement was at floor height (LOCAL origin); now the screen is anchored where the head is at session start
+(`xrLocateSpace` of a VIEW space), measured 1.70 m. Build `ba436e641fff`. Evidence:
+`dev-archive/recon/2026-10-06-headset-output-in-the-simulator/`. Left installed with `[vr] OpenXR=0` and the simulator
+`RuntimeJson` line kept. **Not established:** the look and comfort in a real headset (home PC, owed reminder raised).
+
 ## 7. Constant-buffer fill mechanism
 - **D3D9 float constant registers — there are no constant buffers.** `vs_3_0`/`ps_3_0` throughout,
   so the mechanism is `SetVertexShaderConstantF` / `SetPixelShaderConstantF` against the register
