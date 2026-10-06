@@ -1005,6 +1005,36 @@ written and is corrected here.** The menu is still worth opening once, but for w
   Alan Wake runs today, so it evidently does not call them; the defect is latent. `staging/alan-wake-vr/proxy-d3d9/
   src/d3d9.def` still lists only `Direct3DCreate9` `[inferred-static 2026-09-29]`. Board row added.
 
+## ⭐⭐⭐ 6h. THE CAMERA EDITS WORK. §6e's "zero pixels moved" and §6f's "not the lever" were MISREADS (2026-10-06, `/lm`, dev PC, two launches)
+
+**Supersedes: §6e "1.66 M edits applied, zero pixels moved", §6f "⛔ THE VERTEX-SHADER CONSTANT PATH IS NOT THE
+LEVER", and the board line "three routes to the on-screen transform are now closed".** The measurements in
+those sections stand; their conclusions do not.
+
+**What went wrong before.** Every A/B compared two separate LAUNCHES. The third-person camera stood somewhere
+else in each, and a whole-frame cross-correlation (and a scale search) could not tell "the edit moved the scene"
+from "the camera moved". The 2026-09-08e pictures, re-read by eye on 2026-10-06, already show it: with
+`ProbeScaleXS=0.5` Alan's shoulders are about half as wide relative to his height, which no camera placement can
+do `[measured 2026-10-06, n=1 picture pair]`. The 2026-09-08c shear pictures show Alan moved about 280 px while
+the road edge and lamp post stayed put.
+
+**The fix: a live toggle.** `live_toggle.c` (numpad 7, off at start; switching ON re-reads `d3d9_proxy.ini`) lets
+two pictures be taken a second apart from the same camera. Evidence:
+`dev-archive/recon/2026-10-06-the-camera-edits-were-working-all-along/`.
+
+- **Probe (`ProbeScaleXS=0.5`), off/on/off/on/off:** ON squeezes the whole scene, world and Alan, toward the centre
+  (Alan 80 px right of centre -> 40), more forest comes into view at the sides, HUD unmoved; OFF restores it
+  `[verified-live 2026-10-06, n=2 cycles]`.
+- **Eye shift (`EyeDx=2`, `Convergence=5`, the existing `aw_stereo_apply_block`), off/on/off:** ON moves Alan (near)
+  LEFT about 180 px and the far fence and road sign RIGHT about 150 px, with the middle distance nearly still: the
+  depth-dependent parallax of one converged eye. OFF restores it `[verified-live 2026-10-06, n=1]`.
+- **Not moved by the shift: the street-lamp glow.** A screen-space flare/godray pass, the gap §6 already predicted
+  for post effects `[inferred-static 2026-10-06]`.
+- So the §6 design (edit `g_mViewToClip` at c0/c192 by signature) reaches the main scene. **Open:** drawing TWO eyes
+  per frame (D3D9: re-issue the frame per eye, or alternate frames), the post-effect passes, sensible units for
+  `EyeDx`/`Convergence` (the 2/5 values are deliberately exaggerated).
+- **Lesson worth keeping:** a measurement across launches of a game whose camera moves is not an A/B. Toggle live.
+
 ## 7. Constant-buffer fill mechanism
 - **D3D9 float constant registers — there are no constant buffers.** `vs_3_0`/`ps_3_0` throughout,
   so the mechanism is `SetVertexShaderConstantF` / `SetPixelShaderConstantF` against the register
@@ -1060,6 +1090,8 @@ written and is corrected here.** The menu is still worth opening once, but for w
 | `Ctrl+F3` / `Ctrl+F4` | live in-game stereo separation adjustment (reported working value: 12 "bars," ~20%) | external-research, NVIDIA forum — untested on this installed build, see §6 |
 
 ## 10. Autonomous harness recipe (this game)
+- **Music muted 2026-10-06:** pause menu -> Options -> Audio -> Music Volume, Left x22 (all bars dim). Effects, speech and cinematic volume left as found.
+- **Live A/B:** numpad 7 (proxy-side, `GetAsyncKeyState`, no click needed); hold the key about 250 ms or the 100 ms poll can miss it.
 - **✅ SOLVED 2026-09-08c — THE INPUT RULE: a mouse click must precede EVERY key.** Bare `SendInput`
   does not reach this game, VK or scancode, foreground verified. `click, key, click, key` — one click
   does not enable input persistently. Driver: **`dev-archive/tools/awkeys.py`**; screen capture and

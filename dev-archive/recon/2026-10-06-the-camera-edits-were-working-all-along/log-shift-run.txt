@@ -1,0 +1,1874 @@
+[14:21:18.028] === alan-wake-vr proxy d3d9.dll loaded, PID=21156 ===
+[14:21:18.032] real d3d9.dll loaded from C:\Windows\system32\d3d9.dll; Direct3DCreate9=73664B80
+[14:21:18.033] stereo: ON  eye_dx=2.000000 convergence=5.000  matching xs=0.915689 ys=1.627892 (block-offset match, edits a copy, never the engine's buffer)
+[14:21:18.034] Direct3DCreate9 called: SDKVersion=0x20
+[14:21:18.164]   -> returned 0371F3E0
+[14:21:18.164] returning OUR IDirect3D9 06E20418 wrapping the real 0371F3E0. Nothing was written into a shared vtable, so no other hook can be ahead of us and none is disturbed -- the Steam overlay's hook still runs, layered below every one of our forwarders.
+[14:21:18.172] wrapper IDirect3D9 06E20418 released (real=0371F3E0)
+[14:21:18.197] === alan-wake-vr proxy d3d9.dll unloading (reserved=00000000, explicit FreeLibrary) ===
+[14:21:18.197] releasing the system d3d9.dll reference so the game's next LoadLibraryA("d3d9.dll") searches the game folder and finds us again
+[14:21:18.250] === alan-wake-vr proxy d3d9.dll loaded, PID=21156 ===
+[14:21:18.253] real d3d9.dll loaded from C:\Windows\system32\d3d9.dll; Direct3DCreate9=71A44B80
+[14:21:18.254] stereo: ON  eye_dx=2.000000 convergence=5.000  matching xs=0.915689 ys=1.627892 (block-offset match, edits a copy, never the engine's buffer)
+[14:21:18.255] Direct3DCreate9 called: SDKVersion=0x20
+[14:21:18.366]   -> returned 06E21E18
+[14:21:18.366] returning OUR IDirect3D9 037DB688 wrapping the real 06E21E18. Nothing was written into a shared vtable, so no other hook can be ahead of us and none is disturbed -- the Steam overlay's hook still runs, layered below every one of our forwarders.
+[14:21:18.366] IDirect3D9::CreateDevice (through OUR wrapper): Adapter=0 DeviceType=1 hFocusWindow=00160B6E BehaviorFlags=0x54  <-- PUREDEVICE: D3D9 refuses Get* on shader constants on a pure device, so the constant read-back cannot answer here
+[14:21:18.366]   pp: 1280x720 fmt=22 bufcount=1 windowed=1 swapeffect=1 hDeviceWindow=00160B6E autoDS=1 dsFmt=75 flags=0x2 refresh=0 presentInterval=0x80000000
+[14:21:18.562]   -> hr=0x00000000 device=0B1BC6C0
+[14:21:18.562] SetVertexShaderConstantF hook installed at device vtable slot 94 (real=71B18E70). Watching c0, c4, c7 and c192 for g_mViewToClip.
+[14:21:18.562] readback: Get=71B15630 DrawPrimitive=hooked DrawIndexedPrimitive=hooked. The device is PURE, so Get is expected to REFUSE; the first check will say so.
+[14:21:27.473] g_mViewToClip candidate c0 after 1 uploads:
+[14:21:27.474]     [    2.000000     0.000000     0.000000    -1.000000]
+[14:21:27.474]     [    0.000000    -2.000000     0.000000     1.000000]
+[14:21:27.474]     [    0.000000     0.000000     1.000000     0.000000]
+[14:21:27.474]     [    0.000000     0.000000     0.000000     1.000000]
+[14:21:27.474]     reading: m[11]=0.000000 m[15]=1.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:21:32.466] VS upload ranges in the last 5000 ms (start+count:n): c0+5:39 c0+4:285
+[14:21:32.466]     distinct-signature table: 0/24 slots used, 0 dropped
+[14:21:32.466]     readback: 0 check(s) over 1084 draw(s) - survived=0 restored=0 overwritten=0 unavailable=0  <-- NEVER CHECKED: either no edit was ever armed, or no draw came through our hooks
+[14:21:32.466]     stereo: 0 edit(s) applied in total, 0 upload(s) refused as oversize  <-- NEVER MATCHED: the signature is not being found in any forwarded block
+[14:21:37.466] VS upload ranges in the last 5000 ms (start+count:n): c0+4:300
+[14:21:37.466]     distinct-signature table: 0/24 slots used, 0 dropped
+[14:21:37.466]     readback: 0 check(s) over 1684 draw(s) - survived=0 restored=0 overwritten=0 unavailable=0  <-- NEVER CHECKED: either no edit was ever armed, or no draw came through our hooks
+[14:21:37.466]     stereo: 0 edit(s) applied in total, 0 upload(s) refused as oversize  <-- NEVER MATCHED: the signature is not being found in any forwarded block
+[14:21:42.466] VS upload ranges in the last 5000 ms (start+count:n): c0+4:300
+[14:21:42.466]     distinct-signature table: 0/24 slots used, 0 dropped
+[14:21:42.466]     readback: 0 check(s) over 2284 draw(s) - survived=0 restored=0 overwritten=0 unavailable=0  <-- NEVER CHECKED: either no edit was ever armed, or no draw came through our hooks
+[14:21:42.466]     stereo: 0 edit(s) applied in total, 0 upload(s) refused as oversize  <-- NEVER MATCHED: the signature is not being found in any forwarded block
+[14:21:47.480] VS upload ranges in the last 5000 ms (start+count:n): c0+4:301
+[14:21:47.480]     distinct-signature table: 0/24 slots used, 0 dropped
+[14:21:47.480]     readback: 0 check(s) over 2869 draw(s) - survived=0 restored=0 overwritten=0 unavailable=0  <-- NEVER CHECKED: either no edit was ever armed, or no draw came through our hooks
+[14:21:47.480]     stereo: 0 edit(s) applied in total, 0 upload(s) refused as oversize  <-- NEVER MATCHED: the signature is not being found in any forwarded block
+[14:22:06.218] VS upload ranges in the last 18750 ms (start+count:n): c0+5:59 c0+4:42
+[14:22:06.218]     distinct-signature table: 0/24 slots used, 0 dropped
+[14:22:06.218]     readback: 0 check(s) over 4050 draw(s) - survived=0 restored=0 overwritten=0 unavailable=0  <-- NEVER CHECKED: either no edit was ever armed, or no draw came through our hooks
+[14:22:06.218]     stereo: 0 edit(s) applied in total, 0 upload(s) refused as oversize  <-- NEVER MATCHED: the signature is not being found in any forwarded block
+[14:22:11.224] VS upload ranges in the last 5000 ms (start+count:n): c0+5:1144 c0+4:409
+[14:22:11.224]     distinct-signature table: 0/24 slots used, 0 dropped
+[14:22:11.224]     readback: 0 check(s) over 5901 draw(s) - survived=0 restored=0 overwritten=0 unavailable=0  <-- NEVER CHECKED: either no edit was ever armed, or no draw came through our hooks
+[14:22:11.224]     stereo: 0 edit(s) applied in total, 0 upload(s) refused as oversize  <-- NEVER MATCHED: the signature is not being found in any forwarded block
+[14:22:16.224] VS upload ranges in the last 5000 ms (start+count:n): c0+5:1800 c0+4:600
+[14:22:16.224]     distinct-signature table: 0/24 slots used, 0 dropped
+[14:22:16.224]     readback: 0 check(s) over 8601 draw(s) - survived=0 restored=0 overwritten=0 unavailable=0  <-- NEVER CHECKED: either no edit was ever armed, or no draw came through our hooks
+[14:22:16.224]     stereo: 0 edit(s) applied in total, 0 upload(s) refused as oversize  <-- NEVER MATCHED: the signature is not being found in any forwarded block
+[14:22:21.222] VS upload ranges in the last 5000 ms (start+count:n): c0+5:1816 c0+4:780
+[14:22:21.222]     distinct-signature table: 0/24 slots used, 0 dropped
+[14:22:21.222]     readback: 0 check(s) over 11497 draw(s) - survived=0 restored=0 overwritten=0 unavailable=0  <-- NEVER CHECKED: either no edit was ever armed, or no draw came through our hooks
+[14:22:21.222]     stereo: 0 edit(s) applied in total, 0 upload(s) refused as oversize  <-- NEVER MATCHED: the signature is not being found in any forwarded block
+[14:22:26.230] VS upload ranges in the last 5000 ms (start+count:n): c0+5:1262 c0+4:818
+[14:22:26.230]     distinct-signature table: 0/24 slots used, 0 dropped
+[14:22:26.230]     readback: 0 check(s) over 13763 draw(s) - survived=0 restored=0 overwritten=0 unavailable=0  <-- NEVER CHECKED: either no edit was ever armed, or no draw came through our hooks
+[14:22:26.230]     stereo: 0 edit(s) applied in total, 0 upload(s) refused as oversize  <-- NEVER MATCHED: the signature is not being found in any forwarded block
+[14:22:28.190] PERSPECTIVE-SHAPED 4x4 at c0, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 1, 10177 uploads total):
+[14:22:28.191]     signature xs=1.000000 ys=1.000000  seen at: c0
+[14:22:28.191]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:22:28.191]         [stereo] Enabled=1  MatchXS=1.000000  MatchYS=1.000000
+[14:22:28.191]     [    1.000000     0.000000     0.000000     0.000000]
+[14:22:28.191]     [    0.000000     1.000000     0.000000     0.000000]
+[14:22:28.191]     [    0.000000     0.000000     1.025641    -0.051282]
+[14:22:28.191]     [    0.000000     0.000000     1.000000     0.000000]
+[14:22:28.191] g_mViewToClip candidate c4 after 1 uploads:
+[14:22:28.191]     [    0.000000     0.000000    -0.999994    -0.000000]
+[14:22:28.191]     [   -0.000000     1.000000     0.000000    -0.000000]
+[14:22:28.191]     [    0.999994    -0.000000     0.000000    -0.000000]
+[14:22:28.191]     [    2.000015     0.000000     0.000000     0.000000]
+[14:22:28.191]     reading: m[11]=-0.000000 m[15]=0.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:22:28.197] PERSPECTIVE-SHAPED 4x4 at c0, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 1, 10183 uploads total):
+[14:22:28.197]     signature xs=1.035530 ys=1.840943  seen at: c0
+[14:22:28.197]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:22:28.197]         [stereo] Enabled=1  MatchXS=1.035530  MatchYS=1.840943
+[14:22:28.197]     [    1.035530     0.000000     0.000000     0.000000]
+[14:22:28.197]     [    0.000000     1.840943     0.000000     0.000000]
+[14:22:28.197]     [    0.000000     0.000000     1.104964 -1049.642334]
+[14:22:28.197]     [    0.000000     0.000000     1.000000     0.000000]
+[14:22:28.237] g_mViewToClip candidate c7 after 1 uploads:
+[14:22:28.237]     [    1.035530     0.000000     0.000000     0.000000]
+[14:22:28.237]     [    0.000000     1.840943     0.000000     0.000000]
+[14:22:28.237]     [    0.000000     0.000000     1.000200    -0.200040]
+[14:22:28.237]     [    0.000000     0.000000     1.000000     0.000000]
+[14:22:28.237]     reading: m[11]=-0.200040 m[15]=0.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:22:28.253] g_mViewToClip candidate c192 after 1 uploads:
+[14:22:28.253]     [    0.257028     0.000000     0.000000  -666.664795]
+[14:22:28.253]     [    0.000000     0.181106     0.000000  -182.697983]
+[14:22:28.253]     [    0.000000     0.000000     0.035246   -58.888069]
+[14:22:28.253]     [    0.000000     0.000000     0.000000     1.000000]
+[14:22:28.253]     reading: m[11]=-58.888069 m[15]=1.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:22:28.272] PERSPECTIVE-SHAPED 4x4 at c2, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 1, 10278 uploads total):
+[14:22:28.272]     signature xs=-0.000000 ys=0.000000  seen at: c2
+[14:22:28.272]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:22:28.272]         [stereo] Enabled=1  MatchXS=-0.000000  MatchYS=0.000000
+[14:22:28.272]     [   -0.000000    -0.000000     1.000000     0.000243]
+[14:22:28.272]     [    1.000000     0.000000     0.000000    -0.000019]
+[14:22:28.272]     [   -0.000000     1.000000    -0.000000     0.000004]
+[14:22:28.272]     [   -0.000000    -0.000000     1.000000    -0.000058]
+[14:22:28.291] PERSPECTIVE-SHAPED 4x4 at c0, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 1, 13204 uploads total):
+[14:22:28.291]     signature xs=2.414213 ys=2.414213  seen at: c0
+[14:22:28.291]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:22:28.291]         [stereo] Enabled=1  MatchXS=2.414213  MatchYS=2.414213
+[14:22:28.291]     [    2.414213     0.000000     0.000000     0.000000]
+[14:22:28.291]     [    0.000000     2.414213     0.000000     0.000000]
+[14:22:28.291]     [    0.000000     0.000000     1.021148    -0.327788]
+[14:22:28.291]     [    0.000000     0.000000     1.000000     0.000000]
+[14:22:28.526] PERSPECTIVE-SHAPED 4x4 at c81, layout +-1 at index 11 (sighting 1, 17076 uploads total):
+[14:22:28.526]     signature xs=19.772179 ys=-3.004681  seen at: c81
+[14:22:28.526]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:22:28.526]         [stereo] Enabled=1  MatchXS=19.772179  MatchYS=-3.004681
+[14:22:28.527]     [   19.772179    -0.403353     1.343687     0.000000]
+[14:22:28.527]     [   21.984161    -3.004681     1.178253     0.000000]
+[14:22:28.527]     [   18.514206    -0.848413     1.268307     1.000000]
+[14:22:28.527]     [   21.439711     2.168252     1.328477     0.000000]
+[14:22:28.527]     reading: w-from-z = +1 -> clip.w = +view.z, LEFT-handed, which is what stereo.c assumes. The assumption holds.
+[14:22:28.527] PERSPECTIVE-SHAPED 4x4 at c87, layout +-1 at index 11 (sighting 1, 17076 uploads total):
+[14:22:28.527]     signature xs=19.924162 ys=2.654922  seen at: c87
+[14:22:28.527]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:22:28.527]         [stereo] Enabled=1  MatchXS=19.924162  MatchYS=2.654922
+[14:22:28.527]     [   19.924162     1.233646     1.075491     0.000000]
+[14:22:28.527]     [   23.204901     2.654922     1.081167     0.000000]
+[14:22:28.527]     [    8.667715    -1.572666     1.101639     1.000000]
+[14:22:28.527]     [   16.471909     0.599901     1.306125     0.000000]
+[14:22:28.527]     reading: w-from-z = +1 -> clip.w = +view.z, LEFT-handed, which is what stereo.c assumes. The assumption holds.
+[14:22:28.610] PERSPECTIVE-SHAPED 4x4 at c7, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 1, 24519 uploads total):
+[14:22:28.611]     signature xs=1.035233 ys=1.840415  seen at: c7
+[14:22:28.611]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:22:28.611]         [stereo] Enabled=1  MatchXS=1.035233  MatchYS=1.840415
+[14:22:28.611]     [    1.035233     0.000000     0.000000     0.000000]
+[14:22:28.611]     [    0.000000     1.840415     0.000000     0.000000]
+[14:22:28.611]     [    0.000000     0.000000     1.104964 -1049.642334]
+[14:22:28.611]     [    0.000000     0.000000     1.000000     0.000000]
+[14:22:28.628] PERSPECTIVE-SHAPED 4x4 at c7, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 1, 30385 uploads total):
+[14:22:28.628]     signature xs=1.021579 ys=1.816141  seen at: c7
+[14:22:28.628]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:22:28.628]         [stereo] Enabled=1  MatchXS=1.021579  MatchYS=1.816141
+[14:22:28.628]     [    1.021579     0.000000     0.000000     0.000000]
+[14:22:28.628]     [    0.000000     1.816141     0.000000     0.000000]
+[14:22:28.628]     [    0.000000     0.000000     1.104964 -1049.642334]
+[14:22:28.628]     [    0.000000     0.000000     1.000000     0.000000]
+[14:22:28.706] PERSPECTIVE-SHAPED 4x4 at c7, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 1, 36509 uploads total):
+[14:22:28.706]     signature xs=1.006142 ys=1.788697  seen at: c7
+[14:22:28.706]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:22:28.706]         [stereo] Enabled=1  MatchXS=1.006142  MatchYS=1.788697
+[14:22:28.706]     [    1.006142     0.000000     0.000000     0.000000]
+[14:22:28.706]     [    0.000000     1.788697     0.000000     0.000000]
+[14:22:28.706]     [    0.000000     0.000000     1.104964 -1049.642334]
+[14:22:28.706]     [    0.000000     0.000000     1.000000     0.000000]
+[14:22:28.722] PERSPECTIVE-SHAPED 4x4 at c7, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 1, 42812 uploads total):
+[14:22:28.722]     signature xs=0.991540 ys=1.762738  seen at: c7
+[14:22:28.722]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:22:28.722]         [stereo] Enabled=1  MatchXS=0.991540  MatchYS=1.762738
+[14:22:28.722]     [    0.991540     0.000000     0.000000     0.000000]
+[14:22:28.722]     [    0.000000     1.762738     0.000000     0.000000]
+[14:22:28.722]     [    0.000000     0.000000     1.104964 -1049.642334]
+[14:22:28.722]     [    0.000000     0.000000     1.000000     0.000000]
+[14:22:28.740] PERSPECTIVE-SHAPED 4x4 at c7, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 1, 48293 uploads total):
+[14:22:28.740]     signature xs=0.974061 ys=1.731664  seen at: c7
+[14:22:28.740]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:22:28.740]         [stereo] Enabled=1  MatchXS=0.974061  MatchYS=1.731664
+[14:22:28.740]     [    0.974061     0.000000     0.000000     0.000000]
+[14:22:28.740]     [    0.000000     1.731664     0.000000     0.000000]
+[14:22:28.740]     [    0.000000     0.000000     1.104964 -1049.642334]
+[14:22:28.740]     [    0.000000     0.000000     1.000000     0.000000]
+[14:22:28.771] PERSPECTIVE-SHAPED 4x4 at c7, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 1, 53629 uploads total):
+[14:22:28.771]     signature xs=0.965240 ys=1.715983  seen at: c7
+[14:22:28.772]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:22:28.772]         [stereo] Enabled=1  MatchXS=0.965240  MatchYS=1.715983
+[14:22:28.772]     [    0.965240     0.000000     0.000000     0.000000]
+[14:22:28.772]     [    0.000000     1.715983     0.000000     0.000000]
+[14:22:28.772]     [    0.000000     0.000000     1.104964 -1049.642334]
+[14:22:28.772]     [    0.000000     0.000000     1.000000     0.000000]
+[14:22:28.788] PERSPECTIVE-SHAPED 4x4 at c7, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 1, 58806 uploads total):
+[14:22:28.788]     signature xs=0.958531 ys=1.704055  seen at: c7
+[14:22:28.788]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:22:28.788]         [stereo] Enabled=1  MatchXS=0.958531  MatchYS=1.704055
+[14:22:28.788]     [    0.958531     0.000000     0.000000     0.000000]
+[14:22:28.788]     [    0.000000     1.704055     0.000000     0.000000]
+[14:22:28.788]     [    0.000000     0.000000     1.104964 -1049.642334]
+[14:22:28.788]     [    0.000000     0.000000     1.000000     0.000000]
+[14:22:28.805] PERSPECTIVE-SHAPED 4x4 at c7, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 1, 63850 uploads total):
+[14:22:28.805]     signature xs=0.952206 ys=1.692810  seen at: c7
+[14:22:28.805]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:22:28.805]         [stereo] Enabled=1  MatchXS=0.952206  MatchYS=1.692810
+[14:22:28.805]     [    0.952206     0.000000     0.000000     0.000000]
+[14:22:28.805]     [    0.000000     1.692810     0.000000     0.000000]
+[14:22:28.805]     [    0.000000     0.000000     1.104964 -1049.642334]
+[14:22:28.805]     [    0.000000     0.000000     1.000000     0.000000]
+[14:22:28.823] PERSPECTIVE-SHAPED 4x4 at c7, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 1, 69011 uploads total):
+[14:22:28.823]     signature xs=0.949008 ys=1.687125  seen at: c7
+[14:22:28.823]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:22:28.823]         [stereo] Enabled=1  MatchXS=0.949008  MatchYS=1.687125
+[14:22:28.823]     [    0.949008     0.000000     0.000000     0.000000]
+[14:22:28.823]     [    0.000000     1.687125     0.000000     0.000000]
+[14:22:28.823]     [    0.000000     0.000000     1.104964 -1049.642334]
+[14:22:28.823]     [    0.000000     0.000000     1.000000     0.000000]
+[14:22:28.827] PERSPECTIVE-SHAPED 4x4 at c14, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 1, 70738 uploads total):
+[14:22:28.827]     signature xs=0.000085 ys=-0.000566  seen at: c14
+[14:22:28.827]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:22:28.827]         [stereo] Enabled=1  MatchXS=0.000085  MatchYS=-0.000566
+[14:22:28.827]     [    0.000085     0.060032     0.998197     0.042612]
+[14:22:28.827]     [    1.000000    -0.000566    -0.000086     0.002458]
+[14:22:28.827]     [    0.000566     1.000000     0.000771    -0.895699]
+[14:22:28.827]     [    0.000086    -0.000771     1.000000     0.003407]
+[14:22:28.827] PERSPECTIVE-SHAPED 4x4 at c38, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 1, 70738 uploads total):
+[14:22:28.827]     signature xs=-0.004077 ys=-0.156058  seen at: c38
+[14:22:28.827]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:22:28.827]         [stereo] Enabled=1  MatchXS=-0.004077  MatchYS=-0.156058
+[14:22:28.827]     [   -0.004077     0.106318     0.994324    -0.038955]
+[14:22:28.827]     [    0.987748    -0.156058     0.000470     0.125595]
+[14:22:28.827]     [    0.156058     0.987748     0.000245    -1.091607]
+[14:22:28.827]     [   -0.000503    -0.000168     1.000000     0.005850]
+[14:22:28.827]     reading: w-from-z = -1 -> clip.w = -view.z, RIGHT-handed. stereo.c's derivation assumes the opposite and every sign in it needs re-deriving.
+[14:22:28.827] PERSPECTIVE-SHAPED 4x4 at c65, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 1, 70738 uploads total):
+[14:22:28.827]     signature xs=0.004791 ys=-0.012219  seen at: c65
+[14:22:28.827]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:22:28.827]         [stereo] Enabled=1  MatchXS=0.004791  MatchYS=-0.012219
+[14:22:28.827]     [    0.004791     0.105145     0.994446    -0.038395]
+[14:22:28.827]     [    0.999926    -0.012219     0.000198    -0.035744]
+[14:22:28.827]     [    0.012219     0.999925     0.000954    -0.894430]
+[14:22:28.827]     [   -0.000210    -0.000951     1.000000     0.003871]
+[14:22:28.840] PERSPECTIVE-SHAPED 4x4 at c7, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 1, 74187 uploads total):
+[14:22:28.840]     signature xs=0.946105 ys=1.681964  seen at: c7
+[14:22:28.840]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:22:28.840]         [stereo] Enabled=1  MatchXS=0.946105  MatchYS=1.681964
+[14:22:28.840]     [    0.946105     0.000000     0.000000     0.000000]
+[14:22:28.840]     [    0.000000     1.681964     0.000000     0.000000]
+[14:22:28.840]     [    0.000000     0.000000     1.104964 -1049.642334]
+[14:22:28.840]     [    0.000000     0.000000     1.000000     0.000000]
+[14:22:28.856] PERSPECTIVE-SHAPED 4x4 at c7, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 1, 79228 uploads total):
+[14:22:28.856]     signature xs=0.943426 ys=1.677202  seen at: c7
+[14:22:28.856]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:22:28.856]         [stereo] Enabled=1  MatchXS=0.943426  MatchYS=1.677202
+[14:22:28.856]     [    0.943426     0.000000     0.000000     0.000000]
+[14:22:28.856]     [    0.000000     1.677202     0.000000     0.000000]
+[14:22:28.856]     [    0.000000     0.000000     1.104964 -1049.642334]
+[14:22:28.856]     [    0.000000     0.000000     1.000000     0.000000]
+[14:22:28.873] PERSPECTIVE-SHAPED 4x4 at c7, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 1, 84363 uploads total):
+[14:22:28.873]     signature xs=0.941412 ys=1.673621  seen at: c7
+[14:22:28.873]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:22:28.873]         [stereo] Enabled=1  MatchXS=0.941412  MatchYS=1.673621
+[14:22:28.873]     [    0.941412     0.000000     0.000000     0.000000]
+[14:22:28.873]     [    0.000000     1.673621     0.000000     0.000000]
+[14:22:28.873]     [    0.000000     0.000000     1.104964 -1049.642334]
+[14:22:28.873]     [    0.000000     0.000000     1.000000     0.000000]
+[14:22:28.889] PERSPECTIVE-SHAPED 4x4 at c7, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 1, 89491 uploads total):
+[14:22:28.889]     signature xs=0.939552 ys=1.670314  seen at: c7
+[14:22:28.890]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:22:28.890]         [stereo] Enabled=1  MatchXS=0.939552  MatchYS=1.670314
+[14:22:28.890]     [    0.939552     0.000000     0.000000     0.000000]
+[14:22:28.890]     [    0.000000     1.670314     0.000000     0.000000]
+[14:22:28.890]     [    0.000000     0.000000     1.104964 -1049.642334]
+[14:22:28.890]     [    0.000000     0.000000     1.000000     0.000000]
+[14:22:28.907] PERSPECTIVE-SHAPED 4x4 at c7, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 1, 94617 uploads total):
+[14:22:28.907]     signature xs=0.937825 ys=1.667244  seen at: c7
+[14:22:28.907]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:22:28.907]         [stereo] Enabled=1  MatchXS=0.937825  MatchYS=1.667244
+[14:22:28.907]     [    0.937825     0.000000     0.000000     0.000000]
+[14:22:28.907]     [    0.000000     1.667244     0.000000     0.000000]
+[14:22:28.907]     [    0.000000     0.000000     1.104964 -1049.642334]
+[14:22:28.907]     [    0.000000     0.000000     1.000000     0.000000]
+[14:22:28.923] PERSPECTIVE-SHAPED 4x4 at c7, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 1, 99610 uploads total):
+[14:22:28.923]     signature xs=0.936262 ys=1.664466  seen at: c7
+[14:22:28.923]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:22:28.923]         [stereo] Enabled=1  MatchXS=0.936262  MatchYS=1.664466
+[14:22:28.923]     [    0.936262     0.000000     0.000000     0.000000]
+[14:22:28.923]     [    0.000000     1.664466     0.000000     0.000000]
+[14:22:28.923]     [    0.000000     0.000000     1.104964 -1049.642334]
+[14:22:28.923]     [    0.000000     0.000000     1.000000     0.000000]
+[14:22:30.226] g_mViewToClip candidate c0 after 400000 uploads:
+[14:22:30.226]     [    0.004200     0.000000     0.000000   -11.518635]
+[14:22:30.226]     [    0.000000     0.002956     0.000000    -3.365027]
+[14:22:30.226]     [    0.000000     0.000000     0.001293    -1.801713]
+[14:22:30.226]     [    0.000000     0.000000     0.000000     1.000000]
+[14:22:30.226]     reading: m[11]=-1.801713 m[15]=1.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:22:30.774] g_mViewToClip candidate c4 after 400000 uploads:
+[14:22:30.774]     [    0.362669     0.710477    -0.603071  2620.603027]
+[14:22:30.774]     [    0.770393    -0.592695    -0.234963  1114.974854]
+[14:22:30.774]     [   -0.524373    -0.379387    -0.762298  1659.399658]
+[14:22:30.774]     [    0.000000     0.000000     0.000000     0.000000]
+[14:22:30.774]     reading: m[11]=1659.399658 m[15]=0.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:22:31.216] VS upload ranges in the last 5000 ms (start+count:n): c0+5:2301 c0+4:26251 c0+8:333582 c0+15:2446 c0+12:3228 c192+8:53397 c0+33:1530 c0+105:1530 c0+132:1530 c0+3:41168 c0+6:57692 c0+102:5677 c0+183:1530 c0+21:3060 c0+9:3861 c0+103:26163 c0+129:330 c0+200:4094 c0+61:18056 c192+7:24501 c0+7:58234 c0+77:668 c0+1:5514 c192+11:9148 c0+11:24453 c0+71:9028 c0+87:334 c0+121:2047 c0+13:30630 c0+14:2613 c0+138:1768 c0+122:3519 c0+123:37 c192+12:1836 c0+2:2139 c0+40:1500 c0+52:1500
+[14:22:31.216] LIVE perspective signatures this period (reg xs ys ys/xs n): [c0 0.915690 1.627894 1.7778 n=90985] [c7 0.915690 1.627894 1.7778 n=610] [c2 0.000000 -0.000000 -4.7051 n=26636] [c5 -0.000001 -0.000000 0.0033 n=5559] [c8 0.000000 -0.000000 -0.0079 n=3687] [c11 -0.000000 -0.000000 0.5915 n=2142] [c14 -0.000000 -0.000000 0.5915 n=1560] [c17 -0.000000 -0.000000 0.5915 n=1530]
+[14:22:31.216]     the CAMERA is the one whose ys/xs equals the display aspect ratio (1.7778 at 16:9); paste ITS xs/ys into [stereo] MatchXS/MatchYS.
+[14:22:31.216]     distinct-signature table: 24/24 slots used, 117966 dropped  <-- SATURATED: new projections are being LOST. Read the LIVE line above, not the one-shot table.
+[14:22:31.216]     readback: 0 check(s) over 747871 draw(s) - survived=0 restored=0 overwritten=0 unavailable=0  <-- NEVER CHECKED: either no edit was ever armed, or no draw came through our hooks
+[14:22:31.216]     stereo: 0 edit(s) applied in total, 0 upload(s) refused as oversize  <-- NEVER MATCHED: the signature is not being found in any forwarded block
+[14:22:31.893] g_mViewToClip candidate c0 after 800000 uploads:
+[14:22:31.893]     [    0.004200     0.000000     0.000000   -11.521734]
+[14:22:31.893]     [    0.000000     0.002959     0.000000    -3.369803]
+[14:22:31.893]     [    0.000000     0.000000     0.001293    -1.802352]
+[14:22:31.893]     [    0.000000     0.000000     0.000000     1.000000]
+[14:22:31.893]     reading: m[11]=-1.802352 m[15]=1.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:22:32.893] g_mViewToClip candidate c4 after 800000 uploads:
+[14:22:32.893]     [    0.291926     0.512217     0.807721  2648.795166]
+[14:22:32.893]     [   -0.440943    -0.677329     0.588893  1069.947998]
+[14:22:32.893]     [    0.848733    -0.528072     0.028129  1727.442383]
+[14:22:32.893]     [    0.000000     0.000000     0.000000     0.000000]
+[14:22:32.893]     reading: m[11]=1727.442383 m[15]=0.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:22:33.190] PERSPECTIVE-SHAPED 4x4 at c0, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 1627, 1353959 uploads total):
+[14:22:33.190]     signature xs=1.000000 ys=1.000000  seen at: c0
+[14:22:33.190]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:22:33.190]         [stereo] Enabled=1  MatchXS=1.000000  MatchYS=1.000000
+[14:22:33.190]     [    1.000000     0.000000     0.000000     0.000000]
+[14:22:33.190]     [    0.000000     1.000000     0.000000     0.000000]
+[14:22:33.190]     [    0.000000     0.000000     1.025641    -0.051282]
+[14:22:33.190]     [    0.000000     0.000000     1.000000     0.000000]
+[14:22:33.263] PERSPECTIVE-SHAPED 4x4 at c2, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 73475, 1376646 uploads total):
+[14:22:33.263]     signature xs=-0.000000 ys=0.000000  seen at: c2 c5 c8 c11 c14 c17
+[14:22:33.263]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:22:33.263]         [stereo] Enabled=1  MatchXS=-0.000000  MatchYS=0.000000
+[14:22:33.263]     [   -0.000000    -0.000000     1.000000     0.000243]
+[14:22:33.263]     [    1.000000     0.000000     0.000000    -0.000019]
+[14:22:33.263]     [   -0.000000     1.000000    -0.000000     0.000004]
+[14:22:33.263]     [   -0.000000    -0.000000     1.000000    -0.000058]
+[14:22:33.279] PERSPECTIVE-SHAPED 4x4 at c0, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 6073, 1381434 uploads total):
+[14:22:33.279]     signature xs=2.414213 ys=2.414213  seen at: c0
+[14:22:33.279]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:22:33.279]         [stereo] Enabled=1  MatchXS=2.414213  MatchYS=2.414213
+[14:22:33.279]     [    2.414213     0.000000     0.000000     0.000000]
+[14:22:33.279]     [    0.000000     2.414213     0.000000     0.000000]
+[14:22:33.279]     [    0.000000     0.000000     1.021148    -0.327788]
+[14:22:33.279]     [    0.000000     0.000000     1.000000     0.000000]
+[14:22:33.516] PERSPECTIVE-SHAPED 4x4 at c81, layout +-1 at index 11 (sighting 1161, 1451652 uploads total):
+[14:22:33.516]     signature xs=19.772179 ys=-3.004681  seen at: c81
+[14:22:33.516]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:22:33.516]         [stereo] Enabled=1  MatchXS=19.772179  MatchYS=-3.004681
+[14:22:33.516]     [   19.772179    -0.403353     1.343687     0.000000]
+[14:22:33.516]     [   21.984161    -3.004681     1.178253     0.000000]
+[14:22:33.517]     [   18.514206    -0.848413     1.268307     1.000000]
+[14:22:33.517]     [   21.439711     2.168252     1.328477     0.000000]
+[14:22:33.517]     reading: w-from-z = +1 -> clip.w = +view.z, LEFT-handed, which is what stereo.c assumes. The assumption holds.
+[14:22:33.517] PERSPECTIVE-SHAPED 4x4 at c87, layout +-1 at index 11 (sighting 1161, 1451652 uploads total):
+[14:22:33.517]     signature xs=19.924162 ys=2.654922  seen at: c87
+[14:22:33.517]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:22:33.517]         [stereo] Enabled=1  MatchXS=19.924162  MatchYS=2.654922
+[14:22:33.517]     [   19.924162     1.233646     1.075491     0.000000]
+[14:22:33.517]     [   23.204901     2.654922     1.081167     0.000000]
+[14:22:33.517]     [    8.667715    -1.572666     1.101639     1.000000]
+[14:22:33.517]     [   16.471909     0.599901     1.306125     0.000000]
+[14:22:33.517]     reading: w-from-z = +1 -> clip.w = +view.z, LEFT-handed, which is what stereo.c assumes. The assumption holds.
+[14:22:33.560] g_mViewToClip candidate c0 after 1200000 uploads:
+[14:22:33.560]     [    0.004200     0.000000     0.000000   -11.521734]
+[14:22:33.560]     [    0.000000     0.002959     0.000000    -3.369803]
+[14:22:33.560]     [    0.000000     0.000000     0.001293    -1.802352]
+[14:22:33.560]     [    0.000000     0.000000     0.000000     1.000000]
+[14:22:33.560]     reading: m[11]=-1.802352 m[15]=1.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:22:34.426] PERSPECTIVE-SHAPED 4x4 at c14, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 3, 1717672 uploads total):
+[14:22:34.426]     signature xs=0.000085 ys=-0.000566  seen at: c14
+[14:22:34.427]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:22:34.427]         [stereo] Enabled=1  MatchXS=0.000085  MatchYS=-0.000566
+[14:22:34.427]     [   -0.000001     0.048901     0.998804     0.030526]
+[14:22:34.427]     [    1.000000    -0.000567    -0.000015     0.001581]
+[14:22:34.427]     [    0.000567     1.000000     0.000534    -0.887859]
+[14:22:34.427]     [    0.000014    -0.000534     1.000000    -0.002100]
+[14:22:35.012] g_mViewToClip candidate c4 after 1200000 uploads:
+[14:22:35.012]     [    0.638268     0.601198     0.480807  2642.047852]
+[14:22:35.012]     [   -0.001894    -0.623347     0.781943  1028.981689]
+[14:22:35.012]     [    0.769812    -0.500000    -0.396724  1762.953613]
+[14:22:35.012]     [    0.000000     0.000000     0.000000     0.000000]
+[14:22:35.012]     reading: m[11]=1762.953613 m[15]=0.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:22:35.229] g_mViewToClip candidate c0 after 1600000 uploads:
+[14:22:35.229]     [    1.000000    -0.000001    -0.000001    -0.000157]
+[14:22:35.229]     [   -0.000000     1.000000     0.000000     0.000001]
+[14:22:35.229]     [    0.000001    -0.000001     1.000000     0.000270]
+[14:22:35.229]     [    1.000000    -0.000000    -0.000000     0.000165]
+[14:22:35.229]     reading: m[11]=0.000270 m[15]=0.000165 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:22:35.702] g_mViewToClip candidate c7 after 400000 uploads:
+[14:22:35.703]     [   -0.924645    -0.344193    -0.162979     0.000000]
+[14:22:35.703]     [   -0.173585    -0.338968    -0.924645 -3114.475342]
+[14:22:35.703]     [    0.000000     0.938899    -0.344193    85.173897]
+[14:22:35.703]     [    0.984819    -0.059747    -0.162979  -937.502502]
+[14:22:35.703]     reading: m[11]=85.173897 m[15]=-937.502502 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:22:36.216] VS upload ranges in the last 5000 ms (start+count:n): c0+5:4193 c0+4:39619 c0+8:652807 c0+15:4800 c0+12:6290 c192+8:104700 c0+33:2995 c0+105:2995 c0+132:2995 c0+3:80571 c0+6:112860 c0+102:11083 c0+183:2995 c0+21:5992 c0+9:7480 c0+103:51297 c0+129:600 c0+200:7774 c0+61:34684 c192+7:46644 c0+7:99268 c0+77:1196 c0+1:10766 c192+11:17342 c0+11:41861 c0+71:17342 c0+87:598 c0+121:3887 c0+13:60996 c0+14:5083 c0+138:3289 c0+122:6877 c192+12:3588 c0+2:4189 c0+40:2990 c0+52:2990
+[14:22:36.216] LIVE perspective signatures this period (reg xs ys ys/xs n): [c0 2.414213 2.414213 1.0000 n=157301] [c7 0.915689 1.627892 1.7778 n=1200] [c2 0.000001 -0.000000 -0.2725 n=50957] [c5 0.000000 0.000000 0.2423 n=10777] [c8 0.000000 0.000000 0.2101 n=7193] [c11 -0.000000 -0.000000 0.5915 n=4197] [c14 -0.000000 -0.000000 0.5915 n=3035] [c17 -0.000000 -0.000000 0.5915 n=2997]
+[14:22:36.216]     the CAMERA is the one whose ys/xs equals the display aspect ratio (1.7778 at 16:9); paste ITS xs/ys into [stereo] MatchXS/MatchYS.
+[14:22:36.216]     distinct-signature table: 24/24 slots used, 395495 dropped  <-- SATURATED: new projections are being LOST. Read the LIVE line above, not the one-shot table.
+[14:22:36.216]     readback: 0 check(s) over 2153115 draw(s) - survived=0 restored=0 overwritten=0 unavailable=0  <-- NEVER CHECKED: either no edit was ever armed, or no draw came through our hooks
+[14:22:36.216]     stereo: 0 edit(s) applied in total, 0 upload(s) refused as oversize  <-- NEVER MATCHED: the signature is not being found in any forwarded block
+[14:22:36.905] g_mViewToClip candidate c0 after 2000000 uploads:
+[14:22:36.906]     [    0.001267     0.000000     0.000000    -3.916149]
+[14:22:36.906]     [    0.000000     0.000892     0.000000    -1.288525]
+[14:22:36.906]     [    0.000000     0.000000     0.000396    -0.292816]
+[14:22:36.906]     [    0.000000     0.000000     0.000000     1.000000]
+[14:22:36.906]     reading: m[11]=-0.292816 m[15]=1.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:22:37.147] g_mViewToClip candidate c4 after 1600000 uploads:
+[14:22:37.147]     [   -0.173585    -0.338968    -0.924645 -3114.475342]
+[14:22:37.147]     [    0.000000     0.938899    -0.344193    85.173897]
+[14:22:37.147]     [    0.984819    -0.059747    -0.162979  -937.502502]
+[14:22:37.147]     [    0.573628     0.000000     0.819116    -5.999390]
+[14:22:37.147]     reading: m[11]=-937.502502 m[15]=-5.999390 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:22:38.188] PERSPECTIVE-SHAPED 4x4 at c0, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 3421, 2816840 uploads total):
+[14:22:38.188]     signature xs=1.000000 ys=1.000000  seen at: c0
+[14:22:38.188]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:22:38.188]         [stereo] Enabled=1  MatchXS=1.000000  MatchYS=1.000000
+[14:22:38.188]     [    1.000000     0.000000     0.000000     0.000000]
+[14:22:38.188]     [    0.000000     1.000000     0.000000     0.000000]
+[14:22:38.189]     [    0.000000     0.000000     1.025641    -0.051282]
+[14:22:38.189]     [    0.000000     0.000000     1.000000     0.000000]
+[14:22:38.263] PERSPECTIVE-SHAPED 4x4 at c2, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 152434, 2840202 uploads total):
+[14:22:38.263]     signature xs=-0.000000 ys=0.000000  seen at: c2 c5 c8 c11 c14 c17
+[14:22:38.263]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:22:38.263]         [stereo] Enabled=1  MatchXS=-0.000000  MatchYS=0.000000
+[14:22:38.263]     [    0.000000     0.000000     1.000000     0.000078]
+[14:22:38.263]     [    1.000000     0.000000     0.000000    -0.000044]
+[14:22:38.263]     [    0.000000     1.000000    -0.000000     0.000000]
+[14:22:38.263]     [    0.000000     0.000000     1.000000     0.000095]
+[14:22:38.279] PERSPECTIVE-SHAPED 4x4 at c0, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 12651, 2844354 uploads total):
+[14:22:38.279]     signature xs=2.414213 ys=2.414213  seen at: c0
+[14:22:38.279]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:22:38.279]         [stereo] Enabled=1  MatchXS=2.414213  MatchYS=2.414213
+[14:22:38.279]     [    2.414213     0.000000     0.000000     0.000000]
+[14:22:38.279]     [    0.000000     2.414213     0.000000     0.000000]
+[14:22:38.279]     [    0.000000     0.000000     1.021148    -0.327788]
+[14:22:38.279]     [    0.000000     0.000000     1.000000     0.000000]
+[14:22:38.514] PERSPECTIVE-SHAPED 4x4 at c81, layout +-1 at index 11 (sighting 2357, 2914684 uploads total):
+[14:22:38.515]     signature xs=19.772179 ys=-3.004681  seen at: c81
+[14:22:38.515]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:22:38.515]         [stereo] Enabled=1  MatchXS=19.772179  MatchYS=-3.004681
+[14:22:38.515]     [   19.772179    -0.403353     1.343687     0.000000]
+[14:22:38.515]     [   21.984161    -3.004681     1.178253     0.000000]
+[14:22:38.515]     [   18.514206    -0.848413     1.268307     1.000000]
+[14:22:38.515]     [   21.439711     2.168252     1.328477     0.000000]
+[14:22:38.515]     reading: w-from-z = +1 -> clip.w = +view.z, LEFT-handed, which is what stereo.c assumes. The assumption holds.
+[14:22:38.515] PERSPECTIVE-SHAPED 4x4 at c87, layout +-1 at index 11 (sighting 2357, 2914684 uploads total):
+[14:22:38.515]     signature xs=19.924162 ys=2.654922  seen at: c87
+[14:22:38.515]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:22:38.515]         [stereo] Enabled=1  MatchXS=19.924162  MatchYS=2.654922
+[14:22:38.515]     [   19.924162     1.233646     1.075491     0.000000]
+[14:22:38.515]     [   23.204901     2.654922     1.081167     0.000000]
+[14:22:38.515]     [    8.667715    -1.572666     1.101639     1.000000]
+[14:22:38.515]     [   16.471909     0.599901     1.306125     0.000000]
+[14:22:38.515]     reading: w-from-z = +1 -> clip.w = +view.z, LEFT-handed, which is what stereo.c assumes. The assumption holds.
+[14:22:38.577] g_mViewToClip candidate c0 after 2400000 uploads:
+[14:22:38.578]     [    0.000000     0.000000     0.000000     0.000000]
+[14:22:38.578]     [    0.000000     0.000000     0.000000     0.000000]
+[14:22:38.578]     [    0.000000     0.000000     0.000000     0.000000]
+[14:22:38.578]     [    0.000000     0.000000     0.000000     0.000000]
+[14:22:38.578]     reading: m[11]=0.000000 m[15]=0.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:22:39.276] g_mViewToClip candidate c4 after 2000000 uploads:
+[14:22:39.276]     [   -0.695993     0.622688    -0.357566  2627.507080]
+[14:22:39.276]     [   -0.109913    -0.584489    -0.803923  1035.943359]
+[14:22:39.276]     [   -0.709587    -0.520224     0.475241  1709.627686]
+[14:22:39.276]     [    0.000000     0.000000     0.000000     0.000000]
+[14:22:39.276]     reading: m[11]=1709.627686 m[15]=0.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:22:39.748] g_mViewToClip candidate c192 after 400000 uploads:
+[14:22:39.748]     [   -0.158950     0.000000     0.901788   -16.696409]
+[14:22:39.748]     [   -0.551804     1.528426    -0.097261    28.296553]
+[14:22:39.748]     [   -0.924830    -0.344262    -0.163011    18.665792]
+[14:22:39.748]     [   -0.924645    -0.344193    -0.162979    18.862061]
+[14:22:39.748]     reading: m[11]=18.665792 m[15]=18.862061 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:22:40.244] g_mViewToClip candidate c0 after 2800000 uploads:
+[14:22:40.244]     [    1.000000    -0.000001    -0.000000    -0.000035]
+[14:22:40.244]     [   -0.000000     1.000000     0.000000     0.000001]
+[14:22:40.244]     [    0.000000    -0.000001     1.000000     0.000269]
+[14:22:40.244]     [    1.000000    -0.000000    -0.000000     0.000409]
+[14:22:40.244]     reading: m[11]=0.000269 m[15]=0.000409 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:22:41.216] VS upload ranges in the last 5000 ms (start+count:n): c0+5:4187 c0+4:39985 c0+8:651211 c0+15:4784 c0+12:6283 c192+8:104351 c0+33:2992 c0+105:2992 c0+132:2992 c0+3:80261 c0+6:112944 c0+102:11071 c0+183:2992 c0+21:5983 c0+9:7484 c0+103:51132 c0+129:598 c0+200:7787 c0+61:34742 c192+7:46740 c0+7:99472 c0+77:1198 c0+1:10777 c192+11:17342 c0+11:41860 c0+71:17342 c0+87:598 c0+121:3887 c0+13:60996 c0+14:5083 c0+138:3289 c0+122:6877 c192+12:3588 c0+2:4186 c0+40:3000 c0+52:2990
+[14:22:41.216] LIVE perspective signatures this period (reg xs ys ys/xs n): [c0 0.915689 1.627892 1.7778 n=157487] [c192 0.915689 1.627892 1.7778 n=64082] [c2 0.000001 -0.000000 -0.0067 n=50849] [c5 -0.000001 -0.000000 0.0033 n=10775] [c8 0.000000 -0.000000 -0.0079 n=7179] [c11 -0.000000 -0.000000 0.5915 n=4187] [c14 -0.000000 -0.000000 0.5915 n=3019] [c17 -0.000000 -0.000000 0.5915 n=2991]
+[14:22:41.216]     the CAMERA is the one whose ys/xs equals the display aspect ratio (1.7778 at 16:9); paste ITS xs/ys into [stereo] MatchXS/MatchYS.
+[14:22:41.216]     distinct-signature table: 24/24 slots used, 673312 dropped  <-- SATURATED: new projections are being LOST. Read the LIVE line above, not the one-shot table.
+[14:22:41.216]     readback: 0 check(s) over 3556630 draw(s) - survived=0 restored=0 overwritten=0 unavailable=0  <-- NEVER CHECKED: either no edit was ever armed, or no draw came through our hooks
+[14:22:41.216]     stereo: 0 edit(s) applied in total, 0 upload(s) refused as oversize  <-- NEVER MATCHED: the signature is not being found in any forwarded block
+[14:22:41.395] g_mViewToClip candidate c4 after 2400000 uploads:
+[14:22:41.395]     [   -0.027759     0.601198     0.798618  2632.450195]
+[14:22:41.395]     [   -0.641617    -0.623347     0.446952  1034.424438]
+[14:22:41.396]     [    0.766523    -0.500000     0.403042  1718.754883]
+[14:22:41.396]     [    0.000000     0.000000     0.000000     0.000000]
+[14:22:41.396]     reading: m[11]=1718.754883 m[15]=0.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:22:41.912] g_mViewToClip candidate c0 after 3200000 uploads:
+[14:22:41.912]     [    0.004194     0.000000     0.000000   -11.499224]
+[14:22:41.912]     [    0.000000     0.002956     0.000000    -3.365027]
+[14:22:41.912]     [    0.000000     0.000000     0.001293    -1.801515]
+[14:22:41.912]     [    0.000000     0.000000     0.000000     1.000000]
+[14:22:41.912]     reading: m[11]=-1.801515 m[15]=1.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:22:42.800] g_mViewToClip candidate c7 after 800000 uploads:
+[14:22:42.800]     [   -0.924645    -0.344193    -0.162979     0.000000]
+[14:22:42.800]     [   -0.173585    -0.338968    -0.924645 -3114.475342]
+[14:22:42.800]     [    0.000000     0.938899    -0.344193    85.173897]
+[14:22:42.800]     [    0.984819    -0.059747    -0.162979  -937.502502]
+[14:22:42.800]     reading: m[11]=85.173897 m[15]=-937.502502 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:22:43.195] PERSPECTIVE-SHAPED 4x4 at c0, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 5221, 4285555 uploads total):
+[14:22:43.195]     signature xs=1.000000 ys=1.000000  seen at: c0
+[14:22:43.195]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:22:43.195]         [stereo] Enabled=1  MatchXS=1.000000  MatchYS=1.000000
+[14:22:43.195]     [    1.000000     0.000000     0.000000     0.000000]
+[14:22:43.195]     [    0.000000     1.000000     0.000000     0.000000]
+[14:22:43.195]     [    0.000000     0.000000     1.025641    -0.051282]
+[14:22:43.195]     [    0.000000     0.000000     1.000000     0.000000]
+[14:22:43.263] PERSPECTIVE-SHAPED 4x4 at c2, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 231437, 4305778 uploads total):
+[14:22:43.263]     signature xs=-0.000000 ys=0.000000  seen at: c2 c5 c8 c11 c14 c17
+[14:22:43.263]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:22:43.263]         [stereo] Enabled=1  MatchXS=-0.000000  MatchYS=0.000000
+[14:22:43.263]     [   -0.000000    -0.000000     1.000000     0.000243]
+[14:22:43.263]     [    1.000000     0.000000     0.000000    -0.000019]
+[14:22:43.263]     [   -0.000000     1.000000    -0.000000     0.000004]
+[14:22:43.263]     [   -0.000000    -0.000000     1.000000    -0.000058]
+[14:22:43.283] PERSPECTIVE-SHAPED 4x4 at c0, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 19251, 4313086 uploads total):
+[14:22:43.284]     signature xs=2.414213 ys=2.414213  seen at: c0
+[14:22:43.284]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:22:43.284]         [stereo] Enabled=1  MatchXS=2.414213  MatchYS=2.414213
+[14:22:43.284]     [    2.414213     0.000000     0.000000     0.000000]
+[14:22:43.284]     [    0.000000     2.414213     0.000000     0.000000]
+[14:22:43.284]     [    0.000000     0.000000     1.021148    -0.327788]
+[14:22:43.284]     [    0.000000     0.000000     1.000000     0.000000]
+[14:22:43.516] g_mViewToClip candidate c4 after 2800000 uploads:
+[14:22:43.516]     [   -0.698972     0.601198    -0.387298  2737.306641]
+[14:22:43.516]     [   -0.106950    -0.623347    -0.774597  1041.446289]
+[14:22:43.516]     [   -0.707107    -0.500000     0.500000  1909.460571]
+[14:22:43.516]     [    0.000000     0.000000     0.000000     0.000000]
+[14:22:43.516]     reading: m[11]=1909.460571 m[15]=0.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:22:43.521] PERSPECTIVE-SHAPED 4x4 at c81, layout +-1 at index 11 (sighting 3557, 4383441 uploads total):
+[14:22:43.521]     signature xs=19.772179 ys=-3.004681  seen at: c81
+[14:22:43.521]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:22:43.521]         [stereo] Enabled=1  MatchXS=19.772179  MatchYS=-3.004681
+[14:22:43.521]     [   19.772179    -0.403353     1.343687     0.000000]
+[14:22:43.521]     [   21.984161    -3.004681     1.178253     0.000000]
+[14:22:43.521]     [   18.514206    -0.848413     1.268307     1.000000]
+[14:22:43.521]     [   21.439711     2.168252     1.328477     0.000000]
+[14:22:43.521]     reading: w-from-z = +1 -> clip.w = +view.z, LEFT-handed, which is what stereo.c assumes. The assumption holds.
+[14:22:43.521] PERSPECTIVE-SHAPED 4x4 at c87, layout +-1 at index 11 (sighting 3557, 4383441 uploads total):
+[14:22:43.521]     signature xs=19.924162 ys=2.654922  seen at: c87
+[14:22:43.521]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:22:43.521]         [stereo] Enabled=1  MatchXS=19.924162  MatchYS=2.654922
+[14:22:43.521]     [   19.924162     1.233646     1.075491     0.000000]
+[14:22:43.521]     [   23.204901     2.654922     1.081167     0.000000]
+[14:22:43.521]     [    8.667715    -1.572666     1.101639     1.000000]
+[14:22:43.521]     [   16.471909     0.599901     1.306125     0.000000]
+[14:22:43.521]     reading: w-from-z = +1 -> clip.w = +view.z, LEFT-handed, which is what stereo.c assumes. The assumption holds.
+[14:22:43.582] g_mViewToClip candidate c0 after 3600000 uploads:
+[14:22:43.582]     [    0.004194     0.000000     0.000000   -11.499224]
+[14:22:43.582]     [    0.000000     0.002956     0.000000    -3.365027]
+[14:22:43.582]     [    0.000000     0.000000     0.001293    -1.801515]
+[14:22:43.582]     [    0.000000     0.000000     0.000000     1.000000]
+[14:22:43.582]     reading: m[11]=-1.801515 m[15]=1.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:22:45.261] g_mViewToClip candidate c0 after 4000000 uploads:
+[14:22:45.261]     [    0.016669     0.000000     0.000000   -43.824810]
+[14:22:45.261]     [    0.000000     0.011750     0.000000   -12.213115]
+[14:22:45.261]     [    0.000000     0.000000     0.004843    -7.767769]
+[14:22:45.261]     [    0.000000     0.000000     0.000000     1.000000]
+[14:22:45.262]     reading: m[11]=-7.767769 m[15]=1.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:22:45.651] g_mViewToClip candidate c4 after 3200000 uploads:
+[14:22:45.651]     [   -0.023412     0.000000     0.003049     0.003628]
+[14:22:45.651]     [   -0.053548     0.000000     0.037096     0.016626]
+[14:22:45.651]     [   -0.095107     0.000000    -0.016929     0.030025]
+[14:22:45.652]     [    0.100168     0.000000     0.018944     0.032548]
+[14:22:45.652]     reading: m[11]=0.030025 m[15]=0.032548 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:22:46.216] VS upload ranges in the last 5000 ms (start+count:n): c0+5:5902 c0+4:39487 c0+8:651222 c0+15:4784 c0+12:6277 c192+8:104351 c0+33:2989 c0+105:2989 c0+132:2989 c0+3:80500 c0+6:112641 c0+102:11059 c0+183:2989 c0+21:5979 c0+9:7471 c0+103:51129 c0+129:598 c0+200:7774 c0+61:34684 c192+7:46609 c0+7:99204 c0+77:1196 c0+1:10751 c192+11:17342 c0+11:41860 c0+71:17342 c0+87:598 c0+121:3887 c0+13:60996 c0+14:5083 c0+138:3289 c0+122:6877 c192+12:3588 c0+2:4186 c0+40:2990 c0+52:2990
+[14:22:46.216] LIVE perspective signatures this period (reg xs ys ys/xs n): [c0 0.915689 1.627892 1.7778 n=157205] [c192 0.915689 1.627892 1.7778 n=63951] [c2 0.000000 0.000000 0.0000 n=50823] [c5 0.000000 0.000000 0.0000 n=10759] [c8 0.000000 -0.000000 -0.0079 n=7175] [c11 -0.000000 -0.000000 0.5915 n=4186] [c14 -0.000000 -0.000000 0.5915 n=3032] [c17 -0.000000 -0.000000 0.5915 n=2990]
+[14:22:46.216]     the CAMERA is the one whose ys/xs equals the display aspect ratio (1.7778 at 16:9); paste ITS xs/ys into [stereo] MatchXS/MatchYS.
+[14:22:46.216]     distinct-signature table: 24/24 slots used, 950742 dropped  <-- SATURATED: new projections are being LOST. Read the LIVE line above, not the one-shot table.
+[14:22:46.216]     readback: 0 check(s) over 4960856 draw(s) - survived=0 restored=0 overwritten=0 unavailable=0  <-- NEVER CHECKED: either no edit was ever armed, or no draw came through our hooks
+[14:22:46.216]     stereo: 0 edit(s) applied in total, 0 upload(s) refused as oversize  <-- NEVER MATCHED: the signature is not being found in any forwarded block
+[14:22:46.917] g_mViewToClip candidate c0 after 4400000 uploads:
+[14:22:46.918]     [    0.915689     0.000000     0.000000     0.000000]
+[14:22:46.918]     [    0.000000     1.627892     0.000000     0.000000]
+[14:22:46.918]     [    0.000000     0.000000     1.000200    -0.200040]
+[14:22:46.918]     [    0.000000     0.000000     1.000000     0.000000]
+[14:22:46.918]     reading: m[11]=-0.200040 m[15]=0.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:22:47.779] g_mViewToClip candidate c4 after 3600000 uploads:
+[14:22:47.779]     [    0.767668    -0.640540     0.019878  2577.466797]
+[14:22:47.779]     [    0.511758     0.594066    -0.620636   998.355957]
+[14:22:47.779]     [    0.385734     0.486615     0.783847  1685.117554]
+[14:22:47.779]     [    0.000000     0.000000     0.000000     0.000000]
+[14:22:47.779]     reading: m[11]=1685.117554 m[15]=0.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:22:48.185] PERSPECTIVE-SHAPED 4x4 at c0, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 7009, 5745622 uploads total):
+[14:22:48.185]     signature xs=1.000000 ys=1.000000  seen at: c0
+[14:22:48.185]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:22:48.185]         [stereo] Enabled=1  MatchXS=1.000000  MatchYS=1.000000
+[14:22:48.185]     [    1.000000     0.000000     0.000000     0.000000]
+[14:22:48.185]     [    0.000000     1.000000     0.000000     0.000000]
+[14:22:48.185]     [    0.000000     0.000000     1.025641    -0.051282]
+[14:22:48.185]     [    0.000000     0.000000     1.000000     0.000000]
+[14:22:48.270] PERSPECTIVE-SHAPED 4x4 at c2, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 310367, 5770232 uploads total):
+[14:22:48.270]     signature xs=-0.000000 ys=0.000000  seen at: c2 c5 c8 c11 c14 c17
+[14:22:48.270]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:22:48.270]         [stereo] Enabled=1  MatchXS=-0.000000  MatchYS=0.000000
+[14:22:48.270]     [   -0.000000    -0.000000     1.000000     0.000243]
+[14:22:48.270]     [    1.000000     0.000000     0.000000    -0.000019]
+[14:22:48.270]     [   -0.000000     1.000000    -0.000000     0.000004]
+[14:22:48.270]     [   -0.000000    -0.000000     1.000000    -0.000058]
+[14:22:48.290] PERSPECTIVE-SHAPED 4x4 at c0, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 25829, 5778059 uploads total):
+[14:22:48.290]     signature xs=2.414213 ys=2.414213  seen at: c0
+[14:22:48.290]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:22:48.290]         [stereo] Enabled=1  MatchXS=2.414213  MatchYS=2.414213
+[14:22:48.290]     [    2.414213     0.000000     0.000000     0.000000]
+[14:22:48.290]     [    0.000000     2.414213     0.000000     0.000000]
+[14:22:48.290]     [    0.000000     0.000000     1.021148    -0.327788]
+[14:22:48.290]     [    0.000000     0.000000     1.000000     0.000000]
+[14:22:48.526] PERSPECTIVE-SHAPED 4x4 at c81, layout +-1 at index 11 (sighting 4753, 5848430 uploads total):
+[14:22:48.526]     signature xs=19.772179 ys=-3.004681  seen at: c81
+[14:22:48.526]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:22:48.526]         [stereo] Enabled=1  MatchXS=19.772179  MatchYS=-3.004681
+[14:22:48.526]     [   19.772179    -0.403353     1.343687     0.000000]
+[14:22:48.526]     [   21.984161    -3.004681     1.178253     0.000000]
+[14:22:48.526]     [   18.514206    -0.848413     1.268307     1.000000]
+[14:22:48.526]     [   21.439711     2.168252     1.328477     0.000000]
+[14:22:48.526]     reading: w-from-z = +1 -> clip.w = +view.z, LEFT-handed, which is what stereo.c assumes. The assumption holds.
+[14:22:48.526] PERSPECTIVE-SHAPED 4x4 at c87, layout +-1 at index 11 (sighting 4753, 5848430 uploads total):
+[14:22:48.526]     signature xs=19.924162 ys=2.654922  seen at: c87
+[14:22:48.526]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:22:48.526]         [stereo] Enabled=1  MatchXS=19.924162  MatchYS=2.654922
+[14:22:48.526]     [   19.924162     1.233646     1.075491     0.000000]
+[14:22:48.526]     [   23.204901     2.654922     1.081167     0.000000]
+[14:22:48.526]     [    8.667715    -1.572666     1.101639     1.000000]
+[14:22:48.526]     [   16.471909     0.599901     1.306125     0.000000]
+[14:22:48.526]     reading: w-from-z = +1 -> clip.w = +view.z, LEFT-handed, which is what stereo.c assumes. The assumption holds.
+[14:22:48.591] g_mViewToClip candidate c0 after 4800000 uploads:
+[14:22:48.591]     [   -0.158950     0.000000     0.901788   350.382751]
+[14:22:48.591]     [   -0.551804     1.528426    -0.097261 -1939.944214]
+[14:22:48.591]     [   -0.924830    -0.344262    -0.163011 -3004.062012]
+[14:22:48.591]     [   -0.924645    -0.344193    -0.162979 -3003.261230]
+[14:22:48.591]     reading: m[11]=-3004.062012 m[15]=-3003.261230 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:22:49.904] g_mViewToClip candidate c4 after 4000000 uploads:
+[14:22:49.904]     [   -0.331265     0.601198     0.727204  2704.956787]
+[14:22:49.904]     [   -0.763818    -0.623347     0.167393  1075.188477]
+[14:22:49.904]     [    0.553937    -0.500000     0.665698  1806.113281]
+[14:22:49.904]     [    0.000000     0.000000     0.000000     0.000000]
+[14:22:49.904]     reading: m[11]=1806.113281 m[15]=0.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:22:49.910] g_mViewToClip candidate c7 after 1200000 uploads:
+[14:22:49.910]     [    0.228565    -0.154169     0.961244   -23.608521]
+[14:22:49.910]     [    0.250735     0.963394     0.094894     4.192383]
+[14:22:49.910]     [   -0.940686     0.219328     0.258853    76.156982]
+[14:22:49.910]     [    0.000000     0.000000     0.000000     0.000000]
+[14:22:49.910]     reading: m[11]=76.156982 m[15]=0.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:22:50.257] g_mViewToClip candidate c0 after 5200000 uploads:
+[14:22:50.257]     [   -0.002067     0.000000    -0.002487     0.000184]
+[14:22:50.257]     [   -0.008430     0.000000     0.004677     0.000947]
+[14:22:50.257]     [   -0.002413     0.000000    -0.002733     0.000220]
+[14:22:50.257]     [    0.002305     0.000000     0.000109     0.000111]
+[14:22:50.257]     reading: m[11]=0.000220 m[15]=0.000111 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:22:50.877] g_mViewToClip candidate c192 after 800000 uploads:
+[14:22:50.877]     [    0.001267     0.000000     0.000000    -3.916149]
+[14:22:50.877]     [    0.000000     0.000892     0.000000    -1.288525]
+[14:22:50.877]     [    0.000000     0.000000     0.000396    -0.292816]
+[14:22:50.877]     [    0.000000     0.000000     0.000000     1.000000]
+[14:22:50.877]     reading: m[11]=-0.292816 m[15]=1.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:22:51.222] VS upload ranges in the last 5000 ms (start+count:n): c0+5:5879 c0+4:39784 c0+8:651223 c0+15:4784 c0+12:6287 c192+8:104351 c0+33:2994 c0+105:2994 c0+132:2994 c0+3:80323 c0+6:112824 c0+102:11076 c0+183:2994 c0+21:5986 c0+9:7490 c0+103:51129 c0+129:598 c0+200:7787 c0+61:34742 c192+7:46739 c0+7:99460 c0+77:1198 c0+1:10800 c192+11:17400 c0+11:41999 c0+71:17400 c0+87:600 c0+121:3900 c0+13:61200 c0+14:5100 c0+138:3300 c0+122:6900 c192+12:3600 c0+2:4200 c0+40:2990 c0+52:3000
+[14:22:51.222] LIVE perspective signatures this period (reg xs ys ys/xs n): [c0 0.915689 1.627892 1.7778 n=157629] [c192 0.915689 1.627892 1.7778 n=64139] [c2 0.000000 -0.000000 -4.7051 n=50861] [c5 -0.000001 -0.000000 0.0033 n=10791] [c8 0.000000 -0.000000 -0.0079 n=7181] [c11 -0.000000 -0.000000 0.5915 n=4188] [c14 -0.000000 -0.000000 0.5915 n=3034] [c17 -0.000000 -0.000000 0.5915 n=2992]
+[14:22:51.222]     the CAMERA is the one whose ys/xs equals the display aspect ratio (1.7778 at 16:9); paste ITS xs/ys into [stereo] MatchXS/MatchYS.
+[14:22:51.222]     distinct-signature table: 24/24 slots used, 1229024 dropped  <-- SATURATED: new projections are being LOST. Read the LIVE line above, not the one-shot table.
+[14:22:51.222]     readback: 0 check(s) over 6366337 draw(s) - survived=0 restored=0 overwritten=0 unavailable=0  <-- NEVER CHECKED: either no edit was ever armed, or no draw came through our hooks
+[14:22:51.222]     stereo: 0 edit(s) applied in total, 0 upload(s) refused as oversize  <-- NEVER MATCHED: the signature is not being found in any forwarded block
+[14:22:51.926] g_mViewToClip candidate c0 after 5600000 uploads:
+[14:22:51.926]     [    0.001267     0.000000     0.000000    -3.916149]
+[14:22:51.926]     [    0.000000     0.000892     0.000000    -1.288525]
+[14:22:51.926]     [    0.000000     0.000000     0.000396    -0.292816]
+[14:22:51.926]     [    0.000000     0.000000     0.000000     1.000000]
+[14:22:51.926]     reading: m[11]=-0.292816 m[15]=1.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:22:52.026] g_mViewToClip candidate c4 after 4400000 uploads:
+[14:22:52.026]     [    0.221184     0.875398     0.429832  2813.272949]
+[14:22:52.026]     [    0.805699     0.084305    -0.586294  1090.475220]
+[14:22:52.026]     [   -0.549478     0.475995    -0.686661  2012.734375]
+[14:22:52.026]     [    0.000000     0.000000     0.000000     0.000000]
+[14:22:52.026]     reading: m[11]=2012.734375 m[15]=0.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:22:52.159] PERSPECTIVE-SHAPED 4x4 at c14, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 9, 6913381 uploads total):
+[14:22:52.159]     signature xs=0.000085 ys=-0.000566  seen at: c14
+[14:22:52.159]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:22:52.159]         [stereo] Enabled=1  MatchXS=0.000085  MatchYS=-0.000566
+[14:22:52.159]     [    0.000004     0.049320     0.998783     0.031143]
+[14:22:52.159]     [    1.000000    -0.000666     0.000074     0.002555]
+[14:22:52.159]     [    0.000666     1.000000    -0.000425    -0.889013]
+[14:22:52.159]     [   -0.000074     0.000425     1.000000    -0.000855]
+[14:22:53.193] PERSPECTIVE-SHAPED 4x4 at c0, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 8809, 7215413 uploads total):
+[14:22:53.193]     signature xs=1.000000 ys=1.000000  seen at: c0
+[14:22:53.193]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:22:53.193]         [stereo] Enabled=1  MatchXS=1.000000  MatchYS=1.000000
+[14:22:53.193]     [    1.000000     0.000000     0.000000     0.000000]
+[14:22:53.193]     [    0.000000     1.000000     0.000000     0.000000]
+[14:22:53.193]     [    0.000000     0.000000     1.025641    -0.051282]
+[14:22:53.193]     [    0.000000     0.000000     1.000000     0.000000]
+[14:22:53.264] PERSPECTIVE-SHAPED 4x4 at c2, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 389365, 7236647 uploads total):
+[14:22:53.264]     signature xs=-0.000000 ys=0.000000  seen at: c2 c5 c8 c11 c14 c17
+[14:22:53.264]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:22:53.264]         [stereo] Enabled=1  MatchXS=-0.000000  MatchYS=0.000000
+[14:22:53.264]     [    0.000000     0.000000     1.000000    -0.000066]
+[14:22:53.264]     [    1.000000     0.000000     0.000000     0.000027]
+[14:22:53.264]     [    0.000000     1.000000    -0.000000     0.000011]
+[14:22:53.264]     [    0.000000     0.000000     1.000000    -0.000132]
+[14:22:53.282] PERSPECTIVE-SHAPED 4x4 at c0, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 32407, 7242937 uploads total):
+[14:22:53.282]     signature xs=2.414213 ys=2.414213  seen at: c0
+[14:22:53.282]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:22:53.282]         [stereo] Enabled=1  MatchXS=2.414213  MatchYS=2.414213
+[14:22:53.282]     [    2.414213     0.000000     0.000000     0.000000]
+[14:22:53.282]     [    0.000000     2.414213     0.000000     0.000000]
+[14:22:53.282]     [    0.000000     0.000000     1.021148    -0.327788]
+[14:22:53.282]     [    0.000000     0.000000     1.000000     0.000000]
+[14:22:53.520] PERSPECTIVE-SHAPED 4x4 at c81, layout +-1 at index 11 (sighting 5949, 7313279 uploads total):
+[14:22:53.520]     signature xs=19.772179 ys=-3.004681  seen at: c81
+[14:22:53.520]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:22:53.520]         [stereo] Enabled=1  MatchXS=19.772179  MatchYS=-3.004681
+[14:22:53.520]     [   19.772179    -0.403353     1.343687     0.000000]
+[14:22:53.520]     [   21.984161    -3.004681     1.178253     0.000000]
+[14:22:53.520]     [   18.514206    -0.848413     1.268307     1.000000]
+[14:22:53.520]     [   21.439711     2.168252     1.328477     0.000000]
+[14:22:53.520]     reading: w-from-z = +1 -> clip.w = +view.z, LEFT-handed, which is what stereo.c assumes. The assumption holds.
+[14:22:53.520] PERSPECTIVE-SHAPED 4x4 at c87, layout +-1 at index 11 (sighting 5949, 7313279 uploads total):
+[14:22:53.520]     signature xs=19.924162 ys=2.654922  seen at: c87
+[14:22:53.520]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:22:53.520]         [stereo] Enabled=1  MatchXS=19.924162  MatchYS=2.654922
+[14:22:53.520]     [   19.924162     1.233646     1.075491     0.000000]
+[14:22:53.520]     [   23.204901     2.654922     1.081167     0.000000]
+[14:22:53.520]     [    8.667715    -1.572666     1.101639     1.000000]
+[14:22:53.520]     [   16.471909     0.599901     1.306125     0.000000]
+[14:22:53.520]     reading: w-from-z = +1 -> clip.w = +view.z, LEFT-handed, which is what stereo.c assumes. The assumption holds.
+[14:22:53.597] g_mViewToClip candidate c0 after 6000000 uploads:
+[14:22:53.597]     [    0.001267     0.000000     0.000000    -3.916149]
+[14:22:53.597]     [    0.000000     0.000892     0.000000    -1.288525]
+[14:22:53.597]     [    0.000000     0.000000     0.000396    -0.292816]
+[14:22:53.597]     [    0.000000     0.000000     0.000000     1.000000]
+[14:22:53.597]     reading: m[11]=-0.292816 m[15]=1.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:22:54.148] g_mViewToClip candidate c4 after 4800000 uploads:
+[14:22:54.148]     [    0.000000     0.000000     0.000000     0.000000]
+[14:22:54.148]     [    0.000000     0.000000     0.000000     0.000000]
+[14:22:54.148]     [    0.000000     0.000000     0.000000     0.000000]
+[14:22:54.148]     [    0.000000     0.000000     0.000000     0.000000]
+[14:22:54.148]     reading: m[11]=0.000000 m[15]=0.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:22:55.262] g_mViewToClip candidate c0 after 6400000 uploads:
+[14:22:55.262]     [    0.004194     0.000000     0.000000   -11.499224]
+[14:22:55.262]     [    0.000000     0.002956     0.000000    -3.365027]
+[14:22:55.262]     [    0.000000     0.000000     0.001293    -1.801515]
+[14:22:55.262]     [    0.000000     0.000000     0.000000     1.000000]
+[14:22:55.262]     reading: m[11]=-1.801515 m[15]=1.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:22:56.217] VS upload ranges in the last 5000 ms (start+count:n): c0+5:6038 c0+4:39632 c0+8:653369 c0+15:4800 c0+12:6290 c192+8:104688 c0+33:2995 c0+105:2995 c0+132:2995 c0+3:80559 c0+6:112855 c0+102:11078 c0+183:2995 c0+21:5991 c0+9:7479 c0+103:51190 c0+129:600 c0+200:7774 c0+61:34684 c192+7:46644 c0+7:99268 c0+77:1196 c0+1:10764 c192+11:17342 c0+11:41861 c0+71:17342 c0+87:598 c0+121:3887 c0+13:60996 c0+14:5083 c0+138:3289 c0+122:6877 c192+12:3588 c0+2:4186 c0+40:2990 c0+52:2990
+[14:22:56.217] LIVE perspective signatures this period (reg xs ys ys/xs n): [c0 0.915689 1.627892 1.7778 n=157283] [c7 0.915689 1.627892 1.7778 n=1200] [c2 0.000001 -0.000000 -0.4613 n=50953] [c5 0.000000 0.000000 0.2423 n=10777] [c8 0.000000 0.000000 0.2101 n=7193] [c11 -0.000000 -0.000000 0.5915 n=4197] [c14 -0.000000 -0.000000 0.5915 n=3037] [c17 -0.000000 -0.000000 0.5915 n=2997]
+[14:22:56.217]     the CAMERA is the one whose ys/xs equals the display aspect ratio (1.7778 at 16:9); paste ITS xs/ys into [stereo] MatchXS/MatchYS.
+[14:22:56.217]     distinct-signature table: 24/24 slots used, 1506575 dropped  <-- SATURATED: new projections are being LOST. Read the LIVE line above, not the one-shot table.
+[14:22:56.217]     readback: 0 check(s) over 7773838 draw(s) - survived=0 restored=0 overwritten=0 unavailable=0  <-- NEVER CHECKED: either no edit was ever armed, or no draw came through our hooks
+[14:22:56.217]     stereo: 0 edit(s) applied in total, 0 upload(s) refused as oversize  <-- NEVER MATCHED: the signature is not being found in any forwarded block
+[14:22:56.271] g_mViewToClip candidate c4 after 5200000 uploads:
+[14:22:56.271]     [    0.000095     0.000000    -0.001368     0.000051]
+[14:22:56.271]     [   -0.002603     0.000000    -0.005213     0.000445]
+[14:22:56.271]     [   -0.001289     0.000000    -0.001664     0.000097]
+[14:22:56.271]     [   -0.002021     0.000000     0.002081     0.000156]
+[14:22:56.271]     reading: m[11]=0.000097 m[15]=0.000156 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:22:56.940] g_mViewToClip candidate c0 after 6800000 uploads:
+[14:22:56.940]     [    0.016669     0.000000     0.000000   -43.824810]
+[14:22:56.940]     [    0.000000     0.011750     0.000000   -12.213115]
+[14:22:56.940]     [    0.000000     0.000000     0.004843    -7.767769]
+[14:22:56.940]     [    0.000000     0.000000     0.000000     1.000000]
+[14:22:56.940]     reading: m[11]=-7.767769 m[15]=1.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:22:57.013] g_mViewToClip candidate c7 after 1600000 uploads:
+[14:22:57.013]     [   -0.515093     0.000000    -0.857134   -21.503784]
+[14:22:57.013]     [    0.295020     0.938899    -0.177292     3.242188]
+[14:22:57.013]     [    0.804762    -0.344193    -0.483620    26.109131]
+[14:22:57.013]     [    0.000000     0.000000     0.000000     0.000000]
+[14:22:57.013]     reading: m[11]=26.109131 m[15]=0.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:22:58.143] PERSPECTIVE-SHAPED 4x4 at c14, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 11, 8662256 uploads total):
+[14:22:58.143]     signature xs=0.000085 ys=-0.000566  seen at: c14
+[14:22:58.143]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:22:58.143]         [stereo] Enabled=1  MatchXS=0.000085  MatchYS=-0.000566
+[14:22:58.143]     [    0.000173     0.048164     0.998839     0.030411]
+[14:22:58.143]     [    1.000000    -0.000636    -0.000233     0.002458]
+[14:22:58.143]     [    0.000636     0.999999     0.000833    -0.886030]
+[14:22:58.143]     [    0.000233    -0.000833     1.000000    -0.001647]
+[14:22:58.189] PERSPECTIVE-SHAPED 4x4 at c0, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 10597, 8675200 uploads total):
+[14:22:58.189]     signature xs=1.000000 ys=1.000000  seen at: c0
+[14:22:58.189]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:22:58.189]         [stereo] Enabled=1  MatchXS=1.000000  MatchYS=1.000000
+[14:22:58.189]     [    1.000000     0.000000     0.000000     0.000000]
+[14:22:58.189]     [    0.000000     1.000000     0.000000     0.000000]
+[14:22:58.189]     [    0.000000     0.000000     1.025641    -0.051282]
+[14:22:58.189]     [    0.000000     0.000000     1.000000     0.000000]
+[14:22:58.263] PERSPECTIVE-SHAPED 4x4 at c2, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 468182, 8698561 uploads total):
+[14:22:58.263]     signature xs=-0.000000 ys=0.000000  seen at: c2 c5 c8 c11 c14 c17
+[14:22:58.263]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:22:58.263]         [stereo] Enabled=1  MatchXS=-0.000000  MatchYS=0.000000
+[14:22:58.263]     [    0.000000     0.000000     1.000000     0.000078]
+[14:22:58.263]     [    1.000000     0.000000     0.000000    -0.000044]
+[14:22:58.263]     [    0.000000     1.000000    -0.000000     0.000000]
+[14:22:58.263]     [    0.000000     0.000000     1.000000     0.000095]
+[14:22:58.281] PERSPECTIVE-SHAPED 4x4 at c0, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 38963, 8702718 uploads total):
+[14:22:58.281]     signature xs=2.414213 ys=2.414213  seen at: c0
+[14:22:58.281]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:22:58.281]         [stereo] Enabled=1  MatchXS=2.414213  MatchYS=2.414213
+[14:22:58.281]     [    2.414213     0.000000     0.000000     0.000000]
+[14:22:58.281]     [    0.000000     2.414213     0.000000     0.000000]
+[14:22:58.281]     [    0.000000     0.000000     1.021148    -0.327788]
+[14:22:58.281]     [    0.000000     0.000000     1.000000     0.000000]
+[14:22:58.441] g_mViewToClip candidate c4 after 5600000 uploads:
+[14:22:58.441]     [    0.000000     0.000000     0.000000     0.000000]
+[14:22:58.441]     [    0.000000     0.000000     0.000000     0.000000]
+[14:22:58.441]     [    0.000000     0.000000     0.000000     0.000000]
+[14:22:58.441]     [    0.000000     0.000000     0.000000     0.000000]
+[14:22:58.441]     reading: m[11]=0.000000 m[15]=0.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:22:58.518] PERSPECTIVE-SHAPED 4x4 at c81, layout +-1 at index 11 (sighting 7137, 8768151 uploads total):
+[14:22:58.518]     signature xs=19.772179 ys=-3.004681  seen at: c81
+[14:22:58.518]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:22:58.518]         [stereo] Enabled=1  MatchXS=19.772179  MatchYS=-3.004681
+[14:22:58.518]     [   19.772179    -0.403353     1.343687     0.000000]
+[14:22:58.518]     [   21.984161    -3.004681     1.178253     0.000000]
+[14:22:58.518]     [   18.514206    -0.848413     1.268307     1.000000]
+[14:22:58.518]     [   21.439711     2.168252     1.328477     0.000000]
+[14:22:58.518]     reading: w-from-z = +1 -> clip.w = +view.z, LEFT-handed, which is what stereo.c assumes. The assumption holds.
+[14:22:58.518] PERSPECTIVE-SHAPED 4x4 at c87, layout +-1 at index 11 (sighting 7137, 8768151 uploads total):
+[14:22:58.518]     signature xs=19.924162 ys=2.654922  seen at: c87
+[14:22:58.518]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:22:58.518]         [stereo] Enabled=1  MatchXS=19.924162  MatchYS=2.654922
+[14:22:58.518]     [   19.924162     1.233646     1.075491     0.000000]
+[14:22:58.518]     [   23.204901     2.654922     1.081167     0.000000]
+[14:22:58.518]     [    8.667715    -1.572666     1.101639     1.000000]
+[14:22:58.519]     [   16.471909     0.599901     1.306125     0.000000]
+[14:22:58.519]     reading: w-from-z = +1 -> clip.w = +view.z, LEFT-handed, which is what stereo.c assumes. The assumption holds.
+[14:22:58.637] g_mViewToClip candidate c0 after 7200000 uploads:
+[14:22:58.637]     [    0.528481    -1.040527     0.000000     0.000000]
+[14:22:58.637]     [    0.543450    -1.005729     0.000000     0.000000]
+[14:22:58.637]     [    0.558419    -0.970931     0.000000     0.000000]
+[14:22:58.637]     [    0.573388    -0.936134     0.000000     0.000000]
+[14:22:58.637]     reading: m[11]=0.000000 m[15]=0.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:23:00.310] g_mViewToClip candidate c0 after 7600000 uploads:
+[14:23:00.310]     [   -0.173585     0.000000     0.984819     0.000000]
+[14:23:00.310]     [   -0.338968     0.938899    -0.059747     0.000000]
+[14:23:00.310]     [   -0.924645    -0.344193    -0.162979     0.000000]
+[14:23:00.310]     [    0.000000     0.000000     0.000000     1.000000]
+[14:23:00.310]     reading: m[11]=0.000000 m[15]=1.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:23:00.572] g_mViewToClip candidate c4 after 6000000 uploads:
+[14:23:00.572]     [   -0.793160     0.601198    -0.097258  2580.935059]
+[14:23:00.572]     [   -0.389331    -0.623347    -0.678130   995.718750]
+[14:23:00.572]     [   -0.468315    -0.500000     0.728479  1694.893555]
+[14:23:00.572]     [    0.000000     0.000000     0.000000     0.000000]
+[14:23:00.572]     reading: m[11]=1694.893555 m[15]=0.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:23:01.218] VS upload ranges in the last 5000 ms (start+count:n): c0+5:5639 c0+4:39384 c0+8:644719 c0+15:4736 c0+12:6226 c192+8:103316 c0+33:2965 c0+105:2965 c0+132:2965 c0+3:79743 c0+6:111837 c0+102:10974 c0+183:2965 c0+21:5929 c0+9:7421 c0+103:50726 c0+129:592 c0+200:7722 c0+61:34452 c192+7:46332 c0+7:98604 c0+77:1188 c0+1:10692 c192+11:17226 c0+11:41579 c0+71:17226 c0+87:594 c0+121:3861 c0+13:60588 c0+14:5049 c0+138:3267 c0+122:6831 c192+12:3564 c0+2:4158 c0+40:2970 c0+52:2970
+[14:23:01.218] LIVE perspective signatures this period (reg xs ys ys/xs n): [c2 0.000000 -0.000000 -4.7051 n=50367] [c0 0.915689 1.627892 1.7778 n=156213] [c192 0.915689 1.627892 1.7778 n=63558] [c5 -0.000001 -0.000000 0.0033 n=10679] [c8 0.000000 -0.000000 -0.0079 n=7111] [c11 -0.000000 -0.000000 0.5915 n=4147] [c14 -0.000000 -0.000000 0.5915 n=2999] [c17 -0.000000 -0.000000 0.5915 n=2963]
+[14:23:01.218]     the CAMERA is the one whose ys/xs equals the display aspect ratio (1.7778 at 16:9); paste ITS xs/ys into [stereo] MatchXS/MatchYS.
+[14:23:01.218]     distinct-signature table: 24/24 slots used, 1782220 dropped  <-- SATURATED: new projections are being LOST. Read the LIVE line above, not the one-shot table.
+[14:23:01.218]     readback: 0 check(s) over 9165828 draw(s) - survived=0 restored=0 overwritten=0 unavailable=0  <-- NEVER CHECKED: either no edit was ever armed, or no draw came through our hooks
+[14:23:01.218]     stereo: 0 edit(s) applied in total, 0 upload(s) refused as oversize  <-- NEVER MATCHED: the signature is not being found in any forwarded block
+[14:23:01.975] g_mViewToClip candidate c0 after 8000000 uploads:
+[14:23:01.975]     [   -0.135108     0.000000     0.766520   128.593079]
+[14:23:01.975]     [   -0.469033     1.299162    -0.082672   211.482239]
+[14:23:01.975]     [   -0.786106    -0.292623    -0.138560   409.815460]
+[14:23:01.975]     [   -0.785948    -0.292564    -0.138532   409.933594]
+[14:23:01.975]     reading: m[11]=409.815460 m[15]=409.933594 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:23:02.026] g_mViewToClip candidate c192 after 1200000 uploads:
+[14:23:02.026]     [    0.915689     0.000000     0.000000     0.000000]
+[14:23:02.026]     [    0.000000     1.627892     0.000000     0.000000]
+[14:23:02.026]     [    0.000000     0.000000     1.000200    -0.200040]
+[14:23:02.026]     [    0.000000     0.000000     1.000000     0.000000]
+[14:23:02.026]     reading: m[11]=-0.200040 m[15]=0.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:23:02.689] g_mViewToClip candidate c4 after 6400000 uploads:
+[14:23:02.689]     [   -0.451676     0.593982     0.665715  2658.394531]
+[14:23:02.689]     [   -0.785699    -0.618330     0.018620  1036.366699]
+[14:23:02.689]     [    0.422691    -0.514641     0.745975  1779.334717]
+[14:23:02.689]     [    0.000000     0.000000     0.000000     0.000000]
+[14:23:02.689]     reading: m[11]=1779.334717 m[15]=0.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:23:03.201] PERSPECTIVE-SHAPED 4x4 at c0, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 12379, 10130044 uploads total):
+[14:23:03.201]     signature xs=1.000000 ys=1.000000  seen at: c0
+[14:23:03.201]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:23:03.201]         [stereo] Enabled=1  MatchXS=1.000000  MatchYS=1.000000
+[14:23:03.201]     [    1.000000     0.000000     0.000000     0.000000]
+[14:23:03.201]     [    0.000000     1.000000     0.000000     0.000000]
+[14:23:03.201]     [    0.000000     0.000000     1.025641    -0.051282]
+[14:23:03.201]     [    0.000000     0.000000     1.000000     0.000000]
+[14:23:03.263] PERSPECTIVE-SHAPED 4x4 at c2, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 546307, 10147859 uploads total):
+[14:23:03.263]     signature xs=-0.000000 ys=0.000000  seen at: c2 c5 c8 c11 c14 c17
+[14:23:03.263]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:23:03.263]         [stereo] Enabled=1  MatchXS=-0.000000  MatchYS=0.000000
+[14:23:03.263]     [   -0.000000    -0.000000     1.000000     0.000243]
+[14:23:03.263]     [    1.000000     0.000000     0.000000    -0.000019]
+[14:23:03.263]     [   -0.000000     1.000000    -0.000000     0.000004]
+[14:23:03.263]     [   -0.000000    -0.000000     1.000000    -0.000058]
+[14:23:03.302] PERSPECTIVE-SHAPED 4x4 at c0, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 45497, 10157548 uploads total):
+[14:23:03.302]     signature xs=2.414213 ys=2.414213  seen at: c0
+[14:23:03.302]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:23:03.302]         [stereo] Enabled=1  MatchXS=2.414213  MatchYS=2.414213
+[14:23:03.302]     [    2.414213     0.000000     0.000000     0.000000]
+[14:23:03.302]     [    0.000000     2.414213     0.000000     0.000000]
+[14:23:03.302]     [    0.000000     0.000000     1.021148    -0.327788]
+[14:23:03.302]     [    0.000000     0.000000     1.000000     0.000000]
+[14:23:03.515] PERSPECTIVE-SHAPED 4x4 at c81, layout +-1 at index 11 (sighting 8321, 10218060 uploads total):
+[14:23:03.516]     signature xs=19.772179 ys=-3.004681  seen at: c81
+[14:23:03.516]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:23:03.516]         [stereo] Enabled=1  MatchXS=19.772179  MatchYS=-3.004681
+[14:23:03.516]     [   19.772179    -0.403353     1.343687     0.000000]
+[14:23:03.516]     [   21.984161    -3.004681     1.178253     0.000000]
+[14:23:03.516]     [   18.514206    -0.848413     1.268307     1.000000]
+[14:23:03.516]     [   21.439711     2.168252     1.328477     0.000000]
+[14:23:03.516]     reading: w-from-z = +1 -> clip.w = +view.z, LEFT-handed, which is what stereo.c assumes. The assumption holds.
+[14:23:03.516] PERSPECTIVE-SHAPED 4x4 at c87, layout +-1 at index 11 (sighting 8321, 10218060 uploads total):
+[14:23:03.516]     signature xs=19.924162 ys=2.654922  seen at: c87
+[14:23:03.516]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:23:03.516]         [stereo] Enabled=1  MatchXS=19.924162  MatchYS=2.654922
+[14:23:03.516]     [   19.924162     1.233646     1.075491     0.000000]
+[14:23:03.516]     [   23.204901     2.654922     1.081167     0.000000]
+[14:23:03.516]     [    8.667715    -1.572666     1.101639     1.000000]
+[14:23:03.516]     [   16.471909     0.599901     1.306125     0.000000]
+[14:23:03.516]     reading: w-from-z = +1 -> clip.w = +view.z, LEFT-handed, which is what stereo.c assumes. The assumption holds.
+[14:23:03.696] g_mViewToClip candidate c0 after 8400000 uploads:
+[14:23:03.696]     [    0.915689     0.000000     0.000000     0.000000]
+[14:23:03.697]     [    0.000000     1.627892     0.000000     0.000000]
+[14:23:03.697]     [    0.000000     0.000000     1.000200    -0.200040]
+[14:23:03.697]     [    0.000000     0.000000     1.000000     0.000000]
+[14:23:03.697]     reading: m[11]=-0.200040 m[15]=0.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:23:04.199] g_mViewToClip candidate c7 after 2000000 uploads:
+[14:23:04.199]     [    0.010591     0.000000     0.004983     0.001266]
+[14:23:04.199]     [   -0.002747     0.000000    -0.003611     0.000306]
+[14:23:04.199]     [    0.002409     0.000000    -0.004087     0.000327]
+[14:23:04.199]     [   -0.002318     0.000000    -0.001262     0.000136]
+[14:23:04.199]     reading: m[11]=0.000327 m[15]=0.000136 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:23:04.865] g_mViewToClip candidate c4 after 6800000 uploads:
+[14:23:04.865]     [   -0.173585    -0.338968    -0.924645 -3114.475342]
+[14:23:04.865]     [    0.000000     0.938899    -0.344193    85.173897]
+[14:23:04.865]     [    0.984819    -0.059747    -0.162979  -937.502502]
+[14:23:04.865]     [   -0.271803     0.103086     0.956816   -18.122314]
+[14:23:04.865]     reading: m[11]=-937.502502 m[15]=-18.122314 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:23:05.363] g_mViewToClip candidate c0 after 8800000 uploads:
+[14:23:05.363]     [    0.001267     0.000000     0.000000    -3.919255]
+[14:23:05.363]     [    0.000000     0.000892     0.000000    -1.288525]
+[14:23:05.363]     [    0.000000     0.000000     0.000396    -0.293535]
+[14:23:05.363]     [    0.000000     0.000000     0.000000     1.000000]
+[14:23:05.363]     reading: m[11]=-0.293535 m[15]=1.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:23:06.216] VS upload ranges in the last 5000 ms (start+count:n): c0+5:5632 c0+4:39370 c0+8:646499 c0+15:4752 c0+12:6231 c192+8:103653 c0+33:2967 c0+105:2967 c0+132:2967 c0+3:79617 c0+6:111950 c0+102:10979 c0+183:2967 c0+21:5935 c0+9:7414 c0+103:50787 c0+129:594 c0+200:7709 c0+61:34394 c192+7:46271 c0+7:98511 c0+77:1186 c0+1:10669 c192+11:17168 c0+11:41464 c0+71:17168 c0+87:592 c0+121:3848 c0+13:60384 c0+14:5032 c0+138:3256 c0+122:6808 c192+12:3552 c0+2:4144 c0+40:2970 c0+52:2960
+[14:23:06.216] LIVE perspective signatures this period (reg xs ys ys/xs n): [c0 0.915689 1.627892 1.7778 n=155995] [c7 0.915689 1.627892 1.7778 n=1188] [c2 0.000001 -0.000000 -0.0067 n=50466] [c5 -0.000001 -0.000000 0.0033 n=10680] [c8 0.000000 -0.000000 -0.0079 n=7124] [c11 -0.000000 -0.000000 0.5915 n=4156] [c14 -0.000000 -0.000000 0.5915 n=3004] [c17 -0.000000 -0.000000 0.5915 n=2968]
+[14:23:06.216]     the CAMERA is the one whose ys/xs equals the display aspect ratio (1.7778 at 16:9); paste ITS xs/ys into [stereo] MatchXS/MatchYS.
+[14:23:06.216]     distinct-signature table: 24/24 slots used, 2057333 dropped  <-- SATURATED: new projections are being LOST. Read the LIVE line above, not the one-shot table.
+[14:23:06.216]     readback: 0 check(s) over 10559326 draw(s) - survived=0 restored=0 overwritten=0 unavailable=0  <-- NEVER CHECKED: either no edit was ever armed, or no draw came through our hooks
+[14:23:06.216]     stereo: 0 edit(s) applied in total, 0 upload(s) refused as oversize  <-- NEVER MATCHED: the signature is not being found in any forwarded block
+[14:23:06.829] PERSPECTIVE-SHAPED 4x4 at c14, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 15, 11189337 uploads total):
+[14:23:06.829]     signature xs=0.000085 ys=-0.000566  seen at: c14
+[14:23:06.829]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:23:06.829]         [stereo] Enabled=1  MatchXS=0.000085  MatchYS=-0.000566
+[14:23:06.829]     [    0.000166     0.046968     0.998896     0.030050]
+[14:23:06.829]     [    1.000000    -0.000523    -0.000158     0.001899]
+[14:23:06.829]     [    0.000523     1.000000    -0.000494    -0.887008]
+[14:23:06.829]     [    0.000158     0.000494     1.000000    -0.000765]
+[14:23:06.995] g_mViewToClip candidate c4 after 7200000 uploads:
+[14:23:06.995]     [    0.638112     0.601198    -0.481014  2753.998291]
+[14:23:06.995]     [    0.751130    -0.623347     0.217354  1070.473389]
+[14:23:06.995]     [   -0.169166    -0.500000    -0.849343  1896.217651]
+[14:23:06.995]     [    0.000000     0.000000     0.000000     0.000000]
+[14:23:06.995]     reading: m[11]=1896.217651 m[15]=0.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:23:07.030] g_mViewToClip candidate c0 after 9200000 uploads:
+[14:23:07.030]     [    0.001267     0.000000     0.000000    -3.919255]
+[14:23:07.030]     [    0.000000     0.000892     0.000000    -1.288525]
+[14:23:07.030]     [    0.000000     0.000000     0.000396    -0.293535]
+[14:23:07.030]     [    0.000000     0.000000     0.000000     1.000000]
+[14:23:07.030]     reading: m[11]=-0.293535 m[15]=1.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:23:08.208] PERSPECTIVE-SHAPED 4x4 at c0, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 14173, 11594001 uploads total):
+[14:23:08.208]     signature xs=1.000000 ys=1.000000  seen at: c0
+[14:23:08.208]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:23:08.208]         [stereo] Enabled=1  MatchXS=1.000000  MatchYS=1.000000
+[14:23:08.208]     [    1.000000     0.000000     0.000000     0.000000]
+[14:23:08.208]     [    0.000000     1.000000     0.000000     0.000000]
+[14:23:08.208]     [    0.000000     0.000000     1.025641    -0.051282]
+[14:23:08.208]     [    0.000000     0.000000     1.000000     0.000000]
+[14:23:08.263] PERSPECTIVE-SHAPED 4x4 at c2, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 625185, 11611387 uploads total):
+[14:23:08.264]     signature xs=-0.000000 ys=0.000000  seen at: c2 c5 c8 c11 c14 c17
+[14:23:08.264]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:23:08.264]         [stereo] Enabled=1  MatchXS=-0.000000  MatchYS=0.000000
+[14:23:08.264]     [    0.000000    -0.000000     1.000000    -0.000244]
+[14:23:08.264]     [    1.000000     0.000000    -0.000000    -0.000010]
+[14:23:08.264]     [   -0.000000     1.000000    -0.000000     0.000005]
+[14:23:08.264]     [    0.000000    -0.000000     1.000000     0.000068]
+[14:23:08.297] PERSPECTIVE-SHAPED 4x4 at c0, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 52075, 11621518 uploads total):
+[14:23:08.297]     signature xs=2.414213 ys=2.414213  seen at: c0
+[14:23:08.297]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:23:08.297]         [stereo] Enabled=1  MatchXS=2.414213  MatchYS=2.414213
+[14:23:08.297]     [    2.414213     0.000000     0.000000     0.000000]
+[14:23:08.297]     [    0.000000     2.414213     0.000000     0.000000]
+[14:23:08.297]     [    0.000000     0.000000     1.021148    -0.327788]
+[14:23:08.297]     [    0.000000     0.000000     1.000000     0.000000]
+[14:23:08.518] PERSPECTIVE-SHAPED 4x4 at c81, layout +-1 at index 11 (sighting 9521, 11686952 uploads total):
+[14:23:08.518]     signature xs=19.772179 ys=-3.004681  seen at: c81
+[14:23:08.518]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:23:08.518]         [stereo] Enabled=1  MatchXS=19.772179  MatchYS=-3.004681
+[14:23:08.518]     [   19.772179    -0.403353     1.343687     0.000000]
+[14:23:08.518]     [   21.984161    -3.004681     1.178253     0.000000]
+[14:23:08.518]     [   18.514206    -0.848413     1.268307     1.000000]
+[14:23:08.518]     [   21.439711     2.168252     1.328477     0.000000]
+[14:23:08.518]     reading: w-from-z = +1 -> clip.w = +view.z, LEFT-handed, which is what stereo.c assumes. The assumption holds.
+[14:23:08.518] PERSPECTIVE-SHAPED 4x4 at c87, layout +-1 at index 11 (sighting 9521, 11686952 uploads total):
+[14:23:08.518]     signature xs=19.924162 ys=2.654922  seen at: c87
+[14:23:08.518]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:23:08.518]         [stereo] Enabled=1  MatchXS=19.924162  MatchYS=2.654922
+[14:23:08.518]     [   19.924162     1.233646     1.075491     0.000000]
+[14:23:08.519]     [   23.204901     2.654922     1.081167     0.000000]
+[14:23:08.519]     [    8.667715    -1.572666     1.101639     1.000000]
+[14:23:08.519]     [   16.471909     0.599901     1.306125     0.000000]
+[14:23:08.519]     reading: w-from-z = +1 -> clip.w = +view.z, LEFT-handed, which is what stereo.c assumes. The assumption holds.
+[14:23:08.696] g_mViewToClip candidate c0 after 9600000 uploads:
+[14:23:08.696]     [    0.001267     0.000000     0.000000    -3.919255]
+[14:23:08.696]     [    0.000000     0.000892     0.000000    -1.288525]
+[14:23:08.697]     [    0.000000     0.000000     0.000396    -0.293535]
+[14:23:08.697]     [    0.000000     0.000000     0.000000     1.000000]
+[14:23:08.697]     reading: m[11]=-0.293535 m[15]=1.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:23:09.113] g_mViewToClip candidate c4 after 7600000 uploads:
+[14:23:09.113]     [   -0.083657     0.601198    -0.794709  2779.540771]
+[14:23:09.113]     [    0.573169    -0.623347    -0.531899  1063.612305]
+[14:23:09.113]     [   -0.815156    -0.500000    -0.292440  1940.733643]
+[14:23:09.113]     [    0.000000     0.000000     0.000000     0.000000]
+[14:23:09.113]     reading: m[11]=1940.733643 m[15]=0.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:23:10.364] g_mViewToClip candidate c0 after 10000000 uploads:
+[14:23:10.364]     [    0.001267     0.000000     0.000000    -3.919255]
+[14:23:10.364]     [    0.000000     0.000892     0.000000    -1.288525]
+[14:23:10.364]     [    0.000000     0.000000     0.000396    -0.293535]
+[14:23:10.364]     [    0.000000     0.000000     0.000000     1.000000]
+[14:23:10.364]     reading: m[11]=-0.293535 m[15]=1.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:23:11.216] VS upload ranges in the last 5000 ms (start+count:n): c0+5:5699 c0+4:39634 c0+8:652800 c0+15:4800 c0+12:6298 c192+8:104700 c0+33:2999 c0+105:2999 c0+132:2999 c0+3:80774 c0+6:113090 c0+102:11097 c0+183:2999 c0+21:5999 c0+9:7496 c0+103:51300 c0+129:600 c0+200:7800 c0+61:34800 c192+7:46766 c0+7:99584 c0+77:1200 c0+1:10787 c192+11:17400 c0+11:42012 c0+71:17400 c0+87:600 c0+121:3900 c0+13:61200 c0+14:5100 c0+138:3300 c0+122:6900 c192+12:3600 c0+2:4200 c0+40:3000 c0+52:3000
+[14:23:11.216] LIVE perspective signatures this period (reg xs ys ys/xs n): [c192 0.915689 1.627892 1.7778 n=64167] [c0 0.915689 1.627892 1.7778 n=157790] [c2 0.000000 0.000000 0.0000 n=50993] [c5 0.000000 0.000000 0.0000 n=10795] [c8 0.000000 -0.000000 -0.0079 n=7199] [c11 -0.000000 -0.000000 0.5915 n=4200] [c14 -0.000000 -0.000000 0.5915 n=3034] [c17 -0.000000 -0.000000 0.5915 n=3000]
+[14:23:11.216]     the CAMERA is the one whose ys/xs equals the display aspect ratio (1.7778 at 16:9); paste ITS xs/ys into [stereo] MatchXS/MatchYS.
+[14:23:11.216]     distinct-signature table: 24/24 slots used, 2335734 dropped  <-- SATURATED: new projections are being LOST. Read the LIVE line above, not the one-shot table.
+[14:23:11.216]     readback: 0 check(s) over 11967579 draw(s) - survived=0 restored=0 overwritten=0 unavailable=0  <-- NEVER CHECKED: either no edit was ever armed, or no draw came through our hooks
+[14:23:11.216]     stereo: 0 edit(s) applied in total, 0 upload(s) refused as oversize  <-- NEVER MATCHED: the signature is not being found in any forwarded block
+[14:23:11.233] g_mViewToClip candidate c4 after 8000000 uploads:
+[14:23:11.233]     [   -0.158950     0.000000     0.901788     0.000000]
+[14:23:11.233]     [   -0.551804     1.528426    -0.097261     0.000000]
+[14:23:11.233]     [   -0.924830    -0.344262    -0.163011    -0.200040]
+[14:23:11.233]     [   -0.924645    -0.344193    -0.162979     0.000000]
+[14:23:11.233]     reading: m[11]=-0.200040 m[15]=0.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:23:11.285] g_mViewToClip candidate c7 after 2400000 uploads:
+[14:23:11.285]     [   -0.173585    -0.338968    -0.924645 -3114.475342]
+[14:23:11.285]     [    0.000000     0.938899    -0.344193    85.173897]
+[14:23:11.285]     [    0.984819    -0.059747    -0.162979  -937.502502]
+[14:23:11.285]     [   -0.173585     0.000000     0.984819   479.502808]
+[14:23:11.285]     reading: m[11]=-937.502502 m[15]=479.502808 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:23:12.029] g_mViewToClip candidate c0 after 10400000 uploads:
+[14:23:12.029]     [    0.004194     0.000000     0.000000   -11.502325]
+[14:23:12.029]     [    0.000000     0.002956     0.000000    -3.365027]
+[14:23:12.029]     [    0.000000     0.000000     0.001293    -1.802127]
+[14:23:12.029]     [    0.000000     0.000000     0.000000     1.000000]
+[14:23:12.029]     reading: m[11]=-1.802127 m[15]=1.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:23:12.062] PERSPECTIVE-SHAPED 4x4 at c14, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 17, 12727011 uploads total):
+[14:23:12.062]     signature xs=0.000085 ys=-0.000566  seen at: c14
+[14:23:12.062]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:23:12.062]         [stereo] Enabled=1  MatchXS=0.000085  MatchYS=-0.000566
+[14:23:12.062]     [    0.000016     0.048710     0.998813     0.031004]
+[14:23:12.062]     [    1.000000    -0.000468    -0.000200    -0.001396]
+[14:23:12.062]     [    0.000468     1.000000    -0.000733    -0.890087]
+[14:23:12.062]     [    0.000200     0.000732     1.000000    -0.000633]
+[14:23:13.180] g_mViewToClip candidate c192 after 1600000 uploads:
+[14:23:13.180]     [    0.001267     0.000000     0.000000    -3.919255]
+[14:23:13.180]     [    0.000000     0.000892     0.000000    -1.288525]
+[14:23:13.180]     [    0.000000     0.000000     0.000396    -0.293535]
+[14:23:13.180]     [    0.000000     0.000000     0.000000     1.000000]
+[14:23:13.180]     reading: m[11]=-0.293535 m[15]=1.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:23:13.209] PERSPECTIVE-SHAPED 4x4 at c0, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 15973, 13063159 uploads total):
+[14:23:13.209]     signature xs=1.000000 ys=1.000000  seen at: c0
+[14:23:13.209]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:23:13.209]         [stereo] Enabled=1  MatchXS=1.000000  MatchYS=1.000000
+[14:23:13.209]     [    1.000000     0.000000     0.000000     0.000000]
+[14:23:13.209]     [    0.000000     1.000000     0.000000     0.000000]
+[14:23:13.209]     [    0.000000     0.000000     1.025641    -0.051282]
+[14:23:13.209]     [    0.000000     0.000000     1.000000     0.000000]
+[14:23:13.263] PERSPECTIVE-SHAPED 4x4 at c2, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 704391, 13080537 uploads total):
+[14:23:13.263]     signature xs=-0.000000 ys=0.000000  seen at: c2 c5 c8 c11 c14 c17
+[14:23:13.263]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:23:13.263]         [stereo] Enabled=1  MatchXS=-0.000000  MatchYS=0.000000
+[14:23:13.263]     [    0.000000    -0.000000     1.000000    -0.000244]
+[14:23:13.263]     [    1.000000     0.000000    -0.000000    -0.000010]
+[14:23:13.263]     [   -0.000000     1.000000    -0.000000     0.000005]
+[14:23:13.263]     [    0.000000    -0.000000     1.000000     0.000068]
+[14:23:13.298] PERSPECTIVE-SHAPED 4x4 at c0, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 58675, 13090661 uploads total):
+[14:23:13.298]     signature xs=2.414213 ys=2.414213  seen at: c0
+[14:23:13.298]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:23:13.298]         [stereo] Enabled=1  MatchXS=2.414213  MatchYS=2.414213
+[14:23:13.298]     [    2.414213     0.000000     0.000000     0.000000]
+[14:23:13.298]     [    0.000000     2.414213     0.000000     0.000000]
+[14:23:13.298]     [    0.000000     0.000000     1.021148    -0.327788]
+[14:23:13.298]     [    0.000000     0.000000     1.000000     0.000000]
+[14:23:13.361] g_mViewToClip candidate c4 after 8400000 uploads:
+[14:23:13.361]     [   -0.698972     0.601198    -0.387298  2605.012695]
+[14:23:13.361]     [   -0.106950    -0.623347    -0.774597  1023.573120]
+[14:23:13.361]     [   -0.707107    -0.500000     0.500000  1690.796997]
+[14:23:13.361]     [    0.000000     0.000000     0.000000     0.000000]
+[14:23:13.361]     reading: m[11]=1690.796997 m[15]=0.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:23:13.519] PERSPECTIVE-SHAPED 4x4 at c81, layout +-1 at index 11 (sighting 10721, 13156067 uploads total):
+[14:23:13.519]     signature xs=19.772179 ys=-3.004681  seen at: c81
+[14:23:13.519]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:23:13.519]         [stereo] Enabled=1  MatchXS=19.772179  MatchYS=-3.004681
+[14:23:13.519]     [   19.772179    -0.403353     1.343687     0.000000]
+[14:23:13.519]     [   21.984161    -3.004681     1.178253     0.000000]
+[14:23:13.519]     [   18.514206    -0.848413     1.268307     1.000000]
+[14:23:13.519]     [   21.439711     2.168252     1.328477     0.000000]
+[14:23:13.519]     reading: w-from-z = +1 -> clip.w = +view.z, LEFT-handed, which is what stereo.c assumes. The assumption holds.
+[14:23:13.519] PERSPECTIVE-SHAPED 4x4 at c87, layout +-1 at index 11 (sighting 10721, 13156067 uploads total):
+[14:23:13.519]     signature xs=19.924162 ys=2.654922  seen at: c87
+[14:23:13.519]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:23:13.519]         [stereo] Enabled=1  MatchXS=19.924162  MatchYS=2.654922
+[14:23:13.520]     [   19.924162     1.233646     1.075491     0.000000]
+[14:23:13.520]     [   23.204901     2.654922     1.081167     0.000000]
+[14:23:13.520]     [    8.667715    -1.572666     1.101639     1.000000]
+[14:23:13.520]     [   16.471909     0.599901     1.306125     0.000000]
+[14:23:13.520]     reading: w-from-z = +1 -> clip.w = +view.z, LEFT-handed, which is what stereo.c assumes. The assumption holds.
+[14:23:13.695] g_mViewToClip candidate c0 after 10800000 uploads:
+[14:23:13.695]     [    0.004194     0.000000     0.000000   -11.502325]
+[14:23:13.695]     [    0.000000     0.002956     0.000000    -3.365027]
+[14:23:13.695]     [    0.000000     0.000000     0.001293    -1.802127]
+[14:23:13.695]     [    0.000000     0.000000     0.000000     1.000000]
+[14:23:13.695]     reading: m[11]=-1.802127 m[15]=1.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:23:15.374] g_mViewToClip candidate c0 after 11200000 uploads:
+[14:23:15.374]     [    0.004194     0.000000     0.000000   -11.502325]
+[14:23:15.374]     [    0.000000     0.002956     0.000000    -3.365027]
+[14:23:15.374]     [    0.000000     0.000000     0.001293    -1.802127]
+[14:23:15.374]     [    0.000000     0.000000     0.000000     1.000000]
+[14:23:15.374]     reading: m[11]=-1.802127 m[15]=1.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:23:15.492] g_mViewToClip candidate c4 after 8800000 uploads:
+[14:23:15.492]     [    0.000000     0.000000     0.000000     0.000000]
+[14:23:15.492]     [    0.000000     0.000000     0.000000     0.000000]
+[14:23:15.492]     [    0.000000     0.000000     0.000000     0.000000]
+[14:23:15.493]     [    0.000000     0.000000     0.000000     0.000000]
+[14:23:15.493]     reading: m[11]=0.000000 m[15]=0.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:23:16.216] VS upload ranges in the last 5000 ms (start+count:n): c0+5:5681 c0+4:39779 c0+8:650624 c0+15:4784 c0+12:6278 c192+8:104351 c0+33:2990 c0+105:2990 c0+132:2990 c0+3:80156 c0+6:112516 c0+102:11063 c0+183:2990 c0+21:5980 c0+9:7471 c0+103:51129 c0+129:598 c0+200:7765 c0+61:34684 c192+7:46607 c0+7:99204 c0+77:1196 c0+1:10764 c192+11:17342 c0+11:41860 c0+71:17342 c0+87:598 c0+121:3887 c0+13:60996 c0+14:5083 c0+138:3289 c0+122:6877 c192+12:3588 c0+2:4186 c0+40:2980 c0+52:2990
+[14:23:16.216] LIVE perspective signatures this period (reg xs ys ys/xs n): [c0 0.915689 1.627892 1.7778 n=157210] [c192 0.915689 1.627892 1.7778 n=63949] [c2 -0.000000 0.000000 -1.2320 n=50841] [c5 -0.000000 0.000000 -2.2000 n=10779] [c8 -0.000000 -0.000000 2.0703 n=7195] [c11 -0.000000 -0.000000 0.5915 n=4206] [c14 -0.000000 -0.000000 0.5915 n=3046] [c17 -0.000000 -0.000000 0.5915 n=3000]
+[14:23:16.216]     the CAMERA is the one whose ys/xs equals the display aspect ratio (1.7778 at 16:9); paste ITS xs/ys into [stereo] MatchXS/MatchYS.
+[14:23:16.216]     distinct-signature table: 24/24 slots used, 2613741 dropped  <-- SATURATED: new projections are being LOST. Read the LIVE line above, not the one-shot table.
+[14:23:16.216]     readback: 0 check(s) over 13370826 draw(s) - survived=0 restored=0 overwritten=0 unavailable=0  <-- NEVER CHECKED: either no edit was ever armed, or no draw came through our hooks
+[14:23:16.216]     stereo: 0 edit(s) applied in total, 0 upload(s) refused as oversize  <-- NEVER MATCHED: the signature is not being found in any forwarded block
+[14:23:17.046] g_mViewToClip candidate c0 after 11600000 uploads:
+[14:23:17.046]     [    0.016669     0.000000     0.000000   -43.827911]
+[14:23:17.046]     [    0.000000     0.011763     0.000000   -12.227572]
+[14:23:17.047]     [    0.000000     0.000000     0.004843    -7.768222]
+[14:23:17.047]     [    0.000000     0.000000     0.000000     1.000000]
+[14:23:17.047]     reading: m[11]=-7.768222 m[15]=1.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:23:17.617] g_mViewToClip candidate c4 after 9200000 uploads:
+[14:23:17.617]     [    1.000000     0.000000     0.000000     0.005859]
+[14:23:17.617]     [    0.000000    -0.258819     0.965926     2.015442]
+[14:23:17.617]     [    0.000000    -0.965926    -0.258819     0.301117]
+[14:23:17.617]     [-1000000.000000     0.000000     0.000000     0.000000]
+[14:23:17.617]     reading: m[11]=0.301117 m[15]=0.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:23:18.211] PERSPECTIVE-SHAPED 4x4 at c0, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 17767, 14527185 uploads total):
+[14:23:18.211]     signature xs=1.000000 ys=1.000000  seen at: c0
+[14:23:18.211]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:23:18.211]         [stereo] Enabled=1  MatchXS=1.000000  MatchYS=1.000000
+[14:23:18.211]     [    1.000000     0.000000     0.000000     0.000000]
+[14:23:18.211]     [    0.000000     1.000000     0.000000     0.000000]
+[14:23:18.211]     [    0.000000     0.000000     1.025641    -0.051282]
+[14:23:18.211]     [    0.000000     0.000000     1.000000     0.000000]
+[14:23:18.263] PERSPECTIVE-SHAPED 4x4 at c8, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 783213, 14542498 uploads total):
+[14:23:18.263]     signature xs=-0.000000 ys=0.000000  seen at: c2 c5 c8 c11 c14 c17
+[14:23:18.263]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:23:18.263]         [stereo] Enabled=1  MatchXS=-0.000000  MatchYS=0.000000
+[14:23:18.263]     [   -0.000000     0.013014     0.999915    -0.006951]
+[14:23:18.263]     [    1.000000     0.000000     0.000000     0.000036]
+[14:23:18.263]     [    0.000000     1.000000    -0.000000     0.000001]
+[14:23:18.263]     [   -0.000000    -0.000000     1.000000    -0.000244]
+[14:23:18.300] PERSPECTIVE-SHAPED 4x4 at c0, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 65253, 14554698 uploads total):
+[14:23:18.300]     signature xs=2.414213 ys=2.414213  seen at: c0
+[14:23:18.300]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:23:18.300]         [stereo] Enabled=1  MatchXS=2.414213  MatchYS=2.414213
+[14:23:18.300]     [    2.414213     0.000000     0.000000     0.000000]
+[14:23:18.301]     [    0.000000     2.414213     0.000000     0.000000]
+[14:23:18.301]     [    0.000000     0.000000     1.021148    -0.327788]
+[14:23:18.301]     [    0.000000     0.000000     1.000000     0.000000]
+[14:23:18.395] g_mViewToClip candidate c7 after 2800000 uploads:
+[14:23:18.395]     [    0.000000     0.000000     0.000000     0.000000]
+[14:23:18.395]     [    0.000000     0.000000     0.000000     0.000000]
+[14:23:18.395]     [    0.000000     0.000000     0.000000     0.000000]
+[14:23:18.395]     [    0.000000     0.000000     0.000000     0.000000]
+[14:23:18.395]     reading: m[11]=0.000000 m[15]=0.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:23:18.520] PERSPECTIVE-SHAPED 4x4 at c81, layout +-1 at index 11 (sighting 11917, 14620118 uploads total):
+[14:23:18.520]     signature xs=19.772179 ys=-3.004681  seen at: c81
+[14:23:18.520]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:23:18.520]         [stereo] Enabled=1  MatchXS=19.772179  MatchYS=-3.004681
+[14:23:18.520]     [   19.772179    -0.403353     1.343687     0.000000]
+[14:23:18.520]     [   21.984161    -3.004681     1.178253     0.000000]
+[14:23:18.520]     [   18.514206    -0.848413     1.268307     1.000000]
+[14:23:18.520]     [   21.439711     2.168252     1.328477     0.000000]
+[14:23:18.520]     reading: w-from-z = +1 -> clip.w = +view.z, LEFT-handed, which is what stereo.c assumes. The assumption holds.
+[14:23:18.520] PERSPECTIVE-SHAPED 4x4 at c87, layout +-1 at index 11 (sighting 11917, 14620118 uploads total):
+[14:23:18.520]     signature xs=19.924162 ys=2.654922  seen at: c87
+[14:23:18.520]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:23:18.520]         [stereo] Enabled=1  MatchXS=19.924162  MatchYS=2.654922
+[14:23:18.520]     [   19.924162     1.233646     1.075491     0.000000]
+[14:23:18.520]     [   23.204901     2.654922     1.081167     0.000000]
+[14:23:18.520]     [    8.667715    -1.572666     1.101639     1.000000]
+[14:23:18.520]     [   16.471909     0.599901     1.306125     0.000000]
+[14:23:18.520]     reading: w-from-z = +1 -> clip.w = +view.z, LEFT-handed, which is what stereo.c assumes. The assumption holds.
+[14:23:18.713] g_mViewToClip candidate c0 after 12000000 uploads:
+[14:23:18.713]     [    0.016669     0.000000     0.000000   -43.827911]
+[14:23:18.713]     [    0.000000     0.011763     0.000000   -12.227572]
+[14:23:18.713]     [    0.000000     0.000000     0.004843    -7.768222]
+[14:23:18.713]     [    0.000000     0.000000     0.000000     1.000000]
+[14:23:18.714]     reading: m[11]=-7.768222 m[15]=1.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:23:19.746] g_mViewToClip candidate c4 after 9600000 uploads:
+[14:23:19.746]     [   -0.765433     0.601198    -0.229506  2572.417969]
+[14:23:19.746]     [   -0.269507    -0.623347    -0.734033   985.170959]
+[14:23:19.746]     [   -0.584361    -0.500000     0.639158  1668.107422]
+[14:23:19.746]     [    0.000000     0.000000     0.000000     0.000000]
+[14:23:19.746]     reading: m[11]=1668.107422 m[15]=0.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:23:20.373] g_mViewToClip candidate c0 after 12400000 uploads:
+[14:23:20.373]     [    0.996039    -0.021426    -0.086301     0.003182]
+[14:23:20.373]     [    0.017813     0.998942    -0.042414    -0.013579]
+[14:23:20.373]     [    0.087118     0.040708     0.995366     0.148770]
+[14:23:20.373]     [    0.997133     0.004002     0.075576     0.008128]
+[14:23:20.373]     reading: m[11]=0.148770 m[15]=0.008128 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:23:21.217] VS upload ranges in the last 5000 ms (start+count:n): c0+5:5698 c0+4:39666 c0+8:651970 c0+15:4797 c0+12:6296 c192+8:104589 c0+33:2998 c0+105:2998 c0+132:2998 c0+3:80682 c0+6:113050 c0+102:11090 c0+183:2998 c0+21:5995 c0+9:7498 c0+103:51190 c0+129:599 c0+200:7796 c0+61:34742 c192+7:46776 c0+7:99524 c0+77:1198 c0+1:10800 c192+11:17400 c0+11:42000 c0+71:17400 c0+87:600 c0+121:3900 c0+13:61200 c0+14:5100 c0+138:3300 c0+122:6900 c192+12:3600 c0+2:4200 c0+40:3000 c0+52:3000
+[14:23:21.217] LIVE perspective signatures this period (reg xs ys ys/xs n): [c192 0.915689 1.627892 1.7778 n=64176] [c0 0.915689 1.627892 1.7778 n=157702] [c2 0.000000 -0.000000 -4.6101 n=50953] [c5 -0.000000 0.000000 -2.2000 n=10795] [c8 -0.000000 -0.000000 2.0703 n=7194] [c11 -0.000000 -0.000000 0.5915 n=4196] [c14 -0.000000 -0.000000 0.5915 n=3031] [c17 -0.000000 -0.000000 0.5915 n=2997]
+[14:23:21.217]     the CAMERA is the one whose ys/xs equals the display aspect ratio (1.7778 at 16:9); paste ITS xs/ys into [stereo] MatchXS/MatchYS.
+[14:23:21.217]     distinct-signature table: 24/24 slots used, 2892081 dropped  <-- SATURATED: new projections are being LOST. Read the LIVE line above, not the one-shot table.
+[14:23:21.217]     readback: 0 check(s) over 14777771 draw(s) - survived=0 restored=0 overwritten=0 unavailable=0  <-- NEVER CHECKED: either no edit was ever armed, or no draw came through our hooks
+[14:23:21.217]     stereo: 0 edit(s) applied in total, 0 upload(s) refused as oversize  <-- NEVER MATCHED: the signature is not being found in any forwarded block
+[14:23:21.868] g_mViewToClip candidate c4 after 10000000 uploads:
+[14:23:21.868]     [    0.271220     0.260052     0.926722  2632.332520]
+[14:23:21.868]     [   -0.239801    -0.914194     0.326718  1027.657349]
+[14:23:21.868]     [    0.932167    -0.310841    -0.185587  1751.947998]
+[14:23:21.868]     [    0.000000     0.000000     0.000000     0.000000]
+[14:23:21.868]     reading: m[11]=1751.947998 m[15]=0.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:23:22.048] g_mViewToClip candidate c0 after 12800000 uploads:
+[14:23:22.048]     [   -0.173585     0.000000     0.984819     0.000000]
+[14:23:22.048]     [   -0.338968     0.938899    -0.059747     0.000000]
+[14:23:22.048]     [   -0.924645    -0.344193    -0.162979     0.000000]
+[14:23:22.048]     [    0.000000     0.000000     0.000000     1.000000]
+[14:23:22.049]     reading: m[11]=0.000000 m[15]=1.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:23:23.213] PERSPECTIVE-SHAPED 4x4 at c0, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 19543, 15976432 uploads total):
+[14:23:23.213]     signature xs=1.000000 ys=1.000000  seen at: c0
+[14:23:23.213]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:23:23.213]         [stereo] Enabled=1  MatchXS=1.000000  MatchYS=1.000000
+[14:23:23.213]     [    1.000000     0.000000     0.000000     0.000000]
+[14:23:23.213]     [    0.000000     1.000000     0.000000     0.000000]
+[14:23:23.213]     [    0.000000     0.000000     1.025641    -0.051282]
+[14:23:23.213]     [    0.000000     0.000000     1.000000     0.000000]
+[14:23:23.265] PERSPECTIVE-SHAPED 4x4 at c2, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 861355, 15991222 uploads total):
+[14:23:23.265]     signature xs=-0.000000 ys=0.000000  seen at: c2 c5 c8 c11 c14 c17
+[14:23:23.265]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:23:23.265]         [stereo] Enabled=1  MatchXS=-0.000000  MatchYS=0.000000
+[14:23:23.265]     [   -0.000000    -0.000000     1.000000     0.000243]
+[14:23:23.265]     [    1.000000     0.000000     0.000000    -0.000019]
+[14:23:23.265]     [   -0.000000     1.000000    -0.000000     0.000004]
+[14:23:23.265]     [   -0.000000    -0.000000     1.000000    -0.000058]
+[14:23:23.302] PERSPECTIVE-SHAPED 4x4 at c0, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 71765, 16003935 uploads total):
+[14:23:23.302]     signature xs=2.414213 ys=2.414213  seen at: c0
+[14:23:23.302]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:23:23.302]         [stereo] Enabled=1  MatchXS=2.414213  MatchYS=2.414213
+[14:23:23.302]     [    2.414213     0.000000     0.000000     0.000000]
+[14:23:23.302]     [    0.000000     2.414213     0.000000     0.000000]
+[14:23:23.302]     [    0.000000     0.000000     1.021148    -0.327788]
+[14:23:23.302]     [    0.000000     0.000000     1.000000     0.000000]
+[14:23:23.498] stereo: ON  eye_dx=2.000000 convergence=5.000  matching xs=0.915689 ys=1.627892 (block-offset match, edits a copy, never the engine's buffer)
+[14:23:23.498] live toggle: the configured edit is now ON (numpad 7)
+[14:23:23.505] stereo: FIRST edit applied - block c192+7, matrix at offset +0 (register c192), 1 window(s) this upload
+[14:23:23.505] readback: SURVIVED at c192 - the device still holds OUR sheared matrix at draw time. The edit does reach the draw, so the on-screen transform is NOT produced by this constant. Candidate (2): the wrong buffer entirely.
+[14:23:23.507] readback: OVERWRITTEN at c0 - the device holds neither our value nor the original. A third value is being written here, so the register is shared and the last writer before the draw is not us. Also candidate (1), but the writer is not simply restoring.
+[14:23:23.525] PERSPECTIVE-SHAPED 4x4 at c81, layout +-1 at index 11 (sighting 13101, 16069684 uploads total):
+[14:23:23.526]     signature xs=19.772179 ys=-3.004681  seen at: c81
+[14:23:23.526]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:23:23.526]         [stereo] Enabled=1  MatchXS=19.772179  MatchYS=-3.004681
+[14:23:23.526]     [   19.772179    -0.403353     1.343687     0.000000]
+[14:23:23.526]     [   21.984161    -3.004681     1.178253     0.000000]
+[14:23:23.526]     [   18.514206    -0.848413     1.268307     1.000000]
+[14:23:23.526]     [   21.439711     2.168252     1.328477     0.000000]
+[14:23:23.526]     reading: w-from-z = +1 -> clip.w = +view.z, LEFT-handed, which is what stereo.c assumes. The assumption holds.
+[14:23:23.526] PERSPECTIVE-SHAPED 4x4 at c87, layout +-1 at index 11 (sighting 13101, 16069684 uploads total):
+[14:23:23.526]     signature xs=19.924162 ys=2.654922  seen at: c87
+[14:23:23.526]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:23:23.526]         [stereo] Enabled=1  MatchXS=19.924162  MatchYS=2.654922
+[14:23:23.526]     [   19.924162     1.233646     1.075491     0.000000]
+[14:23:23.526]     [   23.204901     2.654922     1.081167     0.000000]
+[14:23:23.526]     [    8.667715    -1.572666     1.101639     1.000000]
+[14:23:23.526]     [   16.471909     0.599901     1.306125     0.000000]
+[14:23:23.526]     reading: w-from-z = +1 -> clip.w = +view.z, LEFT-handed, which is what stereo.c assumes. The assumption holds.
+[14:23:23.769] g_mViewToClip candidate c0 after 13200000 uploads:
+[14:23:23.769]     [    0.001267     0.000000     0.000000    -3.919255]
+[14:23:23.769]     [    0.000000     0.000892     0.000000    -1.288525]
+[14:23:23.769]     [    0.000000     0.000000     0.000396    -0.293535]
+[14:23:23.769]     [    0.000000     0.000000     0.000000     1.000000]
+[14:23:23.769]     reading: m[11]=-0.293535 m[15]=1.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:23:24.053] g_mViewToClip candidate c4 after 10400000 uploads:
+[14:23:24.053]     [    0.000000     0.000000     0.000000     0.000000]
+[14:23:24.053]     [    0.000000     0.000000     0.000000     0.000000]
+[14:23:24.053]     [    0.000000     0.000000     0.000000     0.000000]
+[14:23:24.053]     [    0.000000     0.000000     0.000000     0.000000]
+[14:23:24.053]     reading: m[11]=0.000000 m[15]=0.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:23:24.200] PERSPECTIVE-SHAPED 4x4 at c14, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 19, 16269045 uploads total):
+[14:23:24.200]     signature xs=0.000085 ys=-0.000566  seen at: c14
+[14:23:24.200]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:23:24.200]         [stereo] Enabled=1  MatchXS=0.000085  MatchYS=-0.000566
+[14:23:24.200]     [    0.000051     0.049065     0.998796     0.031313]
+[14:23:24.200]     [    1.000000    -0.000497    -0.000019     0.001396]
+[14:23:24.200]     [    0.000497     1.000000    -0.000323    -0.889157]
+[14:23:24.200]     [    0.000019     0.000323     1.000000    -0.000520]
+[14:23:24.353] g_mViewToClip candidate c192 after 2000000 uploads:
+[14:23:24.353]     [    0.001267     0.000000     0.000000    -3.919255]
+[14:23:24.353]     [    0.000000     0.000892     0.000000    -1.288525]
+[14:23:24.353]     [    0.000000     0.000000     0.000396    -0.293535]
+[14:23:24.353]     [    0.000000     0.000000     0.000000     1.000000]
+[14:23:24.353]     reading: m[11]=-0.293535 m[15]=1.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:23:25.437] g_mViewToClip candidate c0 after 13600000 uploads:
+[14:23:25.437]     [    0.000000     0.000000     0.000000     0.000000]
+[14:23:25.437]     [    0.000000     0.000000     0.000000     0.000000]
+[14:23:25.437]     [    0.000000     0.000000     0.000000     0.000000]
+[14:23:25.437]     [    0.000000     0.000000     0.000000     0.000000]
+[14:23:25.437]     reading: m[11]=0.000000 m[15]=0.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:23:25.573] g_mViewToClip candidate c7 after 3200000 uploads:
+[14:23:25.573]     [    0.028784     0.000000     0.046158     0.012687]
+[14:23:25.573]     [    0.110833     0.000000     0.034370     0.039529]
+[14:23:25.573]     [   -0.007047     0.000000     0.046019     0.010045]
+[14:23:25.573]     [   -0.022410     0.000000    -0.037406     0.009105]
+[14:23:25.573]     reading: m[11]=0.010045 m[15]=0.009105 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:23:26.186] g_mViewToClip candidate c4 after 10800000 uploads:
+[14:23:26.187]     [    0.000000     0.999999     0.000000     0.000001]
+[14:23:26.187]     [   -0.000001    -0.000000     0.999999    -0.000102]
+[14:23:26.187]     [    0.999999    -0.000000    -0.000000    -0.000030]
+[14:23:26.187]     [   -0.000000     0.999999     0.000000    -0.000002]
+[14:23:26.187]     reading: m[11]=-0.000030 m[15]=-0.000002 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:23:26.217] VS upload ranges in the last 5000 ms (start+count:n): c0+5:5780 c0+4:43403 c0+8:642757 c0+15:4725 c0+12:6208 c192+8:103066 c0+33:2956 c0+105:2956 c0+132:2956 c0+3:80670 c0+6:107888 c0+102:10938 c0+183:2956 c0+21:5911 c0+9:8040 c0+103:50555 c0+129:595 c0+200:7696 c0+61:34336 c192+7:46908 c0+7:99591 c0+77:1184 c0+1:10715 c192+11:17360 c0+11:41545 c0+71:17168 c0+87:592 c0+121:3848 c0+13:57682 c0+14:5032 c0+138:3609 c0+122:6808 c0+123:170 c192+12:3552 c0+2:4144 c0+40:2960 c0+52:2960
+[14:23:26.217] LIVE perspective signatures this period (reg xs ys ys/xs n): [c2 0.000000 -0.000000 -4.7051 n=49951] [c5 -0.000001 -0.000000 0.0033 n=11291] [c8 0.000000 -0.000000 -0.0079 n=7092] [c11 -0.000000 -0.000000 0.5915 n=4136] [c14 -0.000000 -0.000000 0.5915 n=3009] [c17 -0.000000 -0.000000 0.5915 n=2955] [c0 0.915689 1.627892 1.7778 n=157441] [c192 0.915689 1.627892 1.7778 n=64268]
+[14:23:26.217]     the CAMERA is the one whose ys/xs equals the display aspect ratio (1.7778 at 16:9); paste ITS xs/ys into [stereo] MatchXS/MatchYS.
+[14:23:26.217]     distinct-signature table: 24/24 slots used, 3166825 dropped  <-- SATURATED: new projections are being LOST. Read the LIVE line above, not the one-shot table.
+[14:23:26.217]     readback: 714 check(s) over 16167486 draw(s) - survived=309 restored=0 overwritten=405 unavailable=0
+[14:23:26.217]     stereo: 119375 edit(s) applied in total, 0 upload(s) refused as oversize
+[14:23:26.233] live toggle: the configured edit is now OFF (numpad 7)
+[14:23:27.104] g_mViewToClip candidate c0 after 14000000 uploads:
+[14:23:27.104]     [    0.016669     0.000000     0.000000   -43.827911]
+[14:23:27.104]     [    0.000000     0.011763     0.000000   -12.227572]
+[14:23:27.104]     [    0.000000     0.000000     0.004843    -7.768222]
+[14:23:27.104]     [    0.000000     0.000000     0.000000     1.000000]
+[14:23:27.104]     reading: m[11]=-7.768222 m[15]=1.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:23:28.207] PERSPECTIVE-SHAPED 4x4 at c0, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 21331, 17440560 uploads total):
+[14:23:28.207]     signature xs=1.000000 ys=1.000000  seen at: c0
+[14:23:28.207]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:23:28.207]         [stereo] Enabled=1  MatchXS=1.000000  MatchYS=1.000000
+[14:23:28.207]     [    1.000000     0.000000     0.000000     0.000000]
+[14:23:28.208]     [    0.000000     1.000000     0.000000     0.000000]
+[14:23:28.208]     [    0.000000     0.000000     1.025641    -0.051282]
+[14:23:28.208]     [    0.000000     0.000000     1.000000     0.000000]
+[14:23:28.265] PERSPECTIVE-SHAPED 4x4 at c2, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 940487, 17456886 uploads total):
+[14:23:28.265]     signature xs=-0.000000 ys=0.000000  seen at: c2 c5 c8 c11 c14 c17
+[14:23:28.265]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:23:28.265]         [stereo] Enabled=1  MatchXS=-0.000000  MatchYS=0.000000
+[14:23:28.265]     [    0.000000     0.000000     1.000000    -0.000066]
+[14:23:28.265]     [    1.000000     0.000000     0.000000     0.000027]
+[14:23:28.265]     [    0.000000     1.000000    -0.000000     0.000011]
+[14:23:28.265]     [    0.000000     0.000000     1.000000    -0.000132]
+[14:23:28.304] PERSPECTIVE-SHAPED 4x4 at c0, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 78321, 17468069 uploads total):
+[14:23:28.304]     signature xs=2.414213 ys=2.414213  seen at: c0
+[14:23:28.304]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:23:28.304]         [stereo] Enabled=1  MatchXS=2.414213  MatchYS=2.414213
+[14:23:28.304]     [    2.414213     0.000000     0.000000     0.000000]
+[14:23:28.304]     [    0.000000     2.414213     0.000000     0.000000]
+[14:23:28.304]     [    0.000000     0.000000     1.021148    -0.327788]
+[14:23:28.304]     [    0.000000     0.000000     1.000000     0.000000]
+[14:23:28.334] g_mViewToClip candidate c4 after 11200000 uploads:
+[14:23:28.334]     [   -0.798618     0.601198    -0.027759  2643.339355]
+[14:23:28.334]     [   -0.446953    -0.623347    -0.641617  1038.170166]
+[14:23:28.334]     [   -0.403042    -0.500000     0.766523  1726.184082]
+[14:23:28.334]     [    0.000000     0.000000     0.000000     0.000000]
+[14:23:28.334]     reading: m[11]=1726.184082 m[15]=0.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:23:28.531] PERSPECTIVE-SHAPED 4x4 at c81, layout +-1 at index 11 (sighting 14293, 17533475 uploads total):
+[14:23:28.531]     signature xs=19.772179 ys=-3.004681  seen at: c81
+[14:23:28.531]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:23:28.531]         [stereo] Enabled=1  MatchXS=19.772179  MatchYS=-3.004681
+[14:23:28.531]     [   19.772179    -0.403353     1.343687     0.000000]
+[14:23:28.531]     [   21.984161    -3.004681     1.178253     0.000000]
+[14:23:28.531]     [   18.514206    -0.848413     1.268307     1.000000]
+[14:23:28.531]     [   21.439711     2.168252     1.328477     0.000000]
+[14:23:28.531]     reading: w-from-z = +1 -> clip.w = +view.z, LEFT-handed, which is what stereo.c assumes. The assumption holds.
+[14:23:28.531] PERSPECTIVE-SHAPED 4x4 at c87, layout +-1 at index 11 (sighting 14293, 17533475 uploads total):
+[14:23:28.531]     signature xs=19.924162 ys=2.654922  seen at: c87
+[14:23:28.531]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:23:28.531]         [stereo] Enabled=1  MatchXS=19.924162  MatchYS=2.654922
+[14:23:28.531]     [   19.924162     1.233646     1.075491     0.000000]
+[14:23:28.531]     [   23.204901     2.654922     1.081167     0.000000]
+[14:23:28.531]     [    8.667715    -1.572666     1.101639     1.000000]
+[14:23:28.531]     [   16.471909     0.599901     1.306125     0.000000]
+[14:23:28.531]     reading: w-from-z = +1 -> clip.w = +view.z, LEFT-handed, which is what stereo.c assumes. The assumption holds.
+[14:23:28.807] g_mViewToClip candidate c0 after 14400000 uploads:
+[14:23:28.807]     [    0.066071     0.000000     0.000000  -171.841263]
+[14:23:28.807]     [    0.000000     0.046503     0.000000   -47.181427]
+[14:23:28.807]     [    0.000000     0.000000     0.015593   -25.837729]
+[14:23:28.807]     [    0.000000     0.000000     0.000000     1.000000]
+[14:23:28.807]     reading: m[11]=-25.837729 m[15]=1.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:23:30.470] g_mViewToClip candidate c0 after 14800000 uploads:
+[14:23:30.470]     [    0.981036    -0.021169     0.192666     0.021629]
+[14:23:30.470]     [   -0.003627     0.991839     0.127449    -0.009101]
+[14:23:30.470]     [   -0.193791    -0.125730     0.972954     0.133746]
+[14:23:30.470]     [    0.982229     0.016791     0.186932    -0.015534]
+[14:23:30.470]     reading: m[11]=0.133746 m[15]=-0.015534 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:23:30.471] g_mViewToClip candidate c4 after 11600000 uploads:
+[14:23:30.471]     [    0.999930     0.092272     0.000000     0.000000]
+[14:23:30.471]     [    1.004799     0.110977     0.000000     0.000000]
+[14:23:30.471]     [    1.001654     0.129682     0.000000     0.000000]
+[14:23:30.471]     [    0.996088     0.148386     0.000000     0.000000]
+[14:23:30.471]     reading: m[11]=0.000000 m[15]=0.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:23:31.217] VS upload ranges in the last 5000 ms (start+count:n): c0+5:5655 c0+4:40727 c0+8:648441 c0+15:4766 c0+12:6250 c192+8:104002 c0+33:2976 c0+105:2976 c0+132:2976 c0+3:79962 c0+6:112079 c0+102:11013 c0+183:2976 c0+21:5954 c0+9:7459 c0+103:50958 c0+129:600 c0+200:7735 c0+61:34510 c192+7:46450 c0+7:99341 c0+77:1190 c0+1:10693 c192+11:17245 c0+11:41802 c0+71:17226 c0+87:594 c0+121:3861 c0+13:60555 c0+14:5049 c0+138:3274 c0+122:6831 c0+123:4 c192+12:3564 c0+2:4158 c0+40:2980 c0+52:2970
+[14:23:31.217] LIVE perspective signatures this period (reg xs ys ys/xs n): [c0 0.915689 1.627892 1.7778 n=157216] [c7 0.915689 1.627892 1.7778 n=1190] [c2 0.000000 0.000000 0.0000 n=50641] [c5 0.000000 0.000000 0.0000 n=10735] [c8 0.000000 -0.000000 -0.0079 n=7147] [c11 -0.000000 -0.000000 0.5915 n=4170] [c14 -0.000000 -0.000000 0.5915 n=3016] [c17 -0.000000 -0.000000 0.5915 n=2978]
+[14:23:31.217]     the CAMERA is the one whose ys/xs equals the display aspect ratio (1.7778 at 16:9); paste ITS xs/ys into [stereo] MatchXS/MatchYS.
+[14:23:31.217]     distinct-signature table: 24/24 slots used, 3443566 dropped  <-- SATURATED: new projections are being LOST. Read the LIVE line above, not the one-shot table.
+[14:23:31.217]     readback: 719 check(s) over 17567147 draw(s) - survived=311 restored=0 overwritten=408 unavailable=0
+[14:23:31.217]     stereo: 120164 edit(s) applied in total, 0 upload(s) refused as oversize
+[14:23:32.134] g_mViewToClip candidate c0 after 15200000 uploads:
+[14:23:32.134]     [    0.000000     0.000000     0.000000     0.000000]
+[14:23:32.134]     [    0.000000     0.000000     0.000000     0.000000]
+[14:23:32.134]     [    0.000000     0.000000     0.000000     0.000000]
+[14:23:32.134]     [    0.000000     0.000000     0.000000     0.000000]
+[14:23:32.134]     reading: m[11]=0.000000 m[15]=0.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:23:32.599] g_mViewToClip candidate c4 after 12000000 uploads:
+[14:23:32.599]     [    0.784443     0.601198     0.152348  2684.489258]
+[14:23:32.599]     [    0.341079    -0.623347     0.703636  1052.557495]
+[14:23:32.599]     [    0.517990    -0.500000    -0.694036  1799.100830]
+[14:23:32.599]     [    0.000000     0.000000     0.000000     0.000000]
+[14:23:32.599]     reading: m[11]=1799.100830 m[15]=0.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:23:32.718] g_mViewToClip candidate c7 after 3600000 uploads:
+[14:23:32.718]     [    0.000000     0.000000     0.000000     0.000000]
+[14:23:32.718]     [    0.000000     0.000000     0.000000     0.000000]
+[14:23:32.718]     [    0.000000     0.000000     0.000000     0.000000]
+[14:23:32.718]     [    0.000000     0.000000     0.000000     0.000000]
+[14:23:32.718]     reading: m[11]=0.000000 m[15]=0.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:23:33.212] PERSPECTIVE-SHAPED 4x4 at c0, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 23125, 18904486 uploads total):
+[14:23:33.212]     signature xs=1.000000 ys=1.000000  seen at: c0
+[14:23:33.212]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:23:33.212]         [stereo] Enabled=1  MatchXS=1.000000  MatchYS=1.000000
+[14:23:33.212]     [    1.000000     0.000000     0.000000     0.000000]
+[14:23:33.212]     [    0.000000     1.000000     0.000000     0.000000]
+[14:23:33.212]     [    0.000000     0.000000     1.025641    -0.051282]
+[14:23:33.212]     [    0.000000     0.000000     1.000000     0.000000]
+[14:23:33.264] PERSPECTIVE-SHAPED 4x4 at c2, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 1019363, 18919283 uploads total):
+[14:23:33.264]     signature xs=-0.000000 ys=0.000000  seen at: c2 c5 c8 c11 c14 c17
+[14:23:33.264]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:23:33.264]         [stereo] Enabled=1  MatchXS=-0.000000  MatchYS=0.000000
+[14:23:33.264]     [   -0.000000    -0.000000     1.000000     0.000243]
+[14:23:33.264]     [    1.000000     0.000000     0.000000    -0.000019]
+[14:23:33.264]     [   -0.000000     1.000000    -0.000000     0.000004]
+[14:23:33.264]     [   -0.000000    -0.000000     1.000000    -0.000058]
+[14:23:33.302] PERSPECTIVE-SHAPED 4x4 at c0, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 84899, 18932002 uploads total):
+[14:23:33.302]     signature xs=2.414213 ys=2.414213  seen at: c0
+[14:23:33.302]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:23:33.302]         [stereo] Enabled=1  MatchXS=2.414213  MatchYS=2.414213
+[14:23:33.302]     [    2.414213     0.000000     0.000000     0.000000]
+[14:23:33.302]     [    0.000000     2.414213     0.000000     0.000000]
+[14:23:33.302]     [    0.000000     0.000000     1.021148    -0.327788]
+[14:23:33.302]     [    0.000000     0.000000     1.000000     0.000000]
+[14:23:33.538] PERSPECTIVE-SHAPED 4x4 at c81, layout +-1 at index 11 (sighting 15493, 19002336 uploads total):
+[14:23:33.538]     signature xs=19.772179 ys=-3.004681  seen at: c81
+[14:23:33.538]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:23:33.538]         [stereo] Enabled=1  MatchXS=19.772179  MatchYS=-3.004681
+[14:23:33.538]     [   19.772179    -0.403353     1.343687     0.000000]
+[14:23:33.538]     [   21.984161    -3.004681     1.178253     0.000000]
+[14:23:33.538]     [   18.514206    -0.848413     1.268307     1.000000]
+[14:23:33.538]     [   21.439711     2.168252     1.328477     0.000000]
+[14:23:33.538]     reading: w-from-z = +1 -> clip.w = +view.z, LEFT-handed, which is what stereo.c assumes. The assumption holds.
+[14:23:33.538] PERSPECTIVE-SHAPED 4x4 at c87, layout +-1 at index 11 (sighting 15493, 19002336 uploads total):
+[14:23:33.538]     signature xs=19.924162 ys=2.654922  seen at: c87
+[14:23:33.538]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:23:33.538]         [stereo] Enabled=1  MatchXS=19.924162  MatchYS=2.654922
+[14:23:33.538]     [   19.924162     1.233646     1.075491     0.000000]
+[14:23:33.538]     [   23.204901     2.654922     1.081167     0.000000]
+[14:23:33.538]     [    8.667715    -1.572666     1.101639     1.000000]
+[14:23:33.538]     [   16.471909     0.599901     1.306125     0.000000]
+[14:23:33.538]     reading: w-from-z = +1 -> clip.w = +view.z, LEFT-handed, which is what stereo.c assumes. The assumption holds.
+[14:23:33.803] g_mViewToClip candidate c0 after 15600000 uploads:
+[14:23:33.803]     [    0.915689     0.000000     0.000000     0.000000]
+[14:23:33.803]     [    0.000000     1.627892     0.000000     0.000000]
+[14:23:33.803]     [    0.000000     0.000000     1.000200    -0.200040]
+[14:23:33.803]     [    0.000000     0.000000     1.000000     0.000000]
+[14:23:33.803]     reading: m[11]=-0.200040 m[15]=0.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:23:34.718] g_mViewToClip candidate c4 after 12400000 uploads:
+[14:23:34.718]     [   -0.603171     0.601198    -0.524162  2721.567139]
+[14:23:34.718]     [    0.056439    -0.623347    -0.779906  1046.202148]
+[14:23:34.718]     [   -0.795612    -0.500000     0.342054  1866.981445]
+[14:23:34.718]     [    0.000000     0.000000     0.000000     0.000000]
+[14:23:34.718]     reading: m[11]=1866.981445 m[15]=0.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:23:34.850] PERSPECTIVE-SHAPED 4x4 at c14, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 23, 19386129 uploads total):
+[14:23:34.850]     signature xs=0.000085 ys=-0.000566  seen at: c14
+[14:23:34.850]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:23:34.850]         [stereo] Enabled=1  MatchXS=0.000085  MatchYS=-0.000566
+[14:23:34.850]     [    0.000001     0.048453     0.998825     0.030250]
+[14:23:34.850]     [    1.000000    -0.000505    -0.000053     0.000724]
+[14:23:34.850]     [    0.000505     1.000000     0.000306    -0.887909]
+[14:23:34.850]     [    0.000053    -0.000306     1.000000    -0.001971]
+[14:23:35.471] g_mViewToClip candidate c0 after 16000000 uploads:
+[14:23:35.472]     [   -0.158950     0.000000     0.901788   350.382751]
+[14:23:35.472]     [   -0.551804     1.528426    -0.097261 -1939.943970]
+[14:23:35.472]     [   -0.924830    -0.344262    -0.163011 -3004.062012]
+[14:23:35.472]     [   -0.924645    -0.344193    -0.162979 -3003.261230]
+[14:23:35.472]     reading: m[11]=-3004.062012 m[15]=-3003.261230 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:23:35.474] g_mViewToClip candidate c192 after 2400000 uploads:
+[14:23:35.474]     [    0.915689     0.000000     0.000000     0.000000]
+[14:23:35.474]     [    0.000000     1.627892     0.000000     0.000000]
+[14:23:35.474]     [    0.000000     0.000000     1.000200    -0.200040]
+[14:23:35.474]     [    0.000000     0.000000     1.000000     0.000000]
+[14:23:35.474]     reading: m[11]=-0.200040 m[15]=0.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:23:36.217] VS upload ranges in the last 5000 ms (start+count:n): c0+5:5696 c0+4:39604 c0+8:650889 c0+15:4791 c0+12:6289 c192+8:104385 c0+33:2996 c0+105:2996 c0+132:2996 c0+3:80627 c0+6:112954 c0+102:11079 c0+183:2996 c0+21:5989 c0+9:7492 c0+103:51137 c0+129:598 c0+200:7787 c0+61:34742 c192+7:46739 c0+7:99460 c0+77:1198 c0+1:10800 c192+11:17400 c0+11:42000 c0+71:17400 c0+87:600 c0+121:3900 c0+13:61200 c0+14:5100 c0+138:3300 c0+122:6900 c192+12:3600 c0+2:4200 c0+40:2990 c0+52:3000
+[14:23:36.217] LIVE perspective signatures this period (reg xs ys ys/xs n): [c0 0.915689 1.627892 1.7778 n=157638] [c192 0.915689 1.627892 1.7778 n=64139] [c2 -0.000000 0.000000 -161.8789 n=50862] [c5 -0.000000 0.000000 -0.0045 n=10792] [c8 -0.000000 0.000000 -0.0045 n=7183] [c11 -0.000000 0.000000 -0.0625 n=4190] [c14 -0.000000 0.000000 -0.0625 n=3035] [c17 -0.000000 0.000000 -0.0625 n=2993]
+[14:23:36.217]     the CAMERA is the one whose ys/xs equals the display aspect ratio (1.7778 at 16:9); paste ITS xs/ys into [stereo] MatchXS/MatchYS.
+[14:23:36.217]     distinct-signature table: 24/24 slots used, 3721839 dropped  <-- SATURATED: new projections are being LOST. Read the LIVE line above, not the one-shot table.
+[14:23:36.217]     readback: 719 check(s) over 18972532 draw(s) - survived=311 restored=0 overwritten=408 unavailable=0
+[14:23:36.217]     stereo: 120164 edit(s) applied in total, 0 upload(s) refused as oversize
+[14:23:36.847] g_mViewToClip candidate c4 after 12800000 uploads:
+[14:23:36.847]     [   -0.173585    -0.338968    -0.924645 -3114.475342]
+[14:23:36.847]     [    0.000000     0.938899    -0.344193    85.173897]
+[14:23:36.847]     [    0.984819    -0.059747    -0.162979  -937.502502]
+[14:23:36.847]     [    0.675638     0.000000     0.737234   -25.337891]
+[14:23:36.847]     reading: m[11]=-937.502502 m[15]=-25.337891 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:23:37.145] g_mViewToClip candidate c0 after 16400000 uploads:
+[14:23:37.145]     [   -0.158950     0.000000     0.901788     0.000000]
+[14:23:37.145]     [   -0.551804     1.528426    -0.097261     0.000000]
+[14:23:37.145]     [   -0.924830    -0.344262    -0.163011    -0.200040]
+[14:23:37.145]     [   -0.924645    -0.344193    -0.162979     0.000000]
+[14:23:37.145]     reading: m[11]=-0.200040 m[15]=0.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:23:38.205] PERSPECTIVE-SHAPED 4x4 at c0, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 24919, 20368328 uploads total):
+[14:23:38.205]     signature xs=1.000000 ys=1.000000  seen at: c0
+[14:23:38.205]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:23:38.205]         [stereo] Enabled=1  MatchXS=1.000000  MatchYS=1.000000
+[14:23:38.205]     [    1.000000     0.000000     0.000000     0.000000]
+[14:23:38.205]     [    0.000000     1.000000     0.000000     0.000000]
+[14:23:38.205]     [    0.000000     0.000000     1.025641    -0.051282]
+[14:23:38.205]     [    0.000000     0.000000     1.000000     0.000000]
+[14:23:38.264] PERSPECTIVE-SHAPED 4x4 at c2, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 1098540, 20387584 uploads total):
+[14:23:38.264]     signature xs=-0.000000 ys=0.000000  seen at: c2 c5 c8 c11 c14 c17
+[14:23:38.264]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:23:38.264]         [stereo] Enabled=1  MatchXS=-0.000000  MatchYS=0.000000
+[14:23:38.264]     [   -0.000000    -0.000000     1.000000     0.000243]
+[14:23:38.264]     [    1.000000     0.000000     0.000000    -0.000019]
+[14:23:38.264]     [   -0.000000     1.000000    -0.000000     0.000004]
+[14:23:38.264]     [   -0.000000    -0.000000     1.000000    -0.000058]
+[14:23:38.310] PERSPECTIVE-SHAPED 4x4 at c0, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 91499, 20400746 uploads total):
+[14:23:38.310]     signature xs=2.414213 ys=2.414213  seen at: c0
+[14:23:38.310]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:23:38.310]         [stereo] Enabled=1  MatchXS=2.414213  MatchYS=2.414213
+[14:23:38.310]     [    2.414213     0.000000     0.000000     0.000000]
+[14:23:38.310]     [    0.000000     2.414213     0.000000     0.000000]
+[14:23:38.310]     [    0.000000     0.000000     1.021148    -0.327788]
+[14:23:38.310]     [    0.000000     0.000000     1.000000     0.000000]
+[14:23:38.532] PERSPECTIVE-SHAPED 4x4 at c81, layout +-1 at index 11 (sighting 16689, 20466204 uploads total):
+[14:23:38.532]     signature xs=19.772179 ys=-3.004681  seen at: c81
+[14:23:38.532]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:23:38.532]         [stereo] Enabled=1  MatchXS=19.772179  MatchYS=-3.004681
+[14:23:38.532]     [   19.772179    -0.403353     1.343687     0.000000]
+[14:23:38.532]     [   21.984161    -3.004681     1.178253     0.000000]
+[14:23:38.532]     [   18.514206    -0.848413     1.268307     1.000000]
+[14:23:38.532]     [   21.439711     2.168252     1.328477     0.000000]
+[14:23:38.532]     reading: w-from-z = +1 -> clip.w = +view.z, LEFT-handed, which is what stereo.c assumes. The assumption holds.
+[14:23:38.532] PERSPECTIVE-SHAPED 4x4 at c87, layout +-1 at index 11 (sighting 16689, 20466204 uploads total):
+[14:23:38.532]     signature xs=19.924162 ys=2.654922  seen at: c87
+[14:23:38.532]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:23:38.532]         [stereo] Enabled=1  MatchXS=19.924162  MatchYS=2.654922
+[14:23:38.532]     [   19.924162     1.233646     1.075491     0.000000]
+[14:23:38.532]     [   23.204901     2.654922     1.081167     0.000000]
+[14:23:38.532]     [    8.667715    -1.572666     1.101639     1.000000]
+[14:23:38.532]     [   16.471909     0.599901     1.306125     0.000000]
+[14:23:38.532]     reading: w-from-z = +1 -> clip.w = +view.z, LEFT-handed, which is what stereo.c assumes. The assumption holds.
+[14:23:38.812] g_mViewToClip candidate c0 after 16800000 uploads:
+[14:23:38.813]     [    0.000000     0.000000     0.000000     0.000000]
+[14:23:38.813]     [    0.000000     0.000000     0.000000     0.000000]
+[14:23:38.813]     [    0.000000     0.000000     0.000000     0.000000]
+[14:23:38.813]     [    0.000000     0.000000     0.000000     0.000000]
+[14:23:38.813]     reading: m[11]=0.000000 m[15]=0.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:23:38.976] g_mViewToClip candidate c4 after 13200000 uploads:
+[14:23:38.976]     [   -0.698972     0.601198    -0.387298  2809.604004]
+[14:23:38.976]     [   -0.106950    -0.623347    -0.774597  1092.388550]
+[14:23:38.976]     [   -0.707107    -0.500000     0.500000  1955.005981]
+[14:23:38.976]     [    0.000000     0.000000     0.000000     0.000000]
+[14:23:38.976]     reading: m[11]=1955.005981 m[15]=0.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:23:39.811] g_mViewToClip candidate c7 after 4000000 uploads:
+[14:23:39.811]     [    0.000000     0.000000     0.000000     0.000000]
+[14:23:39.811]     [    0.000000     0.000000     0.000000     0.000000]
+[14:23:39.811]     [    0.000000     0.000000     0.000000     0.000000]
+[14:23:39.811]     [    0.000000     0.000000     0.000000     0.000000]
+[14:23:39.811]     reading: m[11]=0.000000 m[15]=0.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:23:40.477] g_mViewToClip candidate c0 after 17200000 uploads:
+[14:23:40.477]     [    0.001267     0.000000     0.000000    -3.919255]
+[14:23:40.477]     [    0.000000     0.000892     0.000000    -1.288525]
+[14:23:40.478]     [    0.000000     0.000000     0.000396    -0.293535]
+[14:23:40.478]     [    0.000000     0.000000     0.000000     1.000000]
+[14:23:40.478]     reading: m[11]=-0.293535 m[15]=1.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:23:41.093] g_mViewToClip candidate c4 after 13600000 uploads:
+[14:23:41.093]     [    0.662557     0.601198     0.446744  2767.192871]
+[14:23:41.093]     [    0.039032    -0.623347     0.780971  1073.022461]
+[14:23:41.093]     [    0.747994    -0.500000    -0.436469  1918.546875]
+[14:23:41.093]     [    0.000000     0.000000     0.000000     0.000000]
+[14:23:41.093]     reading: m[11]=1918.546875 m[15]=0.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:23:41.223] VS upload ranges in the last 5000 ms (start+count:n): c0+5:5697 c0+4:39780 c0+8:652536 c0+15:4793 c0+12:6298 c192+8:104666 c0+33:2998 c0+105:2998 c0+132:2998 c0+3:80415 c0+6:113094 c0+102:11097 c0+183:2998 c0+21:5997 c0+9:7498 c0+103:51292 c0+129:600 c0+200:7800 c0+61:34800 c192+7:46800 c0+7:99600 c0+77:1200 c0+1:10800 c192+11:17400 c0+11:41999 c0+71:17400 c0+87:600 c0+121:3900 c0+13:61200 c0+14:5100 c0+138:3300 c0+122:6900 c192+12:3600 c0+2:4200 c0+40:3000 c0+52:3000
+[14:23:41.223] LIVE perspective signatures this period (reg xs ys ys/xs n): [c8 0.000000 -0.000000 -0.0079 n=7198] [c11 -0.000000 -0.000000 0.5915 n=4198] [c14 -0.000000 -0.000000 0.5915 n=3039] [c17 -0.000000 -0.000000 0.5915 n=2999] [c2 0.000000 -0.000000 -4.7051 n=50999] [c5 -0.000001 -0.000000 0.0033 n=10799] [c0 0.915689 1.627892 1.7778 n=157791] [c192 0.915689 1.627892 1.7778 n=64200]
+[14:23:41.223]     the CAMERA is the one whose ys/xs equals the display aspect ratio (1.7778 at 16:9); paste ITS xs/ys into [stereo] MatchXS/MatchYS.
+[14:23:41.223]     distinct-signature table: 24/24 slots used, 4000312 dropped  <-- SATURATED: new projections are being LOST. Read the LIVE line above, not the one-shot table.
+[14:23:41.223]     readback: 719 check(s) over 20380187 draw(s) - survived=311 restored=0 overwritten=408 unavailable=0
+[14:23:41.223]     stereo: 120164 edit(s) applied in total, 0 upload(s) refused as oversize
+[14:23:41.726] PERSPECTIVE-SHAPED 4x4 at c14, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 27, 21403241 uploads total):
+[14:23:41.726]     signature xs=0.000085 ys=-0.000566  seen at: c14
+[14:23:41.726]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:23:41.726]         [stereo] Enabled=1  MatchXS=0.000085  MatchYS=-0.000566
+[14:23:41.726]     [    0.000005     0.048740     0.998811     0.030422]
+[14:23:41.726]     [    1.000000    -0.000491     0.000037     0.002020]
+[14:23:41.726]     [    0.000491     1.000000     0.000047    -0.888595]
+[14:23:41.726]     [   -0.000037    -0.000047     1.000000    -0.001466]
+[14:23:42.144] g_mViewToClip candidate c0 after 17600000 uploads:
+[14:23:42.144]     [    0.001267     0.000000     0.000000    -3.919255]
+[14:23:42.144]     [    0.000000     0.000892     0.000000    -1.288525]
+[14:23:42.144]     [    0.000000     0.000000     0.000396    -0.293535]
+[14:23:42.144]     [    0.000000     0.000000     0.000000     1.000000]
+[14:23:42.144]     reading: m[11]=-0.293535 m[15]=1.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:23:43.211] PERSPECTIVE-SHAPED 4x4 at c0, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 26719, 21837313 uploads total):
+[14:23:43.211]     signature xs=1.000000 ys=1.000000  seen at: c0
+[14:23:43.211]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:23:43.211]         [stereo] Enabled=1  MatchXS=1.000000  MatchYS=1.000000
+[14:23:43.211]     [    1.000000     0.000000     0.000000     0.000000]
+[14:23:43.211]     [    0.000000     1.000000     0.000000     0.000000]
+[14:23:43.211]     [    0.000000     0.000000     1.025641    -0.051282]
+[14:23:43.211]     [    0.000000     0.000000     1.000000     0.000000]
+[14:23:43.218] g_mViewToClip candidate c4 after 14000000 uploads:
+[14:23:43.219]     [   -0.158950     0.000000     0.901788     0.000000]
+[14:23:43.219]     [   -0.551804     1.528426    -0.097261     0.000000]
+[14:23:43.219]     [   -0.924830    -0.344262    -0.163011    -0.200040]
+[14:23:43.219]     [   -0.924645    -0.344193    -0.162979     0.000000]
+[14:23:43.219]     reading: m[11]=-0.200040 m[15]=0.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:23:43.265] PERSPECTIVE-SHAPED 4x4 at c2, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 1177561, 21853640 uploads total):
+[14:23:43.265]     signature xs=-0.000000 ys=0.000000  seen at: c2 c5 c8 c11 c14 c17
+[14:23:43.265]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:23:43.265]         [stereo] Enabled=1  MatchXS=-0.000000  MatchYS=0.000000
+[14:23:43.265]     [    0.000000     0.000000     1.000000    -0.000066]
+[14:23:43.265]     [    1.000000     0.000000     0.000000     0.000027]
+[14:23:43.265]     [    0.000000     1.000000    -0.000000     0.000011]
+[14:23:43.265]     [    0.000000     0.000000     1.000000    -0.000132]
+[14:23:43.316] PERSPECTIVE-SHAPED 4x4 at c0, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 98099, 21869720 uploads total):
+[14:23:43.316]     signature xs=2.414213 ys=2.414213  seen at: c0
+[14:23:43.316]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:23:43.316]         [stereo] Enabled=1  MatchXS=2.414213  MatchYS=2.414213
+[14:23:43.316]     [    2.414213     0.000000     0.000000     0.000000]
+[14:23:43.316]     [    0.000000     2.414213     0.000000     0.000000]
+[14:23:43.316]     [    0.000000     0.000000     1.021148    -0.327788]
+[14:23:43.316]     [    0.000000     0.000000     1.000000     0.000000]
+[14:23:43.536] PERSPECTIVE-SHAPED 4x4 at c81, layout +-1 at index 11 (sighting 17889, 21935133 uploads total):
+[14:23:43.536]     signature xs=19.772179 ys=-3.004681  seen at: c81
+[14:23:43.536]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:23:43.536]         [stereo] Enabled=1  MatchXS=19.772179  MatchYS=-3.004681
+[14:23:43.536]     [   19.772179    -0.403353     1.343687     0.000000]
+[14:23:43.536]     [   21.984161    -3.004681     1.178253     0.000000]
+[14:23:43.536]     [   18.514206    -0.848413     1.268307     1.000000]
+[14:23:43.536]     [   21.439711     2.168252     1.328477     0.000000]
+[14:23:43.536]     reading: w-from-z = +1 -> clip.w = +view.z, LEFT-handed, which is what stereo.c assumes. The assumption holds.
+[14:23:43.536] PERSPECTIVE-SHAPED 4x4 at c87, layout +-1 at index 11 (sighting 17889, 21935133 uploads total):
+[14:23:43.536]     signature xs=19.924162 ys=2.654922  seen at: c87
+[14:23:43.536]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:23:43.536]         [stereo] Enabled=1  MatchXS=19.924162  MatchYS=2.654922
+[14:23:43.536]     [   19.924162     1.233646     1.075491     0.000000]
+[14:23:43.536]     [   23.204901     2.654922     1.081167     0.000000]
+[14:23:43.536]     [    8.667715    -1.572666     1.101639     1.000000]
+[14:23:43.536]     [   16.471909     0.599901     1.306125     0.000000]
+[14:23:43.536]     reading: w-from-z = +1 -> clip.w = +view.z, LEFT-handed, which is what stereo.c assumes. The assumption holds.
+[14:23:43.815] g_mViewToClip candidate c0 after 18000000 uploads:
+[14:23:43.815]     [    0.001267     0.000000     0.000000    -3.919255]
+[14:23:43.815]     [    0.000000     0.000892     0.000000    -1.288525]
+[14:23:43.815]     [    0.000000     0.000000     0.000396    -0.293535]
+[14:23:43.815]     [    0.000000     0.000000     0.000000     1.000000]
+[14:23:43.815]     reading: m[11]=-0.293535 m[15]=1.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:23:45.347] g_mViewToClip candidate c4 after 14400000 uploads:
+[14:23:45.347]     [   -0.090284     0.601198     0.793984  2631.950195]
+[14:23:45.347]     [   -0.674682    -0.623347     0.395275  1030.254761]
+[14:23:45.347]     [    0.732566    -0.500000     0.461895  1735.243896]
+[14:23:45.347]     [    0.000000     0.000000     0.000000     0.000000]
+[14:23:45.347]     reading: m[11]=1735.243896 m[15]=0.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:23:45.482] g_mViewToClip candidate c0 after 18400000 uploads:
+[14:23:45.482]     [    0.001267     0.000000     0.000000    -3.919255]
+[14:23:45.482]     [    0.000000     0.000892     0.000000    -1.288525]
+[14:23:45.483]     [    0.000000     0.000000     0.000396    -0.293535]
+[14:23:45.483]     [    0.000000     0.000000     0.000000     1.000000]
+[14:23:45.483]     reading: m[11]=-0.293535 m[15]=1.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:23:46.217] VS upload ranges in the last 5000 ms (start+count:n): c0+5:5688 c0+4:39425 c0+8:652790 c0+15:4800 c0+12:6290 c192+8:104700 c0+33:2995 c0+105:2995 c0+132:2995 c0+3:80627 c0+6:112860 c0+102:11083 c0+183:2995 c0+21:5992 c0+9:7480 c0+103:51297 c0+129:600 c0+200:7774 c0+61:34684 c192+7:46644 c0+7:99268 c0+77:1196 c0+1:10764 c192+11:17342 c0+11:41861 c0+71:17342 c0+87:598 c0+121:3887 c0+13:60996 c0+14:5083 c0+138:3289 c0+122:6877 c192+12:3588 c0+2:4186 c0+40:2990 c0+52:2990
+[14:23:46.217] LIVE perspective signatures this period (reg xs ys ys/xs n): [c0 2.414213 2.414213 1.0000 n=157296] [c7 0.915689 1.627892 1.7778 n=1200] [c2 0.000001 -0.000000 -0.2725 n=50957] [c5 0.000000 0.000000 0.2423 n=10787] [c8 0.000000 0.000000 0.2101 n=7193] [c11 -0.000000 -0.000000 0.5915 n=4197] [c14 -0.000000 -0.000000 0.5915 n=3035] [c17 -0.000000 -0.000000 0.5915 n=2997]
+[14:23:46.217]     the CAMERA is the one whose ys/xs equals the display aspect ratio (1.7778 at 16:9); paste ITS xs/ys into [stereo] MatchXS/MatchYS.
+[14:23:46.217]     distinct-signature table: 24/24 slots used, 4277861 dropped  <-- SATURATED: new projections are being LOST. Read the LIVE line above, not the one-shot table.
+[14:23:46.217]     readback: 719 check(s) over 21786753 draw(s) - survived=311 restored=0 overwritten=408 unavailable=0
+[14:23:46.217]     stereo: 120164 edit(s) applied in total, 0 upload(s) refused as oversize
+[14:23:46.583] g_mViewToClip candidate c192 after 2800000 uploads:
+[14:23:46.583]     [    0.001267     0.000000     0.000000    -3.919255]
+[14:23:46.583]     [    0.000000     0.000892     0.000000    -1.288525]
+[14:23:46.583]     [    0.000000     0.000000     0.000396    -0.293535]
+[14:23:46.583]     [    0.000000     0.000000     0.000000     1.000000]
+[14:23:46.583]     reading: m[11]=-0.293535 m[15]=1.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:23:46.904] g_mViewToClip candidate c7 after 4400000 uploads:
+[14:23:46.904]     [   -0.001681     0.000000     0.001494     0.000107]
+[14:23:46.904]     [   -0.001581     0.000000     0.000397     0.000066]
+[14:23:46.904]     [   -0.001548     0.000000    -0.001013     0.000080]
+[14:23:46.904]     [   -0.001340     0.000000    -0.000384     0.000052]
+[14:23:46.904]     reading: m[11]=0.000080 m[15]=0.000052 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:23:47.150] g_mViewToClip candidate c0 after 18800000 uploads:
+[14:23:47.150]     [    0.004194     0.000000     0.000000   -11.502325]
+[14:23:47.150]     [    0.000000     0.002956     0.000000    -3.365027]
+[14:23:47.150]     [    0.000000     0.000000     0.001293    -1.802127]
+[14:23:47.150]     [    0.000000     0.000000     0.000000     1.000000]
+[14:23:47.150]     reading: m[11]=-1.802127 m[15]=1.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:23:47.466] g_mViewToClip candidate c4 after 14800000 uploads:
+[14:23:47.466]     [   -0.101699     0.991110     0.085780    -0.064548]
+[14:23:47.466]     [   -0.738699    -0.132990     0.660787    -0.103959]
+[14:23:47.466]     [    0.159067    -0.624441    -0.764703     0.112519]
+[14:23:47.466]     [    0.778346     0.555818    -0.291966     0.254259]
+[14:23:47.466]     reading: m[11]=0.112519 m[15]=0.254259 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:23:48.213] PERSPECTIVE-SHAPED 4x4 at c0, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 28519, 23306062 uploads total):
+[14:23:48.213]     signature xs=1.000000 ys=1.000000  seen at: c0
+[14:23:48.213]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:23:48.213]         [stereo] Enabled=1  MatchXS=1.000000  MatchYS=1.000000
+[14:23:48.213]     [    1.000000     0.000000     0.000000     0.000000]
+[14:23:48.213]     [    0.000000     1.000000     0.000000     0.000000]
+[14:23:48.213]     [    0.000000     0.000000     1.025641    -0.051282]
+[14:23:48.213]     [    0.000000     0.000000     1.000000     0.000000]
+[14:23:48.265] PERSPECTIVE-SHAPED 4x4 at c2, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 1256699, 23320852 uploads total):
+[14:23:48.265]     signature xs=-0.000000 ys=0.000000  seen at: c2 c5 c8 c11 c14 c17
+[14:23:48.265]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:23:48.265]         [stereo] Enabled=1  MatchXS=-0.000000  MatchYS=0.000000
+[14:23:48.265]     [   -0.000000    -0.000000     1.000000     0.000243]
+[14:23:48.265]     [    1.000000     0.000000     0.000000    -0.000019]
+[14:23:48.265]     [   -0.000000     1.000000    -0.000000     0.000004]
+[14:23:48.265]     [   -0.000000    -0.000000     1.000000    -0.000058]
+[14:23:48.319] PERSPECTIVE-SHAPED 4x4 at c0, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 104699, 23338461 uploads total):
+[14:23:48.320]     signature xs=2.414213 ys=2.414213  seen at: c0
+[14:23:48.320]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:23:48.320]         [stereo] Enabled=1  MatchXS=2.414213  MatchYS=2.414213
+[14:23:48.320]     [    2.414213     0.000000     0.000000     0.000000]
+[14:23:48.320]     [    0.000000     2.414213     0.000000     0.000000]
+[14:23:48.320]     [    0.000000     0.000000     1.021148    -0.327788]
+[14:23:48.320]     [    0.000000     0.000000     1.000000     0.000000]
+[14:23:48.539] PERSPECTIVE-SHAPED 4x4 at c81, layout +-1 at index 11 (sighting 19089, 23403867 uploads total):
+[14:23:48.539]     signature xs=19.772179 ys=-3.004681  seen at: c81
+[14:23:48.539]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:23:48.539]         [stereo] Enabled=1  MatchXS=19.772179  MatchYS=-3.004681
+[14:23:48.539]     [   19.772179    -0.403353     1.343687     0.000000]
+[14:23:48.539]     [   21.984161    -3.004681     1.178253     0.000000]
+[14:23:48.539]     [   18.514206    -0.848413     1.268307     1.000000]
+[14:23:48.539]     [   21.439711     2.168252     1.328477     0.000000]
+[14:23:48.539]     reading: w-from-z = +1 -> clip.w = +view.z, LEFT-handed, which is what stereo.c assumes. The assumption holds.
+[14:23:48.539] PERSPECTIVE-SHAPED 4x4 at c87, layout +-1 at index 11 (sighting 19089, 23403867 uploads total):
+[14:23:48.539]     signature xs=19.924162 ys=2.654922  seen at: c87
+[14:23:48.539]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:23:48.539]         [stereo] Enabled=1  MatchXS=19.924162  MatchYS=2.654922
+[14:23:48.539]     [   19.924162     1.233646     1.075491     0.000000]
+[14:23:48.539]     [   23.204901     2.654922     1.081167     0.000000]
+[14:23:48.539]     [    8.667715    -1.572666     1.101639     1.000000]
+[14:23:48.540]     [   16.471909     0.599901     1.306125     0.000000]
+[14:23:48.540]     reading: w-from-z = +1 -> clip.w = +view.z, LEFT-handed, which is what stereo.c assumes. The assumption holds.
+[14:23:48.816] g_mViewToClip candidate c0 after 19200000 uploads:
+[14:23:48.816]     [    0.004194     0.000000     0.000000   -11.502325]
+[14:23:48.816]     [    0.000000     0.002956     0.000000    -3.365027]
+[14:23:48.816]     [    0.000000     0.000000     0.001293    -1.802127]
+[14:23:48.816]     [    0.000000     0.000000     0.000000     1.000000]
+[14:23:48.816]     reading: m[11]=-1.802127 m[15]=1.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:23:49.588] g_mViewToClip candidate c4 after 15200000 uploads:
+[14:23:49.588]     [    0.000000     0.000000     0.000000     0.000000]
+[14:23:49.588]     [    0.000000     0.000000     0.000000     0.000000]
+[14:23:49.588]     [    0.000000     0.000000     0.000000     0.000000]
+[14:23:49.588]     [    0.000000     0.000000     0.000000     0.000000]
+[14:23:49.588]     reading: m[11]=0.000000 m[15]=0.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:23:50.050] PERSPECTIVE-SHAPED 4x4 at c14, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 31, 23846410 uploads total):
+[14:23:50.050]     signature xs=0.000085 ys=-0.000566  seen at: c14
+[14:23:50.050]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:23:50.050]         [stereo] Enabled=1  MatchXS=0.000085  MatchYS=-0.000566
+[14:23:50.050]     [    0.000075     0.048469     0.998825     0.030562]
+[14:23:50.050]     [    1.000000    -0.000537    -0.000191     0.000978]
+[14:23:50.050]     [    0.000537     1.000000     0.000158    -0.888938]
+[14:23:50.050]     [    0.000191    -0.000158     1.000000    -0.001499]
+[14:23:50.512] g_mViewToClip candidate c0 after 19600000 uploads:
+[14:23:50.512]     [    0.004194     0.000000     0.000000   -11.502325]
+[14:23:50.512]     [    0.000000     0.002956     0.000000    -3.365027]
+[14:23:50.512]     [    0.000000     0.000000     0.001293    -1.802127]
+[14:23:50.512]     [    0.000000     0.000000     0.000000     1.000000]
+[14:23:50.512]     reading: m[11]=-1.802127 m[15]=1.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:23:51.217] VS upload ranges in the last 5000 ms (start+count:n): c0+5:5663 c0+4:39725 c0+8:648457 c0+15:4768 c0+12:6262 c192+8:104002 c0+33:2982 c0+105:2982 c0+132:2982 c0+3:80120 c0+6:112567 c0+102:11034 c0+183:2982 c0+21:5963 c0+9:7459 c0+103:50961 c0+129:596 c0+200:7761 c0+61:34626 c192+7:46584 c0+7:99238 c0+77:1194 c0+1:10741 c192+11:17284 c0+11:41720 c0+71:17284 c0+87:596 c0+121:3874 c0+13:60792 c0+14:5066 c0+138:3278 c0+122:6854 c192+12:3576 c0+2:4172 c0+40:2990 c0+52:2980
+[14:23:51.217] LIVE perspective signatures this period (reg xs ys ys/xs n): [c0 0.915689 1.627892 1.7778 n=157064] [c192 0.915689 1.627892 1.7778 n=63868] [c2 0.000001 -0.000000 -0.0067 n=50679] [c5 -0.000001 -0.000000 0.0033 n=10739] [c8 0.000000 -0.000000 -0.0079 n=7155] [c11 -0.000000 -0.000000 0.5915 n=4173] [c14 -0.000000 -0.000000 0.5915 n=3019] [c17 -0.000000 -0.000000 0.5915 n=2981]
+[14:23:51.217]     the CAMERA is the one whose ys/xs equals the display aspect ratio (1.7778 at 16:9); paste ITS xs/ys into [stereo] MatchXS/MatchYS.
+[14:23:51.217]     distinct-signature table: 24/24 slots used, 4554860 dropped  <-- SATURATED: new projections are being LOST. Read the LIVE line above, not the one-shot table.
+[14:23:51.217]     readback: 719 check(s) over 23186601 draw(s) - survived=311 restored=0 overwritten=408 unavailable=0
+[14:23:51.217]     stereo: 120164 edit(s) applied in total, 0 upload(s) refused as oversize
+[14:23:51.816] g_mViewToClip candidate c4 after 15600000 uploads:
+[14:23:51.816]     [   -0.765433     0.601198    -0.229506  2573.873779]
+[14:23:51.816]     [   -0.269507    -0.623347    -0.734033   985.787964]
+[14:23:51.816]     [   -0.584361    -0.500000     0.639158  1669.338501]
+[14:23:51.816]     [    0.000000     0.000000     0.000000     0.000000]
+[14:23:51.816]     reading: m[11]=1669.338501 m[15]=0.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:23:52.275] g_mViewToClip candidate c0 after 20000000 uploads:
+[14:23:52.275]     [    0.004194     0.000000     0.000000   -11.502325]
+[14:23:52.275]     [    0.000000     0.002956     0.000000    -3.365027]
+[14:23:52.275]     [    0.000000     0.000000     0.001293    -1.802127]
+[14:23:52.275]     [    0.000000     0.000000     0.000000     1.000000]
+[14:23:52.275]     reading: m[11]=-1.802127 m[15]=1.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:23:53.206] PERSPECTIVE-SHAPED 4x4 at c0, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 30271, 24735823 uploads total):
+[14:23:53.206]     signature xs=1.000000 ys=1.000000  seen at: c0
+[14:23:53.206]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:23:53.206]         [stereo] Enabled=1  MatchXS=1.000000  MatchYS=1.000000
+[14:23:53.206]     [    1.000000     0.000000     0.000000     0.000000]
+[14:23:53.206]     [    0.000000     1.000000     0.000000     0.000000]
+[14:23:53.206]     [    0.000000     0.000000     1.025641    -0.051282]
+[14:23:53.206]     [    0.000000     0.000000     1.000000     0.000000]
+[14:23:53.264] PERSPECTIVE-SHAPED 4x4 at c2, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 1334028, 24755070 uploads total):
+[14:23:53.264]     signature xs=-0.000000 ys=0.000000  seen at: c2 c5 c8 c11 c14 c17
+[14:23:53.264]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:23:53.264]         [stereo] Enabled=1  MatchXS=-0.000000  MatchYS=0.000000
+[14:23:53.264]     [   -0.000000    -0.000000     1.000000     0.000243]
+[14:23:53.264]     [    1.000000     0.000000     0.000000    -0.000019]
+[14:23:53.264]     [   -0.000000     1.000000    -0.000000     0.000004]
+[14:23:53.264]     [   -0.000000    -0.000000     1.000000    -0.000058]
+[14:23:53.311] PERSPECTIVE-SHAPED 4x4 at c0, layout +-1 at index 14 (row3 = the w-row; this is the shape stereo.h assumes) (sighting 111123, 24768221 uploads total):
+[14:23:53.311]     signature xs=2.414213 ys=2.414213  seen at: c0
+[14:23:53.311]     to shear THIS projection and no other, put it in d3d9_proxy.ini:
+[14:23:53.311]         [stereo] Enabled=1  MatchXS=2.414213  MatchYS=2.414213
+[14:23:53.311]     [    2.414213     0.000000     0.000000     0.000000]
+[14:23:53.311]     [    0.000000     2.414213     0.000000     0.000000]
+[14:23:53.311]     [    0.000000     0.000000     1.021148    -0.327788]
+[14:23:53.311]     [    0.000000     0.000000     1.000000     0.000000]
+[14:23:56.221] VS upload ranges in the last 5000 ms (start+count:n): c0+5:3723 c0+4:17018 c0+8:269824 c0+15:1984 c0+12:2610 c192+8:43276 c0+33:1243 c0+105:1243 c0+132:1243 c0+3:33488 c0+6:46767 c0+102:4597 c0+183:1243 c0+21:2485 c0+9:3111 c0+103:21204 c0+129:248 c0+200:3237 c0+61:14442 c192+7:19404 c0+7:41198 c0+77:498 c0+1:4489 c192+11:7250 c0+11:17499 c0+71:7250 c0+87:250 c0+121:1625 c0+13:25500 c0+14:2125 c0+138:1375 c0+122:2875 c192+12:1500 c0+2:1750 c0+40:1240 c0+52:1250
+[14:23:56.221] LIVE perspective signatures this period (reg xs ys ys/xs n): [c0 0.915689 1.627892 1.7778 n=65412] [c192 0.915689 1.627892 1.7778 n=26654] [c2 0.000000 -0.000000 -4.7051 n=21104] [c5 -0.000001 -0.000000 0.0033 n=4476] [c8 0.000000 -0.000000 -0.0079 n=2980] [c11 -0.000000 -0.000000 0.5915 n=1738] [c14 -0.000000 -0.000000 0.5915 n=1252] [c17 -0.000000 -0.000000 0.5915 n=1242]
+[14:23:56.221]     the CAMERA is the one whose ys/xs equals the display aspect ratio (1.7778 at 16:9); paste ITS xs/ys into [stereo] MatchXS/MatchYS.
+[14:23:56.221]     distinct-signature table: 24/24 slots used, 4670462 dropped  <-- SATURATED: new projections are being LOST. Read the LIVE line above, not the one-shot table.
+[14:23:56.221]     readback: 719 check(s) over 23771494 draw(s) - survived=311 restored=0 overwritten=408 unavailable=0
+[14:23:56.221]     stereo: 120164 edit(s) applied in total, 0 upload(s) refused as oversize
+[14:24:01.221] VS upload ranges in the last 5000 ms (start+count:n): c0+5:2400 c0+4:1500
+[14:24:01.221]     distinct-signature table: 24/24 slots used, 4670462 dropped  <-- SATURATED: new projections are being LOST. Read the LIVE line above, not the one-shot table.
+[14:24:01.221]     readback: 719 check(s) over 23775394 draw(s) - survived=311 restored=0 overwritten=408 unavailable=0
+[14:24:01.221]     stereo: 120164 edit(s) applied in total, 0 upload(s) refused as oversize
+[14:24:06.221] VS upload ranges in the last 5000 ms (start+count:n): c0+5:2400 c0+4:1500
+[14:24:06.221]     distinct-signature table: 24/24 slots used, 4670462 dropped  <-- SATURATED: new projections are being LOST. Read the LIVE line above, not the one-shot table.
+[14:24:06.221]     readback: 719 check(s) over 23779294 draw(s) - survived=311 restored=0 overwritten=408 unavailable=0
+[14:24:06.221]     stereo: 120164 edit(s) applied in total, 0 upload(s) refused as oversize
+[14:24:11.220] VS upload ranges in the last 5000 ms (start+count:n): c0+5:2400 c0+4:1500
+[14:24:11.220]     distinct-signature table: 24/24 slots used, 4670462 dropped  <-- SATURATED: new projections are being LOST. Read the LIVE line above, not the one-shot table.
+[14:24:11.220]     readback: 719 check(s) over 23783194 draw(s) - survived=311 restored=0 overwritten=408 unavailable=0
+[14:24:11.220]     stereo: 120164 edit(s) applied in total, 0 upload(s) refused as oversize
+[14:24:16.220] VS upload ranges in the last 5000 ms (start+count:n): c0+5:1973 c0+4:1273
+[14:24:16.220]     distinct-signature table: 24/24 slots used, 4670462 dropped  <-- SATURATED: new projections are being LOST. Read the LIVE line above, not the one-shot table.
+[14:24:16.220]     readback: 719 check(s) over 23786440 draw(s) - survived=311 restored=0 overwritten=408 unavailable=0
+[14:24:16.220]     stereo: 120164 edit(s) applied in total, 0 upload(s) refused as oversize
+[14:24:21.221] VS upload ranges in the last 5000 ms (start+count:n): c0+5:1691 c0+4:628
+[14:24:21.221]     distinct-signature table: 24/24 slots used, 4670462 dropped  <-- SATURATED: new projections are being LOST. Read the LIVE line above, not the one-shot table.
+[14:24:21.221]     readback: 719 check(s) over 23789008 draw(s) - survived=311 restored=0 overwritten=408 unavailable=0
+[14:24:21.221]     stereo: 120164 edit(s) applied in total, 0 upload(s) refused as oversize
+[14:24:26.221] VS upload ranges in the last 5000 ms (start+count:n): c0+5:1800 c0+4:600
+[14:24:26.221]     distinct-signature table: 24/24 slots used, 4670462 dropped  <-- SATURATED: new projections are being LOST. Read the LIVE line above, not the one-shot table.
+[14:24:26.221]     readback: 719 check(s) over 23791708 draw(s) - survived=311 restored=0 overwritten=408 unavailable=0
+[14:24:26.221]     stereo: 120164 edit(s) applied in total, 0 upload(s) refused as oversize
+[14:24:31.221] VS upload ranges in the last 5000 ms (start+count:n): c0+5:1800 c0+4:600
+[14:24:31.221]     distinct-signature table: 24/24 slots used, 4670462 dropped  <-- SATURATED: new projections are being LOST. Read the LIVE line above, not the one-shot table.
+[14:24:31.221]     readback: 719 check(s) over 23794408 draw(s) - survived=311 restored=0 overwritten=408 unavailable=0
+[14:24:31.221]     stereo: 120164 edit(s) applied in total, 0 upload(s) refused as oversize
+[14:24:36.221] VS upload ranges in the last 5000 ms (start+count:n): c0+5:1800 c0+4:811
+[14:24:36.221]     distinct-signature table: 24/24 slots used, 4670462 dropped  <-- SATURATED: new projections are being LOST. Read the LIVE line above, not the one-shot table.
+[14:24:36.221]     readback: 719 check(s) over 23797319 draw(s) - survived=311 restored=0 overwritten=408 unavailable=0
+[14:24:36.221]     stereo: 120164 edit(s) applied in total, 0 upload(s) refused as oversize
+[14:24:41.222] VS upload ranges in the last 5000 ms (start+count:n): c0+5:1800 c0+4:900
+[14:24:41.222]     distinct-signature table: 24/24 slots used, 4670462 dropped  <-- SATURATED: new projections are being LOST. Read the LIVE line above, not the one-shot table.
+[14:24:41.222]     readback: 719 check(s) over 23800319 draw(s) - survived=311 restored=0 overwritten=408 unavailable=0
+[14:24:41.222]     stereo: 120164 edit(s) applied in total, 0 upload(s) refused as oversize
+[14:24:46.221] VS upload ranges in the last 5000 ms (start+count:n): c0+5:1800 c0+4:900
+[14:24:46.221]     distinct-signature table: 24/24 slots used, 4670462 dropped  <-- SATURATED: new projections are being LOST. Read the LIVE line above, not the one-shot table.
+[14:24:46.221]     readback: 719 check(s) over 23803319 draw(s) - survived=311 restored=0 overwritten=408 unavailable=0
+[14:24:46.221]     stereo: 120164 edit(s) applied in total, 0 upload(s) refused as oversize
+[14:24:51.221] VS upload ranges in the last 5000 ms (start+count:n): c0+5:1800 c0+4:900
+[14:24:51.221]     distinct-signature table: 24/24 slots used, 4670462 dropped  <-- SATURATED: new projections are being LOST. Read the LIVE line above, not the one-shot table.
+[14:24:51.221]     readback: 719 check(s) over 23806319 draw(s) - survived=311 restored=0 overwritten=408 unavailable=0
+[14:24:51.221]     stereo: 120164 edit(s) applied in total, 0 upload(s) refused as oversize
+[14:24:56.221] VS upload ranges in the last 5000 ms (start+count:n): c0+5:1805 c0+4:900
+[14:24:56.221]     distinct-signature table: 24/24 slots used, 4670462 dropped  <-- SATURATED: new projections are being LOST. Read the LIVE line above, not the one-shot table.
+[14:24:56.221]     readback: 719 check(s) over 23809324 draw(s) - survived=311 restored=0 overwritten=408 unavailable=0
+[14:24:56.221]     stereo: 120164 edit(s) applied in total, 0 upload(s) refused as oversize
+[14:24:58.961] === alan-wake-vr proxy d3d9.dll unloading (reserved=00000001, process is terminating) ===
+[14:24:58.961] g_mViewToClip candidate c0 after 20305952 uploads:
+[14:24:58.961]     [    2.000000     0.000000     0.000000    -1.000000]
+[14:24:58.961]     [    0.000000    -2.000000     0.000000     1.000000]
+[14:24:58.961]     [    0.000000     0.000000     1.000000     0.000000]
+[14:24:58.961]     [    0.000000     0.000000     0.000000     1.000000]
+[14:24:58.961]     reading: m[11]=0.000000 m[15]=1.000000 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:24:58.961] g_mViewToClip candidate c4 after 15891987 uploads:
+[14:24:58.961]     [    0.004846     0.991637    -0.128973    -0.012092]
+[14:24:58.961]     [   -0.073571     0.128978     0.988915    -0.203751]
+[14:24:58.961]     [    0.997279     0.004680     0.073579    -0.004989]
+[14:24:58.961]     [    0.004862     0.991637    -0.128973    -0.012091]
+[14:24:58.961]     reading: m[11]=-0.004989 m[15]=-0.012091 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:24:58.961] g_mViewToClip candidate c7 after 4759163 uploads:
+[14:24:58.961]     [    0.008277     0.999326     0.035767    -0.020535]
+[14:24:58.961]     [    0.019339    -0.035922     0.999169     0.075847]
+[14:24:58.961]     [    0.997279     0.004610     0.073583    -0.004871]
+[14:24:58.961]     [    0.004862     0.991758    -0.128031    -0.012375]
+[14:24:58.961]     reading: m[11]=-0.004871 m[15]=-0.012375 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:24:58.961] g_mViewToClip candidate c192 after 3040679 uploads:
+[14:24:58.961]     [    0.888495     0.000000    -0.221502     0.714478]
+[14:24:58.961]     [    0.135537     1.528426     0.543669    -2.315506]
+[14:24:58.961]     [    0.227162    -0.344262     0.911197     2.955778]
+[14:24:58.961]     [    0.227116    -0.344193     0.911015     3.155033]
+[14:24:58.961]     reading: m[11]=2.955778 m[15]=3.155033 - neither convention. Either this register is not g_mViewToClip in this shader, or the projection is not a plain perspective. Compare the other candidates before concluding.
+[14:24:58.961] readback FINAL: 719 check(s) over 23810494 draw(s) - survived=311 restored=0 overwritten=408 unavailable=0
+[14:24:58.961] SetVertexShaderConstantF hook removed; slot 94 restored to 71B18E70
