@@ -28,3 +28,10 @@ with a larger-than-real eye distance so the difference is easy to see.
 - Comfort at half frame rate per eye.
 
 Evidence: `dev-archive/recon/2026-10-06-alternate-frame-stereo-first-run/`.
+
+## Later: the lighting follows each eye
+
+The background helper built the fix that makes lighting, fog and shadows work out positions for each eye. The first
+version put the lights metres off (a grey haze); it found why (the game rebuilds positions as rays, not with a full
+inverse), fixed it, and added a test the first version fails. Live, the fixed version gave a clean picture once the
+game was started with motion blur off (`-noblur`); with blur on, the alternating eyes smear. `[verified-live 2026-10-06, n=1]`

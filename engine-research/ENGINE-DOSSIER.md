@@ -1067,6 +1067,37 @@ from depth). The maths exists (`aw_stereo_apply_clip_to_view`, numerically verif
 **pixel-shader** constants and `SetPixelShaderConstantF` is not hooked. At `EyeDx=0.032` the error is a few
 centimetres at 10 m, so AFR can be tested first `[inferred-static 2026-10-06]`.
 
+**✅ RUN 2026-10-06 (`/lm`, dev PC): alternate frames ALTERNATE.** `Mode=afr`, `EyeDx=0.5`, `Convergence=3`:
+`afr: ON - Present hooked at slot 17`, then `afr: N Present(s)` every ~10 s (about 60 per second), so the game
+presents through the device, not a swap chain `[verified-live 2026-10-06, n=1]`. With the live toggle on, a burst of
+12 screen grabs falls into two groups: the far fence and road sign about 160 px apart between them, Alan (near the
+3 m convergence) in the same place in both, HUD and the lamp glow fixed `[verified-live 2026-10-06, n=1, 12 frames]`.
+Evidence: `dev-archive/recon/2026-10-06-alternate-frame-stereo-first-run/`. On the monitor this looks like flicker,
+as expected; the headset output is the next build.
+
+**✅ 2026-10-06 (`/lm` + its reader): the per-eye lighting inverse, built, broken once, fixed, clean with `-noblur`.**
+- **Where `g_mClipToView` lives:** pixel `c0 x4` in 17 shaders (DeferredLight 16, ConvertToLinearDepth 1); vertex
+  `c0 x4` in SSAO, Godray, ShadowBuffer, VolumetricLight, DeferredLight, VectorBlur, DarkLight, DarkPresence, Backdrop;
+  `c8/c200 x3` only in Velocity. Matched by `p[0] = 1/xs = 1.092074`, `p[5] = 1/ys = 0.614291` plus shape; no other
+  pixel matrix has that diagonal `[inferred-static 2026-10-06]`. Fires live in both stages `[verified-live 2026-10-06, n=2]`.
+- **How the engine uses it:** every consumer builds a RAY, `dot(row.xyw,(u,v,1)) / dot(row3.xyw,(u,v,1))`, and scales
+  it by linear depth times `g_fInvNear`; the z column is never read `[inferred-static 2026-10-06]`. So a full
+  homogeneous inverse is the wrong model.
+- **First version (`8fddbd880c5d`) was wrong:** the exact homogeneous inverse put `eye_dx/near` into `row0.w`, moving
+  every lit point by about `eye_dx*(z/near - 1)` (24.5 m at 10 m depth with `EyeDx=0.5`): live result a flat grey
+  haze with banding, Alan fine, toggle off restores `[verified-live 2026-10-06, n=1]`.
+- **Shipped version (`8f6ee2776754`):** `row0.w -= eye_dx/C`, the ray-direction form (= `aw_stereo_apply_clip_to_view`'s
+  intent). Leaves a constant `eye_dx` error at every depth (3.2 cm at a real IPD), the best one matrix can do; with no
+  edit the error grows as `(eye_dx/C)(z - C)` `[verified-numerically 2026-10-06, n=192 configs x 4 depths]`. The test
+  now rebuilds positions the way the shaders do; the first version fails it 771 times.
+- **Live:** without `-noblur` the picture smears and doubles (motion blur, `VectorBlur`/`Velocity`, sees the eye flip
+  every frame); **with `-noblur` it is clean** `[verified-live 2026-10-06, n=1]`. **Launch for stereo:
+  `steam://run/108710//-noblur`** (the command line arrived intact).
+- **Better route for lights, unexplored:** DeferredLight's pixel shader samples `g_sStereoBuffer` (s3, the 3D Vision
+  stereo texture) and applies `x -= sep*(depth - conv)`; filling that texture with `sep = eye_dx/C`, `conv = C` and
+  leaving ClipToView mono would make the deferred-light error exactly zero `[inferred-static 2026-10-06]`.
+- Installed: `d3d9.dll` `8f6ee2776754`, ini `Mode=afr`, `ClipToView=1`, `EyeDx=0.032`, `Convergence=3.0`.
+
 ## 7. Constant-buffer fill mechanism
 - **D3D9 float constant registers — there are no constant buffers.** `vs_3_0`/`ps_3_0` throughout,
   so the mechanism is `SetVertexShaderConstantF` / `SetPixelShaderConstantF` against the register
