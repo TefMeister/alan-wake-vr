@@ -1044,6 +1044,29 @@ two pictures be taken a second apart from the same camera. Evidence:
 
 - **Lesson worth keeping:** a measurement across launches of a game whose camera moves is not an A/B. Toggle live.
 
+## 6i. Two eyes: ALTERNATE FRAMES first, built and installed (2026-10-06, `/pd`, no launch)
+
+**Decision.** Of the three routes to two eyes, alternate frames is taken first because it needs nothing new from
+the engine: the per-eye edit already works (§6h), so flipping the sign of the eye offset at every `Present` gives
+left, right, left, right. A headset shows each eye its own frames at half rate (UEVR's AFR mode works the same way).
+The two same-frame routes stay open as the upgrade: re-issuing a deferred renderer's passes per eye into two
+viewports (hard: every render target and fullscreen pass), or calling the engine's render twice per `Present`
+(needs the render entry in `renderer_sf_Win32.dll` found) `[inferred-static 2026-10-06]`.
+
+**Built:** `afr.c` hooks device `Present` (slot 17, compile-time checked against the SDK header, restored on unload
+like every other slot), flips `g_right_eye` after each real `Present`, and the edit multiplies `EyeDx` by -1 for the
+left eye. Enabled only by `[stereo] Mode=afr`; otherwise nothing changes. Logs one line per 600 `Present`s, so
+**no `afr:` lines in gameplay would mean the game presents through a swap chain** (then hook
+`IDirect3DSwapChain9::Present`). Deployed `2dac6aee9055`; self-tests pass `[compile-verified 2026-10-06]`.
+**Not run.**
+
+**Known costs:** half rate per eye; motion blur (via `g_mPreviousLocalToClip`) sees the camera jump between eyes, so
+test with `-noblur`; screen-space effects that do not read the edited constants stay mono (the lamp glow).
+**Deferred, not wired:** the matching inverse for `g_mClipToView` (deferred lighting, SSAO, godrays rebuild position
+from depth). The maths exists (`aw_stereo_apply_clip_to_view`, numerically verified) but most of those uploads are
+**pixel-shader** constants and `SetPixelShaderConstantF` is not hooked. At `EyeDx=0.032` the error is a few
+centimetres at 10 m, so AFR can be tested first `[inferred-static 2026-10-06]`.
+
 ## 7. Constant-buffer fill mechanism
 - **D3D9 float constant registers — there are no constant buffers.** `vs_3_0`/`ps_3_0` throughout,
   so the mechanism is `SetVertexShaderConstantF` / `SetPixelShaderConstantF` against the register
