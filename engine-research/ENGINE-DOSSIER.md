@@ -1128,6 +1128,30 @@ First placement was at floor height (LOCAL origin); now the screen is anchored w
 `dev-archive/recon/2026-10-06-headset-output-in-the-simulator/`. Left installed with `[vr] OpenXR=0` and the simulator
 `RuntimeJson` line kept. **Not established:** the look and comfort in a real headset (home PC, owed reminder raised).
 
+## 6k. Head tracking and per-eye lens, built on the same matrix edit (2026-10-06, `/pd`, no launch)
+
+**Route:** no game-camera hook. The head turns the view in the same `g_mViewToClip` window the eye shift already edits
+live (§6h): `P' = P * R4^T` (R = head rotation in game view space, from the OpenXR quaternion with z mirrored:
+`(x,y,z,w) -> (-x,-y,z,w)`). The deferred passes' ray inverse turns back: `ClipToView rows 0..2 <- R * rows 0..2`
+(rays come out in head space; G-buffer normals and every other matrix stay in game view space).
+**Per-eye lens** (`[vr] Layers=projection`): `P00 = 2/(r-l)`, `P02 = -(r+l)/(r-l)`, `P11 = 2/(u-d)`, `P12 = -(u+d)/(u-d)`
+from the headset's fov tangents, eye at `x = +EyeDx` as a pure translation (`row0.w = -P00*EyeDx`, no convergence
+shear); inverse `row0 = [1/P00, 0, *, -P02/P00]`, `row1 = [0, 1/P11, *, -P12/P11]`.
+Tested against ground truth built a different way (points moved into head space, projected through an explicit
+frustum; rays checked against the true eye-relative direction): **3,172 checks pass, 5 of 5 planted mistakes caught**
+(transposed rotation, wrong-side inverse rotation, inverse lens sign, unmirrored quaternion, eye-shift sign)
+`[verified-numerically 2026-10-06, n=96 random configs x 12 points]`.
+
+**Plumbing:** `aw_xr_views.c` holds the head direction and both eyes' pose+fov (`xrLocateSpace` of a VIEW space and
+`xrLocateViews` every headset frame); `afr.c` snapshots them at each `Present` as the pose the next frame renders with;
+`aw_xr_capture` stores that pose with the eye's image, and projection mode submits each eye at exactly that pose, so
+the runtime reprojects for later head movement. Settings: `[vr] HeadTrack=1`, `[vr] Layers=projection`; both off by
+default. Build `95512af70511`, deployed; all self-tests pass `[compile-verified 2026-10-06]`. **Not run.**
+
+**Known gaps:** the 515 fused-matrix shaders (`g_mWorldToClip` / `g_mLocalToClip`: particles, foliage, some
+terrain) get neither the eye shift nor the head turn yet (§6 table); screen-space effects stay screen-locked; the game
+camera does not move with head POSITION (rotation only); the HUD turns with the image.
+
 ## 7. Constant-buffer fill mechanism
 - **D3D9 float constant registers — there are no constant buffers.** `vs_3_0`/`ps_3_0` throughout,
   so the mechanism is `SetVertexShaderConstantF` / `SetPixelShaderConstantF` against the register
