@@ -1098,6 +1098,26 @@ as expected; the headset output is the next build.
   leaving ClipToView mono would make the deferred-light error exactly zero `[inferred-static 2026-10-06]`.
 - Installed: `d3d9.dll` `8f6ee2776754`, ini `Mode=afr`, `ClipToView=1`, `EyeDx=0.032`, `Convergence=3.0`.
 
+## 6j. Headset output built: each eye to its own floating screen (2026-10-06, `/pd`, no launch)
+
+- **Split first (Inspector I-0001):** `proxy.c` 1,398 -> 666 lines by moving four whole sections into `#include`d
+  files (`vs_instrument.inc.c`, `stereo_edit.inc.c`, `readback.inc.c`, `wrap_d3d9.inc.c`). Same translation unit:
+  the built DLL was **byte-identical** before and after (`8f6ee2776754`), self-tests pass. Backup tag
+  `pre-split-2026-10-06-alan-wake-proxy` in `staging` `[compile-verified 2026-10-06]`.
+- **`aw_xr.c` (436 lines):** at each `Present` (before the real one) the back buffer is copied to a plain render
+  target, read back to system memory and stored as that frame's eye (AFR) or both eyes (mono). A thread loads
+  `openxr_loader.dll` from the game folder at run time, makes a D3D11 device on the runtime's adapter, two swapchains
+  (one per eye, BGRA preferred, RGBA swizzled otherwise) and submits **two quad layers, eyeVisibility LEFT and RIGHT,
+  world-locked 2 m ahead, 3.2 m wide**: a 3D screen. Not a projection layer on purpose: the game camera does not follow
+  the head yet and the frame has the game's own field of view. `Reset` (slot 16) is hooked while it is on, to drop our
+  default-pool surface before the game's Reset. D3D11/DXGI are loaded at run time, so with it off nothing new loads.
+  Off unless `[vr] OpenXR=1`. Build `4796bdf6cb9a`, deployed with the 32-bit OpenXR 1.0.10 loader `[compile-verified 2026-10-06]`. **Not run.**
+- **Runtime on the dev PC:** only a 64-bit runtime is registered (SteamVR); the 32-bit key is empty. SteamVR ships
+  `steamxr_win32.json`, and the OpenXR simulator in `tools/OpenXR-Simulator` has a 32-bit build
+  (`openxr_simulator-32.dll`) with activate/deactivate scripts `[measured 2026-10-06]`. The home PC reached a headset
+  from 32-bit XIII through Virtual Desktop's VDXR `[reported]`.
+- **Not done:** head tracking into the game camera (the camera is one static global, §6), per-eye projection layers.
+
 ## 7. Constant-buffer fill mechanism
 - **D3D9 float constant registers — there are no constant buffers.** `vs_3_0`/`ps_3_0` throughout,
   so the mechanism is `SetVertexShaderConstantF` / `SetPixelShaderConstantF` against the register
