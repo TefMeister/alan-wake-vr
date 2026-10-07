@@ -77,3 +77,9 @@ the job done that doesn't rely on your material. This is your work; we're
 just grateful to have learned from it.
 
 | Alan Wake detailed report and FoV-slider thread | Widescreen Gaming Forum (WSGF) | https://www.wsgf.org/dr/alan-wake/en |
+
+**Added 2026-10-07 (`/gr`):**
+
+- **vr.org**, SteamVR 2.17 and 32-bit OpenXR (2026-09-12): https://vr.org/articles/steamvr-2-17-stable-32-bit-openxr-runtime-2026
+- **GamingOnLinux**, SteamVR 2.17 (2026-09): https://www.gamingonlinux.com/2026/09/steamvr-2-17-arrives-ready-to-go-for-the-steam-frame/
+- **DSOGaming**, Alan Wake PC patch 1.02 notes (the `-noblur` fix): https://www.dsogaming.com/?p=18888
