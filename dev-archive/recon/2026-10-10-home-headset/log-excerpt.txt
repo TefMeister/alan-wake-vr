@@ -1,0 +1,213 @@
+[21:35:43.344] stereo: ON  eye_dx=0.032000 convergence=3.000  matching xs=0.915689 ys=1.627892 (block-offset match, edits a copy, never the engine's buffer)
+[21:35:43.963] stereo: ON  eye_dx=0.032000 convergence=3.000  matching xs=0.915689 ys=1.627892 (block-offset match, edits a copy, never the engine's buffer)
+[21:35:44.198] readback: Get=6446C780 DrawPrimitive=hooked DrawIndexedPrimitive=hooked. The device is PURE, so Get is expected to REFUSE; the first check will say so.
+[21:35:44.199] xr: head tracking ON, eye output as per-eye projection views
+[21:35:44.199] xr: ON - headset thread started; each eye's frames go to its own floating screen
+[21:35:44.199] clip-to-view: SetPixelShaderConstantF hooked at slot 109; g_mClipToView gets the per-eye inverse in both stages while the live toggle is ON
+[21:35:44.514] xr: session created; waiting for the runtime to start it
+[21:35:44.514] xr: session running
+[21:35:45.263] xr: capturing 1920x1080 frames for the headset
+[21:35:45.372] xr: two 1920x1080 eye swapchains, format 91
+[21:35:45.372] xr: screen placed at head height -1.16 m
+[21:35:45.411] xr: 1 headset frames submitted
+[21:35:50.474]     readback: 0 check(s) over 1815 draw(s) - survived=0 restored=0 overwritten=0 unavailable=0  <-- NEVER CHECKED: either no edit was ever armed, or no draw came through our hooks
+[21:35:50.474]     stereo: 0 edit(s) applied in total, 0 upload(s) refused as oversize  <-- NEVER MATCHED: the signature is not being found in any forwarded block
+[21:35:55.474]     readback: 0 check(s) over 3989 draw(s) - survived=0 restored=0 overwritten=0 unavailable=0  <-- NEVER CHECKED: either no edit was ever armed, or no draw came through our hooks
+[21:35:55.474]     stereo: 0 edit(s) applied in total, 0 upload(s) refused as oversize  <-- NEVER MATCHED: the signature is not being found in any forwarded block
+[21:35:58.010] xr: 901 headset frames submitted
+[21:36:00.476]     readback: 0 check(s) over 6659 draw(s) - survived=0 restored=0 overwritten=0 unavailable=0  <-- NEVER CHECKED: either no edit was ever armed, or no draw came through our hooks
+[21:36:00.476]     stereo: 0 edit(s) applied in total, 0 upload(s) refused as oversize  <-- NEVER MATCHED: the signature is not being found in any forwarded block
+[21:36:05.475]     readback: 0 check(s) over 9320 draw(s) - survived=0 restored=0 overwritten=0 unavailable=0  <-- NEVER CHECKED: either no edit was ever armed, or no draw came through our hooks
+[21:36:05.475]     stereo: 0 edit(s) applied in total, 0 upload(s) refused as oversize  <-- NEVER MATCHED: the signature is not being found in any forwarded block
+[21:36:10.476]     readback: 0 check(s) over 11987 draw(s) - survived=0 restored=0 overwritten=0 unavailable=0  <-- NEVER CHECKED: either no edit was ever armed, or no draw came through our hooks
+[21:36:10.476]     stereo: 0 edit(s) applied in total, 0 upload(s) refused as oversize  <-- NEVER MATCHED: the signature is not being found in any forwarded block
+[21:36:10.511] xr: 1801 headset frames submitted
+[21:36:15.480]     readback: 0 check(s) over 14231 draw(s) - survived=0 restored=0 overwritten=0 unavailable=0  <-- NEVER CHECKED: either no edit was ever armed, or no draw came through our hooks
+[21:36:15.480]     stereo: 0 edit(s) applied in total, 0 upload(s) refused as oversize  <-- NEVER MATCHED: the signature is not being found in any forwarded block
+[21:36:20.476]     readback: 0 check(s) over 21074 draw(s) - survived=0 restored=0 overwritten=0 unavailable=0  <-- NEVER CHECKED: either no edit was ever armed, or no draw came through our hooks
+[21:36:20.476]     stereo: 0 edit(s) applied in total, 0 upload(s) refused as oversize  <-- NEVER MATCHED: the signature is not being found in any forwarded block
+[21:36:23.012] xr: 2701 headset frames submitted
+[21:36:25.477]     readback: 0 check(s) over 30298 draw(s) - survived=0 restored=0 overwritten=0 unavailable=0  <-- NEVER CHECKED: either no edit was ever armed, or no draw came through our hooks
+[21:36:25.477]     stereo: 0 edit(s) applied in total, 0 upload(s) refused as oversize  <-- NEVER MATCHED: the signature is not being found in any forwarded block
+[21:36:30.472]     readback: 0 check(s) over 39408 draw(s) - survived=0 restored=0 overwritten=0 unavailable=0  <-- NEVER CHECKED: either no edit was ever armed, or no draw came through our hooks
+[21:36:30.472]     stereo: 0 edit(s) applied in total, 0 upload(s) refused as oversize  <-- NEVER MATCHED: the signature is not being found in any forwarded block
+[21:36:35.473]     readback: 0 check(s) over 48318 draw(s) - survived=0 restored=0 overwritten=0 unavailable=0  <-- NEVER CHECKED: either no edit was ever armed, or no draw came through our hooks
+[21:36:35.473]     stereo: 0 edit(s) applied in total, 0 upload(s) refused as oversize  <-- NEVER MATCHED: the signature is not being found in any forwarded block
+[21:36:35.516] xr: 3601 headset frames submitted
+[21:36:40.473]     readback: 0 check(s) over 57786 draw(s) - survived=0 restored=0 overwritten=0 unavailable=0  <-- NEVER CHECKED: either no edit was ever armed, or no draw came through our hooks
+[21:36:40.473]     stereo: 0 edit(s) applied in total, 0 upload(s) refused as oversize  <-- NEVER MATCHED: the signature is not being found in any forwarded block
+[21:36:45.477]     readback: 0 check(s) over 68430 draw(s) - survived=0 restored=0 overwritten=0 unavailable=0  <-- NEVER CHECKED: either no edit was ever armed, or no draw came through our hooks
+[21:36:45.477]     stereo: 0 edit(s) applied in total, 0 upload(s) refused as oversize  <-- NEVER MATCHED: the signature is not being found in any forwarded block
+[21:36:48.014] xr: 4501 headset frames submitted
+[21:36:50.478]     readback: 0 check(s) over 78858 draw(s) - survived=0 restored=0 overwritten=0 unavailable=0  <-- NEVER CHECKED: either no edit was ever armed, or no draw came through our hooks
+[21:36:50.478]     stereo: 0 edit(s) applied in total, 0 upload(s) refused as oversize  <-- NEVER MATCHED: the signature is not being found in any forwarded block
+[21:36:55.472] LIVE perspective signatures this period (reg xs ys ys/xs n): [c0 1.208792 2.148964 1.7778 n=32645] [c7 1.208792 2.148964 1.7778 n=208] [c2 0.000000 0.000000 0.0000 n=7110] [c5 -0.000001 -0.000000 0.0033 n=1524] [c8 0.000000 -0.000000 -0.0079 n=680] [c11 -0.000000 -0.000000 0.5915 n=259] [c14 -0.000000 -0.000000 0.5915 n=265] [c17 -0.000000 -0.000000 0.5915 n=259]
+[21:36:55.472]     readback: 0 check(s) over 276187 draw(s) - survived=0 restored=0 overwritten=0 unavailable=0  <-- NEVER CHECKED: either no edit was ever armed, or no draw came through our hooks
+[21:36:55.472]     stereo: 0 edit(s) applied in total, 0 upload(s) refused as oversize  <-- NEVER MATCHED: the signature is not being found in any forwarded block
+[21:37:00.476] LIVE perspective signatures this period (reg xs ys ys/xs n): [c1 -0.248333 -0.295472 1.1898 n=81406] [c192 1.208792 2.148964 1.7778 n=87297] [c0 1.208792 2.148964 1.7778 n=228125] [c2 0.000000 0.000000 0.0000 n=53480] [c5 -0.000001 -0.000000 0.0033 n=11664] [c8 0.000000 -0.000000 -0.0079 n=5228] [c11 -0.000000 -0.000000 0.5915 n=2011] [c14 -0.000000 -0.000000 0.5915 n=2087]
+[21:37:00.476]     readback: 0 check(s) over 1753331 draw(s) - survived=0 restored=0 overwritten=0 unavailable=0  <-- NEVER CHECKED: either no edit was ever armed, or no draw came through our hooks
+[21:37:00.476]     stereo: 0 edit(s) applied in total, 0 upload(s) refused as oversize  <-- NEVER MATCHED: the signature is not being found in any forwarded block
+[21:37:00.519] xr: 5401 headset frames submitted
+[21:37:05.472] LIVE perspective signatures this period (reg xs ys ys/xs n): [c0 1.208792 2.148964 1.7778 n=235710] [c7 1.208792 2.148964 1.7778 n=1668] [c2 0.000001 0.000000 0.0484 n=55371] [c5 -0.000000 0.000000 -2.2000 n=12067] [c8 -0.000000 -0.000000 2.0703 n=5411] [c11 -0.000000 -0.000000 0.5915 n=2081] [c14 -0.000000 -0.000000 0.5915 n=2131] [c17 -0.000000 -0.000000 0.5915 n=2081]
+[21:37:05.472]     readback: 0 check(s) over 3280811 draw(s) - survived=0 restored=0 overwritten=0 unavailable=0  <-- NEVER CHECKED: either no edit was ever armed, or no draw came through our hooks
+[21:37:05.472]     stereo: 0 edit(s) applied in total, 0 upload(s) refused as oversize  <-- NEVER MATCHED: the signature is not being found in any forwarded block
+[21:37:10.472] LIVE perspective signatures this period (reg xs ys ys/xs n): [c2 0.000000 0.000000 1.0000 n=55502] [c5 -0.000000 0.000000 -2.2000 n=12102] [c8 -0.000000 -0.000000 2.0703 n=5424] [c11 -0.000000 -0.000000 0.5915 n=2086] [c14 -0.000000 -0.000000 0.5915 n=2136] [c17 -0.000000 -0.000000 0.5915 n=2086] [c0 2.414213 2.414213 1.0000 n=236276] [c192 1.208792 2.148964 1.7778 n=90489]
+[21:37:10.472]     readback: 0 check(s) over 4811375 draw(s) - survived=0 restored=0 overwritten=0 unavailable=0  <-- NEVER CHECKED: either no edit was ever armed, or no draw came through our hooks
+[21:37:10.472]     stereo: 0 edit(s) applied in total, 0 upload(s) refused as oversize  <-- NEVER MATCHED: the signature is not being found in any forwarded block
+[21:37:13.018] xr: 6301 headset frames submitted
+[21:37:15.472] LIVE perspective signatures this period (reg xs ys ys/xs n): [c192 1.208792 2.148964 1.7778 n=82262] [c0 1.208792 2.148964 1.7778 n=214064] [c2 -0.000000 0.000000 -4.4000 n=51460] [c5 -0.000000 0.000000 -2.2000 n=11395] [c8 -0.000000 -0.000000 2.0703 n=5605] [c11 -0.000000 -0.000000 0.5915 n=2574] [c14 -0.000000 -0.000000 0.5915 n=2290] [c17 -0.000000 -0.000000 0.5915 n=2244]
+[21:37:15.472]     readback: 0 check(s) over 6277251 draw(s) - survived=0 restored=0 overwritten=0 unavailable=0  <-- NEVER CHECKED: either no edit was ever armed, or no draw came through our hooks
+[21:37:15.472]     stereo: 0 edit(s) applied in total, 0 upload(s) refused as oversize  <-- NEVER MATCHED: the signature is not being found in any forwarded block
+[21:37:25.518] xr: 7201 headset frames submitted
+[21:37:36.411] LIVE perspective signatures this period (reg xs ys ys/xs n): [c0 1.208792 2.148964 1.7778 n=81543] [c192 1.208792 2.148964 1.7778 n=28778] [c2 0.000000 -0.000000 -4.7051 n=13663] [c5 -0.000001 -0.000000 0.0033 n=3483] [c8 0.000000 -0.000000 -0.0079 n=1890] [c11 -0.000000 -0.000000 0.5915 n=776] [c14 -0.000000 -0.000000 0.5915 n=811] [c17 -0.000000 -0.000000 0.5915 n=773]
+[21:37:36.411]     readback: 0 check(s) over 6747874 draw(s) - survived=0 restored=0 overwritten=0 unavailable=0  <-- NEVER CHECKED: either no edit was ever armed, or no draw came through our hooks
+[21:37:36.411]     stereo: 0 edit(s) applied in total, 0 upload(s) refused as oversize  <-- NEVER MATCHED: the signature is not being found in any forwarded block
+[21:37:38.021] xr: 8101 headset frames submitted
+[21:37:41.410] LIVE perspective signatures this period (reg xs ys ys/xs n): [c0 1.208792 2.148964 1.7778 n=239103] [c7 1.208792 2.148964 1.7778 n=1576] [c2 -0.000000 0.000000 -4.4000 n=49520] [c5 -0.000000 0.000000 -2.2000 n=11410] [c8 -0.000000 -0.000000 2.0703 n=5110] [c11 -0.000000 -0.000000 0.5915 n=1966] [c14 -0.000000 -0.000000 0.5915 n=2110] [c17 -0.000000 -0.000000 0.5915 n=1966]
+[21:37:41.410]     readback: 0 check(s) over 8154650 draw(s) - survived=0 restored=0 overwritten=0 unavailable=0  <-- NEVER CHECKED: either no edit was ever armed, or no draw came through our hooks
+[21:37:41.410]     stereo: 0 edit(s) applied in total, 0 upload(s) refused as oversize  <-- NEVER MATCHED: the signature is not being found in any forwarded block
+[21:37:46.409] LIVE perspective signatures this period (reg xs ys ys/xs n): [c2 0.000000 0.000000 1.0000 n=48591] [c5 -0.000001 -0.000000 0.0033 n=11170] [c8 0.000000 -0.000000 -0.0079 n=5010] [c11 -0.000000 -0.000000 0.5915 n=1926] [c14 -0.000000 -0.000000 0.5915 n=2064] [c17 -0.000000 -0.000000 0.5915 n=1926] [c0 2.414213 2.414213 1.0000 n=234699] [c192 1.208792 2.148964 1.7778 n=82775]
+[21:37:46.409]     readback: 0 check(s) over 9534457 draw(s) - survived=0 restored=0 overwritten=0 unavailable=0  <-- NEVER CHECKED: either no edit was ever armed, or no draw came through our hooks
+[21:37:46.409]     stereo: 0 edit(s) applied in total, 0 upload(s) refused as oversize  <-- NEVER MATCHED: the signature is not being found in any forwarded block
+[21:37:50.523] xr: 9001 headset frames submitted
+[21:37:51.410] LIVE perspective signatures this period (reg xs ys ys/xs n): [c192 1.208792 2.148964 1.7778 n=85785] [c0 1.208792 2.148964 1.7778 n=243092] [c2 -0.000000 0.000000 -4.4000 n=50205] [c5 -0.000000 0.000000 -2.2000 n=11590] [c8 -0.000000 -0.000000 2.0703 n=5182] [c11 -0.000000 -0.000000 0.5915 n=1994] [c14 -0.000000 -0.000000 0.5915 n=2138] [c17 -0.000000 -0.000000 0.5915 n=1994]
+[21:37:51.410]     readback: 0 check(s) over 10960256 draw(s) - survived=0 restored=0 overwritten=0 unavailable=0  <-- NEVER CHECKED: either no edit was ever armed, or no draw came through our hooks
+[21:37:51.410]     stereo: 0 edit(s) applied in total, 0 upload(s) refused as oversize  <-- NEVER MATCHED: the signature is not being found in any forwarded block
+[21:37:56.413] LIVE perspective signatures this period (reg xs ys ys/xs n): [c2 0.000000 -0.000000 -4.7051 n=48760] [c5 -0.000001 -0.000000 0.0033 n=11222] [c8 0.000000 -0.000000 -0.0079 n=5030] [c11 -0.000000 -0.000000 0.5915 n=1934] [c14 0.000208 -0.000178 -0.8551 n=2090] [c17 -0.000000 -0.000000 0.5915 n=1934] [c0 1.208792 2.148964 1.7778 n=235676] [c192 1.208792 2.148964 1.7778 n=83205]
+[21:37:56.413]     readback: 0 check(s) over 12345467 draw(s) - survived=0 restored=0 overwritten=0 unavailable=0  <-- NEVER CHECKED: either no edit was ever armed, or no draw came through our hooks
+[21:37:56.413]     stereo: 0 edit(s) applied in total, 0 upload(s) refused as oversize  <-- NEVER MATCHED: the signature is not being found in any forwarded block
+[21:38:01.410] LIVE perspective signatures this period (reg xs ys ys/xs n): [c0 1.208792 2.148964 1.7778 n=239094] [c7 1.208792 2.148964 1.7778 n=1572] [c2 0.000000 -0.000000 -4.7051 n=49506] [c5 -0.000001 -0.000000 0.0033 n=11391] [c8 0.000000 -0.000000 -0.0079 n=5107] [c11 -0.000000 -0.000000 0.5915 n=1964] [c14 -0.000000 -0.000000 0.5915 n=2102] [c17 -0.000000 -0.000000 0.5915 n=1964]
+[21:38:01.410]     readback: 0 check(s) over 13752041 draw(s) - survived=0 restored=0 overwritten=0 unavailable=0  <-- NEVER CHECKED: either no edit was ever armed, or no draw came through our hooks
+[21:38:01.410]     stereo: 0 edit(s) applied in total, 0 upload(s) refused as oversize  <-- NEVER MATCHED: the signature is not being found in any forwarded block
+[21:38:03.023] xr: 9901 headset frames submitted
+[21:38:06.414] LIVE perspective signatures this period (reg xs ys ys/xs n): [c0 1.208792 2.148964 1.7778 n=245179] [c192 1.208792 2.148964 1.7778 n=87124] [c2 0.000000 -0.000000 -4.7051 n=51042] [c5 -0.000001 -0.000000 0.0033 n=11769] [c8 0.000000 -0.000000 -0.0079 n=5267] [c11 -0.000000 -0.000000 0.5915 n=2026] [c14 -0.000000 -0.000000 0.5915 n=2170] [c17 -0.000000 -0.000000 0.5915 n=2026]
+[21:38:06.414]     readback: 0 check(s) over 15200141 draw(s) - survived=0 restored=0 overwritten=0 unavailable=0  <-- NEVER CHECKED: either no edit was ever armed, or no draw came through our hooks
+[21:38:06.414]     stereo: 0 edit(s) applied in total, 0 upload(s) refused as oversize  <-- NEVER MATCHED: the signature is not being found in any forwarded block
+[21:38:10.322] stereo: ON  eye_dx=0.032000 convergence=3.000  matching xs=0.915689 ys=1.627892 (block-offset match, edits a copy, never the engine's buffer)
+[21:38:10.322] live toggle: the configured edit is now ON (numpad 7)
+[21:38:11.415] LIVE perspective signatures this period (reg xs ys ys/xs n): [c0 1.208792 2.148964 1.7778 n=244903] [c7 1.208792 2.148964 1.7778 n=1612] [c2 0.000000 -0.000000 -4.7051 n=50778] [c5 -0.000001 -0.000000 0.0033 n=11687] [c8 0.000000 -0.000000 -0.0079 n=5239] [c11 -0.000000 -0.000000 0.5915 n=2015] [c14 -0.000000 -0.000000 0.5915 n=2159] [c17 -0.000000 -0.000000 0.5915 n=2015]
+[21:38:11.415]     readback: 0 check(s) over 16641900 draw(s) - survived=0 restored=0 overwritten=0 unavailable=0  <-- NEVER CHECKED: either no edit was ever armed, or no draw came through our hooks
+[21:38:11.415]     stereo: 0 edit(s) applied in total, 0 upload(s) refused as oversize  <-- NEVER MATCHED: the signature is not being found in any forwarded block
+[21:38:15.526] xr: 10801 headset frames submitted
+[21:38:16.409] LIVE perspective signatures this period (reg xs ys ys/xs n): [c0 1.208792 2.148964 1.7778 n=247761] [c7 1.208792 2.148964 1.7778 n=1632] [c2 0.000000 -0.000000 -1.0447 n=51326] [c5 -0.000000 0.000000 -2.2000 n=11825] [c8 -0.000000 -0.000000 2.0703 n=5295] [c11 -0.000000 -0.000000 0.5915 n=2037] [c14 -0.000000 -0.000000 0.5915 n=2187] [c17 -0.000000 -0.000000 0.5915 n=2037]
+[21:38:16.409]     readback: 0 check(s) over 18099600 draw(s) - survived=0 restored=0 overwritten=0 unavailable=0  <-- NEVER CHECKED: either no edit was ever armed, or no draw came through our hooks
+[21:38:16.409]     stereo: 0 edit(s) applied in total, 0 upload(s) refused as oversize  <-- NEVER MATCHED: the signature is not being found in any forwarded block
+[21:38:21.416] LIVE perspective signatures this period (reg xs ys ys/xs n): [c2 0.000000 -0.000000 -4.7051 n=50608] [c5 -0.000001 -0.000000 0.0033 n=11654] [c8 0.000000 -0.000000 -0.0079 n=5222] [c0 1.208792 2.148964 1.7778 n=244935] [c192 1.208792 2.148964 1.7778 n=86430] [c11 -0.000000 -0.000000 0.5915 n=2008] [c14 -0.000000 -0.000000 0.5915 n=2158] [c17 -0.000000 -0.000000 0.5915 n=2008]
+[21:38:21.416]     readback: 0 check(s) over 19537202 draw(s) - survived=0 restored=0 overwritten=0 unavailable=0  <-- NEVER CHECKED: either no edit was ever armed, or no draw came through our hooks
+[21:38:21.416]     stereo: 0 edit(s) applied in total, 0 upload(s) refused as oversize  <-- NEVER MATCHED: the signature is not being found in any forwarded block
+[21:38:26.410] LIVE perspective signatures this period (reg xs ys ys/xs n): [c0 1.208792 2.148964 1.7778 n=247210] [c7 1.208792 2.148964 1.7778 n=1624] [c2 0.000000 -0.000000 -4.7051 n=51156] [c5 -0.000001 -0.000000 0.0033 n=11768] [c8 0.000000 -0.000000 -0.0079 n=5288] [c11 -0.000000 -0.000000 0.5915 n=2041] [c14 -0.000000 -0.000000 0.5915 n=2185] [c17 -0.000000 -0.000000 0.5915 n=2035]
+[21:38:26.410]     readback: 0 check(s) over 20990652 draw(s) - survived=0 restored=0 overwritten=0 unavailable=0  <-- NEVER CHECKED: either no edit was ever armed, or no draw came through our hooks
+[21:38:26.410]     stereo: 0 edit(s) applied in total, 0 upload(s) refused as oversize  <-- NEVER MATCHED: the signature is not being found in any forwarded block
+[21:38:28.026] xr: 11701 headset frames submitted
+[21:38:31.418] LIVE perspective signatures this period (reg xs ys ys/xs n): [c0 1.208792 2.148964 1.7778 n=242992] [c192 1.208792 2.148964 1.7778 n=85834] [c2 0.000000 -0.000000 -4.7051 n=50286] [c5 -0.000001 -0.000000 0.0033 n=11577] [c8 0.000000 -0.000000 -0.0079 n=5189] [c11 -0.000000 -0.000000 0.5915 n=1996] [c14 -0.000000 -0.000000 0.5915 n=2128] [c17 -0.000000 -0.000000 0.5915 n=1996]
+[21:38:31.418]     readback: 0 check(s) over 22418418 draw(s) - survived=0 restored=0 overwritten=0 unavailable=0  <-- NEVER CHECKED: either no edit was ever armed, or no draw came through our hooks
+[21:38:31.418]     stereo: 0 edit(s) applied in total, 0 upload(s) refused as oversize  <-- NEVER MATCHED: the signature is not being found in any forwarded block
+[21:38:36.414] LIVE perspective signatures this period (reg xs ys ys/xs n): [c0 1.208792 2.148964 1.7778 n=247181] [c7 1.208792 2.148964 1.7778 n=1620] [c2 0.000000 -0.000000 -4.7051 n=51030] [c5 -0.000001 -0.000000 0.0033 n=11745] [c8 0.000000 -0.000000 -0.0079 n=5265] [c11 -0.000000 -0.000000 0.5915 n=2025] [c14 0.000215 -0.000782 -3.6333 n=2187] [c17 -0.000000 -0.000000 0.5915 n=2025]
+[21:38:36.414]     readback: 0 check(s) over 23869078 draw(s) - survived=0 restored=0 overwritten=0 unavailable=0  <-- NEVER CHECKED: either no edit was ever armed, or no draw came through our hooks
+[21:38:36.414]     stereo: 0 edit(s) applied in total, 0 upload(s) refused as oversize  <-- NEVER MATCHED: the signature is not being found in any forwarded block
+[21:38:40.527] xr: 12601 headset frames submitted
+[21:38:41.414] LIVE perspective signatures this period (reg xs ys ys/xs n): [c0 1.208792 2.148964 1.7778 n=245563] [c7 1.208792 2.148964 1.7778 n=1616] [c2 0.000000 -0.000000 -4.7051 n=50904] [c5 -0.000001 -0.000000 0.0033 n=11716] [c8 0.000000 -0.000000 -0.0079 n=5252] [c11 -0.000000 -0.000000 0.5915 n=2020] [c14 -0.000000 -0.000000 0.5915 n=2170] [c17 -0.000000 -0.000000 0.5915 n=2020]
+[21:38:41.414]     readback: 0 check(s) over 25314207 draw(s) - survived=0 restored=0 overwritten=0 unavailable=0  <-- NEVER CHECKED: either no edit was ever armed, or no draw came through our hooks
+[21:38:41.414]     stereo: 0 edit(s) applied in total, 0 upload(s) refused as oversize  <-- NEVER MATCHED: the signature is not being found in any forwarded block
+[21:38:43.241] live toggle: the configured edit is now OFF (numpad 7)
+[21:38:44.551] stereo: ON  eye_dx=0.032000 convergence=3.000  matching xs=1.208792 ys=2.148964 (block-offset match, edits a copy, never the engine's buffer)
+[21:38:44.551] live toggle: the configured edit is now ON (numpad 7)
+[21:38:44.552] readback: OVERWRITTEN at c192 - the device holds neither our value nor the original. A third value is being written here, so the register is shared and the last writer before the draw is not us. Also candidate (1), but the writer is not simply restoring.
+[21:38:46.418] LIVE perspective signatures this period (reg xs ys ys/xs n): [c0 1.208792 2.148964 1.7778 n=274042] [c7 1.208792 2.148964 1.7778 n=1600] [c2 0.000000 -0.000000 -4.7051 n=51903] [c5 -0.000001 -0.000000 0.0033 n=12650] [c8 0.000000 -0.000000 -0.0079 n=5650] [c11 -0.000000 -0.000000 0.5915 n=2000] [c14 -0.000000 -0.000000 0.5915 n=2150] [c17 -0.000000 -0.000000 0.5915 n=2000]
+[21:38:46.418]     readback: 779 check(s) over 26782960 draw(s) - survived=0 restored=0 overwritten=779 unavailable=0
+[21:38:46.418]     stereo: 157027 edit(s) applied in total, 0 upload(s) refused as oversize
+[21:38:51.411] LIVE perspective signatures this period (reg xs ys ys/xs n): [c0 1.208792 2.148964 1.7778 n=331749] [c7 1.208792 2.148964 1.7778 n=1620] [c2 0.000000 -0.000000 -4.7051 n=55080] [c5 -0.000001 -0.000000 0.0033 n=14598] [c8 0.000000 -0.000000 -0.0079 n=6480] [c11 -0.000000 -0.000000 0.5915 n=2025] [c14 -0.000000 -0.000000 0.5915 n=2175] [c17 -0.000000 -0.000000 0.5915 n=2025]
+[21:38:51.411]     readback: 2848 check(s) over 28331198 draw(s) - survived=0 restored=0 overwritten=2848 unavailable=0
+[21:38:51.411]     stereo: 577471 edit(s) applied in total, 0 upload(s) refused as oversize
+[21:38:53.028] xr: 13501 headset frames submitted
+[21:38:56.413] LIVE perspective signatures this period (reg xs ys ys/xs n): [c0 1.208792 2.148964 1.7778 n=332514] [c7 1.208792 2.148964 1.7778 n=1624] [c2 0.000000 -0.000000 -4.7051 n=55216] [c5 -0.000001 -0.000000 0.0033 n=14616] [c8 0.000000 -0.000000 -0.0079 n=6496] [c11 -0.000000 -0.000000 0.5915 n=2030] [c14 -0.000000 -0.000000 0.5915 n=2180] [c17 -0.000000 -0.000000 0.5915 n=2030]
+[21:38:56.413]     readback: 4927 check(s) over 29883131 draw(s) - survived=0 restored=0 overwritten=4927 unavailable=0
+[21:38:56.413]     stereo: 998899 edit(s) applied in total, 0 upload(s) refused as oversize
+[21:39:01.413] LIVE perspective signatures this period (reg xs ys ys/xs n): [c0 1.208792 2.148964 1.7778 n=319430] [c7 1.208792 2.148964 1.7778 n=1560] [c2 0.000000 -0.000000 -4.7051 n=53040] [c5 -0.000001 -0.000000 0.0033 n=14040] [c8 0.000000 -0.000000 -0.0079 n=6240] [c11 -0.000000 -0.000000 0.5915 n=1950] [c14 -0.000000 -0.000000 0.5915 n=2106] [c17 -0.000000 -0.000000 0.5915 n=1950]
+[21:39:01.413]     readback: 6923 check(s) over 31374418 draw(s) - survived=0 restored=0 overwritten=6923 unavailable=0
+[21:39:01.413]     stereo: 1403739 edit(s) applied in total, 0 upload(s) refused as oversize
+[21:39:05.529] xr: 14401 headset frames submitted
+[21:39:06.412] LIVE perspective signatures this period (reg xs ys ys/xs n): [c0 1.208792 2.148964 1.7778 n=330077] [c7 1.208792 2.148964 1.7778 n=1612] [c2 0.000000 -0.000000 -4.7051 n=54808] [c5 -0.000001 -0.000000 0.0033 n=14508] [c8 0.000000 -0.000000 -0.0079 n=6448] [c11 -0.000000 -0.000000 0.5915 n=2015] [c14 -0.000000 -0.000000 0.5915 n=2159] [c17 -0.000000 -0.000000 0.5915 n=2015]
+[21:39:06.412]     readback: 8983 check(s) over 32915037 draw(s) - survived=0 restored=0 overwritten=8983 unavailable=0
+[21:39:06.412]     stereo: 1822073 edit(s) applied in total, 0 upload(s) refused as oversize
+[21:39:11.410] LIVE perspective signatures this period (reg xs ys ys/xs n): [c0 1.208792 2.148964 1.7778 n=327600] [c7 1.208792 2.148964 1.7778 n=1600] [c2 0.000000 -0.000000 -4.7051 n=54400] [c5 -0.000001 -0.000000 0.0033 n=14406] [c8 0.000000 -0.000000 -0.0079 n=6400] [c11 -0.000000 -0.000000 0.5915 n=2000] [c14 -0.000000 -0.000000 0.5915 n=2156] [c17 -0.000000 -0.000000 0.5915 n=2000]
+[21:39:11.410]     readback: 11027 check(s) over 34444426 draw(s) - survived=0 restored=0 overwritten=11027 unavailable=0
+[21:39:11.410]     stereo: 2237273 edit(s) applied in total, 0 upload(s) refused as oversize
+[21:39:16.414] LIVE perspective signatures this period (reg xs ys ys/xs n): [c0 1.208792 2.148964 1.7778 n=323559] [c7 1.208792 2.148964 1.7778 n=1580] [c2 0.000000 -0.000000 -4.7051 n=53720] [c5 -0.000001 -0.000000 0.0033 n=14220] [c8 0.000000 -0.000000 -0.0079 n=6320] [c11 -0.000000 -0.000000 0.5915 n=1975] [c14 -0.000073 -0.000733 10.0454 n=2119] [c17 -0.000000 -0.000000 0.5915 n=1975]
+[21:39:16.414]     readback: 13044 check(s) over 35954544 draw(s) - survived=0 restored=0 overwritten=13044 unavailable=0
+[21:39:16.414]     stereo: 2647337 edit(s) applied in total, 0 upload(s) refused as oversize
+[21:39:18.031] xr: 15301 headset frames submitted
+[21:39:21.417] LIVE perspective signatures this period (reg xs ys ys/xs n): [c0 1.208792 2.148964 1.7778 n=325962] [c7 1.208792 2.148964 1.7778 n=1592] [c2 0.000000 -0.000000 -4.7051 n=54134] [c5 -0.000001 -0.000000 0.0033 n=14334] [c8 0.000000 -0.000000 -0.0079 n=6368] [c11 -0.000000 -0.000000 0.5915 n=1990] [c14 -0.000000 -0.000000 0.5915 n=2134] [c17 -0.000000 -0.000000 0.5915 n=1990]
+[21:39:21.417]     readback: 15078 check(s) over 37476101 draw(s) - survived=0 restored=0 overwritten=15078 unavailable=0
+[21:39:21.417]     stereo: 3060461 edit(s) applied in total, 0 upload(s) refused as oversize
+[21:39:25.244] live toggle: the configured edit is now OFF (numpad 7)
+[21:39:26.414] LIVE perspective signatures this period (reg xs ys ys/xs n): [c0 1.208792 2.148964 1.7778 n=299525] [c7 1.208792 2.148964 1.7778 n=1556] [c2 0.000000 -0.000000 -4.7051 n=52008] [c5 -0.000001 -0.000000 0.0033 n=13387] [c8 0.000000 -0.000000 -0.0079 n=5951] [c11 -0.000000 -0.000000 0.5915 n=1945] [c14 -0.000000 -0.000000 0.5915 n=2095] [c17 -0.000000 -0.000000 0.5915 n=1945]
+[21:39:26.414]     readback: 16594 check(s) over 38942132 draw(s) - survived=0 restored=0 overwritten=16594 unavailable=0
+[21:39:26.414]     stereo: 3367729 edit(s) applied in total, 0 upload(s) refused as oversize
+[21:39:27.535] stereo: ON  eye_dx=0.032000 convergence=3.000  matching xs=1.208792 ys=2.148964 (block-offset match, edits a copy, never the engine's buffer)
+[21:39:27.535] live toggle: the configured edit is now ON (numpad 7)
+[21:39:30.532] xr: 16201 headset frames submitted
+[21:39:31.409] LIVE perspective signatures this period (reg xs ys ys/xs n): [c0 1.208792 2.148964 1.7778 n=299265] [c7 1.208792 2.148964 1.7778 n=1548] [c2 0.000000 -0.000000 -4.7051 n=51752] [c5 -0.000001 -0.000000 0.0033 n=13316] [c8 0.000000 -0.000000 -0.0079 n=5928] [c11 -0.000000 -0.000000 0.5915 n=1935] [c14 -0.000000 -0.000000 0.5915 n=2079] [c17 -0.000000 -0.000000 0.5915 n=1935]
+[21:39:31.409]     readback: 18131 check(s) over 40402321 draw(s) - survived=0 restored=0 overwritten=18131 unavailable=0
+[21:39:31.409]     stereo: 3679407 edit(s) applied in total, 0 upload(s) refused as oversize
+[21:39:36.410] LIVE perspective signatures this period (reg xs ys ys/xs n): [c0 1.208792 2.148964 1.7778 n=323505] [c7 1.208792 2.148964 1.7778 n=1580] [c2 0.000000 -0.000000 -4.7051 n=53720] [c5 -0.000001 -0.000000 0.0033 n=14238] [c8 0.000000 -0.000000 -0.0079 n=6320] [c11 -0.000000 -0.000000 0.5915 n=1975] [c14 -0.000000 -0.000000 0.5915 n=2107] [c17 -0.000000 -0.000000 0.5915 n=1975]
+[21:39:36.410]     readback: 20153 check(s) over 41912600 draw(s) - survived=0 restored=0 overwritten=20153 unavailable=0
+[21:39:36.410]     stereo: 4089417 edit(s) applied in total, 0 upload(s) refused as oversize
+[21:39:41.411] LIVE perspective signatures this period (reg xs ys ys/xs n): [c0 1.208792 2.148964 1.7778 n=338259] [c7 1.208792 2.148964 1.7778 n=1652] [c2 0.000000 -0.000000 -4.7051 n=56168] [c5 -0.000001 -0.000000 0.0033 n=14868] [c8 0.000000 -0.000000 -0.0079 n=6608] [c11 -0.000000 -0.000000 0.5915 n=2065] [c14 -0.000000 -0.000000 0.5915 n=2227] [c17 -0.000000 -0.000000 0.5915 n=2065]
+[21:39:41.411]     readback: 22261 check(s) over 43491789 draw(s) - survived=0 restored=0 overwritten=22261 unavailable=0
+[21:39:41.411]     stereo: 4518123 edit(s) applied in total, 0 upload(s) refused as oversize
+[21:39:43.034] xr: 17101 headset frames submitted
+[21:39:46.410] LIVE perspective signatures this period (reg xs ys ys/xs n): [c0 2.414213 2.414213 1.0000 n=330085] [c7 1.208792 2.148964 1.7778 n=1616] [c2 0.000000 0.000000 1.0000 n=54891] [c5 -0.000001 -0.000000 0.0033 n=14514] [c8 0.000000 -0.000000 -0.0079 n=6454] [c11 -0.000000 -0.000000 0.5915 n=2017] [c14 -0.000000 -0.000000 0.5915 n=2155] [c17 -0.000000 -0.000000 0.5915 n=2017]
+[21:39:46.410]     readback: 24321 check(s) over 45034132 draw(s) - survived=0 restored=0 overwritten=24321 unavailable=0
+[21:39:46.410]     stereo: 4936444 edit(s) applied in total, 0 upload(s) refused as oversize
+[21:39:51.410] LIVE perspective signatures this period (reg xs ys ys/xs n): [c192 1.208792 2.148964 1.7778 n=95040] [c0 2.414213 2.414213 1.0000 n=324324] [c2 0.000000 0.000000 1.0000 n=53856] [c5 -0.000001 -0.000000 0.0033 n=14268] [c8 0.000000 -0.000000 -0.0079 n=6336] [c11 -0.000000 -0.000000 0.5915 n=1980] [c14 -0.000000 -0.000000 0.5915 n=2118] [c17 -0.000000 -0.000000 0.5915 n=1980]
+[21:39:51.410]     readback: 26344 check(s) over 46548021 draw(s) - survived=0 restored=0 overwritten=26344 unavailable=0
+[21:39:51.410]     stereo: 5347492 edit(s) applied in total, 0 upload(s) refused as oversize
+[21:39:55.535] xr: 18001 headset frames submitted
+[21:39:56.410] LIVE perspective signatures this period (reg xs ys ys/xs n): [c192 1.208792 2.148964 1.7778 n=99360] [c0 1.208792 2.148964 1.7778 n=339045] [c2 0.000000 -0.000000 -4.7051 n=56221] [c5 -0.000001 -0.000000 0.0033 n=14898] [c8 0.000000 -0.000000 -0.0079 n=6618] [c11 -0.000000 -0.000000 0.5915 n=2068] [c14 -0.000000 -0.000000 0.5915 n=2224] [c17 -0.000000 -0.000000 0.5915 n=2068]
+[21:39:56.410]     readback: 28459 check(s) over 48128637 draw(s) - survived=0 restored=0 overwritten=28459 unavailable=0
+[21:39:56.410]     stereo: 5777220 edit(s) applied in total, 0 upload(s) refused as oversize
+[21:39:59.587] live toggle: the configured edit is now OFF (numpad 7)
+[21:40:00.895] stereo: ON  eye_dx=0.032000 convergence=3.000  matching xs=1.208792 ys=2.148964 (block-offset match, edits a copy, never the engine's buffer)
+[21:40:00.895] live toggle: the configured edit is now ON (numpad 7)
+[21:40:01.410] LIVE perspective signatures this period (reg xs ys ys/xs n): [c0 1.208792 2.148964 1.7778 n=306631] [c7 1.208792 2.148964 1.7778 n=1602] [c2 0.000000 -0.000000 -4.7051 n=53369] [c5 -0.000001 -0.000000 0.0033 n=13672] [c8 0.000000 -0.000000 -0.0079 n=6088] [c11 -0.000000 -0.000000 0.5915 n=2000] [c14 -0.000000 -0.000000 0.5915 n=2162] [c17 -0.000000 -0.000000 0.5915 n=2000]
+[21:40:01.410]     readback: 29971 check(s) over 49635409 draw(s) - survived=0 restored=0 overwritten=29971 unavailable=0
+[21:40:01.410]     stereo: 6083918 edit(s) applied in total, 0 upload(s) refused as oversize
+[21:40:06.416] LIVE perspective signatures this period (reg xs ys ys/xs n): [c2 0.000000 -0.000000 -4.7051 n=54944] [c5 -0.000001 -0.000000 0.0033 n=14544] [c8 0.000000 -0.000000 -0.0079 n=6464] [c11 -0.000000 -0.000000 0.5915 n=2020] [c14 -0.000000 -0.000000 0.5915 n=2152] [c17 -0.000000 -0.000000 0.5915 n=2020] [c0 1.208792 2.148964 1.7778 n=330921] [c192 1.208792 2.148964 1.7778 n=96960]
+[21:40:06.416]     readback: 32040 check(s) over 51180049 draw(s) - survived=0 restored=0 overwritten=32040 unavailable=0
+[21:40:06.416]     stereo: 6503317 edit(s) applied in total, 0 upload(s) refused as oversize
+[21:40:08.040] xr: 18901 headset frames submitted
+[21:40:11.417] LIVE perspective signatures this period (reg xs ys ys/xs n): [c0 1.208792 2.148964 1.7778 n=336609] [c7 1.208792 2.148964 1.7778 n=1644] [c2 0.000000 -0.000000 -4.7051 n=55896] [c5 -0.000001 -0.000000 0.0033 n=14802] [c8 0.000000 -0.000000 -0.0079 n=6576] [c11 -0.000000 -0.000000 0.5915 n=2055] [c14 -0.000000 -0.000000 0.5915 n=2193] [c17 -0.000000 -0.000000 0.5915 n=2055]
+[21:40:11.417]     readback: 34141 check(s) over 52751351 draw(s) - survived=0 restored=0 overwritten=34141 unavailable=0
+[21:40:11.417]     stereo: 6929935 edit(s) applied in total, 0 upload(s) refused as oversize
+[21:40:16.415] LIVE perspective signatures this period (reg xs ys ys/xs n): [c0 1.208792 2.148964 1.7778 n=327620] [c7 1.208792 2.148964 1.7778 n=1600] [c2 0.000000 -0.000000 -4.7051 n=54400] [c5 -0.000001 -0.000000 0.0033 n=14400] [c8 0.000000 -0.000000 -0.0079 n=6400] [c11 -0.000000 -0.000000 0.5915 n=2000] [c14 -0.000000 -0.000000 0.5915 n=2126] [c17 -0.000000 -0.000000 0.5915 n=2000]
+[21:40:16.415]     readback: 36186 check(s) over 54280799 draw(s) - survived=0 restored=0 overwritten=36186 unavailable=0
+[21:40:16.415]     stereo: 7345155 edit(s) applied in total, 0 upload(s) refused as oversize
+[21:40:20.538] xr: 19801 headset frames submitted
+[21:40:21.410] LIVE perspective signatures this period (reg xs ys ys/xs n): [c0 1.208792 2.148964 1.7778 n=33579] [c7 1.208792 2.148964 1.7778 n=164] [c2 0.000000 -0.000000 -4.7051 n=5576] [c5 -0.000001 -0.000000 0.0033 n=1476] [c8 0.000000 -0.000000 -0.0079 n=656] [c11 -0.000000 -0.000000 0.5915 n=205] [c14 -0.000000 -0.000000 0.5915 n=223] [c17 -0.000000 -0.000000 0.5915 n=205]
+[21:40:21.410]     readback: 36396 check(s) over 54447504 draw(s) - survived=0 restored=0 overwritten=36396 unavailable=0
+[21:40:21.410]     stereo: 7387713 edit(s) applied in total, 0 upload(s) refused as oversize
+[21:40:26.411]     readback: 36396 check(s) over 54458786 draw(s) - survived=0 restored=0 overwritten=36396 unavailable=0
+[21:40:26.411]     stereo: 7387713 edit(s) applied in total, 0 upload(s) refused as oversize
+[21:40:31.414]     readback: 36396 check(s) over 54470759 draw(s) - survived=0 restored=0 overwritten=36396 unavailable=0
+[21:40:31.414]     stereo: 7387713 edit(s) applied in total, 0 upload(s) refused as oversize
+[21:40:33.040] xr: 20701 headset frames submitted
+[21:40:36.413]     readback: 36396 check(s) over 54482784 draw(s) - survived=0 restored=0 overwritten=36396 unavailable=0
+[21:40:36.413]     stereo: 7387713 edit(s) applied in total, 0 upload(s) refused as oversize
+[21:40:41.413]     readback: 36396 check(s) over 54490357 draw(s) - survived=0 restored=0 overwritten=36396 unavailable=0
+[21:40:41.413]     stereo: 7387713 edit(s) applied in total, 0 upload(s) refused as oversize
+[21:40:45.543] xr: 21601 headset frames submitted
+[21:40:46.410]     readback: 36396 check(s) over 54499407 draw(s) - survived=0 restored=0 overwritten=36396 unavailable=0
+[21:40:46.410]     stereo: 7387713 edit(s) applied in total, 0 upload(s) refused as oversize
+[21:40:51.411]     readback: 36396 check(s) over 54508467 draw(s) - survived=0 restored=0 overwritten=36396 unavailable=0
+[21:40:51.411]     stereo: 7387713 edit(s) applied in total, 0 upload(s) refused as oversize
+[21:40:56.412]     readback: 36396 check(s) over 54517690 draw(s) - survived=0 restored=0 overwritten=36396 unavailable=0
+[21:40:56.412]     stereo: 7387713 edit(s) applied in total, 0 upload(s) refused as oversize
+[21:40:58.043] xr: 22501 headset frames submitted
+[21:41:01.413]     readback: 36396 check(s) over 54527469 draw(s) - survived=0 restored=0 overwritten=36396 unavailable=0
+[21:41:01.413]     stereo: 7387713 edit(s) applied in total, 0 upload(s) refused as oversize
+[21:41:06.410]     readback: 36396 check(s) over 54537171 draw(s) - survived=0 restored=0 overwritten=36396 unavailable=0
+[21:41:06.410]     stereo: 7387713 edit(s) applied in total, 0 upload(s) refused as oversize
+[21:41:10.544] xr: 23401 headset frames submitted
+[21:41:11.410]     readback: 36396 check(s) over 54546175 draw(s) - survived=0 restored=0 overwritten=36396 unavailable=0
+[21:41:11.410]     stereo: 7387713 edit(s) applied in total, 0 upload(s) refused as oversize
