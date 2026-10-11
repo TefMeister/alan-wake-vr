@@ -1025,6 +1025,10 @@ two pictures be taken a second apart from the same camera. Evidence:
 - **Probe (`ProbeScaleXS=0.5`), off/on/off/on/off:** ON squeezes the whole scene, world and Alan, toward the centre
   (Alan 80 px right of centre -> 40), more forest comes into view at the sides, HUD unmoved; OFF restores it
   `[verified-live 2026-10-06, n=2 cycles]`.
+  ⚠️ **Corrected 2026-10-11 (§6l): not the whole scene.** On a gridded crop of `probe-squeeze-off-on-off.png` the
+  street lamp, both road edges and the yellow line sit at the same pixels off and on; Alan, the sign and the light
+  cone change. The road, terrain and trees are on the fused path, which this edit never reached
+  `[measured 2026-10-11, n=1 picture, by eye on a 40 px grid]`.
 - **Eye shift (`EyeDx=2`, `Convergence=5`, the existing `aw_stereo_apply_block`), off/on/off:** ON moves Alan (near)
   LEFT about 180 px and the far fence and road sign RIGHT about 150 px, with the middle distance nearly still: the
   depth-dependent parallax of one converged eye. OFF restores it `[verified-live 2026-10-06, n=1]`.
@@ -1115,7 +1119,11 @@ as expected; the headset output is the next build.
 - **Runtime on the dev PC:** only a 64-bit runtime is registered (SteamVR); the 32-bit key is empty. SteamVR ships
   `steamxr_win32.json`, and the OpenXR simulator in `tools/OpenXR-Simulator` has a 32-bit build
   (`openxr_simulator-32.dll`) with activate/deactivate scripts `[measured 2026-10-06]`. The home PC reached a headset
-  from 32-bit XIII through Virtual Desktop's VDXR `[reported]`.
+  from 32-bit XIII through Virtual Desktop's VDXR `[reported]`. Why the 32-bit key is empty (from `/gr`, 2026-10-07):
+  SteamVR 2.17 (stable 2026-09-10) added 32-bit OpenXR and fills that key only when you accept its "set as default
+  OpenXR runtime" prompt; `[vr] RuntimeJson` can point at `steamxr_win32.json` directly instead `[reported]`.
+- **`-noblur` is a real, supported switch** (Remedy's v1.02 patch notes fixed blur "re-enabled even if -noblur command
+  line option was specified") `[reported]`; it is in the standard launch line since 2026-10-06.
 - **Not done:** head tracking into the game camera (the camera is one static global, §6), per-eye projection layers.
 
 **✅ RUN 2026-10-06 (`/lm`, dev PC, OpenXR simulator 32-bit): HEADSET OUTPUT WORKS END TO END.** A launch with the
@@ -1162,6 +1170,40 @@ it waits for a person to press OK `[verified-live 2026-10-06]`.
 **Known gaps:** the 515 fused-matrix shaders (`g_mWorldToClip` / `g_mLocalToClip`: particles, foliage, some
 terrain) get neither the eye shift nor the head turn yet (§6 table); screen-space effects stay screen-locked; the game
 camera does not move with head POSITION (rotation only); the HUD turns with the image.
+
+## 6l. The scene is two halves: the fused half now gets the same edit, and the head is re-centred (2026-10-11, `/pd`, no launch)
+
+**Why the home headset run (2026-10-10) lost Alan, the light cones and the fog while the road and trees stayed put.**
+The world is drawn on two camera paths. The split path (`g_mViewToClip`, the one `MatchXS/YS` finds) carries Alan,
+rocks, signs and light volumes; the fused path (`g_mWorldToClip` / `g_mLocalToClip`, the 515 shaders of §6: Particle,
+FoliagePRT, Terrain, Grass, FoliageBillboard) carries the road, terrain, trees and particles and never received the
+edit. The 2026-10-06 squeeze probe already showed it: Alan squeezed, the lamp and road edges did not move (§6h
+correction) `[measured 2026-10-11, n=1 picture]`. With a 3 cm eye shift the halves drift slightly; with a head turn
+the split half is thrown off screen. ⚠️ So §6k's simulator "the world slides left" was judged on the split half too.
+`[inferred-static 2026-10-11]`
+Two more causes, both from the code `[inferred-static 2026-10-11]`: the head turn used the runtime's raw heading
+(never re-centred, so a headset lying on a desk turned everything away), and `[vr]` settings were read once at start,
+so the home "HeadTrack=0 before reload" picture still had head turning on. The home FOV values are a different in-game
+FOV setting, not a cause.
+
+**Built (`staging/alan-wake-vr/proxy-d3d9/src/fused.c`, `[stereo] Fused=1`, off by default).** Each fused window is
+split as `X = P^-1 * M` with the camera projection P the split path last matched (P is
+`[xs 0 p02 p03; 0 ys p12 p13; 0 0 a b; 0 0 1 0]`, so the inverse is a few lines), and rebuilt as `Pe * X`, where
+`Pe` is made by the split path's own functions (shear, eye lens, head turn). **Attribution, the §6 KNOWN GAP:** a
+window counts only if X is a real camera transform: `X3 = (0,0,0,1)` (the camera's own near/far) and the 3x3 columns
+orthogonal (any rotation times per-axis scale passes; another FOV or aspect fails). Residual risk: a spot light with
+the camera's near plane looking exactly along a world axis; its tell would be shadows that split between the eyes.
+Test (`fused_test.c`): 2,934 checks, 1,130 on-screen points land where the split path puts them; seven decoys left
+alone (padding, P itself, ortho shadow, square spot light, camera FOV with another near, camera at +3% FOV,
+local-to-view plus other data); 3 of 6 planted mistakes caught, the other 3 cannot occur with this game's symmetric P
+`[verified-numerically 2026-10-11]`.
+**Re-centring:** the heading at the first pose and at every numpad 7 switch-on becomes the game's forward; pitch and
+roll stay measured from gravity (`aw_head_yaw`, `aw_head_remove_yaw`; 64 checks, 2 of 2 planted mistakes caught)
+`[verified-numerically 2026-10-11]`. **Live reload** now re-reads `[vr] HeadTrack` and `Layers`.
+Build `038c168ed96d`, installed on the dev PC with `Fused=1` (the edit stays off until numpad 7) `[compile-verified 2026-10-11]`. **Not run.**
+**The deciding run (flat, dev PC):** numpad 7 on the lighthouse road. Road, trees and Alan shift together and the log's
+`fused: N` grows → joined. `fused: 0 ... NONE FOUND` → the fused matrices do not reach this hook. Trees or particles
+jump while Alan is right → a mis-split window.
 
 ## 7. Constant-buffer fill mechanism
 - **D3D9 float constant registers — there are no constant buffers.** `vs_3_0`/`ps_3_0` throughout,
