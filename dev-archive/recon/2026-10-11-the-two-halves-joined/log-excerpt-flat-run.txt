@@ -1,0 +1,40 @@
+[17:38:08.799] clip-to-view: SetPixelShaderConstantF hooked at slot 109; g_mClipToView gets the per-eye inverse in both stages while the live toggle is ON
+[17:40:01.501] live toggle: the configured edit is now ON (numpad 7)
+[17:40:01.501] stereo: FIRST edit applied - block c192+7, matrix at offset +0 (register c192), 1 window(s) this upload
+[17:40:01.502] clip-to-view: FIRST pixel-stage inverse applied at block offset +0 (1 window(s))
+[17:40:01.502] clip-to-view: FIRST vertex-stage inverse applied at block offset +0 (1 window(s))
+[17:41:16.104] live toggle: the configured edit is now OFF (numpad 7)
+[14:43:43.289] clip-to-view: SetPixelShaderConstantF hooked at slot 109; g_mClipToView gets the per-eye inverse in both stages while the live toggle is ON
+[14:43:57.284]     fused: 0 fused camera matrices given the same edit (particles, foliage, terrain)  <-- NONE FOUND: no camera projection cached yet, or no fused window passed the camera test
+[14:44:02.284]     fused: 0 fused camera matrices given the same edit (particles, foliage, terrain)  <-- NONE FOUND: no camera projection cached yet, or no fused window passed the camera test
+[14:44:07.294]     fused: 0 fused camera matrices given the same edit (particles, foliage, terrain)  <-- NONE FOUND: no camera projection cached yet, or no fused window passed the camera test
+[14:44:12.293]     fused: 0 fused camera matrices given the same edit (particles, foliage, terrain)  <-- NONE FOUND: no camera projection cached yet, or no fused window passed the camera test
+[14:45:31.004]     fused: 0 fused camera matrices given the same edit (particles, foliage, terrain)  <-- NONE FOUND: no camera projection cached yet, or no fused window passed the camera test
+[14:45:36.001]     fused: 0 fused camera matrices given the same edit (particles, foliage, terrain)  <-- NONE FOUND: no camera projection cached yet, or no fused window passed the camera test
+[14:45:41.002]     fused: 0 fused camera matrices given the same edit (particles, foliage, terrain)  <-- NONE FOUND: no camera projection cached yet, or no fused window passed the camera test
+[14:45:46.001]     fused: 0 fused camera matrices given the same edit (particles, foliage, terrain)  <-- NONE FOUND: no camera projection cached yet, or no fused window passed the camera test
+[14:45:51.008]     fused: 0 fused camera matrices given the same edit (particles, foliage, terrain)  <-- NONE FOUND: no camera projection cached yet, or no fused window passed the camera test
+[14:45:56.006]     fused: 0 fused camera matrices given the same edit (particles, foliage, terrain)  <-- NONE FOUND: no camera projection cached yet, or no fused window passed the camera test
+[14:46:01.002]     fused: 0 fused camera matrices given the same edit (particles, foliage, terrain)  <-- NONE FOUND: no camera projection cached yet, or no fused window passed the camera test
+[14:46:06.001]     fused: 0 fused camera matrices given the same edit (particles, foliage, terrain)  <-- NONE FOUND: no camera projection cached yet, or no fused window passed the camera test
+[14:46:11.001]     fused: 0 fused camera matrices given the same edit (particles, foliage, terrain)  <-- NONE FOUND: no camera projection cached yet, or no fused window passed the camera test
+[14:46:16.003]     fused: 0 fused camera matrices given the same edit (particles, foliage, terrain)  <-- NONE FOUND: no camera projection cached yet, or no fused window passed the camera test
+[14:46:21.005]     fused: 0 fused camera matrices given the same edit (particles, foliage, terrain)  <-- NONE FOUND: no camera projection cached yet, or no fused window passed the camera test
+[14:46:26.004]     fused: 0 fused camera matrices given the same edit (particles, foliage, terrain)  <-- NONE FOUND: no camera projection cached yet, or no fused window passed the camera test
+[14:46:31.003]     fused: 0 fused camera matrices given the same edit (particles, foliage, terrain)  <-- NONE FOUND: no camera projection cached yet, or no fused window passed the camera test
+[14:46:36.001]     fused: 0 fused camera matrices given the same edit (particles, foliage, terrain)  <-- NONE FOUND: no camera projection cached yet, or no fused window passed the camera test
+[14:46:41.001]     fused: 0 fused camera matrices given the same edit (particles, foliage, terrain)  <-- NONE FOUND: no camera projection cached yet, or no fused window passed the camera test
+[14:46:46.002]     fused: 0 fused camera matrices given the same edit (particles, foliage, terrain)  <-- NONE FOUND: no camera projection cached yet, or no fused window passed the camera test
+[14:46:51.003]     fused: 0 fused camera matrices given the same edit (particles, foliage, terrain)  <-- NONE FOUND: no camera projection cached yet, or no fused window passed the camera test
+[14:46:56.001]     fused: 0 fused camera matrices given the same edit (particles, foliage, terrain)  <-- NONE FOUND: no camera projection cached yet, or no fused window passed the camera test
+[14:47:01.000]     fused: 0 fused camera matrices given the same edit (particles, foliage, terrain)  <-- NONE FOUND: no camera projection cached yet, or no fused window passed the camera test
+[14:47:06.000]     fused: 0 fused camera matrices given the same edit (particles, foliage, terrain)  <-- NONE FOUND: no camera projection cached yet, or no fused window passed the camera test
+[14:47:11.000]     fused: 0 fused camera matrices given the same edit (particles, foliage, terrain)  <-- NONE FOUND: no camera projection cached yet, or no fused window passed the camera test
+[14:47:16.000]     fused: 0 fused camera matrices given the same edit (particles, foliage, terrain)  <-- NONE FOUND: no camera projection cached yet, or no fused window passed the camera test
+[14:47:20.999]     fused: 0 fused camera matrices given the same edit (particles, foliage, terrain)  <-- NONE FOUND: no camera projection cached yet, or no fused window passed the camera test
+[14:47:25.999]     fused: 0 fused camera matrices given the same edit (particles, foliage, terrain)  <-- NONE FOUND: no camera projection cached yet, or no fused window passed the camera test
+[14:47:30.999]     fused: 0 fused camera matrices given the same edit (particles, foliage, terrain)  <-- NONE FOUND: no camera projection cached yet, or no fused window passed the camera test
+[14:47:35.997]     fused: 0 fused camera matrices given the same edit (particles, foliage, terrain)  <-- NONE FOUND: no camera projection cached yet, or no fused window passed the camera test
+[14:47:40.998]     fused: 0 fused camera matrices given the same edit (particles, foliage, terrain)  <-- NONE FOUND: no camera projection cached yet, or no fused window passed the camera test
+[14:47:45.996]     fused: 0 fused camera matrices given the same edit (particles, foliage, terrain)  <-- NONE FOUND: no camera projection cached yet, or no fused window passed the camera test
+[14:47:50.996]     fused: 0 fused camera matrices given the same edit (particles, foliage, terrain)  <-- NONE FOUND: no camera projection cached yet, or no fused window passed the camera test
