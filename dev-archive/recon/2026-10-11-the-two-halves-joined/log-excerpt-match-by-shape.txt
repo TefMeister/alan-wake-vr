@@ -1,0 +1,12 @@
+[17:38:08.288] stereo: ON  eye_dx=0.032000 convergence=3.000  matching xs=0.915689 ys=1.627892 (block-offset match, edits a copy, never the engine's buffer)
+[17:38:08.490] stereo: ON  eye_dx=0.032000 convergence=3.000  matching xs=0.915689 ys=1.627892 (block-offset match, edits a copy, never the engine's buffer)
+[17:40:01.501] stereo: ON  eye_dx=0.032000 convergence=3.000  matching xs=0.915689 ys=1.627892 (block-offset match, edits a copy, never the engine's buffer)
+[17:40:01.501] stereo: FIRST edit applied - block c192+7, matrix at offset +0 (register c192), 1 window(s) this upload
+[17:40:01.502] clip-to-view: FIRST pixel-stage inverse applied at block offset +0 (1 window(s))
+[17:40:01.502] clip-to-view: FIRST vertex-stage inverse applied at block offset +0 (1 window(s))
+[14:43:42.442] stereo: ON  eye_dx=0.032000 convergence=3.000  matching xs=0.915689 ys=1.627892 (block-offset match, edits a copy, never the engine's buffer)
+[14:43:42.771] stereo: ON  eye_dx=0.032000 convergence=3.000  matching xs=0.915689 ys=1.627892 (block-offset match, edits a copy, never the engine's buffer)
+[14:43:57.284]     fused: 0 fused camera matrices given the same edit (particles, foliage, terrain)  <-- NONE FOUND: no camera projection cached yet, or no fused window passed the camera test
+[14:44:02.284]     fused: 0 fused camera matrices given the same edit (particles, foliage, terrain)  <-- NONE FOUND: no camera projection cached yet, or no fused window passed the camera test
+[14:44:07.294]     fused: 0 fused camera matrices given the same edit (particles, foliage, terrain)  <-- NONE FOUND: no camera projection cached yet, or no fused window passed the camera test
+[14:44:12.293]     fused: 0 fused camera matrices given the same edit (particles, foliage, terrain)  <-- NONE FOUND: no camera projection cached yet, or no fused window passed the camera test

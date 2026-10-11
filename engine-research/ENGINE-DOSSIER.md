@@ -1205,6 +1205,31 @@ Build `038c168ed96d`, installed on the dev PC with `Fused=1` (the edit stays off
 `fused: N` grows → joined. `fused: 0 ... NONE FOUND` → the fused matrices do not reach this hook. Trees or particles
 jump while Alan is right → a mis-split window.
 
+**✅ RUN 2026-10-11 (`/lm`, dev PC, three launches): THE TWO HALVES ARE JOINED.** Evidence:
+`dev-archive/recon/2026-10-11-the-two-halves-joined/`.
+- **Flat, eye shift 0.30 m, convergence 3 m, `-noblur`, numpad 7, measured as the best-correlating sideways shift per
+  region against the "off" frame** (`shift.py`): `Fused=0`: fence/sign +47 px, road edge 0, treetops 0 (torn). `Fused=1`:
+  fence +47, treetops +51, road +18, Alan (nearer than convergence) -7: one consistent depth order
+  `[measured 2026-10-11, n=2 frames each]`. Log: `fused: 64012` matrices in the first second.
+- At 2 m eye shift with `Fused=0`, Alan **vanished**, as in the home picture; with `Fused=1` he came back
+  `[verified-live 2026-10-11, n=1]`.
+- **OpenXR simulator, head 40° off to the side and 20° down when the edit switched on:** the view re-centred straight
+  down the road, the scene whole; a further 25° turn turned everything together. Control, same turn with `Fused=0`:
+  the road stayed put while Alan, rocks and the sign floated into the sky, the home fault reproduced
+  `[verified-live 2026-10-11, n=1 each]`. ⚠️ The simulator's positive yaw turns the head LEFT (OpenXR +y rotation).
+- **`[stereo] MatchAspect=1.7778` with `MatchXS/YS=0`** (built by the session's reader, `aspect_test.c` 7,015 checks):
+  found the camera by shape on its own (`c7, xs 0.915689, ys 1.627892`), fused path and head turn on top, scene whole
+  in the simulator `[verified-live 2026-10-11, n=1]`. So the home PC needs no hand-entered signature. Optional
+  `MatchNear` would also drop the camera's far-scenery slice (c7, near ~1068), so it stays off.
+- **Reader, static, all 62 shader files:** all 515 fused matrices are 4x4 rows-as-registers, one element, at c0..c195
+  (Particle c103/c119, FoliagePRT c59/c75/c91/c123, Terrain c4, Grass c43, FoliageBillboard c111/c192, 28 at c0 incl.
+  17 DeferredLight light volumes); none crosses c127/c128, so every one is visible to the hook; row 3 always gives clip.w
+  `[measured 2026-10-11]`.
+- **Still open:** the street-lamp glow sprites did not move with the eye shift (0/-1 px) and sit at the same screen spot
+  through a head turn: a third, screen-space path `[hypothesis]`. Captures taken 0.3 s apart showed the same eye each
+  time, so per-eye alternation was not checked here.
+Build `a7942782684d` installed on the dev PC: `Fused=1`, `MatchAspect=1.7778`, `[vr] OpenXR=0`; stamped.
+
 ## 7. Constant-buffer fill mechanism
 - **D3D9 float constant registers — there are no constant buffers.** `vs_3_0`/`ps_3_0` throughout,
   so the mechanism is `SetVertexShaderConstantF` / `SetPixelShaderConstantF` against the register

@@ -1,0 +1,24 @@
+E1.png
+   road edge (fused: terrain)   dx=  +0 px  corr=1.00
+   near fence/sign (split)      dx= +47 px  corr=0.91
+   Alan (split)                 dx= -10 px  corr=0.74
+   street lamp glow             dx=  +0 px  corr=0.89
+   trees top (fused: foliage)   dx=  +0 px  corr=0.59
+E2.png
+   road edge (fused: terrain)   dx=  +0 px  corr=1.00
+   near fence/sign (split)      dx= +44 px  corr=0.77
+   Alan (split)                 dx=  +0 px  corr=0.79
+   street lamp glow             dx=  +0 px  corr=0.87
+   trees top (fused: foliage)   dx=  +0 px  corr=0.65
+F1.png
+   road edge (fused: terrain)   dx= +18 px  corr=0.81
+   near fence/sign (split)      dx= +47 px  corr=0.92
+   Alan (split)                 dx=  -7 px  corr=0.81
+   street lamp glow             dx=  -1 px  corr=0.87
+   trees top (fused: foliage)   dx= +51 px  corr=0.72
+F2.png
+   road edge (fused: terrain)   dx= +18 px  corr=0.81
+   near fence/sign (split)      dx= +47 px  corr=0.91
+   Alan (split)                 dx=  -7 px  corr=0.81
+   street lamp glow             dx=  -1 px  corr=0.88
+   trees top (fused: foliage)   dx= +51 px  corr=0.74

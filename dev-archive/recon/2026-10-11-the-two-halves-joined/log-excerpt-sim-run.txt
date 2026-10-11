@@ -1,0 +1,60 @@
+[17:38:08.799] xr: head tracking ON, eye output as per-eye projection views
+[17:38:08.799] xr: ON - headset thread started; each eye's frames go to its own floating screen
+[17:38:08.799] clip-to-view: SetPixelShaderConstantF hooked at slot 109; g_mClipToView gets the per-eye inverse in both stages while the live toggle is ON
+[17:38:08.800] xr: runtime for this game only: D:\claude video game stuff\tools\OpenXR-Simulator\openxr_simulator-32.json
+[17:38:09.271] xr: session created; waiting for the runtime to start it
+[17:38:09.379] xr: session running
+[17:38:09.736] xr: capturing 1280x720 frames for the headset
+[17:38:09.751] xr: two 1280x720 eye swapchains, format 91
+[17:38:09.754] xr: screen placed at head height 1.70 m
+[17:38:09.865] xr: 1 headset frames submitted
+[17:38:25.111] xr: 901 headset frames submitted
+[17:38:40.115] xr: 1801 headset frames submitted
+[17:38:42.911] xr: capturing 1280x720 frames for the headset
+[17:38:55.115] xr: 2701 headset frames submitted
+[17:39:10.033] xr: 3601 headset frames submitted
+[17:39:25.035] xr: 4501 headset frames submitted
+[17:39:40.018] xr: 5401 headset frames submitted
+[17:39:55.019] xr: 6301 headset frames submitted
+[17:40:01.501] live toggle: the configured edit is now ON (numpad 7)
+[17:40:01.501] stereo: FIRST edit applied - block c192+7, matrix at offset +0 (register c192), 1 window(s) this upload
+[17:40:01.502] clip-to-view: FIRST pixel-stage inverse applied at block offset +0 (1 window(s))
+[17:40:01.502] clip-to-view: FIRST vertex-stage inverse applied at block offset +0 (1 window(s))
+[17:40:10.043] xr: 7201 headset frames submitted
+[17:40:25.048] xr: 8101 headset frames submitted
+[17:40:40.061] xr: 9001 headset frames submitted
+[17:40:55.064] xr: 9901 headset frames submitted
+[17:41:10.083] xr: 10801 headset frames submitted
+[17:41:16.104] live toggle: the configured edit is now OFF (numpad 7)
+[17:41:25.084] xr: 11701 headset frames submitted
+[17:41:40.084] xr: 12601 headset frames submitted
+[17:41:55.084] xr: 13501 headset frames submitted
+[17:42:10.045] xr: 14401 headset frames submitted
+[14:43:43.289] xr: off ([vr] OpenXR is not 1)
+[14:43:43.289] clip-to-view: SetPixelShaderConstantF hooked at slot 109; g_mClipToView gets the per-eye inverse in both stages while the live toggle is ON
+[14:43:57.284]     fused: 0 fused camera matrices given the same edit (particles, foliage, terrain)  <-- NONE FOUND: no camera projection cached yet, or no fused window passed the camera test
+[14:44:02.284]     fused: 0 fused camera matrices given the same edit (particles, foliage, terrain)  <-- NONE FOUND: no camera projection cached yet, or no fused window passed the camera test
+[14:44:07.294]     fused: 0 fused camera matrices given the same edit (particles, foliage, terrain)  <-- NONE FOUND: no camera projection cached yet, or no fused window passed the camera test
+[14:44:12.293]     fused: 0 fused camera matrices given the same edit (particles, foliage, terrain)  <-- NONE FOUND: no camera projection cached yet, or no fused window passed the camera test
+[14:45:31.004]     fused: 0 fused camera matrices given the same edit (particles, foliage, terrain)  <-- NONE FOUND: no camera projection cached yet, or no fused window passed the camera test
+[14:45:36.001]     fused: 0 fused camera matrices given the same edit (particles, foliage, terrain)  <-- NONE FOUND: no camera projection cached yet, or no fused window passed the camera test
+[14:45:41.002]     fused: 0 fused camera matrices given the same edit (particles, foliage, terrain)  <-- NONE FOUND: no camera projection cached yet, or no fused window passed the camera test
+[14:45:46.001]     fused: 0 fused camera matrices given the same edit (particles, foliage, terrain)  <-- NONE FOUND: no camera projection cached yet, or no fused window passed the camera test
+[14:45:51.008]     fused: 0 fused camera matrices given the same edit (particles, foliage, terrain)  <-- NONE FOUND: no camera projection cached yet, or no fused window passed the camera test
+[14:45:56.006]     fused: 0 fused camera matrices given the same edit (particles, foliage, terrain)  <-- NONE FOUND: no camera projection cached yet, or no fused window passed the camera test
+[14:46:01.002]     fused: 0 fused camera matrices given the same edit (particles, foliage, terrain)  <-- NONE FOUND: no camera projection cached yet, or no fused window passed the camera test
+[14:46:06.001]     fused: 0 fused camera matrices given the same edit (particles, foliage, terrain)  <-- NONE FOUND: no camera projection cached yet, or no fused window passed the camera test
+[14:46:11.001]     fused: 0 fused camera matrices given the same edit (particles, foliage, terrain)  <-- NONE FOUND: no camera projection cached yet, or no fused window passed the camera test
+[14:46:16.003]     fused: 0 fused camera matrices given the same edit (particles, foliage, terrain)  <-- NONE FOUND: no camera projection cached yet, or no fused window passed the camera test
+[14:46:21.005]     fused: 0 fused camera matrices given the same edit (particles, foliage, terrain)  <-- NONE FOUND: no camera projection cached yet, or no fused window passed the camera test
+[14:46:26.004]     fused: 0 fused camera matrices given the same edit (particles, foliage, terrain)  <-- NONE FOUND: no camera projection cached yet, or no fused window passed the camera test
+[14:46:31.003]     fused: 0 fused camera matrices given the same edit (particles, foliage, terrain)  <-- NONE FOUND: no camera projection cached yet, or no fused window passed the camera test
+[14:46:36.001]     fused: 0 fused camera matrices given the same edit (particles, foliage, terrain)  <-- NONE FOUND: no camera projection cached yet, or no fused window passed the camera test
+[14:46:41.001]     fused: 0 fused camera matrices given the same edit (particles, foliage, terrain)  <-- NONE FOUND: no camera projection cached yet, or no fused window passed the camera test
+[14:46:46.002]     fused: 0 fused camera matrices given the same edit (particles, foliage, terrain)  <-- NONE FOUND: no camera projection cached yet, or no fused window passed the camera test
+[14:46:51.003]     fused: 0 fused camera matrices given the same edit (particles, foliage, terrain)  <-- NONE FOUND: no camera projection cached yet, or no fused window passed the camera test
+[14:46:56.001]     fused: 0 fused camera matrices given the same edit (particles, foliage, terrain)  <-- NONE FOUND: no camera projection cached yet, or no fused window passed the camera test
+[14:47:01.000]     fused: 0 fused camera matrices given the same edit (particles, foliage, terrain)  <-- NONE FOUND: no camera projection cached yet, or no fused window passed the camera test
+[14:47:06.000]     fused: 0 fused camera matrices given the same edit (particles, foliage, terrain)  <-- NONE FOUND: no camera projection cached yet, or no fused window passed the camera test
+[14:47:11.000]     fused: 0 fused camera matrices given the same edit (particles, foliage, terrain)  <-- NONE FOUND: no camera projection cached yet, or no fused window passed the camera test
+[14:47:16.000]     fused: 0 fused camera matrices given the same edit (particles, foliage, terrain)  <-- NONE FOUND: no camera projection cached yet, or no fused window passed the camera test
