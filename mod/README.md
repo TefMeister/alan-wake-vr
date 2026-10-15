@@ -4,9 +4,9 @@ A VR conversion mod for **Alan Wake (2010)** by Remedy Entertainment — the
 goal is stereo rendering and 6DOF head tracking, and ultimately motion-
 controlled play, in the flashlight-and-shotgun psychological thriller.
 
-> **Status: work in progress — nothing playable released yet, no code
-> written yet.** This folder holds releases only; watch it if you
-> want to know the moment there is something to try.
+> **Status: work in progress.** A first VR build, 0.1.0 (2026-10-11), is on the
+> [Releases page](https://github.com/TefMeister/alan-wake-vr/releases) as a pre-release: the picture reaches the
+> headset and head tracking works. Smoothing out the camera jitter comes next.
 
 ## What this will be
 
