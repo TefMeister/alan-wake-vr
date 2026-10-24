@@ -36,7 +36,7 @@ import time
 
 TOOLKIT_CANDIDATES = [
     r"D:\claude video game stuff\github-backups\flat-to-vr-RE-toolkit\tools\game-harness.py",
-    r"~\github-backups\flat-to-vr-RE-toolkit\tools\game-harness.py",
+    os.path.expanduser(r"~\github-backups\flat-to-vr-RE-toolkit\tools\game-harness.py"),
 ]
 
 BAND = (80, 360)      # upper band, in 720p pixels: sky / treeline / far field

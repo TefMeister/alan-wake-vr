@@ -36,7 +36,7 @@ def _first_existing(env, candidates, what):
 
 TOOLKIT = _first_existing("AWDRIVE_TOOLKIT", [
     r"D:\claude video game stuff\github-backups\flat-to-vr-RE-toolkit\tools\game-harness.py",
-    r"~\github-backups\flat-to-vr-RE-toolkit\tools\game-harness.py",
+    os.path.expanduser(r"~\github-backups\flat-to-vr-RE-toolkit\tools\game-harness.py"),
 ], "game-harness.py")
 
 GAME = _first_existing("AWDRIVE_GAME", [
