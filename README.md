@@ -1,5 +1,11 @@
 # alan-wake-vr
 
+> ### ⏸️ Paused (2026-10-25)
+>
+> **A VR mod for Alan Wake has been released by fholger**, the maker of the open-source Crysis VR and Far Cry VR mods: [fholger/alanwake_vr](https://github.com/fholger/alanwake_vr) (v1.1.0, 2026-10-20), with its own site at [alanwake.vrmods.eu](https://alanwake.vrmods.eu/). It works with the original Alan Wake, not the Remastered edition.
+>
+> Work on this project is paused. If it resumes, it will build on top of fholger's mod rather than compete with it. Everything here stays as it was for anyone who wants to read it.
+
 **Alan Wake** — a flat-to-VR modding project.
 
 Consolidated on 2026-08-30: each folder below used to be one of this project's
