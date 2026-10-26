@@ -1,6 +1,8 @@
 # Research index
 
-**Last `/gr` pass: 2026-10-07 (estate sweep) — CHECK-IN.** Inbox empty. SteamVR 2.17's 32-bit OpenXR runtime explains the empty 32-bit key on the dev PC, and `-noblur` turned up in Remedy's v1.02 patch notes; one topic, pointer sent to the dossier inbox.
+**Last `/gr` pass: 2026-10-26 (estate sweep) — CHECK-IN.** Inbox empty; project paused for fholger's mod. Watch check: his v1.1.0 (2026-10-20) is still the newest; its notes fixed light-source bright spots, fog billboards and the vignette for stereo, the family of our frozen lamp-glow row; one topic.
+
+_Previous: **Last `/gr` pass: 2026-10-07 (estate sweep) — CHECK-IN.** Inbox empty. SteamVR 2.17's 32-bit OpenXR runtime explains the empty 32-bit key on the dev PC, and `-noblur` turned up in Remedy's v1.02 patch notes; one topic, pointer sent to the dossier inbox._
 
 _Previous: **Last `/gr` pass: 2026-10-04 (estate sweep, second pass) — CHECK-IN.** Inbox empty; board `OPEN` rows read: the top row is the FOV-slider diff this lane suggested on 2026-09-29, still a launch. Nothing new._
 
@@ -46,6 +48,7 @@ write-up in `topics/`. Status tags:
 
 | Date | Topic | Status | Summary |
 | --- | --- | --- | --- |
+| 2026-10-26 | [fholger's Alan Wake VR release notes name the screen effects that needed stereo fixes](topics/2026-10-26-fholgers-alan-wake-vr-release-notes-name-the-screen-effects-that-need-stereo-fixes.md) | 🆕 | Watch check while paused: v1.1.0 (2026-10-20) is newest; it fixed light-source bright spots, fog billboards, item highlight, and disabled the vignette for stereo. Uses "synced stereo" (both eyes per game frame), not alternate frames. Meta Link's 32-bit runtime reported broken. |
 | 2026-10-07 | [SteamVR now has a 32-bit OpenXR runtime, and `-noblur` is in Remedy's patch notes](topics/2026-10-07-steamvr-32-bit-runtime-and-noblur-is-documented.md) | 🆕 new | Explains the empty 32-bit key on the dev PC and gives the home PC a SteamVR route; `-noblur` is a real, supported switch for the launch line |
 | 2026-09-29 | [The FOV slider is a free probe for where the on-screen transform lives](topics/2026-09-29-the-fov-slider-is-a-free-probe-for-where-the-transform-lives.md) | 🆕 | For the Fable 'new hypothesis' row. |
 | 2026-09-05 | [The layered-hook race is a known Steam-overlay conflict, and it can be switched off](topics/2026-09-05-the-layered-hook-race-is-a-known-steam-overlay-conflict-and-it-can-be-switched-off.md) | 🆕 new | Corroborates the `[PD]` row's "Steam overlay, most likely" and adds a free control for the `[FLAT]` relaunch behind it. Public record `[reported 2026-09-05]`: the older external overlay coexisted with `d3d9`/`dxgi`/`ddraw`/`opengl32` proxies, but **the newer overlay hooking code conflicts with other hooks and proxies**, with `CreateDevice` named in its init path and "two overlays hooking the same object will conflict" the recurring rule. ⚠️ Community threads, not a Valve statement, and **none names this game or this recursion** — it corroborates the *class*, and **nothing here changes the fix**, which rests on our own launch-1 measurement. ⭐ **The practical part: disable the Steam overlay per-game and the foreign pointer should not appear at all**, splitting one ambiguous run into two readable ones — overlay **off** gives the cleanest possible first stereo-proxy run (and if a foreign pointer *still* shows, it is **not** Steam, which would be a new finding); overlay **on** deliberately exercises the new refusal path. Record the overlay state beside every log. |
