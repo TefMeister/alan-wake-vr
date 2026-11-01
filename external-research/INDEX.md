@@ -1,8 +1,8 @@
 # Research index
 
-**Last `/gr` pass: 2026-10-26 (estate sweep) — CHECK-IN.** Inbox empty; project paused for fholger's mod. Watch check: his v1.1.0 (2026-10-20) is still the newest; its notes fixed light-source bright spots, fog billboards and the vignette for stereo, the family of our frozen lamp-glow row; one topic.
+**Last `/gr` pass: 2026-11-01 (estate sweep) — CHECK-IN.** Watch list: fholger's alanwake_vr still at v1.1.0 (2026-10-20); nothing new.
 
-_Previous: **Last `/gr` pass: 2026-10-07 (estate sweep) — CHECK-IN.** Inbox empty. SteamVR 2.17's 32-bit OpenXR runtime explains the empty 32-bit key on the dev PC, and `-noblur` turned up in Remedy's v1.02 patch notes; one topic, pointer sent to the dossier inbox._
+_Previous: **Last `/gr` pass: 2026-10-26 (estate sweep) — CHECK-IN.** Inbox empty; project paused for fholger's mod. Watch check: his v1.1.0 (2026-10-20) is still the newest; its notes fixed light-source bright spots, fog billboards and the vignette for stereo, the family of our frozen lamp-glow row; one topic._
 
 _Previous: **Last `/gr` pass: 2026-10-04 (estate sweep, second pass) — CHECK-IN.** Inbox empty; board `OPEN` rows read: the top row is the FOV-slider diff this lane suggested on 2026-09-29, still a launch. Nothing new._
 
