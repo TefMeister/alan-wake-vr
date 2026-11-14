@@ -1,6 +1,6 @@
 # Research index
 
-**Last `/gr` pass: 2026-11-01 (estate sweep) — CHECK-IN.** Watch list: fholger's alanwake_vr still at v1.1.0 (2026-10-20); nothing new.
+**Last `/gr` pass: 2026-11-14 — CHECK-IN.** Watch list: fholger's Alan Wake VR released v2.0.1 (2026-11-13, in-game brightness works in VR) on top of v2.0.0; inbox drop sent.
 
 _Previous: **Last `/gr` pass: 2026-10-26 (estate sweep) — CHECK-IN.** Inbox empty; project paused for fholger's mod. Watch check: his v1.1.0 (2026-10-20) is still the newest; its notes fixed light-source bright spots, fog billboards and the vignette for stereo, the family of our frozen lamp-glow row; one topic._
 
